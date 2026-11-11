@@ -30,3 +30,12 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - Independent raw-CSV Decimal oracle confirms the August 2024 tied ranking and Seoul 2024-01-01 windows.
 - Commands: `python3 tools/build_seed.py` (twice), `python3 tests/oracle.py`, `python3 -m py_compile tools/*.py`, `git diff --check`. Evidence: docs/evidence/data-validation.json, oracle.json, oracle-summary.json; details in data-validation.md.
 - P1 push failed for the same missing HTTPS credentials. All implementation continues locally. P2 tests T01–T03 PASS; database calculations not yet claimed.
+
+## P3 — real schema execution
+
+- Started project-owned Apache/PHP and MariaDB containers; imported `dbcreate.sql` then `dbinsert.sql` as team05.
+- `docker compose exec -T web php /workspace/tests/schema.php`: PASS; six InnoDB tables, exact 5,569 seed rows, correct PK/FK/index metadata. Invalid FK/duplicate PK/CHECK probes rejected; all probes rolled back.
+- `php -l` for all P1 files: PASS. PHP 8.2.35 native PDO and MariaDB 10.4.34 verified with ONLY_FULL_GROUP_BY.
+- Evidence: docs/evidence/schema.json, php-cli.txt, apache.txt, php-lint-p3.txt.
+- Initial HTTP connection failed because Docker's internal-only network suppressed the host mapping. A separate localhost access bridge is being added; HTTP is not marked PASS at this point.
+- P2 push failed for missing HTTPS credentials; c9ff724 remains local. P3 validated commit is the commit adding schema evidence; see history.

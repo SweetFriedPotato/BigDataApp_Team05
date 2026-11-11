@@ -1,0 +1,5 @@
+/usr/local/bin/php
+No syntax errors detected in /var/www/html/team05/config.php
+No syntax errors detected in /var/www/html/team05/includes/db.php
+No syntax errors detected in /var/www/html/team05/includes/filters.php
+No syntax errors detected in /var/www/html/team05/config.local.example.php
