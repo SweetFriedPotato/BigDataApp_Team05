@@ -5,5 +5,7 @@
   "recording": "Actual Chromium interactions with Apache/PHP/MariaDB",
   "audio": "none; silent rehearsal preview",
   "final_course_video": "NOT_SUBMITTED",
-  "test_plan": "deleted"
+  "test_plan": "deleted",
+  "duration": "00:00:15.48",
+  "codec_verified": "WebM video, 1280x860; parsed by bundled ffmpeg"
 }

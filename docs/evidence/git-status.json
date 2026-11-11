@@ -7,5 +7,6 @@
   "actual_last_push_error": "fatal: could not read Username for 'https://github.com': terminal prompts disabled",
   "local_commits": "All milestones retained locally; current SHA/count are available from git log and review ZIP metadata",
   "next_authenticated_action": "git push -u origin main; push the review tag if desired; never force",
-  "credentials": "No token was requested, stored, printed or added to the remote URL"
+  "credentials": "No token was requested, stored, printed or added to the remote URL",
+  "final_runtime_state": "owned Compose containers stopped after verification; project DB volume preserved"
 }

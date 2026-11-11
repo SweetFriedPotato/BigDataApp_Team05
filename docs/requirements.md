@@ -26,14 +26,14 @@ PASS records executed implementation evidence. Draft documentation is distinguis
 | R20 | team05 DB/user/password; no root app connection | **PASS** | [team05/config.php](../team05/config.php) | [evidence](evidence/schema.json) | e660795 |
 | R21 | Install exactly under htdocs/team05 (actual Linux XAMPP; professor Windows host NOT_RUN) | **PASS** | [team05/index.php](../team05/index.php) | [evidence](evidence/xampp-install.json) | 4198842 |
 | R22 | Fresh XAMPP from PHP+SQL with no API/CDN (actual Linux XAMPP; professor Windows host NOT_RUN) | **PASS** | [tools/verify_xampp.py](../tools/verify_xampp.py) | [evidence](evidence/xampp-install.json) | 02fff99 |
-| R23 | Demo source and packaged commit match | **TODO** | [tools/package_release.py](../tools/package_release.py) | [evidence](evidence/release-verification.json) | pending document milestone |
+| R23 | Demo source and packaged commit match | **PASS** | [tools/package_release.py](../tools/package_release.py) | [evidence](evidence/release-verification.json) | 7159ab4 |
 | R24 | At least five base tables; actual six | **PASS** | [sql/dbcreate.sql](../sql/dbcreate.sql) | [evidence](evidence/schema.json) | e660795 |
 | R25 | At least five user screens; actual nine | **PASS** | [team05/includes/header.php](../team05/includes/header.php) | [evidence](evidence/browser-tests.json) | 4198842 |
-| R26 | Implementation report final rendered minimum 10 pages (draft PDF 18 pages; final human review pending) | **PASS** | [docs/report.md](report.md) | [evidence](evidence/document-render.json) | pending document milestone |
-| R27 | English paper final rendered minimum 4 pages (draft PDF 7 pages; final human review pending) | **PASS** | [docs/paper.md](paper.md) | [evidence](evidence/document-render.json) | pending document milestone |
-| R28 | ERD/PHP structure/code/schedule/contributions (draft report records all sections; actual human contribution information remains pending) | **PASS** | [docs/report.md](report.md) | [evidence](report.md) | pending document milestone |
-| R29 | English PPT, oral presentation and backup video (English draft/script prepared in P9; final oral presentation and submitted backup video NOT_RUN) | **TODO** | [docs/demo-script.md](demo-script.md) | [evidence](demo-script.md) | pending document milestone |
-| R30 | Actual individual contributions and author comments (Codex implementation is recorded honestly; team members must supply their actual roles/effort) | **BLOCKED** | [docs/contributions.md](contributions.md) | [evidence](contributions.md) | pending document milestone |
+| R26 | Implementation report final rendered minimum 10 pages (draft PDF 18 pages; final human review pending) | **PASS** | [docs/report.md](report.md) | [evidence](evidence/document-render.json) | 7159ab4 |
+| R27 | English paper final rendered minimum 4 pages (draft PDF 7 pages; final human review pending) | **PASS** | [docs/paper.md](paper.md) | [evidence](evidence/document-render.json) | 7159ab4 |
+| R28 | ERD/PHP structure/code/schedule/contributions (draft report records all sections; actual human contribution information remains pending) | **PASS** | [docs/report.md](report.md) | [evidence](report.md) | 7159ab4 |
+| R29 | English PPT, oral presentation and backup video (English draft/script prepared in P9; final oral presentation and submitted backup video NOT_RUN) | **TODO** | [docs/demo-script.md](demo-script.md) | [evidence](demo-script.md) | 7159ab4 |
+| R30 | Actual individual contributions and author comments (Codex implementation is recorded honestly; team members must supply their actual roles/effort) | **BLOCKED** | [docs/contributions.md](contributions.md) | [evidence](contributions.md) | 7159ab4 |
 
 Scope note: NASA retrieval was performed here; KASI/RDA values came from the user-provided verified appendix snapshots. No new final almanac cross-check or RDA full-page download is claimed.
 

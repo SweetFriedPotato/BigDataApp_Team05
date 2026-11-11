@@ -1,6 +1,6 @@
 # Actual test results
 
-Generated 2026-11-11 23:20 KST from retained result files. PASS means an executed check. Synthetic fixtures are rolled back or cleaned up; no fixture is part of seed/dump. SQL assertions use native PDO with ONLY_FULL_GROUP_BY.
+Generated 2026-11-11 23:26 KST from retained result files. PASS means an executed check. Synthetic fixtures are rolled back or cleaned up; no fixture is part of seed/dump. SQL assertions use native PDO with ONLY_FULL_GROUP_BY.
 
 | ID | Test / input | Expected | Actual | Result | Evidence | Command / environment |
 |---|---|---|---|---|---|---|
@@ -37,7 +37,7 @@ Generated 2026-11-11 23:20 KST from retained result files. PASS means an execute
 | T31 | T31 dump-only restore into zero tables | Fresh isolated environment; complete expected state | {'fingerprint': 'identical to seeded baseline', 'http': {'result': 'PASS', 'pages': 9, 'analyses': 'four independent dynamic DB menus', 'olap': 'year/month/day/up', 'ranking': 'two first-place ties', 'seasonal': 'October 2024 sources and ingredient', 'crud': 'HTTP create/read/list/edit/update/apply/delete', 'session': 'saved common filters reused on another analysis', 'network': 'container attached only to an internal Docker network', 'base_url': 'http://127.0.0.1/team05/'}, 'client': 'mysql bundled with MariaDB10.4.34'} | **PASS** | [evidence](evidence/clean-install.json) | `python3 tools/verify_install.py` |
 | T32 | T32 offline runtime | Fresh isolated environment; complete expected state | {'internal_network': True, 'attached_networks': ['slg-clean-b98b65d4e3-net'], 'public_request_exit': 6, 'all9screens_and_crud': 'passed before and after dump restore'} | **PASS** | [evidence](evidence/clean-install.json) | `python3 tools/verify_install.py` |
 | T33 | T33 changed copied path and local config override | Fresh isolated environment; complete expected state | {'copied_path': '/tmp/slg-clean-b98b65d4e3-38kvlgkz/team05', 'web_path': '/var/www/html/team05', 'url': 'http://127.0.0.1/team05/', 'override_host': 'database.local', 'account': 'team05@%', 'default_user_database_password': 'team05; root not used by application'} | **PASS** | [evidence](evidence/clean-install.json) | `python3 tools/verify_install.py` |
-| T34 | Demo/package code identity | Archive files match recorded release commit | Packaging pending P9 evidence freeze | **NOT_RUN** | [progress](progress.md) | `Not executed` |
+| T34 | Demo/package code identity | Archive files match the recorded commit | {'result': 'PASS', 'test_id': 'T34', 'check': 'Archive payload and live demo PHP/SQL match one committed source byte for byte', 'current_release_identity': 'COMMIT_SHA.txt and RELEASE_MANIFEST.json inside the review ZIP', 'concrete_proof': 'VERIFICATION.json inside ZIP; dist/review-verification.json and SHA-256 sidecar in the local workspace', 'command': 'python3 tools/package_release.py', 'scope': 'review package only; actual course submission NOT_RUN'} | **PASS** | [evidence](evidence/release-verification.json) | `python3 tools/package_release.py` |
 
 Actual browser: Chromium 141.0.7390.37; 1440×1050, 390×844, eight routes, no document overflow; console errors 0. See [browser evidence](evidence/browser-tests.json) and four actual screenshots.
 

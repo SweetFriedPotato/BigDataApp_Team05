@@ -124,3 +124,13 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - Added exact-commit review packaging tool and pinned optional developer document/browser dependencies. Runtime still needs only PHP/Apache/MariaDB and supplied SQL.
 - `record_results.py` and `record_requirements.py` link actual evidence. R26/R27 satisfy rendered draft minimums; final human review remains pending. R29 final presentation/video and R30 actual individual contributions are not fabricated as complete.
 - P8b push failed for missing HTTPS credentials. Local commits continue. Next: verify links and source cleanliness, commit documentation, run exact-commit package verification and freeze a review tag.
+
+## Review package verification and final workspace state
+
+- First actual review ZIP from committed P9 source 7159ab4 PASS: 149 committed payload members byte-identical to Git; current team05/ and sql/ bytes match that same source. Identity and SHA-256 are in the generated ZIP metadata and dist/review-verification.json.
+- T34 now PASS; all T01–T34 have executed evidence. The final package is regenerated from this evidence-freeze commit; COMMIT_SHA.txt / RELEASE_MANIFEST.json / VERIFICATION.json are authoritative for the current review artifact and avoid self-referential hashes inside tracked source.
+- Final main DB fingerprint after all browser/recording work equals the baseline: zero surviving rehearsal plans or synthetic records. Demo WebM codec, resolution and duration were checked with the bundled ffmpeg.
+- Local Markdown link audit PASS, including generated document/media files. Original 79,061-byte specification remains local and ignored; no private config/token is in the staged payload.
+- Stopped only the owned Compose runtime during teardown; named DB volume seasonal-team05_seasonal_db is preserved. Restart with `./tools/dev.sh up`; do not reinitialize the existing prepared DB. XAMPP test/diagnostic containers were removed.
+- P9 push again failed for absent GitHub HTTPS credentials. Local commits and a review tag preserve the result; no force push or remote history rewrite. The current local commit/tag and final ZIP SHA are reported by the packaging/final Git commands, not fabricated in this document.
+- P0–P8 implementation and actual runtime verification completed. P9 report/paper/slides/script/recording drafts completed. Report18/paper7 rendered pages. R29 final oral presentation/submitted video and R30 actual individual human contribution statements remain TODO/BLOCKED; Windows/macOS/professor physical host and actual course upload NOT_RUN.

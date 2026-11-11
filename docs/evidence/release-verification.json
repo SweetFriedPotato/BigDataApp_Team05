@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "test_id": "T34",
+  "check": "Archive payload and live demo PHP/SQL match one committed source byte for byte",
+  "current_release_identity": "COMMIT_SHA.txt and RELEASE_MANIFEST.json inside the review ZIP",
+  "concrete_proof": "VERIFICATION.json inside ZIP; dist/review-verification.json and SHA-256 sidecar in the local workspace",
+  "command": "python3 tools/package_release.py",
+  "scope": "review package only; actual course submission NOT_RUN"
+}
