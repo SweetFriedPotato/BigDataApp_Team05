@@ -4,9 +4,10 @@ import urllib.request
 import urllib.parse
 import urllib.error
 import re
+import os
 class Client:
-    def __init__(self, base='http://127.0.0.1:8055/team05/'):
-        self.base=base
+    def __init__(self, base=None):
+        self.base=base or os.environ.get('SLG_BASE_URL','http://127.0.0.1:8055/team05/')
         self.jar=http.cookiejar.CookieJar()
         self.opener=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(self.jar))
     def request(self, page, params=None, post=False):

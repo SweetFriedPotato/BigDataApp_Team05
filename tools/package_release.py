@@ -53,13 +53,13 @@ def main():
         for name,item in files.items():assert sha(z.read(name))==item['sha256'],name
     pending.replace(target)
     proof['archive']='dist/team05-review.zip';proof['archive_sha256']=sha(target.read_bytes());proof['archive_bytes']=target.stat().st_size
-    (DIST/'review-verification.json').write_text(json.dumps(proof,indent=2)+'\n')
-    (DIST/'team05-review.zip.sha256').write_text(proof['archive_sha256']+'  team05-review.zip\n')
+    (DIST/'review-verification.json').write_text(json.dumps(proof,indent=2)+'\n', encoding='utf-8')
+    (DIST/'team05-review.zip.sha256').write_text(proof['archive_sha256']+'  team05-review.zip\n', encoding='utf-8')
     # Stable evidence points to the concrete per-release proof; contains no self-referential commit hash.
     stable={'result':'PASS','test_id':'T34','check':'Archive payload and live demo PHP/SQL match one committed source byte for byte',
             'current_release_identity':'COMMIT_SHA.txt and RELEASE_MANIFEST.json inside the review ZIP',
             'concrete_proof':'VERIFICATION.json inside ZIP; dist/review-verification.json and SHA-256 sidecar in the local workspace',
             'command':'python3 tools/package_release.py','scope':'review package only; actual course submission NOT_RUN'}
-    (ROOT/'docs/evidence/release-verification.json').write_text(json.dumps(stable,indent=2)+'\n')
+    (ROOT/'docs/evidence/release-verification.json').write_text(json.dumps(stable,indent=2)+'\n', encoding='utf-8')
     print(json.dumps(proof,indent=2))
 if __name__=='__main__':main()

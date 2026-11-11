@@ -6,9 +6,10 @@ import json
 from collections import Counter
 from datetime import date
 from data_common import ROOT, LOCATIONS, parse_nasa
+from evidence_support import write_evidence
 
-def validate():
-    manifest = json.loads((ROOT/'data/manifest.json').read_text())
+def _validate():
+    manifest = json.loads((ROOT/'data/manifest.json').read_text(encoding='utf-8'))
     all_rows, reports = [], []
     for loc in LOCATIONS:
         content = (ROOT/f'data/raw/nasa_{loc[1]}.csv').read_bytes()
@@ -16,12 +17,12 @@ def validate():
         assert hashlib.sha256(content).hexdigest() == entry['sha256'], 'Raw hash mismatch'
         rows, report = parse_nasa(content, loc[0])
         all_rows.extend(rows)
-        reports.append({'location': loc[1], **report})
-    with (ROOT/'data/raw/kasi_reference.csv').open() as f:
+        reports.append({'location': loc[1], 'raw_sha256_match': True, **report})
+    with (ROOT/'data/raw/kasi_reference.csv').open(encoding='utf-8', newline='') as f:
         terms = list(csv.DictReader(f))
     assert len(terms) == 72 and len({r['term_date'] for r in terms}) == 72
     assert Counter(date.fromisoformat(r['term_date']).year for r in terms) == {2023:24, 2024:24, 2025:24}
-    with (ROOT/'data/raw/rda_curated.csv').open() as f:
+    with (ROOT/'data/raw/rda_curated.csv').open(encoding='utf-8', newline='') as f:
         foods = list(csv.DictReader(f))
     assert len(foods) == 12 and {int(r['month_no']) for r in foods} == set(range(1,13))
     assert len({(r['month_no'], r['food_name']) for r in foods}) == 12
@@ -29,12 +30,19 @@ def validate():
         ('temperatures', ['location_id','weather_date','tmean','tmax','tmin'], all_rows),
         ('solar_terms', ['term_date','term_name','source_url'], [[r[k] for k in ('term_date','term_name','source_url')] for r in sorted(terms,key=lambda r:r['term_date'])]),
         ('monthly_food_guides', ['month_no','food_name','source_url'], [[r[k] for k in ('month_no','food_name','source_url')] for r in foods])]:
-        with (ROOT/f'data/processed/{name}.csv').open('w', newline='') as f:
+        with (ROOT/f'data/processed/{name}.csv').open('w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f, lineterminator='\n'); writer.writerow(header); writer.writerows(rows)
-    result = {'nasa': reports, 'temperature_rows': len(all_rows), 'solar_terms':len(terms), 'food_guides':len(foods)}
-    (ROOT/'docs/evidence/data-validation.json').write_text(json.dumps(result,indent=2)+'\n')
+    result = {'result':'PASS', 'nasa': reports, 'temperature_rows': len(all_rows), 'solar_terms':len(terms), 'food_guides':len(foods)}
+    write_evidence('data-validation.json',result,['python3','tools/validate_data.py'],group='data',extra=['tools/validate_data.py','tools/build_seed.py','tools/data_common.py'])
     print(json.dumps(result,indent=2))
     return all_rows, terms, foods
+
+def validate():
+    try:
+        return _validate()
+    except Exception as error:
+        write_evidence('data-validation.json',{'result':'FAIL','error':str(error)},['python3','tools/validate_data.py'],group='data',extra=['tools/validate_data.py','tools/build_seed.py','tools/data_common.py'])
+        raise
 
 if __name__ == '__main__':
     validate()

@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from data_common import ROOT, LOCATIONS, nasa_url, parse_nasa
 
 manifest_path = ROOT / 'data/manifest.json'
-manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+manifest = json.loads(manifest_path.read_text(encoding='utf-8')) if manifest_path.exists() else {}
 manifest.update({'period': ['2023-01-01', '2025-12-31'], 'time_standard': 'LST',
                  'fields': {'tmean': 'T2M', 'tmax': 'T2M_MAX', 'tmin': 'T2M_MIN'},
                  'temperature_unit': 'C', 'coordinate_meaning': 'requested point, not grid center'})
@@ -44,5 +44,5 @@ for loc in LOCATIONS:
              'raw_file': str(path.relative_to(ROOT)), 'bytes': len(content),
              'sha256': hashlib.sha256(content).hexdigest(), 'validation': validation}
     manifest['nasa'] = sorted([r for r in manifest['nasa'] if r['location_id'] != loc[0]] + [entry], key=lambda r:r['location_id'])
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2)+'\n')
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     print(f'{loc[1]}: {validation}', flush=True)

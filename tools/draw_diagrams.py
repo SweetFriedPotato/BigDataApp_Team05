@@ -17,7 +17,7 @@ svg+=box(370,310,290,150,'plan_locations',['PK, FK plan_id (CASCADE delete)','PK
 svg+=box(700,310,280,150,'solar_terms',['PK term_date','term_name (repeats by year)','source_url','Calendar reference: no FK'])
 svg+=box(700,520,280,165,'monthly_food_guides',['PK guide_id','UK month_no + food_name','source_url','CHECK month between 1 and 12','Monthly reference: no FK'])
 svg+='<g stroke="#b45b3b" stroke-width="2" fill="none"><path d="M300 95 H370"/><path d="M160 225 V275 H515 V310"/><path d="M300 380 H370"/></g><g fill="#b45b3b" font-size="12"><text x="306" y="83">1 → many</text><text x="318" y="266">1 → many</text><text x="305" y="365">1 → many</text></g><text x="20" y="620">Physical FKs: weather→locations; plan_locations→plans and locations.</text><text x="20" y="647">At least one location per plan is an application + transaction invariant.</text><text x="20" y="674">Solar terms and food guides use independent date/month lookups.</text><text x="20" y="701">All six tables: InnoDB, utf8mb4_unicode_ci. Exactly six BASE TABLEs.</text></g></svg>'
-(D/'erd.svg').write_text(svg)
+(D/'erd.svg').write_text(svg, encoding='utf-8')
 svg=start.replace('Six-table ERD','PHP request and database flow')
 svg+=box(20,20,280,100,'Browser input',['GET analysis forms','POST plan/reset forms + CSRF'])
 svg+=box(360,20,280,100,'bootstrap.php',['config + Session + escaping','strict native PDO connection'])
@@ -28,5 +28,5 @@ svg+=box(700,230,280,135,'Seasonal page',['year/month selection','independent pr
 svg+=box(200,480,600,110,'MariaDB — team05 account',['six InnoDB tables; constraints + indexed dates','COMMIT complete writes; ROLLBACK intermediate failures'])
 svg+=box(200,665,600,80,'View + header + footer',['escaped tables; separate menus; local CSS/JS/fonts'])
 svg+='<g stroke="#b45b3b" stroke-width="2" fill="none"><path d="M300 65 H360"/><path d="M640 65 H700"/><path d="M840 120 V170 H160 V230"/><path d="M500 170 V230"/><path d="M840 170 V230"/><path d="M160 365 V430 H500 V480"/><path d="M500 365 V480"/><path d="M840 365 V430 H500"/><path d="M500 590 V665"/></g></g></svg>'
-(D/'php-structure.svg').write_text(svg)
+(D/'php-structure.svg').write_text(svg, encoding='utf-8')
 print('Two original SVG diagrams generated from actual table/file relationships')

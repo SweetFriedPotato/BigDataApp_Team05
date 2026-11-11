@@ -7,7 +7,7 @@ The web runtime is Apache + PHP 8.x with PDO MySQL + MariaDB 10.4 or newer. No N
 1. Start XAMPP Apache and MariaDB. Keep existing applications and accounts intact; choose another port if occupied.
 2. Copy **the contents of `team05/` into `htdocs/team05/`**. The entry is `http://localhost/team05/`. Keep SQL/data/tests outside the document root.
 3. Use the assigned database **team05**, user **team05**, password **team05**. `team05/config.php` contains these public evaluation defaults: host 127.0.0.1, port 3306, utf8mb4. If the environment differs, copy `config.local.example.php` to `config.local.php` and adjust the central array; do not commit that file.
-4. Check both CLI `php -m` and the Apache PHP environment for pdo_mysql. The application needs PHP 8.0+; no mbstring dependency is required for Unicode character validation.
+4. Check both CLI `php -m` and the Apache PHP environment for pdo_mysql. PHP 8.0 is the syntax compatibility target (the nonreturning handler uses void plus exit). Actual runtime validation uses PHP 8.2.12 and 8.2.35; PHP 8.0 runtime, professor-server OS/version and Windows/macOS remain untested. No mbstring dependency is required for Unicode character validation.
 5. Connect from a database client, for example:
 
 ```bash

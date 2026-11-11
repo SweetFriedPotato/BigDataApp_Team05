@@ -23,5 +23,5 @@ sql += insert('locations','location_id,location_code,name_en,name_ko,requested_l
 sql += insert('daily_temperatures','location_id,weather_date,tmean,tmax,tmin',weather)
 sql += insert('solar_terms','term_date,term_name,source_url',[[r[k] for k in ('term_date','term_name','source_url')] for r in sorted(terms,key=lambda r:r['term_date'])])
 sql += insert('monthly_food_guides','month_no,food_name,source_url',[[r[k] for k in ('month_no','food_name','source_url')] for r in foods])
-(ROOT/'sql/dbinsert.sql').write_text(sql+'COMMIT;\n')
+(ROOT/'sql/dbinsert.sql').write_text(sql+'COMMIT;\n', encoding='utf-8')
 print('Wrote sql/dbinsert.sql: 5 + 5480 + 72 + 12 = 5569 rows')

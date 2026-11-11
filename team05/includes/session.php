@@ -11,6 +11,9 @@ function analysis_context(string $page): array {
             $f = default_filters(); $o = default_options($page);
         } else {
             $candidate = $f;
+            $intent = array_key_exists('intent',$_GET) ? scalar_input($_GET,'intent') : 'apply';
+            if (!in_array($intent,['apply','save'],true)) throw new InvalidArgumentException('Unknown filter action.');
+            if ($intent === 'save' && !array_key_exists('apply_filters',$_GET)) throw new InvalidArgumentException('Submit the current comparison conditions first.');
             if (array_key_exists('apply_filters', $_GET)) {
                 if (scalar_input($_GET,'apply_filters') !== '1') throw new InvalidArgumentException('Invalid filter submission.');
                 $candidate = validate_filters($_GET);
@@ -20,6 +23,10 @@ function analysis_context(string $page): array {
             $_SESSION['analysis_filters'] = $candidate;
             $_SESSION['analysis_options'][$page] = $options;
             $f = $candidate; $o = $options;
+            if ($intent === 'save') {
+                header('Location: plan_form.php',true,303);
+                exit;
+            }
         }
         return [$f, $o, null];
     } catch (InvalidArgumentException $e) {

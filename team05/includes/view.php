@@ -49,7 +49,7 @@ switch ($page) {
 }
 ?>
 <button class="button" type="submit">Apply filters <span aria-hidden="true">↗</span></button>
-<a class="button secondary" href="plan_form.php">Save these conditions</a>
+<button class="button secondary" type="submit" name="intent" value="save">Save conditions</button>
 </div></form>
 <form class="reset-form" method="post"><input type="hidden" name="csrf_token" value="<?=e(csrf_token())?>"><button class="text-button" name="reset_filters" value="1">Reset analysis filters</button></form>
 </section>

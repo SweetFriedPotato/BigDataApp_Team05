@@ -54,12 +54,12 @@ try:
             time.sleep(1)
         else:raise RuntimeError('Fresh database did not become ready')
         assert 'daily_temperatures' not in sql('SHOW TABLES;')
-        sql((ROOT/'sql/dbcreate.sql').read_text()+(ROOT/'sql/dbinsert.sql').read_text())
+        sql((ROOT/'sql/dbcreate.sql').read_text(encoding='utf-8')+(ROOT/'sql/dbinsert.sql').read_text(encoding='utf-8'))
         cmd(['docker','run','-d','--name',web,'--network',network,'-e','SLG_DB_HOST=db',
              '-v',str(snapshot/'team05')+':/var/www/html/team05:ro','-v',str(snapshot)+':/workspace:ro',image])
         wait_web()
         baseline=php('fingerprint.php')
-        assert baseline==json.loads((ROOT/'docs/evidence/database-fingerprint.json').read_text()), 'Primary/fresh semantic fingerprints differ'
+        assert baseline==json.loads((ROOT/'docs/evidence/database-fingerprint.json').read_text(encoding='utf-8')), 'Primary/fresh semantic fingerprints differ'
         schema=php('schema.php');assert schema['result']=='PASS'
         offline=php('offline_http.php');assert offline['result']=='PASS'
         step('T29 clean create→insert→all9screens',{'schema':schema['counts'],'identity':schema['identity'],'http':offline})
@@ -69,11 +69,11 @@ try:
             suite[test]=[r['id'] for r in report['tests']]
         assert php('fingerprint.php')==baseline,'Synthetic test rows or plans leaked'
         step('fresh full calculation and transaction suite',suite)
-        sql((ROOT/'sql/dbdrop.sql').read_text());assert sql('SHOW TABLES;').strip()==''
-        sql((ROOT/'sql/dbcreate.sql').read_text()+(ROOT/'sql/dbinsert.sql').read_text());assert php('fingerprint.php')==baseline
+        sql((ROOT/'sql/dbdrop.sql').read_text(encoding='utf-8'));assert sql('SHOW TABLES;').strip()==''
+        sql((ROOT/'sql/dbcreate.sql').read_text(encoding='utf-8')+(ROOT/'sql/dbinsert.sql').read_text(encoding='utf-8'));assert php('fingerprint.php')==baseline
         step('T30 drop→create→insert',{'fingerprint':'identical rows, data hashes, columns, constraints and indexes'})
-        sql((ROOT/'sql/dbdrop.sql').read_text());assert sql('SHOW TABLES;').strip()==''
-        sql((ROOT/'sql/dbdump.sql').read_text());assert php('fingerprint.php')==baseline
+        sql((ROOT/'sql/dbdrop.sql').read_text(encoding='utf-8'));assert sql('SHOW TABLES;').strip()==''
+        sql((ROOT/'sql/dbdump.sql').read_text(encoding='utf-8'));assert php('fingerprint.php')==baseline
         restored=php('offline_http.php');assert restored['result']=='PASS'
         step('T31 dump-only restore into zero tables',{'fingerprint':'identical to seeded baseline','http':restored,'client':'mysql bundled with MariaDB10.4.34'})
         internal=json.loads(cmd(['docker','network','inspect',network]).stdout)[0]['Internal'];assert internal
@@ -81,7 +81,7 @@ try:
         egress=cmd(['docker','exec',web,'curl','-fsS','--connect-timeout','2','--max-time','3','https://example.com'],check=False)
         assert egress.returncode!=0,'Unexpected public network access'
         step('T32 offline runtime',{'internal_network':True,'attached_networks':list(only_networks),'public_request_exit':egress.returncode,'all9screens_and_crud':'passed before and after dump restore'})
-        (snapshot/'team05/config.local.php').write_text("<?php return ['host'=>'database.local','port'=>3306];\n")
+        (snapshot/'team05/config.local.php').write_text("<?php return ['host'=>'database.local','port'=>3306];\n", encoding='utf-8')
         effective=cmd(['docker','exec',web,'php','-r',"$c=require '/var/www/html/team05/config.php';echo $c['host'];"]).stdout
         assert effective=='database.local'
         assert php('offline_http.php')['result']=='PASS'
@@ -95,4 +95,4 @@ finally:
     for name in (web,database):cmd(['docker','rm','-f',name],check=False)
     cmd(['docker','volume','rm',volume],check=False);cmd(['docker','network','rm',network],check=False)
     results['cleanup']='only this run’s unique resources removed; primary runtime preserved'
-    (ROOT/'docs/evidence/clean-install.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n')
+    (ROOT/'docs/evidence/clean-install.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n', encoding='utf-8')

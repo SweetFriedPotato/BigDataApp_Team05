@@ -36,16 +36,16 @@ try:
         versions={'php':execute(['/opt/lampp/bin/php','-v']).stdout,'apache':execute(['/opt/lampp/bin/httpd','-v']).stdout,'mysql_client':execute(['/opt/lampp/bin/mysql','--version']).stdout,'mysqldump':execute(['/opt/lampp/bin/mysqldump','--version']).stdout}
         report['versions']=versions
         probe=snapshot/'team05/_xampp_probe.php'
-        probe.write_text("<?php header('Content-Type: application/json'); echo json_encode(['sapi'=>PHP_SAPI,'version'=>PHP_VERSION,'pdo_mysql'=>extension_loaded('pdo_mysql'),'ini'=>php_ini_loaded_file()]);")
+        probe.write_text("<?php header('Content-Type: application/json'); echo json_encode(['sapi'=>PHP_SAPI,'version'=>PHP_VERSION,'pdo_mysql'=>extension_loaded('pdo_mysql'),'ini'=>php_ini_loaded_file()]);", encoding='utf-8')
         try:
             apache_php=json.loads(execute(['curl','-fsS','http://127.0.0.1/team05/_xampp_probe.php']).stdout)
             assert apache_php['sapi']=='apache2handler' and apache_php['pdo_mysql']
             report['apache_php']=apache_php
         finally: probe.unlink()
         step('new official XAMPP started',{'apache':apache,'mysql':mysql,'htdocs':'/opt/lampp/htdocs/team05','config':'unmodified public defaults; no environment override','network':'none'})
-        sql((ROOT/'sql/dbcreate.sql').read_text()+(ROOT/'sql/dbinsert.sql').read_text())
+        sql((ROOT/'sql/dbcreate.sql').read_text(encoding='utf-8')+(ROOT/'sql/dbinsert.sql').read_text(encoding='utf-8'))
         baseline=php('fingerprint.php')
-        assert baseline==json.loads((ROOT/'docs/evidence/database-fingerprint.json').read_text()),'XAMPP seeded fingerprint differs'
+        assert baseline==json.loads((ROOT/'docs/evidence/database-fingerprint.json').read_text(encoding='utf-8')),'XAMPP seeded fingerprint differs'
         schema=php('schema.php');assert schema['result']=='PASS'
         http=php('offline_http.php');assert http['result']=='PASS'
         step('create→insert→all9screens and web CRUD',{'schema_counts':schema['counts'],'identity':schema['identity'],'http':http})
@@ -54,14 +54,14 @@ try:
             r=php(test+'.php');assert all(t['status']=='PASS' for t in r['tests']),test;suites[test]=[t['id'] for t in r['tests']]
         assert php('fingerprint.php')==baseline
         step('all calculations and real rollback tests',suites)
-        sql((ROOT/'sql/dbdrop.sql').read_text());assert sql('SHOW TABLES;').strip()==''
-        sql((ROOT/'sql/dbcreate.sql').read_text()+(ROOT/'sql/dbinsert.sql').read_text());assert php('fingerprint.php')==baseline
+        sql((ROOT/'sql/dbdrop.sql').read_text(encoding='utf-8'));assert sql('SHOW TABLES;').strip()==''
+        sql((ROOT/'sql/dbcreate.sql').read_text(encoding='utf-8')+(ROOT/'sql/dbinsert.sql').read_text(encoding='utf-8'));assert php('fingerprint.php')==baseline
         step('drop→create→insert',{'fingerprint':'identical'})
-        sql((ROOT/'sql/dbdrop.sql').read_text());assert sql('SHOW TABLES;').strip()==''
-        sql((ROOT/'sql/dbdump.sql').read_text());assert php('fingerprint.php')==baseline
+        sql((ROOT/'sql/dbdrop.sql').read_text(encoding='utf-8'));assert sql('SHOW TABLES;').strip()==''
+        sql((ROOT/'sql/dbdump.sql').read_text(encoding='utf-8'));assert php('fingerprint.php')==baseline
         assert php('offline_http.php')['result']=='PASS'
         step('project dump restored by actual XAMPP mysql client',{'fingerprint':'all rows, columns, PK/FK/CHECK/indexes identical','http':'all screens and CRUD passed'})
-        local=snapshot/'team05/config.local.php';local.write_text("<?php return ['host'=>'localhost','port'=>3306];\n")
+        local=snapshot/'team05/config.local.php';local.write_text("<?php return ['host'=>'localhost','port'=>3306];\n", encoding='utf-8')
         # localhost uses XAMPP's configured local socket; confirms a real local-override path.
         assert php('offline_http.php')['result']=='PASS';local.unlink()
         step('local configuration override',{'host':'localhost','port':3306,'result':'all screens and CRUD passed'})
@@ -76,4 +76,4 @@ finally:
     call(['docker','rm','-f',name],check=False)
     report['cleanup']='fresh XAMPP container and temporary copied source removed; primary runtime untouched'
     report['installer']={'url':'https://downloads.sourceforge.net/project/xampp/XAMPP%20Linux/8.2.12/xampp-linux-x64-8.2.12-0-installer.run','sha256':'df0774e7a6d0d0754a5f0132015411234b5f953df2365b693d3758fc35a30374','note':'hash of downloaded bytes; not claimed as independently signed vendor checksum'}
-    (ROOT/'docs/evidence/xampp-install.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+    (ROOT/'docs/evidence/xampp-install.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n', encoding='utf-8')

@@ -44,4 +44,4 @@ for index,(title,points) in enumerate(slides,1):
 path=ROOT/'docs/rendered/slides-draft.pptx';P.save(path)
 opened=Presentation(path);assert len(opened.slides)==12
 result={'result':'PASS','file':str(path.relative_to(ROOT)),'slides':len(opened.slides),'validation':'PPTX reopened with python-pptx; text/package verified','powerpoint_application_render':'NOT_RUN','draft':True}
-(ROOT/'docs/evidence/slides-draft.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
+(ROOT/'docs/evidence/slides-draft.json').write_text(json.dumps(result,indent=2)+'\n', encoding='utf-8');print(json.dumps(result,indent=2))

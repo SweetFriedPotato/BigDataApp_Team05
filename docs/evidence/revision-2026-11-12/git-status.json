@@ -1,0 +1,10 @@
+{
+  "status": "SYNCHRONIZED",
+  "checked_at": "2026-11-12T00:25:07.480529+09:00",
+  "local_head": "aa190e9bc4772a2504222e39aa1f7c52e80b72fe",
+  "remote_main": "aa190e9bc4772a2504222e39aa1f7c52e80b72fe",
+  "existing_review_tag": "7c7c8509266f38d02f49965ee89f2bef0d53619a",
+  "review_tag_preserved": true,
+  "remote_url": "https://github.com/SweetFriedPotato/BigDataApp_Team05.git",
+  "scope": "A snapshot of observed refs at checked_at; later commits may advance main. Earlier auth failures remain historical."
+}

@@ -1,5 +1,5 @@
 <?php
-// Runs inside an internal-network-only Apache container. No API or CDN can be reached.
+// HTTP workflow helper. Network isolation is inspected by the outer verifier.
 declare(strict_types=1);
 function demand(bool $condition,string $message): void {if(!$condition)throw new RuntimeException($message);}
 $cookie=tempnam(sys_get_temp_dir(),'slg_cookie_');
@@ -32,7 +32,7 @@ try {
     [$status,$body]=request_page('aggregate.php');demand($status===200 && str_contains($body,'value="2" checked') && !str_contains($body,'value="1" checked'),'Cross-page session');
     [$status,$body]=request_page('plan_actions.php',['action'=>'delete','plan_id'=>$id,'csrf_token'=>$token],true);demand($status===200,'Delete');
     [$status,$body]=request_page('plan_detail.php',['id'=>$id]);demand($status===404,'Deleted detail');$id=null;
-    echo json_encode(['result'=>'PASS','pages'=>9,'analyses'=>'four independent dynamic DB menus','olap'=>'year/month/day/up','ranking'=>'two first-place ties','seasonal'=>'October 2024 sources and ingredient','crud'=>'HTTP create/read/list/edit/update/apply/delete','session'=>'saved common filters reused on another analysis','network'=>'container attached only to an internal Docker network','base_url'=>$base],JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE),"\n";
+    echo json_encode(['result'=>'PASS','pages'=>9,'analyses'=>'four independent dynamic DB menus','olap'=>'year/month/day/up','ranking'=>'two first-place ties','seasonal'=>'October 2024 sources and ingredient','crud'=>'HTTP create/read/list/edit/update/apply/delete','session'=>'saved common filters reused on another analysis','client_php'=>PHP_VERSION,'network_isolation'=>'not inspected by this HTTP helper','base_url'=>$base],JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE),"\n";
 } finally {
     if($id!==null)request_page('plan_actions.php',['action'=>'delete','plan_id'=>$id,'csrf_token'=>$token],true);
     unlink($cookie);

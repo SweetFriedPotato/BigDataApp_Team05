@@ -2,7 +2,7 @@
 // Implementation: Codex. POST-only actions, validated input, atomic writes and PRG redirects.
 require __DIR__ . '/includes/bootstrap.php';
 require __DIR__ . '/includes/plans.php';
-function action_error(int $status,string $message): never {
+function action_error(int $status,string $message): void {
     http_response_code($status);page_header('Request could not be completed','plans');
     echo '<div class="notice error" role="alert">'.e($message).'</div><a href="plans.php">Return to saved plans</a>';
     page_footer();exit;

@@ -33,6 +33,8 @@ for page in ('config.php','config.local.example.php','includes/db.php'):
     assert status==403,(page,status)
 assert "default-src 'self'" in headers['Content-Security-Policy']
 result={'result':'PASS','session':'A aggregate filters reused by B ranking; invalid common/option submissions preserve prior state; reset preserves CSRF',
-    'invalid_cases':len(bad)+1,'protected_files':'config and includes return HTTP 403','cookies':'HttpOnly, SameSite=Lax','environment':'Apache HTTP at localhost:8055'}
-Path('docs/evidence/common-http.json').write_text(json.dumps(result,indent=2)+'\n')
+    'invalid_cases':len(bad)+1,'protected_files':'config and includes return HTTP 403','cookies':'HttpOnly, SameSite=Lax','environment':{'base_url':c.base,'http_server':headers.get('Server','not exposed'),'network_isolation':'not inspected by HTTP helper'}}
+__import__('sys').path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
+from evidence_support import write_evidence
+write_evidence('common-http.json',result,['python3','tests/common_http.py'],result['environment'],extra=['tests/common_http.py','tests/http_client.py'])
 print(json.dumps(result,indent=2))

@@ -23,7 +23,7 @@
   ],
   "historical_bug_reproduced": true,
   "_meta": {
-    "executed_at": "2026-11-12T00:19:03.493117+09:00",
+    "executed_at": "2026-11-12T00:25:06.880272+09:00",
     "command": [
       "python3",
       "tests/evidence_regression.py"
@@ -32,7 +32,7 @@
       "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
       "python": "3.13.12"
     },
-    "source_commit_base": "de223eb9c91a27d23a64ab4a34ddd4b6df5224b9",
+    "source_commit_base": "aa190e9bc4772a2504222e39aa1f7c52e80b72fe",
     "source_files": {
       "sql/dbcreate.sql": "d3692c5c5b4bdf2415a71371bac6a20249a3aeb4bf67bf1f231833a7c7fe70cc",
       "sql/dbdrop.sql": "abc6f9f8ef7508936e6cac8584a6a923b4c2b7eb3fade4414047cf4d5574638b",
@@ -54,14 +54,14 @@
       "team05/includes/filters.php": "5a9d47f2ba21527bacef98ff9dbe9dd6d30117e8235eabaf78ba1c32269c98b4",
       "team05/includes/footer.php": "281a79fe622c51368b652dfe26748c27de49f26703898f3f1d1b8ded509e0796",
       "team05/includes/header.php": "4da3860943447197597fca27b1758afd0312ed0f97eab466062532817b31062b",
-      "team05/includes/plans.php": "2a4a9e164b5a8bfd978a880e2cdee66c271f489be6ecb989b4d2e69bc652f39f",
+      "team05/includes/plans.php": "f289610625cbbe259cc61d8eecf1a4bc3990100dc7e3da0d23a6501c856d1f7d",
       "team05/includes/queries.php": "2c6e4ea1ec4d2c79a7c5f216c1de54f2d9108f05016e13e954959d64813fc430",
-      "team05/includes/session.php": "abc0964f4067c184646f625ddf255eea2071957c6cdae0d5668244970c914cf8",
-      "team05/includes/view.php": "b70d21f4949f1ea1f471a16538a1ec4b7627801b5b7bf5fbd5343ae8c72f5b11",
+      "team05/includes/session.php": "b0ec63fd0a1906a32c35a57bc8b18db5c50624ebdd400970ce5baac0d8c25f84",
+      "team05/includes/view.php": "9920bf12cd2a90fe8ea13f84c40c077a0a04d8445b466714b3453aff4d5c2017",
       "team05/index.php": "5fb8b4fd91f655caec1be4b452d5943daa23dbfd0ad191fdb6c033f1759bafd8",
       "team05/olap.php": "48c08896cd8668c7561f80e3575fb022a92dca4509026e39ec0030f4a9841b4b",
-      "team05/plan_actions.php": "4cccbdc9ce8bd2e700c9ca2593b54a7332539f7acf2fc73c3f3071ce248ad268",
-      "team05/plan_detail.php": "33ef8daf3008002ea3c72fa4b960f43dbf11571bb2c47c4d332c02332499b8cf",
+      "team05/plan_actions.php": "7f79ff866ef47e8cb467f28c5720cfc03fb028ded91abdfa737356ae7ff672bf",
+      "team05/plan_detail.php": "aca05f7713beaedba7d7334b12d6146d69f931df008c4787afc56189a433ec64",
       "team05/plan_form.php": "43da1ab1197c322ecc252634b2c3eb6a74727a95bef9425f0870640adc4d0c4a",
       "team05/plans.php": "dd950ea14165c31835d10f7e6d3de06de2f7ad4dd24456336951c623d999d3b4",
       "team05/ranking.php": "6199d749d638bae99f484b8785affa54abe6828461ccf9a290ed5a10c9d9365c",

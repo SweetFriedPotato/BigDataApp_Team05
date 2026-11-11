@@ -59,7 +59,7 @@ Open docs/evidence/plans-tests.json or the corresponding report section. Show T 
 These are real DB failures tested from CLI, not form rejection presented as rollback. No failure-injection switch exists on the web. If a live rerun is appropriate, use the disposable installation command rather than resetting a real shared database:
 
 ```bash
-python 3 tools/verify_install.py
+python3 tools/verify_install.py
 ```
 
 ## 7. Seasonal Information

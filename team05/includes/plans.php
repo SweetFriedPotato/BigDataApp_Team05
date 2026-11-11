@@ -42,7 +42,7 @@ function save_plan(PDO $p,array $plan,?int $id = null): int {
             $id=(int)$p->lastInsertId();
         } else {
             if (!run_query($p,'SELECT plan_id FROM saved_plans WHERE plan_id=? FOR UPDATE',[$id])) throw new OutOfBoundsException('Plan no longer exists.');
-            run_query($p,'UPDATE saved_plans SET plan_name=?,start_date=?,end_date=?,max_temp_threshold=?,max_temp_range=?,memo=? WHERE plan_id=?',[...$values,$id]);
+            run_query($p,'UPDATE saved_plans SET plan_name=?,start_date=?,end_date=?,max_temp_threshold=?,max_temp_range=?,memo=?,updated_at=CURRENT_TIMESTAMP WHERE plan_id=?',[...$values,$id]);
             run_query($p,'DELETE FROM plan_locations WHERE plan_id=?',[$id]);
         }
         foreach($plan['location_ids'] as $location) run_query($p,'INSERT INTO plan_locations (plan_id,location_id) VALUES (?,?)',[$id,$location]);

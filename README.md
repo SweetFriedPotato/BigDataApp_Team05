@@ -46,8 +46,8 @@ Development: PHP 8.2.35 / Apache 2.4.69 / MariaDB 10.4.34. Separate official XAM
 Verified complex grouping against independent raw-CSV Decimal expectations; OLAP/rollup; dense ties and unrounded rates; cross-year/leap-month windows; web CRUD/Session; actual create/update FK-failure rollbacks; hostile HTTP inputs; fresh installation, drop/reinstall and **actual dump-only restoration with the bundled XAMPP client**. Chromium desktop/mobile flows passed with zero console errors.
 
 ```bash
-python 3 tools/verify_install.py
-python 3 tools/verify_xampp.py
+python3 tools/verify_install.py
+python3 tools/verify_xampp.py
 ```
 
 The first command uses existing project runtime images and creates disposable independent resources. The second requires the optional image prepared by `tools/prepare_xampp.sh`. Neither resets the primary project DB. Developer preparation tools are separate from runtime requirements. See [test results](docs/test-results.md), [requirements](docs/requirements.md), [environment](docs/environment.md) and [progress](docs/progress.md).
@@ -61,4 +61,4 @@ The first command uses existing project runtime images and creates disposable in
 
 `tools/package_release.py` builds a review ZIP from a clean Git commit, writes COMMIT_SHA.txt and a SHA-256 file manifest, verifies every payload member against Git, and verifies the live demo PHP/SQL bytes against the same commit. It excludes untracked secrets, local configuration, the original local specification and .git. The original supplied README is preserved only at `.local/README.spec.md`; this replacement README describes actual implementation.
 
-The PDFs and slides are drafts. Actual personal contribution statements, English oral presentation, final video/submission review, professor-host verification and course upload remain human work. Windows/macOS were not tested. GitHub push attempts in this session failed because HTTPS credentials were absent; verified local commits continue to preserve all work. No final course-submission tag is implied by a review tag.
+The PDFs and slides are drafts. Actual personal contribution statements, English oral presentation, final video/submission review, professor-host verification and course upload remain human work. Windows/macOS were not tested. The original 15 commits and review-2026-11-11 tag have been pushed and verified against GitHub. Current revision synchronization is recorded with observed SHAs in docs/evidence/revision-2026-11-12/git-status.json. No final course-submission tag is implied by a review tag.

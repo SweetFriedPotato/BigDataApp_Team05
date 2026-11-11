@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 files=subprocess.check_output(['rg','--files','-g','*.md'],cwd=ROOT,text=True).splitlines()
 checked=0;missing=[];pending=[]
 for name in files:
-    content=(ROOT/name).read_text()
+    content=(ROOT/name).read_text(encoding='utf-8')
     for target in re.findall(r'!?\[[^\]]*\]\(([^\s)]+)(?:\s+[^)]*)?\)',content):
         target=target.strip('<>');parts=urlsplit(target)
         if parts.scheme or not parts.path:continue
@@ -18,4 +18,4 @@ for name in files:
 if missing:raise RuntimeError(json.dumps(missing,indent=2))
 if pending:print(f'{checked} local links checked; only release proof pending packaging');sys.exit(0)
 result={'result':'PASS','markdown_files':len(files),'local_link_targets_checked':checked,'missing':[],'external_links':'Source URLs retained; availability not retested by this local-link check'}
-(ROOT/'docs/evidence/document-links.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
+(ROOT/'docs/evidence/document-links.json').write_text(json.dumps(result,indent=2)+'\n', encoding='utf-8');print(json.dumps(result,indent=2))

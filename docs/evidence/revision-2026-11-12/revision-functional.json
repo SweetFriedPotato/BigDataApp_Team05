@@ -1,0 +1,118 @@
+{
+  "result": "PASS",
+  "tests": [
+    {
+      "id": "T35",
+      "test": "Regions-only/body-only/identical updates advance timestamp/order; FK failure restores timestamp",
+      "status": "PASS",
+      "actual": {
+        "regions_only_updated_at": "2026-11-12 00:23:28",
+        "old_timestamp": "2023-01-01 00:00:00",
+        "newest_plan": 4,
+        "body_only": "PASS",
+        "identical": "PASS",
+        "failed_save_snapshot_restored": true
+      }
+    },
+    {
+      "id": "T36",
+      "status": "PASS",
+      "actual": [
+        {
+          "input": "0",
+          "display": "0"
+        },
+        {
+          "input": "",
+          "display": "No memo."
+        },
+        {
+          "input": "한글 and English",
+          "display": "한글 and English"
+        },
+        {
+          "input": "<b>literal</b>",
+          "display": "<b>literal</b>"
+        }
+      ]
+    },
+    {
+      "id": "T37",
+      "status": "PASS",
+      "actual": {
+        "dates": "2024-01-01..03",
+        "regions": [
+          2,
+          3
+        ],
+        "threshold": "26.50",
+        "inserted_by_filter_save": false
+      }
+    },
+    {
+      "id": "T38",
+      "status": "PASS",
+      "actual": {
+        "invalid_save_cases": 3,
+        "session": "previous conditions preserved",
+        "plan_insert": "not performed"
+      }
+    }
+  ],
+  "_meta": {
+    "executed_at": "2026-11-12T00:23:28.950838+09:00",
+    "command": [
+      "docker exec TEST_WEB php tests/revision_plans.php",
+      "SLG_BASE_URL=TEST_URL python3 tests/revision_http.py"
+    ],
+    "environment": {
+      "database": {
+        "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+        "account": "team05@%",
+        "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+      },
+      "base_url": "http://127.0.0.1:8056/team05/",
+      "scope": "disposable test DB"
+    },
+    "source_commit_base": "aa190e9bc4772a2504222e39aa1f7c52e80b72fe",
+    "source_files": {
+      "sql/dbcreate.sql": "d3692c5c5b4bdf2415a71371bac6a20249a3aeb4bf67bf1f231833a7c7fe70cc",
+      "sql/dbdrop.sql": "abc6f9f8ef7508936e6cac8584a6a923b4c2b7eb3fade4414047cf4d5574638b",
+      "sql/dbdump.sql": "6b4cdf05b94469864bdc2839f14b38ace4ee13c0c39fc398719e7ebf55baa8b7",
+      "sql/dbinsert.sql": "5113725dffc2c9de6f9f95f8edb25bde398a4a3a3b99b0e0437d2728e5975513",
+      "team05/.htaccess": "59caa281e2a0515a6c449999933e63a9822e356ff18a2618600203460b6ea9aa",
+      "team05/aggregate.php": "5924eee402b54fb8e57fa7ac0b487c7aabdf9208c2351f9c2bcdfbfb316875a1",
+      "team05/assets/css/app.css": "10e93a2aef72d18aef6d844aa027a673c738a733b66b9a83b7255efee3432aff",
+      "team05/assets/fonts/NanumGothic-Regular.ttf": "76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31",
+      "team05/assets/fonts/OFL.txt": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "team05/assets/fonts/SOURCE.txt": "c5696c7bdbaed305f3f01cbc476bc8d9555f61ce057ac0e3568af8cdfc3a07e3",
+      "team05/assets/js/app.js": "6ced870e65705a164b9a9aefa0e634b1323df2952bbd78413498cd469cc76a32",
+      "team05/config.local.example.php": "9cd01995ca7c0bc799a1c0fe6ecaec79430a9fe70661913cc44b064a0dc895da",
+      "team05/config.php": "cf8f6c4d8ae154f0c9a60678b23fa296a45ec0c8b22565a77345ccbdb32c442e",
+      "team05/includes/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+      "team05/includes/bootstrap.php": "3367defd7ad76cdf0944dea8f02eb79e374c8f90506e5a218bc9d30f4d79902d",
+      "team05/includes/csrf.php": "39d8471f5f078874ac3ae65af2ca8e88a09c1d1d97992bcdff20003ff328585e",
+      "team05/includes/db.php": "d3b3293577209708a2fcf6e9dab94ace8783a49e96ea821762ab5b8bd10d1477",
+      "team05/includes/filters.php": "5a9d47f2ba21527bacef98ff9dbe9dd6d30117e8235eabaf78ba1c32269c98b4",
+      "team05/includes/footer.php": "281a79fe622c51368b652dfe26748c27de49f26703898f3f1d1b8ded509e0796",
+      "team05/includes/header.php": "4da3860943447197597fca27b1758afd0312ed0f97eab466062532817b31062b",
+      "team05/includes/plans.php": "f289610625cbbe259cc61d8eecf1a4bc3990100dc7e3da0d23a6501c856d1f7d",
+      "team05/includes/queries.php": "2c6e4ea1ec4d2c79a7c5f216c1de54f2d9108f05016e13e954959d64813fc430",
+      "team05/includes/session.php": "b0ec63fd0a1906a32c35a57bc8b18db5c50624ebdd400970ce5baac0d8c25f84",
+      "team05/includes/view.php": "9920bf12cd2a90fe8ea13f84c40c077a0a04d8445b466714b3453aff4d5c2017",
+      "team05/index.php": "5fb8b4fd91f655caec1be4b452d5943daa23dbfd0ad191fdb6c033f1759bafd8",
+      "team05/olap.php": "48c08896cd8668c7561f80e3575fb022a92dca4509026e39ec0030f4a9841b4b",
+      "team05/plan_actions.php": "7f79ff866ef47e8cb467f28c5720cfc03fb028ded91abdfa737356ae7ff672bf",
+      "team05/plan_detail.php": "aca05f7713beaedba7d7334b12d6146d69f931df008c4787afc56189a433ec64",
+      "team05/plan_form.php": "43da1ab1197c322ecc252634b2c3eb6a74727a95bef9425f0870640adc4d0c4a",
+      "team05/plans.php": "dd950ea14165c31835d10f7e6d3de06de2f7ad4dd24456336951c623d999d3b4",
+      "team05/ranking.php": "6199d749d638bae99f484b8785affa54abe6828461ccf9a290ed5a10c9d9365c",
+      "team05/seasonal.php": "7140e497da0f3e11fff66fef99cd76a58e312d2ad95f116c7534f51ce322e36f",
+      "team05/window.php": "8f04c069f983f59f6af4b8a89eb86d8af12293a58518381e46e42c8c7f4e8aa4",
+      "tests/http_client.py": "c4b2833a83ad350189e0900dc2634a468cf13ff4942ed1cc49f1eb92e4ef2fe6",
+      "tests/revision_http.py": "81f92feae262938d53d49366a33265e2797d2a542228412300e7346c0947438b",
+      "tests/revision_plans.php": "ddf6930a25b129708462b2ff9b65bf291ab1178bd12ee9dd59a2e1c24d21e839"
+    },
+    "identity_scope": "File hashes identify executed inputs, including uncommitted changes; this evidence does not hash itself."
+  }
+}
