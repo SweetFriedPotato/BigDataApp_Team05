@@ -1,0 +1,46 @@
+{
+  "ranking_august_2024": [
+    {
+      "location_id": 2,
+      "valid_days": 31,
+      "matching_days": 2,
+      "matching_rate": "6.451612903225806451612903226",
+      "rank_no": 1
+    },
+    {
+      "location_id": 3,
+      "valid_days": 31,
+      "matching_days": 2,
+      "matching_rate": "6.451612903225806451612903226",
+      "rank_no": 1
+    },
+    {
+      "location_id": 5,
+      "valid_days": 31,
+      "matching_days": 1,
+      "matching_rate": "3.225806451612903225806451613",
+      "rank_no": 2
+    },
+    {
+      "location_id": 1,
+      "valid_days": 31,
+      "matching_days": 0,
+      "matching_rate": "0",
+      "rank_no": 3
+    },
+    {
+      "location_id": 4,
+      "valid_days": 31,
+      "matching_days": 0,
+      "matching_rate": "0",
+      "rank_no": 3
+    }
+  ],
+  "seoul_january_1": {
+    "location_id": 1,
+    "weather_date": "2024-01-01",
+    "metric": "mean",
+    "ma7": "1.141428571428571428571428571",
+    "ma30": "0.3013333333333333333333333333"
+  }
+}

@@ -21,3 +21,12 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - Added isolated Docker runtime definition with an internal network and a localhost-only web port. Existing host services are untouched.
 - P0 push failed: `could not read Username ... terminal prompts disabled`. Local commit bfec3f7 exists; authentication remains unavailable.
 - Verification before this commit: `docker compose config --quiet`, `git diff --check`; PHP runtime and schema execution pending P3/P4. The commit is a contract/setup milestone, not a claim of runtime PASS.
+
+## P2 — acquired and validated data
+
+- Downloaded five actual NASA CSVs sequentially; 5,480 rows, zero date/missing/order defects, 2024 leap day present for all locations.
+- Preserved collection timestamps and hashes; used supplied KASI/RDA appendix snapshots with their provenance explicitly distinguished from new downloads.
+- Created deterministic normalized CSVs and plain INSERT seed; repeated generation produced the same SHA-256.
+- Independent raw-CSV Decimal oracle confirms the August 2024 tied ranking and Seoul 2024-01-01 windows.
+- Commands: `python3 tools/build_seed.py` (twice), `python3 tests/oracle.py`, `python3 -m py_compile tools/*.py`, `git diff --check`. Evidence: docs/evidence/data-validation.json, oracle.json, oracle-summary.json; details in data-validation.md.
+- P1 push failed for the same missing HTTPS credentials. All implementation continues locally. P2 tests T01–T03 PASS; database calculations not yet claimed.

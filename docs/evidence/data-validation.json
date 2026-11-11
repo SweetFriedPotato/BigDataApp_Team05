@@ -1,0 +1,82 @@
+{
+  "nasa": [
+    {
+      "location": "seoul",
+      "rows": 1096,
+      "missing_dates": 0,
+      "outside_dates": 0,
+      "duplicates": 0,
+      "missing_temperature_rows": 0,
+      "order_errors": 0,
+      "year_counts": {
+        "2023": 365,
+        "2024": 366,
+        "2025": 365
+      },
+      "leap_day": true
+    },
+    {
+      "location": "busan",
+      "rows": 1096,
+      "missing_dates": 0,
+      "outside_dates": 0,
+      "duplicates": 0,
+      "missing_temperature_rows": 0,
+      "order_errors": 0,
+      "year_counts": {
+        "2023": 365,
+        "2024": 366,
+        "2025": 365
+      },
+      "leap_day": true
+    },
+    {
+      "location": "daegu",
+      "rows": 1096,
+      "missing_dates": 0,
+      "outside_dates": 0,
+      "duplicates": 0,
+      "missing_temperature_rows": 0,
+      "order_errors": 0,
+      "year_counts": {
+        "2023": 365,
+        "2024": 366,
+        "2025": 365
+      },
+      "leap_day": true
+    },
+    {
+      "location": "gwangju",
+      "rows": 1096,
+      "missing_dates": 0,
+      "outside_dates": 0,
+      "duplicates": 0,
+      "missing_temperature_rows": 0,
+      "order_errors": 0,
+      "year_counts": {
+        "2023": 365,
+        "2024": 366,
+        "2025": 365
+      },
+      "leap_day": true
+    },
+    {
+      "location": "jeju",
+      "rows": 1096,
+      "missing_dates": 0,
+      "outside_dates": 0,
+      "duplicates": 0,
+      "missing_temperature_rows": 0,
+      "order_errors": 0,
+      "year_counts": {
+        "2023": 365,
+        "2024": 366,
+        "2025": 365
+      },
+      "leap_day": true
+    }
+  ],
+  "temperature_rows": 5480,
+  "solar_terms": 72,
+  "food_guides": 12
+}

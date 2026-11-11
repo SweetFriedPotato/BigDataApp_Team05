@@ -1,0 +1,157 @@
+{
+  "kasi": {
+    "raw_file": "data/raw/kasi_reference.csv",
+    "sha256": "9e4f5ae8aa36f6450c9ba406e26bceef36f5410306ebcbe1cec48d62eadac08b",
+    "provenance": "Transcribed from user-supplied specification appendix; not downloaded anew in this implementation session",
+    "upstream_verification": "Prior specification reports source verification on 2026-11-11; not independently reverified here",
+    "official_almanac_crosscheck": false,
+    "rows": 72
+  },
+  "rda": {
+    "raw_file": "data/raw/rda_curated.csv",
+    "sha256": "f1d0e14cf54e173145d68d20b460fef17d62deecbc1158f5f88bd8f7efb3c982",
+    "provenance": "Transcribed from user-supplied specification appendix; not downloaded anew in this implementation session",
+    "upstream_verification": "Prior specification reports source verification on 2026-11-11; not independently reverified here",
+    "official_almanac_crosscheck": null,
+    "rows": 12
+  },
+  "period": [
+    "2023-01-01",
+    "2025-12-31"
+  ],
+  "time_standard": "LST",
+  "fields": {
+    "tmean": "T2M",
+    "tmax": "T2M_MAX",
+    "tmin": "T2M_MIN"
+  },
+  "temperature_unit": "C",
+  "coordinate_meaning": "requested point, not grid center",
+  "nasa": [
+    {
+      "location_id": 1,
+      "code": "seoul",
+      "requested_latitude": "37.5665",
+      "requested_longitude": "126.9780",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,T2M_MAX,T2M_MIN&community=RE&longitude=126.9780&latitude=37.5665&start=20230101&end=20251231&format=CSV&time-standard=LST",
+      "collected_at_utc": "2026-11-11T13:20:23.040225+00:00",
+      "raw_file": "data/raw/nasa_seoul.csv",
+      "bytes": 31198,
+      "sha256": "18cdfb1db2c1a29a3662b39e572f5026fdd3d86a41000d38ebe058bd422a31db",
+      "validation": {
+        "rows": 1096,
+        "missing_dates": 0,
+        "outside_dates": 0,
+        "duplicates": 0,
+        "missing_temperature_rows": 0,
+        "order_errors": 0,
+        "year_counts": {
+          "2023": 365,
+          "2024": 366,
+          "2025": 365
+        },
+        "leap_day": true
+      }
+    },
+    {
+      "location_id": 2,
+      "code": "busan",
+      "requested_latitude": "35.1796",
+      "requested_longitude": "129.0756",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,T2M_MAX,T2M_MIN&community=RE&longitude=129.0756&latitude=35.1796&start=20230101&end=20251231&format=CSV&time-standard=LST",
+      "collected_at_utc": "2026-11-11T13:20:24.119898+00:00",
+      "raw_file": "data/raw/nasa_busan.csv",
+      "bytes": 31409,
+      "sha256": "7492c4b44e28ac6b97d95ab782e08dd0049a02eb328b63d11fa286dba136a27a",
+      "validation": {
+        "rows": 1096,
+        "missing_dates": 0,
+        "outside_dates": 0,
+        "duplicates": 0,
+        "missing_temperature_rows": 0,
+        "order_errors": 0,
+        "year_counts": {
+          "2023": 365,
+          "2024": 366,
+          "2025": 365
+        },
+        "leap_day": true
+      }
+    },
+    {
+      "location_id": 3,
+      "code": "daegu",
+      "requested_latitude": "35.8714",
+      "requested_longitude": "128.6014",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,T2M_MAX,T2M_MIN&community=RE&longitude=128.6014&latitude=35.8714&start=20230101&end=20251231&format=CSV&time-standard=LST",
+      "collected_at_utc": "2026-11-11T13:20:24.931742+00:00",
+      "raw_file": "data/raw/nasa_daegu.csv",
+      "bytes": 31245,
+      "sha256": "51d46ad33c7f62c93e40a39ed2b7efcceb11b7f330ba62f5b3a648681b898475",
+      "validation": {
+        "rows": 1096,
+        "missing_dates": 0,
+        "outside_dates": 0,
+        "duplicates": 0,
+        "missing_temperature_rows": 0,
+        "order_errors": 0,
+        "year_counts": {
+          "2023": 365,
+          "2024": 366,
+          "2025": 365
+        },
+        "leap_day": true
+      }
+    },
+    {
+      "location_id": 4,
+      "code": "gwangju",
+      "requested_latitude": "35.1595",
+      "requested_longitude": "126.8526",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,T2M_MAX,T2M_MIN&community=RE&longitude=126.8526&latitude=35.1595&start=20230101&end=20251231&format=CSV&time-standard=LST",
+      "collected_at_utc": "2026-11-11T13:20:25.731305+00:00",
+      "raw_file": "data/raw/nasa_gwangju.csv",
+      "bytes": 31130,
+      "sha256": "639c95b786879ed4aa5c1daa97da0c8a659146dff46824b35a38abb05ada9ab5",
+      "validation": {
+        "rows": 1096,
+        "missing_dates": 0,
+        "outside_dates": 0,
+        "duplicates": 0,
+        "missing_temperature_rows": 0,
+        "order_errors": 0,
+        "year_counts": {
+          "2023": 365,
+          "2024": 366,
+          "2025": 365
+        },
+        "leap_day": true
+      }
+    },
+    {
+      "location_id": 5,
+      "code": "jeju",
+      "requested_latitude": "33.4996",
+      "requested_longitude": "126.5312",
+      "source_url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,T2M_MAX,T2M_MIN&community=RE&longitude=126.5312&latitude=33.4996&start=20230101&end=20251231&format=CSV&time-standard=LST",
+      "collected_at_utc": "2026-11-11T13:20:26.614392+00:00",
+      "raw_file": "data/raw/nasa_jeju.csv",
+      "bytes": 31417,
+      "sha256": "5c91f164a3bd044f00ac3667c983560148e0dcaa06a6964088f83fe278fa82e7",
+      "validation": {
+        "rows": 1096,
+        "missing_dates": 0,
+        "outside_dates": 0,
+        "duplicates": 0,
+        "missing_temperature_rows": 0,
+        "order_errors": 0,
+        "year_counts": {
+          "2023": 365,
+          "2024": 366,
+          "2025": 365
+        },
+        "leap_day": true
+      }
+    }
+  ]
+}
