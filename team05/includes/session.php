@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Jieun Hwang (2376329) — Common PHP/config/PDO, Session/input/UI; solar-term and monthly-guide pages/queries.
 // Implementation: Codex. Filters persist across pages; permanent plans live in MariaDB.
 declare(strict_types=1);
 function analysis_context(string $page): array {

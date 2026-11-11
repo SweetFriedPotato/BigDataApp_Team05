@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Sumin Cho (2376274) — Plan CRUD, saved_plans/plan_locations; transactions, rollback and saving UX.
 // Implementation: Codex. Each detail and its locations are read from the database.
 require __DIR__ . '/includes/bootstrap.php';
 require __DIR__ . '/includes/plans.php';

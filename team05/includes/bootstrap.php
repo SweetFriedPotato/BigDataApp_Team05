@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Jieun Hwang (2376329) — Common PHP/config/PDO, Session/input/UI; solar-term and monthly-guide pages/queries.
 // Implementation: Codex; one sequential implementation session. See docs/contributions.md.
 declare(strict_types=1);
 ini_set('display_errors', '0');

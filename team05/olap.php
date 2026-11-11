@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Koo Daon (2476009) — Complex Grouping, OLAP and ROLLUP; valid-day/weighted summaries and hierarchy verification.
 // Implementation: Codex. Real hierarchical queries and MariaDB WITH ROLLUP totals.
 require __DIR__ . '/includes/bootstrap.php';
 require __DIR__ . '/includes/queries.php';

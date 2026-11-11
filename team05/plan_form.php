@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Sumin Cho (2376274) — Plan CRUD, saved_plans/plan_locations; transactions, rollback and saving UX.
 // Implementation: Codex. Used for GET form display and validation-error redisplay.
 require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/includes/plans.php';

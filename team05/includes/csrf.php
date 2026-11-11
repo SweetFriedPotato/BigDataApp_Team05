@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Jieun Hwang (2376329) — Common PHP/config/PDO, Session/input/UI; solar-term and monthly-guide pages/queries.
 // Implementation: Codex. All changes require POST and a session-bound CSRF token.
 declare(strict_types=1);
 function csrf_token(): string {

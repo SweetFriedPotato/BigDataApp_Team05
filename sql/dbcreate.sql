@@ -1,3 +1,4 @@
+-- Team responsibility: Nunnalin Heimvichit (2371001) — Data collection/validation; six-table ERD, normalization, keys/indexes; four SQL files, initialization and dump.
 -- Implementation: Codex. Run as the pre-provisioned team05 account; no administrative SQL.
 USE team05;
 SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;

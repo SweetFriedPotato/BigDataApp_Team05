@@ -1,3 +1,4 @@
+-- Team responsibility: Nunnalin Heimvichit (2371001) — Data collection/validation; six-table ERD, normalization, keys/indexes; four SQL files, initialization and dump.
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;

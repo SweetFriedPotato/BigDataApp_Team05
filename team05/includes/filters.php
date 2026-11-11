@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Jieun Hwang (2376329) — Common PHP/config/PDO, Session/input/UI; solar-term and monthly-guide pages/queries.
 // Implementation: Codex. Common input contract used by every analysis and saved plan.
 declare(strict_types=1);
 class InputValidationException extends InvalidArgumentException {

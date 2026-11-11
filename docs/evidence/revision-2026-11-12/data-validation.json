@@ -86,7 +86,7 @@
   "solar_terms": 72,
   "food_guides": 12,
   "_meta": {
-    "executed_at": "2026-11-12T00:25:05.203120+09:00",
+    "executed_at": "2026-11-12T01:00:22.755014+09:00",
     "command": [
       "python3",
       "tools/validate_data.py"
@@ -95,7 +95,7 @@
       "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
       "python": "3.13.12"
     },
-    "source_commit_base": "aa190e9bc4772a2504222e39aa1f7c52e80b72fe",
+    "source_commit_base": "cc91e54daf350e6b7b24d92781642e22bb090bf7",
     "source_files": {
       "data/manifest.json": "c5cf91fbf2aa995ef0cc4a46fd94ddf621f9d99fb5c2cabd245dffc50e3b653c",
       "data/processed/monthly_food_guides.csv": "b2772f55ceb6048710b9dc9e03f7c7c156dbe0e27f496fa6ed3f6344c9d70853",
@@ -108,7 +108,7 @@
       "data/raw/nasa_jeju.csv": "5c91f164a3bd044f00ac3667c983560148e0dcaa06a6964088f83fe278fa82e7",
       "data/raw/nasa_seoul.csv": "18cdfb1db2c1a29a3662b39e572f5026fdd3d86a41000d38ebe058bd422a31db",
       "data/raw/rda_curated.csv": "f1d0e14cf54e173145d68d20b460fef17d62deecbc1158f5f88bd8f7efb3c982",
-      "tools/build_seed.py": "35ef4f818f352c2cb2d76da9a60a84c09ebef1753e40e489cb7fba52c787fd3e",
+      "tools/build_seed.py": "dd63f638b0e41f4bb18ed2a63432b86f47d41c6a6a40f75d938cfd5171823f0d",
       "tools/data_common.py": "e26e925aea0beee14e9a328b7514044fa05191e254792d45183c9c4211eaaba2",
       "tools/validate_data.py": "583df221c6053f2e5104e85999cb0f1595b4648be6ec292d45d33626bf0ffab9"
     },

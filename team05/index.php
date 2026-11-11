@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Jieun Hwang (2376329) — Common PHP/config/PDO, Session/input/UI; solar-term and monthly-guide pages/queries.
 // Implementation: Codex. Home values are read from the installed database.
 require __DIR__ . '/includes/bootstrap.php';
 $counts = run_query(db(), 'SELECT (SELECT COUNT(*) FROM daily_temperatures) weather_rows,(SELECT COUNT(*) FROM locations) locations,(SELECT COUNT(*) FROM solar_terms) terms,(SELECT COUNT(*) FROM monthly_food_guides) foods')[0];

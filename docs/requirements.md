@@ -17,9 +17,9 @@ Current judgments are derived from executed test evidence and complete requireme
 | R11 | OLAP hierarchy and WITH ROLLUP | **NOT_RUN** | [team05/olap.php](../team05/olap.php) | T09, T10;  |
 | R12 | Dense ranks, ties and Top N ranks | **NOT_RUN** | [team05/ranking.php](../team05/ranking.php) | T11, T12, T13;  |
 | R13 | Continuous SQL 7/30-day windows | **PARTIAL** | [team05/window.php](../team05/window.php) | T14, T15, T16, T17, T18, T41;  |
-| R14 | Four separate menus and URLs | **PASS** | [team05/includes/header.php](../team05/includes/header.php) | T43;  |
+| R14 | Four separate menus and URLs | **PARTIAL** | [team05/includes/header.php](../team05/includes/header.php) | T43;  |
 | R15 | Validated dynamic inputs and native prepared statements | **PARTIAL** | [team05/includes/queries.php](../team05/includes/queries.php) | T05, T09, T13, T16, T20;  |
-| R16 | Dates, numbers, checkbox, select and buttons | **PASS** | [team05/includes/view.php](../team05/includes/view.php) | T43;  |
+| R16 | Dates, numbers, checkbox, select and buttons | **PARTIAL** | [team05/includes/view.php](../team05/includes/view.php) | T43;  |
 | R17 | PHP Session shared comparison conditions | **PARTIAL** | [team05/includes/session.php](../team05/includes/session.php) | T19, T26, T37, T38;  |
 | R18 | Real COMMIT and intermediate-failure rollback | **NOT_RUN** | [team05/includes/plans.php](../team05/includes/plans.php) | T21, T24, T25, T35;  |
 | R19 | Central configuration with local override | **NOT_RUN** | [team05/config.php](../team05/config.php) | T33;  |
@@ -28,7 +28,7 @@ Current judgments are derived from executed test evidence and complete requireme
 | R22 | Fresh offline installation from supplied PHP/SQL | **NOT_RUN** | [tools/verify_xampp.py](../tools/verify_xampp.py) | T29, T30, T31, T32; Actual tested OS only; professor physical host NOT_RUN |
 | R23 | Package, actual serving root and recorded app identity | **NOT_RUN** | [tools/package_release.py](../tools/package_release.py) | T34, T42;  |
 | R24 | At least five base tables; actual six | **NOT_RUN** | [sql/dbcreate.sql](../sql/dbcreate.sql) | T04;  |
-| R25 | At least five user screens; actual nine | **PASS** | [team05/includes/header.php](../team05/includes/header.php) | T43;  |
+| R25 | At least five user screens; actual nine | **PARTIAL** | [team05/includes/header.php](../team05/includes/header.php) | T43;  |
 | R26 | Rendered report minimum 10 pages (review draft) | **NOT_RUN** | [docs/report.md](report.md) | T44;  |
 | R27 | Rendered English paper minimum 4 pages (review draft) | **NOT_RUN** | [docs/paper.md](paper.md) | T44;  |
 | R28 | ERD, PHP structure, actual code, schedule and personal work evidence | **NOT_RUN** | [docs/report.md](report.md) | T44; Assigned 20% responsibility is separate from actual human completion; member_reviews=NOT_RUN |

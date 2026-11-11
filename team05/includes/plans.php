@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Sumin Cho (2376274) — Plan CRUD, saved_plans/plan_locations; transactions, rollback and saving UX.
 // Implementation: Codex. Web callers validate first; repository writes are atomic.
 declare(strict_types=1);
 function text_length(string $value): int {

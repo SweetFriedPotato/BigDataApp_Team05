@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Sumin Cho (2376274) — Plan CRUD, saved_plans/plan_locations; transactions, rollback and saving UX.
 // Implementation: Codex. Shared demonstration records stored in MariaDB.
 require __DIR__ . '/includes/bootstrap.php';
 require __DIR__ . '/includes/plans.php';

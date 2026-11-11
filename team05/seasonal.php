@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Jieun Hwang (2376329) — Common PHP/config/PDO, Session/input/UI; solar-term and monthly-guide pages/queries.
 // Implementation: Codex. Dated calendar reference and independent monthly editorial guide.
 require __DIR__ . '/includes/bootstrap.php';
 require __DIR__ . '/includes/queries.php';

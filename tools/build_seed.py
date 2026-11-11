@@ -18,7 +18,7 @@ def insert(table, columns, rows):
     return ''.join(out)
 
 weather, terms, foods = validate()
-sql = '-- Deterministic seed; generated only after raw validation. Plans intentionally empty.\nUSE team05;\nSET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;\nSTART TRANSACTION;\n'
+sql = '-- Team responsibility: Nunnalin Heimvichit (2371001) — Data collection/validation; six-table ERD, normalization, keys/indexes; four SQL files, initialization and dump.\n-- Deterministic seed; generated only after raw validation. Plans intentionally empty.\nUSE team05;\nSET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;\nSTART TRANSACTION;\n'
 sql += insert('locations','location_id,location_code,name_en,name_ko,requested_latitude,requested_longitude',LOCATIONS)
 sql += insert('daily_temperatures','location_id,weather_date,tmean,tmax,tmin',weather)
 sql += insert('solar_terms','term_date,term_name,source_url',[[r[k] for k in ('term_date','term_name','source_url')] for r in sorted(terms,key=lambda r:r['term_date'])])

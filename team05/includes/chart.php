@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Jihee Choi (2276337) — Ranking/Windowing; ties, denominators, continuous dates and line-chart verification.
 // Presentation geometry only: every plotted value is a returned SQL field.
 declare(strict_types=1);
 function trend_geometry(array $rows, int $width = 1030): array {

@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Jihee Choi (2276337) — Ranking/Windowing; ties, denominators, continuous dates and line-chart verification.
 // Implementation: Codex. Unrounded rates determine dense ranks; Top N includes every tie.
 require __DIR__ . '/includes/bootstrap.php';
 require __DIR__ . '/includes/queries.php';

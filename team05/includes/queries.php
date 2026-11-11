@@ -1,6 +1,7 @@
 <?php
 // Implementation: Codex. SQL alone computes grouping, rollups, ranks and moving averages.
 declare(strict_types=1);
+// Team responsibility: Koo Daon (2476009) — Shared analysis helpers are reviewed by Koo Daon and Jihee Choi.
 function base_cte(array $f, ?string $start = null, ?string $end = null): array {
     $marks = implode(',', array_fill(0, count($f['location_ids']), '?'));
     $sql = "WITH params AS (SELECT CAST(? AS DECIMAL(6,2)) max_limit, CAST(? AS DECIMAL(6,2)) range_limit),
@@ -17,6 +18,7 @@ function base_cte(array $f, ?string $start = null, ?string $end = null): array {
     )";
     return [$sql, [$f['max_temp_threshold'], $f['max_temp_range'], $start ?? $f['start_date'], $end ?? $f['end_date'], ...$f['location_ids']]];
 }
+// Team responsibility: Koo Daon (2476009) — Assigned module responsibility; implementation history remains unchanged.
 function statistics_sql(): string {
     return 'COUNT(*) candidate_days, SUM(valid_flag) valid_days,
         AVG(CASE WHEN valid_flag=1 THEN tmean END) mean_temperature,
@@ -28,6 +30,7 @@ function statistics_sql(): string {
         SUM(exceedance_flag) exceedance_days, SUM(matching_flag) matching_days,
         100.0*SUM(matching_flag)/NULLIF(SUM(valid_flag),0) matching_rate';
 }
+// Team responsibility: Koo Daon (2476009) — Assigned module responsibility; implementation history remains unchanged.
 function aggregate_query(array $f, array $o): array {
     [$sql,$params] = base_cte($f);
     $month = match ($o['group_mode']) {
@@ -40,6 +43,7 @@ function aggregate_query(array $f, array $o): array {
         ORDER BY g.location_id, g.year_no' . ($month ? ', g.month_no' : '');
     return [$sql,$params];
 }
+// Team responsibility: Koo Daon (2476009) — Assigned module responsibility; implementation history remains unchanged.
 function olap_bounds(array $f, array $o): array {
     $start = $f['start_date']; $end = $f['end_date'];
     if ($o['level'] !== 'year') {
@@ -56,6 +60,7 @@ function olap_bounds(array $f, array $o): array {
     }
     return [$start,$end];
 }
+// Team responsibility: Koo Daon (2476009) — Assigned module responsibility; implementation history remains unchanged.
 function olap_query(array $f, array $o): array {
     [$start,$end] = olap_bounds($f,$o);
     if ($o['level'] !== 'day') {
@@ -65,6 +70,7 @@ function olap_query(array $f, array $o): array {
     [$sql,$params] = base_cte($f,$start,$end);
     return [$sql.' SELECT b.*,l.name_en FROM base b JOIN locations l ON l.location_id=b.location_id ORDER BY b.location_id,b.weather_date',$params];
 }
+// Team responsibility: Koo Daon (2476009) — Assigned module responsibility; implementation history remains unchanged.
 function rollup_query(array $f, array $o): array {
     [$start,$end] = olap_bounds($f,$o);
     [$sql,$params] = base_cte($f,$start,$end);
@@ -74,6 +80,7 @@ function rollup_query(array $f, array $o): array {
         ORDER BY (t.location_id IS NULL),t.location_id,(t.year_no IS NULL),t.year_no,(t.month_no IS NULL),t.month_no';
     return [$sql,$params];
 }
+// Team responsibility: Jihee Choi (2276337) — Assigned module responsibility; implementation history remains unchanged.
 function ranking_query(array $f, array $o): array {
     $minDays = integer_input($o,'min_valid_days',1,1096);
     $topRank = integer_input($o,'top_rank',1,5);
@@ -90,6 +97,7 @@ function ranking_query(array $f, array $o): array {
       WHERE r.rank_no<=? ORDER BY r.rank_no,r.location_id';
     return [$sql,[...$params,$minDays,$topRank]];
 }
+// Team responsibility: Jihee Choi (2276337) — Assigned module responsibility; implementation history remains unchanged.
 function window_query(array $f, array $o): array {
     $metric = match ($o['metric']) {
         'mean' => 'tmean', 'max' => 'tmax', 'min' => 'tmin', 'range' => 'dtr',
@@ -115,6 +123,7 @@ function window_query(array $f, array $o): array {
     WHERE weather_date BETWEEN ? AND ? ORDER BY w.location_id,weather_date';
     return [$sql,[...$params,$f['start_date'],$f['end_date']]];
 }
+// Team responsibility: Jieun Hwang (2376329) — Assigned module responsibility; implementation history remains unchanged.
 function seasonal_data(PDO $p,array $o): array {
     $year = integer_input($o,'year',2023,2025);
     $month = integer_input($o,'month',1,12);

@@ -1,4 +1,5 @@
 <?php
+// Team responsibility: Jieun Hwang (2376329) — Common PHP/config/PDO, Session/input/UI; solar-term and monthly-guide pages/queries.
 // Original interface by Codex. The four analysis menus remain separate.
 $menus = ['index'=>['Home','index.php'],'aggregate'=>['Temperature Comparison','aggregate.php'],
     'olap'=>['Temperature Explorer','olap.php'],'ranking'=>['Find My Season','ranking.php'],

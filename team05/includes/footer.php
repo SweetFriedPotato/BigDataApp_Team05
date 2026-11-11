@@ -1,1 +1,2 @@
+<?php // Team responsibility: Jieun Hwang (2376329) — shared footer and original weather identity. ?>
 </main><footer class="footer"><a class="brand" href="index.php" aria-label="Seasonal Living Guide"><img src="assets/img/weather-mark.svg" width="32" height="32" alt="" aria-hidden="true"><span>Seasonal Living Guide</span></a><p>NASA POWER historical grid data · LST dates<br>KASI calendar references · RDA monthly guides</p><span>Team 05 · Weather Data Analysis</span></footer></body></html>
