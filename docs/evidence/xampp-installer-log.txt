@@ -1,0 +1,132 @@
+Log started 11/11/2026 at 13:54:34
+Preferred installation mode : unattended
+Trying to init installer in mode unattended
+Mode unattended successfully initialized
+Unable to use minimal UI during unattended installation
+Preparing to Install
+Preparing to Install
+Unpacking files
+Unpacking files
+Unpacking files
+Unpacking files
+Unpacking files
+Unpacking files
+Unpacking files
+Setting variable phpExtensionsOutput from /opt/lampp/bin/php -i | grep extension_dir
+Script exit code: 0
+
+Script output:
+ extension_dir => /opt/lampp/lib/php/extensions/no-debug-non-zts-20220829 => /opt/lampp/lib/php/extensions/no-debug-non-zts-20220829
+sqlite3.extension_dir => no value => no value
+
+Script stderr:
+ 
+
+File /opt/lampp/htdocs/xampp/navi.php not readable
+Executing chown -R root:daemon "/opt/lampp/apache2/htdocs"
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing /opt/lampp/ctlscript.sh stop apache > /dev/null 2> /dev/null
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing /opt/lampp/ctlscript.sh start apache > /dev/null 2> /dev/null
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing chown -R root:daemon /opt/lampp/phpmyadmin/tmp
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing find /opt/lampp/phpmyadmin/tmp   -type d  -print0 | xargs -0 chmod 775
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing chown -R daemon:daemon /opt/lampp/logs
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing chown -R daemon:daemon /opt/lampp/var/proftpd
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing chown -R daemon:daemon /opt/lampp/htdocs/webalizer
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing chown -R daemon:daemon /opt/lampp/phpmyadmin/config.inc.php
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing chown -R mysql:mysql /opt/lampp/var/mysql
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing chown -R daemon:daemon /opt/lampp/temp
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Creating Uninstaller
+Creating uninstaller 25%
+Creating uninstaller 50%
+Creating uninstaller 75%
+Creating uninstaller 100%
+Installation completed
+Log finished 11/11/2026 at 14:01:42
+Exiting with code 0

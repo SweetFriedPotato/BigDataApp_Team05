@@ -8,7 +8,7 @@ PASS records executed implementation evidence. Draft documentation is distinguis
 | R02 | Six-table create SQL, PK/FK/indexes | **PASS** | [sql/dbcreate.sql](../sql/dbcreate.sql) | [evidence](evidence/schema.json) | e660795 |
 | R03 | Plain INSERT seed before analysis | **PASS** | [sql/dbinsert.sql](../sql/dbinsert.sql) | [evidence](evidence/data-validation.json) | c9ff724 |
 | R04 | Project-only child-first DROP and reset | **PASS** | [sql/dbdrop.sql](../sql/dbdrop.sql) | [evidence](evidence/clean-install.json) | e660795 |
-| R05 | Actual mysqldump and dump-only restore | **PASS** | [sql/dbdump.sql](../sql/dbdump.sql) | [evidence](evidence/clean-install.json) | pending document milestone |
+| R05 | Actual mysqldump and dump-only restore | **PASS** | [sql/dbdump.sql](../sql/dbdump.sql) | [evidence](evidence/clean-install.json) | cb2ce62 |
 | R06 | Web INSERT | **PASS** | [team05/plan_actions.php](../team05/plan_actions.php) | [evidence](evidence/plans-http.json) | fba9c9f |
 | R07 | Web SELECT list/detail | **PASS** | [team05/plan_detail.php](../team05/plan_detail.php) | [evidence](evidence/plans-http.json) | fba9c9f |
 | R08 | Web UPDATE body and selected locations | **PASS** | [team05/includes/plans.php](../team05/includes/plans.php) | [evidence](evidence/plans-tests.json) | fba9c9f |
@@ -24,14 +24,14 @@ PASS records executed implementation evidence. Draft documentation is distinguis
 | R18 | Successful COMMIT and actual intermediate-failure ROLLBACK | **PASS** | [team05/includes/plans.php](../team05/includes/plans.php) | [evidence](evidence/plans-tests.json) | fba9c9f |
 | R19 | Central config and checked local override | **PASS** | [team05/config.php](../team05/config.php) | [evidence](evidence/clean-install.json) | e660795 |
 | R20 | team05 DB/user/password; no root app connection | **PASS** | [team05/config.php](../team05/config.php) | [evidence](evidence/schema.json) | e660795 |
-| R21 | Install exactly under htdocs/team05 | **TODO** | [team05/index.php](../team05/index.php) | [evidence](evidence/xampp-install.json) | 4198842 |
-| R22 | Fresh XAMPP from PHP+SQL with no API/CDN | **TODO** | [tools/verify_xampp.py](../tools/verify_xampp.py) | [evidence](evidence/xampp-install.json) | pending document milestone |
+| R21 | Install exactly under htdocs/team05 (actual Linux XAMPP; professor Windows host NOT_RUN) | **PASS** | [team05/index.php](../team05/index.php) | [evidence](evidence/xampp-install.json) | 4198842 |
+| R22 | Fresh XAMPP from PHP+SQL with no API/CDN (actual Linux XAMPP; professor Windows host NOT_RUN) | **PASS** | [tools/verify_xampp.py](../tools/verify_xampp.py) | [evidence](evidence/xampp-install.json) | pending document milestone |
 | R23 | Demo source and packaged commit match | **TODO** | [tools/package_release.py](../tools/package_release.py) | [evidence](evidence/release-verification.json) | pending document milestone |
 | R24 | At least five base tables; actual six | **PASS** | [sql/dbcreate.sql](../sql/dbcreate.sql) | [evidence](evidence/schema.json) | e660795 |
 | R25 | At least five user screens; actual nine | **PASS** | [team05/includes/header.php](../team05/includes/header.php) | [evidence](evidence/browser-tests.json) | 4198842 |
 | R26 | Implementation report final rendered minimum 10 pages | **TODO** | [docs/report.md](report.md) | [evidence](evidence/document-render.json) | pending document milestone |
 | R27 | English paper final rendered minimum 4 pages | **TODO** | [docs/paper.md](paper.md) | [evidence](evidence/document-render.json) | pending document milestone |
-| R28 | ERD/PHP structure/code/schedule/contributions | **TODO** | [docs/report.md](report.md) | [evidence](report.md) | pending document milestone |
+| R28 | ERD/PHP structure/code/schedule/contributions (draft report records all sections; actual human contribution information remains pending) | **PASS** | [docs/report.md](report.md) | [evidence](report.md) | pending document milestone |
 | R29 | English PPT, oral presentation and backup video (English draft/script prepared in P9; final oral presentation and submitted backup video NOT_RUN) | **TODO** | [docs/demo-script.md](demo-script.md) | [evidence](demo-script.md) | pending document milestone |
 | R30 | Actual individual contributions and author comments (Codex implementation is recorded honestly; team members must supply their actual roles/effort) | **BLOCKED** | [docs/contributions.md](contributions.md) | [evidence](contributions.md) | pending document milestone |
 

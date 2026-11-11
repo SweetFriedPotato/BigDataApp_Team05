@@ -11,3 +11,5 @@ KASI 72 dates and RDA 12 monthly items were transcribed from the supplied specif
 Seed contains 5 + 5,480 + 72 + 12 = 5,569 rows. Saved plans and their links start empty. Synthetic test data is never written to seed files.
 
 Seed SHA-256: `5113725dffc2c9de6f9f95f8edb25bde398a4a3a3b99b0e0437d2728e5975513`.
+
+All five newly retrieved NASA SHA-256 hashes exactly match the supplied appendix C hashes. The independently checked August ranking and Seoul cross-year windows therefore use the same source byte versions as the specification.

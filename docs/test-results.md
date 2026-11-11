@@ -1,6 +1,6 @@
 # Actual test results
 
-Generated 2026-11-11 22:47 KST from retained result files. PASS means an executed check. Synthetic fixtures are rolled back or cleaned up; no fixture is part of seed/dump. SQL assertions use native PDO with ONLY_FULL_GROUP_BY.
+Generated 2026-11-11 23:05 KST from retained result files. PASS means an executed check. Synthetic fixtures are rolled back or cleaned up; no fixture is part of seed/dump. SQL assertions use native PDO with ONLY_FULL_GROUP_BY.
 
 | ID | Test / input | Expected | Actual | Result | Evidence | Command / environment |
 |---|---|---|---|---|---|---|
@@ -41,6 +41,6 @@ Generated 2026-11-11 22:47 KST from retained result files. PASS means an execute
 
 Actual browser: Chromium 141.0.7390.37; 1440×1050, 390×844, eight routes, no document overflow; console errors 0. See [browser evidence](evidence/browser-tests.json) and four actual screenshots.
 
-Actual XAMPP package installation is in progress. Docker Apache checks do not substitute for that result. Windows/macOS and professor-server checks are NOT_RUN.
+Additional actual XAMPP Linux test: **PASS**. See [XAMPP evidence](evidence/xampp-install.json). This does not claim a Windows/macOS or professor-server test.
 
 No performance benchmark, user study, final human presentation or course upload was performed. Publication/academic contribution claims require human confirmation.

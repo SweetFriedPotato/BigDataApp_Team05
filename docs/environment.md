@@ -15,3 +15,16 @@ Installed runtime versions, executable paths, CLI/Apache extensions and database
 - Host XAMPP/Windows and the professor's specific client remain unavailable; these are not claimed as tested.
 
 Apache SAPI confirmed as `apache2handler`, PHP 8.2.35, pdo_mysql and session enabled: `evidence/php-apache.json`. Temporary probe removed. CLI and Apache load the same application ini files.
+
+## Additional actual official XAMPP compatibility run
+
+Official XAMPP Linux 8.2.12 was installed in a new Ubuntu 22.04 container. Its installer completed with code 0; no host XAMPP/system files were changed. The installed image was used for a fresh container with Docker network mode `none`.
+
+- php: PHP 8.2.12 (cli) (built: Nov 25 2023 08:09:53) (NTS); Copyright (c) The PHP Group; Zend Engine v4.2.12, Copyright (c) Zend Technologies
+- apache: Server version: Apache/2.4.58 (Unix); Server built:   Nov 25 2023 07:37:35
+- mysql_client: /opt/lampp/bin/mysql  Ver 15.1 Distrib 10.4.32-MariaDB, for Linux (x86_64) using readline 5.1
+- mysqldump: mysqldump  Ver 10.19 Distrib 10.4.32-MariaDB, for Linux (x86_64)
+
+Apache PHP probe: {'sapi': 'apache2handler', 'version': '8.2.12', 'pdo_mysql': True, 'ini': '/opt/lampp/etc/php.ini'}. CLI loaded `/opt/lampp/etc/php.ini`. Temporary probe removed. Actual htdocs path `/opt/lampp/htdocs/team05`; default config 127.0.0.1:3306 and team05/team05/team05, no environment override. Separate local override to localhost also passed.
+
+Create/insert, all nine user screens, HTTP CRUD/Session, every calculation/rollback test, drop/create/insert and actual XAMPP mysql-client dump restoration passed. Windows/macOS and the professor’s physical server remain NOT_RUN. See evidence/xampp-install.json and xampp-installer-log.txt.

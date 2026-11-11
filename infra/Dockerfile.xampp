@@ -1,0 +1,6 @@
+FROM ubuntu:22.04 AS base
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libaio1 libncurses5 libstdc++6 libnsl2 net-tools procps curl ca-certificates && rm -rf /var/lib/apt/lists/*
+FROM base AS xampp
+COPY installer.run /tmp/installer.run
+RUN chmod +x /tmp/installer.run && /tmp/installer.run --mode unattended --unattendedmodeui none && rm /tmp/installer.run
+CMD ["sleep", "infinity"]

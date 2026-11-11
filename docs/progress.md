@@ -103,3 +103,13 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - Final PHP syntax check PASS; T01–T33 currently PASS. T34 packaging NOT_RUN. `tools/record_results.py` generated the matrix from actual evidence only.
 - Official XAMPP Linux 8.2.12 installer downloaded from the project's SourceForge mirror, hash recorded; installation inside a new Ubuntu container is still running. XAMPP-specific requirements remain TODO until actual execution finishes.
 - P7 push failed for missing HTTPS credentials. Remaining work: finish the XAMPP check, commit integration evidence, then P9 documents and a concrete demo package.
+
+## P8 — official XAMPP compatibility completed
+
+- Official installer completed with exit code 0. Slow progress was actual manual-page symbolic-link creation, not a runtime test PASS. Two opaque Docker-build attempts were interrupted; a project-owned no-network install container made file/log progress observable. The installed image was saved only after stopping its services.
+- Fresh actual XAMPP `/opt/lampp/htdocs/team05`, unmodified public config, team05@localhost: PASS. Docker `--network none`; no API/CDN possible.
+- All six calculation/transaction suites and HTTP across nine screens/CRUD/Session PASS; drop→create→insert PASS; dump-only import with the actual bundled XAMPP mysql client PASS; semantic fingerprints match the original MariaDB seed/dump; local config override PASS.
+- Explicit Apache-vs-CLI SAPI/version/extension probe was added and the fresh run repeated for that unresolved environment check: PASS. Temporary probe removed.
+- Evidence: xampp-install.json and xampp-installer-log.txt. `tools/verify_xampp.py` reproduces verification with an existing image; prepare_xampp.sh installs the official package in isolation. Windows/macOS/professor physical host remain NOT_RUN.
+- Adversarial real HTTP test PASS: SQL metacharacter title remains text, script memo escaped, duplicate IDs normalized, malformed action/id/array CSRF rejected; no table loss. Runtime PHP warning/fatal/parse/notice count is 0. Five NASA hashes exactly equal supplied references.
+- P8a push failed for missing credentials. P0–P8 runtime implementation/verification complete; T34 package identity will be checked after the P9 document freeze.

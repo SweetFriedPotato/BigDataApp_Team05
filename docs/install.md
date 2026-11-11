@@ -88,3 +88,9 @@ The browser script requires a developer-local Playwright install at `.local/brow
 ## Observed environments and limits
 
 Read `environment.md`, `test-results.md` and `evidence/clean-install.json` for actual executed versions and results. A Docker Apache run is distinguished from an actual XAMPP run. Windows/macOS and the professor's physical server cannot be claimed from a Linux test. Final human contribution statements, live English presentation and actual course submission require the team's review.
+
+## Reproduce the optional official XAMPP compatibility test
+
+`./tools/prepare_xampp.sh` downloads the pinned official Linux 8.2.12 installer and installs it only inside a new Docker container. No host package/configuration is modified. The vendor installer creates thousands of manual-page symbolic links and can take several minutes; do not mistake its silent period for an application test result.
+
+Then run `python3 tools/verify_xampp.py`. It copies only delivered PHP into the real `/opt/lampp/htdocs/team05` path, provisions a new disposable DB/account, uses unchanged evaluation config defaults, disables all container networking and verifies every analysis, HTTP CRUD, rollback, reset and dump-only restore. Actual observed result: PASS. The precise PHP/Apache/MariaDB versions and SAPI checks are retained in evidence/xampp-install.json.

@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "native_statement": "SQL metacharacter title stored as literal text; tables and 5480 weather rows survive",
+  "output": "script memo escaped",
+  "normalization": "duplicate location IDs stored once",
+  "hostile_shapes": "invalid action/id422; array CSRF403",
+  "cleanup": "test plan deleted"
+}

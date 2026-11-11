@@ -1,0 +1,5 @@
+{
+  "result": "PASS",
+  "scope": "project Apache log since runtime recreation through completed browser/HTTP tests",
+  "php_warning_fatal_parse_notice_count": 0
+}
