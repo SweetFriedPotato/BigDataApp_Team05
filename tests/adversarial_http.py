@@ -23,4 +23,7 @@ try:
 finally:
     if id is not None:c.request('plan_actions.php',{'action':'delete','plan_id':id,'csrf_token':token},post=True)
 result={'result':'PASS','native_statement':'SQL metacharacter title stored as literal text; tables and 5480 weather rows survive','output':'script memo escaped','normalization':'duplicate location IDs stored once','hostile_shapes':'invalid action/id422; array CSRF403','cleanup':'test plan deleted'}
-Path('docs/evidence/adversarial-http.json').write_text(json.dumps(result,indent=2)+'\n', encoding='utf-8');print(json.dumps(result,indent=2))
+__import__('sys').path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
+from evidence_support import write_evidence
+write_evidence('adversarial-http.json',result,['python3','tests/adversarial_http.py'],{'base_url':c.base,'client':'Python stdlib HTTP'},extra=['tests/adversarial_http.py','tests/http_client.py'])
+print(json.dumps(result,indent=2))

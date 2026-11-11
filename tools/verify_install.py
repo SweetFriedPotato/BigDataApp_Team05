@@ -11,6 +11,7 @@ import time
 import uuid
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+from evidence_support import write_evidence
 prefix='slg-clean-'+uuid.uuid4().hex[:10]
 network=prefix+'-net';volume=prefix+'-db';database=prefix+'-db';web=prefix+'-web'
 results={'environment':'fresh MariaDB10.4 + PHP8.2/Apache containers; internal-only network','resource_prefix':prefix,'steps':[]}
@@ -64,7 +65,7 @@ try:
         offline=php('offline_http.php');assert offline['result']=='PASS'
         step('T29 clean create→insert→all9screens',{'schema':schema['counts'],'identity':schema['identity'],'http':offline})
         suite={}
-        for test in ('aggregate','olap','ranking','window','plans','seasonal'):
+        for test in ('aggregate','olap','ranking','window','plans','seasonal','revision_plans','chart'):
             report=php(test+'.php');assert all(r['status']=='PASS' for r in report['tests']),test
             suite[test]=[r['id'] for r in report['tests']]
         assert php('fingerprint.php')==baseline,'Synthetic test rows or plans leaked'
@@ -75,7 +76,7 @@ try:
         sql((ROOT/'sql/dbdrop.sql').read_text(encoding='utf-8'));assert sql('SHOW TABLES;').strip()==''
         sql((ROOT/'sql/dbdump.sql').read_text(encoding='utf-8'));assert php('fingerprint.php')==baseline
         restored=php('offline_http.php');assert restored['result']=='PASS'
-        step('T31 dump-only restore into zero tables',{'fingerprint':'identical to seeded baseline','http':restored,'client':'mysql bundled with MariaDB10.4.34'})
+        step('T31 dump-only restore into zero tables',{'fingerprint':'identical to seeded baseline','http':restored,'client':cmd(['docker','exec',database,'mysql','--version']).stdout.strip()})
         internal=json.loads(cmd(['docker','network','inspect',network]).stdout)[0]['Internal'];assert internal
         only_networks=json.loads(cmd(['docker','inspect',web]).stdout)[0]['NetworkSettings']['Networks'];assert list(only_networks)==[network]
         egress=cmd(['docker','exec',web,'curl','-fsS','--connect-timeout','2','--max-time','3','https://example.com'],check=False)
@@ -95,4 +96,4 @@ finally:
     for name in (web,database):cmd(['docker','rm','-f',name],check=False)
     cmd(['docker','volume','rm',volume],check=False);cmd(['docker','network','rm',network],check=False)
     results['cleanup']='only this run’s unique resources removed; primary runtime preserved'
-    (ROOT/'docs/evidence/clean-install.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n', encoding='utf-8')
+    write_evidence('clean-install.json',results,['python3','tools/verify_install.py'],results.get('versions',{'environment':results['environment']}),extra=['tools/verify_install.py','tests/offline_http.php','tests/fingerprint.php','tests/revision_plans.php','tests/chart.php'])

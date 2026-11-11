@@ -1,0 +1,193 @@
+{
+  "result": "PASS",
+  "excerpts": [
+    {
+      "title": "DDL: weather PK, date index, FK and pairwise CHECK",
+      "file": "sql/dbcreate.sql",
+      "first_line": 12,
+      "last_line": 22,
+      "file_sha256": "1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1",
+      "excerpt": "CREATE TABLE daily_temperatures (\n location_id TINYINT UNSIGNED NOT NULL,\n weather_date DATE NOT NULL,\n tmean DECIMAL(6,2) NULL, tmax DECIMAL(6,2) NULL, tmin DECIMAL(6,2) NULL,\n PRIMARY KEY (location_id, weather_date),\n KEY idx_weather_date_location (weather_date, location_id),\n CONSTRAINT fk_weather_location FOREIGN KEY (location_id) REFERENCES locations(location_id),\n CONSTRAINT chk_temperature_order CHECK (\n  (tmin IS NULL OR tmean IS NULL OR tmin <= tmean) AND\n  (tmean IS NULL OR tmax IS NULL OR tmean <= tmax) AND\n  (tmin IS NULL OR tmax IS NULL OR tmin <= tmax))"
+    },
+    {
+      "title": "DDL: plans, association keys and cascade",
+      "file": "sql/dbcreate.sql",
+      "first_line": 35,
+      "last_line": 50,
+      "file_sha256": "1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1",
+      "excerpt": "CREATE TABLE saved_plans (\n plan_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,\n plan_name VARCHAR(100) NOT NULL, start_date DATE NOT NULL, end_date DATE NOT NULL,\n max_temp_threshold DECIMAL(6,2) NOT NULL, max_temp_range DECIMAL(6,2) NOT NULL,\n memo TEXT NULL, created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,\n updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n KEY idx_plan_updated (updated_at, plan_id),\n CONSTRAINT chk_plan_dates CHECK (start_date <= end_date),\n CONSTRAINT chk_plan_range CHECK (max_temp_range >= 0)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\nCREATE TABLE plan_locations (\n plan_id BIGINT UNSIGNED NOT NULL, location_id TINYINT UNSIGNED NOT NULL,\n PRIMARY KEY (plan_id, location_id), KEY idx_plan_location (location_id),\n CONSTRAINT fk_plan_parent FOREIGN KEY (plan_id) REFERENCES saved_plans(plan_id) ON DELETE CASCADE,\n CONSTRAINT fk_plan_location FOREIGN KEY (location_id) REFERENCES locations(location_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;"
+    },
+    {
+      "title": "Seed: explicit encoding, transaction and plain INSERT",
+      "file": "sql/dbinsert.sql",
+      "first_line": 3,
+      "last_line": 10,
+      "file_sha256": "6b090a2d2e31ea1ef2c3b01f598ef07f9f5479a3878b13dcb0120000771cb207",
+      "excerpt": "USE team05;\nSET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;\nSTART TRANSACTION;\nINSERT INTO locations (location_id,location_code,name_en,name_ko,requested_latitude,requested_longitude) VALUES\n('1','seoul','Seoul','서울','37.5665','126.9780'),\n('2','busan','Busan','부산','35.1796','129.0756'),\n('3','daegu','Daegu','대구','35.8714','128.6014'),\n('4','gwangju','Gwangju','광주','35.1595','126.8526'),"
+    },
+    {
+      "title": "Project-only child-first DROP",
+      "file": "sql/dbdrop.sql",
+      "first_line": 3,
+      "last_line": 9,
+      "file_sha256": "58cbb6cbc6042e95635ee5f37919ddf97f0e4c685ec87d4c8955c99164ea49a2",
+      "excerpt": "USE team05;\nDROP TABLE IF EXISTS plan_locations;\nDROP TABLE IF EXISTS saved_plans;\nDROP TABLE IF EXISTS daily_temperatures;\nDROP TABLE IF EXISTS monthly_food_guides;\nDROP TABLE IF EXISTS solar_terms;\nDROP TABLE IF EXISTS locations;"
+    },
+    {
+      "title": "PDO connection and native prepare configuration",
+      "file": "team05/includes/db.php",
+      "first_line": 5,
+      "last_line": 12,
+      "file_sha256": "ed589abd54b06bbac02e2f0cd95e230ed9043c0218ce3dc86502e71e150da302",
+      "excerpt": "function connect_db(?array $config = null): PDO {\n    $c = $config ?? require dirname(__DIR__) . '/config.php';\n    $pdo = new PDO('mysql:host=' . $c['host'] . ';port=' . $c['port'] . ';dbname=' . $c['database'] . ';charset=utf8mb4',\n        $c['username'], $c['password'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,\n        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES => false]);\n    $pdo->exec(\"SET SESSION sql_mode='STRICT_TRANS_TABLES,ONLY_FULL_GROUP_BY,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'\");\n    $pdo->exec(\"SET SESSION time_zone='+09:00'\");\n    return $pdo;"
+    },
+    {
+      "title": "Actual prepare, typed bindValue and execute",
+      "file": "team05/includes/db.php",
+      "first_line": 18,
+      "last_line": 25,
+      "file_sha256": "ed589abd54b06bbac02e2f0cd95e230ed9043c0218ce3dc86502e71e150da302",
+      "excerpt": "function run_query(PDO $pdo, string $sql, array $params = []): array {\n    $statement = $pdo->prepare($sql);\n    foreach (array_values($params) as $i => $value) {\n        $statement->bindValue($i + 1, $value, is_int($value) ? PDO::PARAM_INT : ($value === null ? PDO::PARAM_NULL : PDO::PARAM_STR));\n    }\n    $statement->execute();\n    return $statement->columnCount() ? $statement->fetchAll() : [];\n}"
+    },
+    {
+      "title": "Session start before output",
+      "file": "team05/includes/bootstrap.php",
+      "first_line": 5,
+      "last_line": 18,
+      "file_sha256": "95f10fbad84d072a75918a48b67cd5e7f2ce70a93e844eebdd61fc713cea67e6",
+      "excerpt": "ini_set('display_errors', '0');\nerror_reporting(E_ALL);\ndate_default_timezone_set('Asia/Seoul');\nset_exception_handler(function(Throwable $e): void {\n    error_log(get_class($e) . ': ' . $e->getMessage());\n    http_response_code(503);\n    echo '<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Service unavailable</title><h1>Service unavailable</h1><p>The request could not be completed. Please check the database connection or try again.</p><p><a href=\"index.php\">Return home</a></p></html>';\n});\nif (session_status() !== PHP_SESSION_ACTIVE) {\n    session_start(['use_strict_mode' => true, 'cookie_httponly' => true, 'cookie_samesite' => 'Lax',\n        'cookie_secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off']);\n}\nheader(\"Content-Security-Policy: default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'self'; frame-ancestors 'none'\");\nheader('X-Content-Type-Options: nosniff');"
+    },
+    {
+      "title": "Validate current Save conditions before Session/redirect",
+      "file": "team05/includes/session.php",
+      "first_line": 15,
+      "last_line": 34,
+      "file_sha256": "c0f24d21d89cb4727118c1068f0d6409f57be805b5220cee7f59b15e2628339a",
+      "excerpt": "            $candidate = $f;\n            $intent = array_key_exists('intent',$_GET) ? scalar_input($_GET,'intent') : 'apply';\n            if (!in_array($intent,['apply','save'],true)) throw new InvalidArgumentException('Unknown filter action.');\n            if ($intent === 'save' && !array_key_exists('apply_filters',$_GET)) throw new InvalidArgumentException('Submit the current comparison conditions first.');\n            if (array_key_exists('apply_filters', $_GET)) {\n                if (scalar_input($_GET,'apply_filters') !== '1') throw new InvalidArgumentException('Invalid filter submission.');\n                $candidate = validate_filters($_GET);\n            }\n            $options = validate_options($page, $_GET, $o);\n            if ($page === 'window' && !in_array($options['chart_location'],$candidate['location_ids'],true)) {\n                if (array_key_exists('chart_location',$_GET)) throw new InputValidationException('chart_location','Choose a graph location from the selected comparison locations.');\n                $options['chart_location']=$candidate['location_ids'][0];\n            }\n            // Nothing is written to the session until both common and page options validate.\n            $_SESSION['analysis_filters'] = $candidate;\n            $_SESSION['analysis_options'][$page] = $options;\n            $f = $candidate; $o = $options;\n            if ($intent === 'save') {\n                header('Location: plan_form.php',true,303);\n                exit;"
+    },
+    {
+      "title": "Persistent plan SELECT/list",
+      "file": "team05/includes/plans.php",
+      "first_line": 21,
+      "last_line": 34,
+      "file_sha256": "7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67",
+      "excerpt": "function get_plan(PDO $p,int $id): ?array {\n    $rows=run_query($p,'SELECT * FROM saved_plans WHERE plan_id=?',[$id]);\n    if (!$rows) return null;\n    $plan=$rows[0];\n    $plan['locations']=run_query($p,'SELECT l.* FROM plan_locations pl JOIN locations l ON l.location_id=pl.location_id WHERE pl.plan_id=? ORDER BY pl.location_id',[$id]);\n    $plan['location_ids']=array_map('intval',array_column($plan['locations'],'location_id'));\n    return $plan;\n}\nfunction list_plans(PDO $p): array {\n    return run_query($p,\"SELECT s.*,COALESCE(p.location_count,0) location_count,p.location_names\n        FROM saved_plans s LEFT JOIN (\n            SELECT pl.plan_id,COUNT(*) location_count,GROUP_CONCAT(l.name_en ORDER BY l.location_id SEPARATOR ', ') location_names\n            FROM plan_locations pl JOIN locations l ON l.location_id=pl.location_id GROUP BY pl.plan_id\n        ) p ON p.plan_id=s.plan_id ORDER BY s.updated_at DESC,s.plan_id DESC\");"
+    },
+    {
+      "title": "Atomic INSERT/UPDATE/children and actual rollback",
+      "file": "team05/includes/plans.php",
+      "first_line": 36,
+      "last_line": 55,
+      "file_sha256": "7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67",
+      "excerpt": "function save_plan(PDO $p,array $plan,?int $id = null): int {\n    // Internal repository boundary accepts normalized data. Database FK/CHECK failures propagate after rollback.\n    $p->beginTransaction();\n    try {\n        $values=[$plan['plan_name'],$plan['start_date'],$plan['end_date'],$plan['max_temp_threshold'],$plan['max_temp_range'],$plan['memo']];\n        if ($id === null) {\n            run_query($p,'INSERT INTO saved_plans (plan_name,start_date,end_date,max_temp_threshold,max_temp_range,memo) VALUES (?,?,?,?,?,?)',$values);\n            $id=(int)$p->lastInsertId();\n        } else {\n            if (!run_query($p,'SELECT plan_id FROM saved_plans WHERE plan_id=? FOR UPDATE',[$id])) throw new OutOfBoundsException('Plan no longer exists.');\n            run_query($p,'UPDATE saved_plans SET plan_name=?,start_date=?,end_date=?,max_temp_threshold=?,max_temp_range=?,memo=?,updated_at=CURRENT_TIMESTAMP WHERE plan_id=?',[...$values,$id]);\n            run_query($p,'DELETE FROM plan_locations WHERE plan_id=?',[$id]);\n        }\n        foreach($plan['location_ids'] as $location) run_query($p,'INSERT INTO plan_locations (plan_id,location_id) VALUES (?,?)',[$id,$location]);\n        $p->commit();\n        return $id;\n    } catch (Throwable $e) {\n        if ($p->inTransaction()) $p->rollBack();\n        throw $e;\n    }"
+    },
+    {
+      "title": "Transactional DELETE",
+      "file": "team05/includes/plans.php",
+      "first_line": 57,
+      "last_line": 63,
+      "file_sha256": "7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67",
+      "excerpt": "function delete_plan(PDO $p,int $id): void {\n    $p->beginTransaction();\n    try {\n        if (!run_query($p,'SELECT plan_id FROM saved_plans WHERE plan_id=? FOR UPDATE',[$id])) throw new OutOfBoundsException('Plan no longer exists.');\n        run_query($p,'DELETE FROM saved_plans WHERE plan_id=?',[$id]);\n        $p->commit();\n    } catch (Throwable $e) { if ($p->inTransaction()) $p->rollBack(); throw $e; }"
+    },
+    {
+      "title": "Date, number and checkbox inputs",
+      "file": "team05/includes/view.php",
+      "first_line": 46,
+      "last_line": 60,
+      "file_sha256": "e708abea1f9acc5cd2de0d994680d2f8e0038290e93409a283acfc7b4ff889b7",
+      "excerpt": "function filter_fields(array $f): void { ?>\n    <div class=\"field-row\">\n        <label class=\"field\"><span>From · LST</span><input type=\"date\" name=\"start_date\"<?=field_attrs('start_date')?> min=\"2023-01-01\" max=\"2025-12-31\" value=\"<?=e(form_value('start_date',$f['start_date']))?>\" required><?php field_error_view('start_date'); ?></label>\n        <label class=\"field\"><span>To · LST</span><input type=\"date\" name=\"end_date\"<?=field_attrs('end_date')?> min=\"2023-01-01\" max=\"2025-12-31\" value=\"<?=e(form_value('end_date',$f['end_date']))?>\" required><?php field_error_view('end_date'); ?></label>\n        <label class=\"field\"><span>Daily maximum ≤ °C</span><input type=\"number\" name=\"max_temp_threshold\"<?=field_attrs('max_temp_threshold')?> min=\"-50\" max=\"60\" step=\"0.01\" value=\"<?=e(form_value('max_temp_threshold',$f['max_temp_threshold']))?>\" required><?php field_error_view('max_temp_threshold'); ?></label>\n        <label class=\"field\"><span>Daily range ≤ °C</span><input type=\"number\" name=\"max_temp_range\"<?=field_attrs('max_temp_range')?> min=\"0\" max=\"60\" step=\"0.01\" value=\"<?=e(form_value('max_temp_range',$f['max_temp_range']))?>\" required><?php field_error_view('max_temp_range'); ?></label>\n    </div>\n    <?php $draft=$GLOBALS['filter_draft'] ?? []; $selected=$f['location_ids'];\n    if (array_key_exists('apply_filters',$draft)) {\n        $selected=[];foreach(is_array($draft['location_ids'] ?? null) ? $draft['location_ids'] : [] as $id) if(is_scalar($id) && preg_match('/^[1-5]$/D',(string)$id))$selected[]=(int)$id;\n    } ?>\n    <fieldset class=\"regions\"<?=field_attrs('location_ids')?>><legend>Compare locations <span>Select one or more requested points</span></legend>\n    <?php foreach (locations() as $l): ?><label class=\"region\"><input type=\"checkbox\" name=\"location_ids[]\" value=\"<?=e($l['location_id'])?>\"<?=in_array((int)$l['location_id'], $selected, true) ? ' checked' : ''?>><span><?=e($l['name_en'])?> <small lang=\"ko\"><?=e($l['name_ko'])?></small></span></label><?php endforeach; ?>\n    <?php field_error_view('location_ids'); ?></fieldset>\n<?php }"
+    },
+    {
+      "title": "Select controls and current-input Save submit",
+      "file": "team05/includes/view.php",
+      "first_line": 61,
+      "last_line": 84,
+      "file_sha256": "e708abea1f9acc5cd2de0d994680d2f8e0038290e93409a283acfc7b4ff889b7",
+      "excerpt": "function filters_form(string $page, array $f, array $o): void { ?>\n<section class=\"panel filters\" aria-label=\"Analysis filters\"><form method=\"get\">\n<input type=\"hidden\" name=\"apply_filters\" value=\"1\">\n<?php filter_fields($f); ?>\n<div class=\"options-row\">\n<?php\nswitch ($page) {\n    case 'aggregate': select_control('group_mode','Group records by',['location_year_month'=>'Location · year · month','location_year'=>'Location · year'],$o['group_mode']); break;\n    case 'olap':\n        select_control('level','Explore level',['year'=>'Year','month'=>'Month','day'=>'Day'],$o['level']);\n        select_control('drill_year','Drill year',[2023=>2023,2024=>2024,2025=>2025],$o['drill_year']);\n        select_control('drill_month','Drill month',array_combine(range(1,12),range(1,12)),$o['drill_month']); break;\n    case 'ranking':\n        select_control('top_rank','Show ranks',[1=>'Top 1 · includes ties',2=>'Top 2 · includes ties',3=>'Top 3 · includes ties',4=>'Top 4 · includes ties',5=>'All 5 ranks'],$o['top_rank']);\n        echo '<label class=\"field\"><span>Minimum valid days</span><input type=\"number\" name=\"min_valid_days\" min=\"1\" max=\"1096\" value=\"'.e($o['min_valid_days']).'\" required></label>'; break;\n    case 'window':\n        select_control('metric','Temperature metric',['mean'=>'Daily mean','max'=>'Daily maximum','min'=>'Daily minimum','range'=>'Daily range'],$o['metric']);\n        select_control('window_days','Highlight moving average',[7=>'7 days',30=>'30 days'],$o['window_days']); break;\n}\n?>\n<button class=\"button\" type=\"submit\">Apply filters <span aria-hidden=\"true\">↗</span></button>\n<button class=\"button secondary\" type=\"submit\" name=\"intent\" id=\"f-intent\" value=\"save\">Save conditions</button>\n</div></form>\n<form class=\"reset-form\" method=\"post\"><input type=\"hidden\" name=\"csrf_token\" value=\"<?=e(csrf_token())?>\"><button class=\"text-button\" name=\"reset_filters\" value=\"1\">Reset filters</button></form>"
+    },
+    {
+      "title": "Complex grouping and full valid-day statistics",
+      "file": "team05/includes/queries.php",
+      "first_line": 22,
+      "last_line": 44,
+      "file_sha256": "1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be",
+      "excerpt": "function statistics_sql(): string {\n    return 'COUNT(*) candidate_days, SUM(valid_flag) valid_days,\n        AVG(CASE WHEN valid_flag=1 THEN tmean END) mean_temperature,\n        AVG(CASE WHEN valid_flag=1 THEN tmax END) mean_daily_max,\n        AVG(CASE WHEN valid_flag=1 THEN tmin END) mean_daily_min,\n        AVG(CASE WHEN valid_flag=1 THEN dtr END) mean_daily_range,\n        MAX(CASE WHEN valid_flag=1 THEN tmax END) period_high,\n        MIN(CASE WHEN valid_flag=1 THEN tmin END) period_low,\n        SUM(exceedance_flag) exceedance_days, SUM(matching_flag) matching_days,\n        100.0*SUM(matching_flag)/NULLIF(SUM(valid_flag),0) matching_rate';\n}\n// Team responsibility: Koo Daon (2476009) — Assigned module responsibility; implementation history remains unchanged.\nfunction aggregate_query(array $f, array $o): array {\n    [$sql,$params] = base_cte($f);\n    $month = match ($o['group_mode']) {\n        'location_year_month' => true, 'location_year' => false,\n        default => throw new InvalidArgumentException('Unknown grouping.'),\n    };\n    $dimensions = 'location_id, year_no' . ($month ? ', month_no' : '');\n    $sql .= ', grouped AS (SELECT ' . $dimensions . ', ' . statistics_sql() . ' FROM base GROUP BY ' . $dimensions . ')\n        SELECT g.*, l.name_en FROM grouped g JOIN locations l ON l.location_id=g.location_id\n        ORDER BY g.location_id, g.year_no' . ($month ? ', g.month_no' : '');\n    return [$sql,$params];"
+    },
+    {
+      "title": "OLAP level query and physical WITH ROLLUP",
+      "file": "team05/includes/queries.php",
+      "first_line": 64,
+      "last_line": 81,
+      "file_sha256": "1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be",
+      "excerpt": "function olap_query(array $f, array $o): array {\n    [$start,$end] = olap_bounds($f,$o);\n    if ($o['level'] !== 'day') {\n        return aggregate_query(array_replace($f,['start_date'=>$start,'end_date'=>$end]),\n            ['group_mode'=>$o['level']==='year' ? 'location_year' : 'location_year_month']);\n    }\n    [$sql,$params] = base_cte($f,$start,$end);\n    return [$sql.' SELECT b.*,l.name_en FROM base b JOIN locations l ON l.location_id=b.location_id ORDER BY b.location_id,b.weather_date',$params];\n}\n// Team responsibility: Koo Daon (2476009) — Assigned module responsibility; implementation history remains unchanged.\nfunction rollup_query(array $f, array $o): array {\n    [$start,$end] = olap_bounds($f,$o);\n    [$sql,$params] = base_cte($f,$start,$end);\n    $sql .= ', totals AS (SELECT location_id,year_no,month_no,' . statistics_sql() . '\n        FROM base GROUP BY location_id,year_no,month_no WITH ROLLUP)\n        SELECT t.*,l.name_en FROM totals t LEFT JOIN locations l ON l.location_id=t.location_id\n        ORDER BY (t.location_id IS NULL),t.location_id,(t.year_no IS NULL),t.year_no,(t.month_no IS NULL),t.month_no';\n    return [$sql,$params];"
+    },
+    {
+      "title": "Precision, qualification and tied DENSE_RANK",
+      "file": "team05/includes/queries.php",
+      "first_line": 84,
+      "last_line": 99,
+      "file_sha256": "1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be",
+      "excerpt": "function ranking_query(array $f, array $o): array {\n    $minDays = integer_input($o,'min_valid_days',1,1096);\n    $topRank = integer_input($o,'top_rank',1,5);\n    [$sql,$params] = base_cte($f);\n    $sql .= ', counts AS (\n        SELECT location_id,SUM(valid_flag) valid_days,SUM(matching_flag) matching_days\n        FROM base GROUP BY location_id\n    ), rates AS (\n        SELECT c.*,100*CAST(matching_days AS DECIMAL(30,16))/valid_days matching_rate\n        FROM counts c WHERE valid_days>=? AND valid_days>0\n    ), ranked AS (\n        SELECT r.*,DENSE_RANK() OVER (ORDER BY matching_rate DESC) rank_no FROM rates r\n    ) SELECT r.*,l.name_en FROM ranked r JOIN locations l ON l.location_id=r.location_id\n      WHERE r.rank_no<=? ORDER BY r.rank_no,r.location_id';\n    return [$sql,[...$params,$minDays,$topRank]];\n}"
+    },
+    {
+      "title": "Continuous SQL windows, counts and outer display bounds",
+      "file": "team05/includes/queries.php",
+      "first_line": 101,
+      "last_line": 124,
+      "file_sha256": "1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be",
+      "excerpt": "function window_query(array $f, array $o): array {\n    $metric = match ($o['metric']) {\n        'mean' => 'tmean', 'max' => 'tmax', 'min' => 'tmin', 'range' => 'dtr',\n        default => throw new InvalidArgumentException('Unknown temperature metric.'),\n    };\n    if (!in_array($o['window_days'],[7,30],true)) throw new InvalidArgumentException('Unknown window.');\n    $scan = max(DATA_START, (new DateTimeImmutable($f['start_date']))->modify('-29 days')->format('Y-m-d'));\n    [$sql,$params] = base_cte($f,$scan,$f['end_date']);\n    $sql .= ', metrics AS (SELECT b.*,CASE WHEN valid_flag=1 THEN ' . $metric . ' END metric_value FROM base b),\n    framed AS (\n        SELECT m.*,AVG(metric_value) OVER w7 mean7,COUNT(metric_value) OVER w7 n7,\n        AVG(metric_value) OVER w30 mean30,COUNT(metric_value) OVER w30 n30,\n        MIN(weather_date) OVER w7 first7,MIN(weather_date) OVER w30 first30\n        FROM metrics m WINDOW\n        w7 AS (PARTITION BY location_id ORDER BY weather_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW),\n        w30 AS (PARTITION BY location_id ORDER BY weather_date ROWS BETWEEN 29 PRECEDING AND CURRENT ROW)\n    )\n    SELECT w.*,l.name_en,\n        CASE WHEN n7=7 AND DATEDIFF(weather_date,first7)=6 THEN mean7 END ma7,\n        CASE WHEN n30=30 AND DATEDIFF(weather_date,first30)=29 THEN mean30 END ma30,\n        SUM(valid_flag) OVER (PARTITION BY w.location_id) display_valid_days\n    FROM framed w JOIN locations l ON l.location_id=w.location_id\n    WHERE weather_date BETWEEN ? AND ? ORDER BY w.location_id,weather_date';\n    return [$sql,[...$params,$f['start_date'],$f['end_date']]];"
+    }
+  ],
+  "exact_current_source": true,
+  "_meta": {
+    "executed_at": "2026-11-12T01:18:01.108344+09:00",
+    "command": [
+      "python3",
+      "tools/update_report.py"
+    ],
+    "environment": {
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "python": "3.13.12"
+    },
+    "source_commit_base": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+    "source_files": {
+      "sql/dbcreate.sql": "1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1",
+      "sql/dbdrop.sql": "58cbb6cbc6042e95635ee5f37919ddf97f0e4c685ec87d4c8955c99164ea49a2",
+      "sql/dbdump.sql": "4d81a8c0f21b99513664d9ccc33187940c99966e941de6e6044b8bc609a39cb0",
+      "sql/dbinsert.sql": "6b090a2d2e31ea1ef2c3b01f598ef07f9f5479a3878b13dcb0120000771cb207",
+      "team05/.htaccess": "59caa281e2a0515a6c449999933e63a9822e356ff18a2618600203460b6ea9aa",
+      "team05/aggregate.php": "181ee070a3d54647ba8fd707376180d3bb9343d7d834d3fea41d288ffb68e5ed",
+      "team05/assets/css/app.css": "f0bc1539b0c062769272cf962d4c364d3cb3abc70003985c92c65feb4fa55a0e",
+      "team05/assets/fonts/NanumGothic-Regular.ttf": "76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31",
+      "team05/assets/fonts/OFL.txt": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "team05/assets/fonts/SOURCE.txt": "c5696c7bdbaed305f3f01cbc476bc8d9555f61ce057ac0e3568af8cdfc3a07e3",
+      "team05/assets/img/weather-mark.svg": "d763554fd7a45ed758e8969801b0de666ec7733fe5f128ad31bf8842b3663d19",
+      "team05/assets/js/app.js": "a66371925077990a277a1e2ab5cb0e2cacaca89c691ede61c5bae441f7c6a739",
+      "team05/config.local.example.php": "5e3d7d43e44fc53217b8673ccb4d61829ea077c4b7fe6818e0726398952deb15",
+      "team05/config.php": "700e3df2f7928451b708c090b7ee442055c072c26a1353843ff3f2d828cb7867",
+      "team05/includes/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+      "team05/includes/bootstrap.php": "95f10fbad84d072a75918a48b67cd5e7f2ce70a93e844eebdd61fc713cea67e6",
+      "team05/includes/chart.php": "186223a5bc53bfca5563c72d50c390ed6da7023e6acd1c5b68117566eb07b82c",
+      "team05/includes/csrf.php": "85efc63ad1a9a6e4e768957897621bf32dd2e1f68ceff512183434c3d88ab0d2",
+      "team05/includes/db.php": "ed589abd54b06bbac02e2f0cd95e230ed9043c0218ce3dc86502e71e150da302",
+      "team05/includes/filters.php": "f9099bf8d20c97e9ee45a1afce33370e617f7c034b79d22fee05b87ee610a8cd",
+      "team05/includes/footer.php": "0dfbdd8c6f227e5780cfdba769d12e296a0c2ee90ac0d082e22d975fbc7e2339",
+      "team05/includes/header.php": "f381e9b04f6753761d2b6e5afc873bd84608774039e9898d910b60aa2e9adb8e",
+      "team05/includes/plans.php": "7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67",
+      "team05/includes/queries.php": "1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be",
+      "team05/includes/session.php": "c0f24d21d89cb4727118c1068f0d6409f57be805b5220cee7f59b15e2628339a",
+      "team05/includes/view.php": "e708abea1f9acc5cd2de0d994680d2f8e0038290e93409a283acfc7b4ff889b7",
+      "team05/index.php": "d4ae77dc23d3deaf9072a905f8b8080f97e664da62719a04caf8e0772d8bbb13",
+      "team05/olap.php": "2e2fd10bd4821c718180d8b3c029a385383129d948910223ca79f5efa7be55d5",
+      "team05/plan_actions.php": "1b04203dcf31cdb5caff3001b4c0fb20429371b1baf7f2da64778e93735559f2",
+      "team05/plan_detail.php": "a4d172d88b75d30e4fea6cb50de9e4853242b13c56cbb191818885694bd31b62",
+      "team05/plan_form.php": "082e7dc9c5e52990a6e5b24ca9cb2ca64f6a4f1d8308b2e20a959175bb05a0b8",
+      "team05/plans.php": "4e45bdb2500d5f64d48a05c864199743f12ea5c9c464f6d8b43c01c25b04d854",
+      "team05/ranking.php": "3c54d3e64282c4a5cf5474e7e25457b81c6c1a5cbe0616de5da230617266c43b",
+      "team05/seasonal.php": "715d6fea069f199b3c1b040ed71ddd692709b5dfa70d093a79510738ace5292f",
+      "team05/window.php": "4845f909a5ce873f191a5304f0792a250f75a5678828292979750a8617d7db34",
+      "tools/update_report.py": "a1f13388582569afdf236f471d344dcb8b7d1f42dd8449697e970ed221c56553"
+    },
+    "identity_scope": "File hashes identify executed inputs, including uncommitted changes; this evidence does not hash itself."
+  }
+}

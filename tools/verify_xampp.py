@@ -3,6 +3,7 @@
 import hashlib,json,shutil,subprocess,tempfile,time,uuid
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+from evidence_support import write_evidence
 name='slg-xampp-'+uuid.uuid4().hex[:10]
 report={'environment':'official XAMPP Linux8.2.12 in fresh Ubuntu22.04 container; network=none','steps':[]}
 def call(args,input=None,check=True):
@@ -50,7 +51,7 @@ try:
         http=php('offline_http.php');assert http['result']=='PASS'
         step('create→insert→all9screens and web CRUD',{'schema_counts':schema['counts'],'identity':schema['identity'],'http':http})
         suites={}
-        for test in ('aggregate','olap','ranking','window','plans','seasonal'):
+        for test in ('aggregate','olap','ranking','window','plans','seasonal','revision_plans','chart'):
             r=php(test+'.php');assert all(t['status']=='PASS' for t in r['tests']),test;suites[test]=[t['id'] for t in r['tests']]
         assert php('fingerprint.php')==baseline
         step('all calculations and real rollback tests',suites)
@@ -76,4 +77,4 @@ finally:
     call(['docker','rm','-f',name],check=False)
     report['cleanup']='fresh XAMPP container and temporary copied source removed; primary runtime untouched'
     report['installer']={'url':'https://downloads.sourceforge.net/project/xampp/XAMPP%20Linux/8.2.12/xampp-linux-x64-8.2.12-0-installer.run','sha256':'df0774e7a6d0d0754a5f0132015411234b5f953df2365b693d3758fc35a30374','note':'hash of downloaded bytes; not claimed as independently signed vendor checksum'}
-    (ROOT/'docs/evidence/xampp-install.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n', encoding='utf-8')
+    write_evidence('xampp-install.json',report,['python3','tools/verify_xampp.py'],report.get('versions',{'environment':report['environment']}),extra=['tools/verify_xampp.py','tests/offline_http.php','tests/fingerprint.php','tests/revision_plans.php','tests/chart.php'])

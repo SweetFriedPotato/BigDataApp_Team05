@@ -5,30 +5,30 @@ Current judgments are derived from executed test evidence and complete requireme
 | ID | Requirement | Status | Implementation | Mapped evidence / remaining scope |
 |---|---|---|---|---|
 | R01 | Weather Data Analysis scope | **PASS** | [team05/index.php](../team05/index.php) | T01, T02;  |
-| R02 | Six-table DDL with keys and indexes | **NOT_RUN** | [sql/dbcreate.sql](../sql/dbcreate.sql) | T04;  |
-| R03 | Deterministic plain INSERT seed | **PARTIAL** | [sql/dbinsert.sql](../sql/dbinsert.sql) | T01, T02, T03, T40;  |
-| R04 | Project-only DROP and reinitialization | **NOT_RUN** | [sql/dbdrop.sql](../sql/dbdrop.sql) | T30;  |
-| R05 | Actual DB dump and dump-only restore | **NOT_RUN** | [sql/dbdump.sql](../sql/dbdump.sql) | T31;  |
-| R06 | Web INSERT | **NOT_RUN** | [team05/plan_actions.php](../team05/plan_actions.php) | T21, T27;  |
-| R07 | Web SELECT/list/detail | **NOT_RUN** | [team05/plan_detail.php](../team05/plan_detail.php) | T21, T27;  |
-| R08 | Web UPDATE including selected locations/timestamp | **NOT_RUN** | [team05/includes/plans.php](../team05/includes/plans.php) | T22, T27, T35;  |
-| R09 | Web DELETE and cascading children | **NOT_RUN** | [team05/plans.php](../team05/plans.php) | T23, T27;  |
-| R10 | Complex grouping and weighted valid-day statistics | **NOT_RUN** | [team05/aggregate.php](../team05/aggregate.php) | T05, T06, T07, T08;  |
-| R11 | OLAP hierarchy and WITH ROLLUP | **NOT_RUN** | [team05/olap.php](../team05/olap.php) | T09, T10;  |
-| R12 | Dense ranks, ties and Top N ranks | **NOT_RUN** | [team05/ranking.php](../team05/ranking.php) | T11, T12, T13;  |
-| R13 | Continuous SQL 7/30-day windows | **PARTIAL** | [team05/window.php](../team05/window.php) | T14, T15, T16, T17, T18, T41;  |
-| R14 | Four separate menus and URLs | **PARTIAL** | [team05/includes/header.php](../team05/includes/header.php) | T43;  |
-| R15 | Validated dynamic inputs and native prepared statements | **PARTIAL** | [team05/includes/queries.php](../team05/includes/queries.php) | T05, T09, T13, T16, T20;  |
-| R16 | Dates, numbers, checkbox, select and buttons | **PARTIAL** | [team05/includes/view.php](../team05/includes/view.php) | T43;  |
-| R17 | PHP Session shared comparison conditions | **PARTIAL** | [team05/includes/session.php](../team05/includes/session.php) | T19, T26, T37, T38;  |
-| R18 | Real COMMIT and intermediate-failure rollback | **NOT_RUN** | [team05/includes/plans.php](../team05/includes/plans.php) | T21, T24, T25, T35;  |
-| R19 | Central configuration with local override | **NOT_RUN** | [team05/config.php](../team05/config.php) | T33;  |
-| R20 | team05 DB and non-root evaluation account | **NOT_RUN** | [team05/config.php](../team05/config.php) | T04, T33;  |
-| R21 | Actual htdocs/team05 installation | **NOT_RUN** | [tools/verify_xampp.py](../tools/verify_xampp.py) | T33; Actual tested OS only; professor physical host NOT_RUN |
-| R22 | Fresh offline installation from supplied PHP/SQL | **NOT_RUN** | [tools/verify_xampp.py](../tools/verify_xampp.py) | T29, T30, T31, T32; Actual tested OS only; professor physical host NOT_RUN |
+| R02 | Six-table DDL with keys and indexes | **PASS** | [sql/dbcreate.sql](../sql/dbcreate.sql) | T04;  |
+| R03 | Deterministic plain INSERT seed | **PASS** | [sql/dbinsert.sql](../sql/dbinsert.sql) | T01, T02, T03, T40;  |
+| R04 | Project-only DROP and reinitialization | **PASS** | [sql/dbdrop.sql](../sql/dbdrop.sql) | T30;  |
+| R05 | Actual DB dump and dump-only restore | **PASS** | [sql/dbdump.sql](../sql/dbdump.sql) | T31;  |
+| R06 | Web INSERT | **PASS** | [team05/plan_actions.php](../team05/plan_actions.php) | T21, T27;  |
+| R07 | Web SELECT/list/detail | **PASS** | [team05/plan_detail.php](../team05/plan_detail.php) | T21, T27;  |
+| R08 | Web UPDATE including selected locations/timestamp | **PASS** | [team05/includes/plans.php](../team05/includes/plans.php) | T22, T27, T35;  |
+| R09 | Web DELETE and cascading children | **PASS** | [team05/plans.php](../team05/plans.php) | T23, T27;  |
+| R10 | Complex grouping and weighted valid-day statistics | **PASS** | [team05/aggregate.php](../team05/aggregate.php) | T05, T06, T07, T08;  |
+| R11 | OLAP hierarchy and WITH ROLLUP | **PASS** | [team05/olap.php](../team05/olap.php) | T09, T10;  |
+| R12 | Dense ranks, ties and Top N ranks | **PASS** | [team05/ranking.php](../team05/ranking.php) | T11, T12, T13;  |
+| R13 | Continuous SQL 7/30-day windows | **PASS** | [team05/window.php](../team05/window.php) | T14, T15, T16, T17, T18, T41;  |
+| R14 | Four separate menus and URLs | **PASS** | [team05/includes/header.php](../team05/includes/header.php) | T43;  |
+| R15 | Validated dynamic inputs and native prepared statements | **PASS** | [team05/includes/queries.php](../team05/includes/queries.php) | T05, T09, T13, T16, T20;  |
+| R16 | Dates, numbers, checkbox, select and buttons | **PASS** | [team05/includes/view.php](../team05/includes/view.php) | T43;  |
+| R17 | PHP Session shared comparison conditions | **PASS** | [team05/includes/session.php](../team05/includes/session.php) | T19, T26, T37, T38;  |
+| R18 | Real COMMIT and intermediate-failure rollback | **PASS** | [team05/includes/plans.php](../team05/includes/plans.php) | T21, T24, T25, T35;  |
+| R19 | Central configuration with local override | **PASS** | [team05/config.php](../team05/config.php) | T33;  |
+| R20 | team05 DB and non-root evaluation account | **PASS** | [team05/config.php](../team05/config.php) | T04, T33;  |
+| R21 | Actual htdocs/team05 installation | **PASS** | [tools/verify_xampp.py](../tools/verify_xampp.py) | T33; Actual tested OS only; professor physical host NOT_RUN |
+| R22 | Fresh offline installation from supplied PHP/SQL | **PASS** | [tools/verify_xampp.py](../tools/verify_xampp.py) | T29, T30, T31, T32; Actual tested OS only; professor physical host NOT_RUN |
 | R23 | Package, actual serving root and recorded app identity | **NOT_RUN** | [tools/package_release.py](../tools/package_release.py) | T34, T42;  |
-| R24 | At least five base tables; actual six | **NOT_RUN** | [sql/dbcreate.sql](../sql/dbcreate.sql) | T04;  |
-| R25 | At least five user screens; actual nine | **PARTIAL** | [team05/includes/header.php](../team05/includes/header.php) | T43;  |
+| R24 | At least five base tables; actual six | **PASS** | [sql/dbcreate.sql](../sql/dbcreate.sql) | T04;  |
+| R25 | At least five user screens; actual nine | **PASS** | [team05/includes/header.php](../team05/includes/header.php) | T43;  |
 | R26 | Rendered report minimum 10 pages (review draft) | **NOT_RUN** | [docs/report.md](report.md) | T44;  |
 | R27 | Rendered English paper minimum 4 pages (review draft) | **NOT_RUN** | [docs/paper.md](paper.md) | T44;  |
 | R28 | ERD, PHP structure, actual code, schedule and personal work evidence | **NOT_RUN** | [docs/report.md](report.md) | T44; Assigned 20% responsibility is separate from actual human completion; member_reviews=NOT_RUN |

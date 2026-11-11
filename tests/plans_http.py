@@ -33,4 +33,7 @@ result={'result':'PASS','T21_T23':'Actual HTTP create/read/list/update/delete wi
         'T26':'Apply restored common filters to window and reused them on ranking',
         'T27':'Escaped script/memo, CSRF403, GET405, overlength Unicode422, invalid redirect target422, deleted detail404',
         'test_records':'deleted in finally','client':'Python stdlib HTTP, Apache PHP 8.2'}
-Path('docs/evidence/plans-http.json').write_text(json.dumps(result,indent=2)+'\n', encoding='utf-8');print(json.dumps(result,indent=2))
+__import__('sys').path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
+from evidence_support import write_evidence
+write_evidence('plans-http.json',result,['python3','tests/plans_http.py'],{'base_url':c.base,'client':'Python stdlib HTTP'},extra=['tests/plans_http.py','tests/http_client.py'])
+print(json.dumps(result,indent=2))

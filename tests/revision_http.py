@@ -38,5 +38,5 @@ def invalid_save():
   s,b,_=c.request('ranking.php');assert s==200 and 'value="27.50"' in b
  return {'invalid_save_cases':3,'session':'previous conditions preserved','plan_insert':'not performed'}
 case('T36',memo_cases);case('T37',save_current);case('T38',invalid_save)
-write_evidence('revision-functional.json',{'result':'PASS' if all(c['status']=='PASS' for c in cases) else 'FAIL','tests':cases},['python3','tests/revision_http.py'],{'base_url':Client().base,'client':'Python stdlib HTTP'},extra=['tests/revision_http.py','tests/http_client.py'])
+write_evidence('revision-http.json',{'result':'PASS' if all(c['status']=='PASS' for c in cases) else 'FAIL','tests':cases},['python3','tests/revision_http.py'],{'base_url':Client().base,'client':'Python stdlib HTTP'},extra=['tests/revision_http.py','tests/http_client.py'])
 print(json.dumps(cases,ensure_ascii=False,indent=2));raise SystemExit(any(c['status']!='PASS' for c in cases))

@@ -1,0 +1,200 @@
+{
+  "environment": "fresh MariaDB10.4 + PHP8.2/Apache containers; internal-only network",
+  "resource_prefix": "slg-clean-85381d9ea4",
+  "steps": [
+    {
+      "step": "T29 clean create→insert→all9screens",
+      "status": "PASS",
+      "actual": {
+        "schema": {
+          "daily_temperatures": 5480,
+          "locations": 5,
+          "monthly_food_guides": 12,
+          "plan_locations": 0,
+          "saved_plans": 0,
+          "solar_terms": 72
+        },
+        "identity": {
+          "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+          "db": "team05",
+          "account": "team05@%",
+          "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+        },
+        "http": {
+          "result": "PASS",
+          "pages": 9,
+          "analyses": "four independent dynamic DB menus",
+          "olap": "year/month/day/up",
+          "ranking": "two first-place ties",
+          "seasonal": "October 2024 sources and ingredient",
+          "crud": "HTTP create/read/list/edit/update/apply/delete",
+          "session": "saved common filters reused on another analysis",
+          "database": {
+            "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+            "account": "team05@%"
+          },
+          "client_php": "8.2.35",
+          "network_isolation": "not inspected by this HTTP helper",
+          "base_url": "http://127.0.0.1/team05/"
+        }
+      }
+    },
+    {
+      "step": "fresh full calculation and transaction suite",
+      "status": "PASS",
+      "actual": {
+        "aggregate": [
+          "T05",
+          "T06",
+          "T07",
+          "T08"
+        ],
+        "olap": [
+          "T09",
+          "T10"
+        ],
+        "ranking": [
+          "T11",
+          "T12",
+          "T13"
+        ],
+        "window": [
+          "T14",
+          "T15",
+          "T16",
+          "T17",
+          "T18"
+        ],
+        "plans": [
+          "T21",
+          "T22",
+          "T23",
+          "T24",
+          "T25"
+        ],
+        "seasonal": [
+          "T03",
+          "T28"
+        ],
+        "revision_plans": [
+          "T35"
+        ],
+        "chart": [
+          "T41"
+        ]
+      }
+    },
+    {
+      "step": "T30 drop→create→insert",
+      "status": "PASS",
+      "actual": {
+        "fingerprint": "identical rows, data hashes, columns, constraints and indexes"
+      }
+    },
+    {
+      "step": "T31 dump-only restore into zero tables",
+      "status": "PASS",
+      "actual": {
+        "fingerprint": "identical to seeded baseline",
+        "http": {
+          "result": "PASS",
+          "pages": 9,
+          "analyses": "four independent dynamic DB menus",
+          "olap": "year/month/day/up",
+          "ranking": "two first-place ties",
+          "seasonal": "October 2024 sources and ingredient",
+          "crud": "HTTP create/read/list/edit/update/apply/delete",
+          "session": "saved common filters reused on another analysis",
+          "database": {
+            "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+            "account": "team05@%"
+          },
+          "client_php": "8.2.35",
+          "network_isolation": "not inspected by this HTTP helper",
+          "base_url": "http://127.0.0.1/team05/"
+        },
+        "client": "mysql  Ver 15.1 Distrib 10.4.34-MariaDB, for debian-linux-gnu (x86_64) using readline 5.2"
+      }
+    },
+    {
+      "step": "T32 offline runtime",
+      "status": "PASS",
+      "actual": {
+        "internal_network": true,
+        "attached_networks": [
+          "slg-clean-85381d9ea4-net"
+        ],
+        "public_request_exit": 6,
+        "all9screens_and_crud": "passed before and after dump restore"
+      }
+    },
+    {
+      "step": "T33 changed copied path and local config override",
+      "status": "PASS",
+      "actual": {
+        "copied_path": "/tmp/slg-clean-85381d9ea4-dvenumpz/team05",
+        "web_path": "/var/www/html/team05",
+        "url": "http://127.0.0.1/team05/",
+        "override_host": "database.local",
+        "account": "team05@%",
+        "default_user_database_password": "team05; root not used by application"
+      }
+    }
+  ],
+  "result": "PASS",
+  "cleanup": "only this run’s unique resources removed; primary runtime preserved",
+  "_meta": {
+    "executed_at": "2026-11-12T01:12:18.150822+09:00",
+    "command": [
+      "python3",
+      "tools/verify_install.py"
+    ],
+    "environment": {
+      "environment": "fresh MariaDB10.4 + PHP8.2/Apache containers; internal-only network"
+    },
+    "source_commit_base": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+    "source_files": {
+      "sql/dbcreate.sql": "1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1",
+      "sql/dbdrop.sql": "58cbb6cbc6042e95635ee5f37919ddf97f0e4c685ec87d4c8955c99164ea49a2",
+      "sql/dbdump.sql": "4d81a8c0f21b99513664d9ccc33187940c99966e941de6e6044b8bc609a39cb0",
+      "sql/dbinsert.sql": "6b090a2d2e31ea1ef2c3b01f598ef07f9f5479a3878b13dcb0120000771cb207",
+      "team05/.htaccess": "59caa281e2a0515a6c449999933e63a9822e356ff18a2618600203460b6ea9aa",
+      "team05/aggregate.php": "181ee070a3d54647ba8fd707376180d3bb9343d7d834d3fea41d288ffb68e5ed",
+      "team05/assets/css/app.css": "f0bc1539b0c062769272cf962d4c364d3cb3abc70003985c92c65feb4fa55a0e",
+      "team05/assets/fonts/NanumGothic-Regular.ttf": "76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31",
+      "team05/assets/fonts/OFL.txt": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "team05/assets/fonts/SOURCE.txt": "c5696c7bdbaed305f3f01cbc476bc8d9555f61ce057ac0e3568af8cdfc3a07e3",
+      "team05/assets/img/weather-mark.svg": "d763554fd7a45ed758e8969801b0de666ec7733fe5f128ad31bf8842b3663d19",
+      "team05/assets/js/app.js": "a66371925077990a277a1e2ab5cb0e2cacaca89c691ede61c5bae441f7c6a739",
+      "team05/config.local.example.php": "5e3d7d43e44fc53217b8673ccb4d61829ea077c4b7fe6818e0726398952deb15",
+      "team05/config.php": "700e3df2f7928451b708c090b7ee442055c072c26a1353843ff3f2d828cb7867",
+      "team05/includes/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+      "team05/includes/bootstrap.php": "95f10fbad84d072a75918a48b67cd5e7f2ce70a93e844eebdd61fc713cea67e6",
+      "team05/includes/chart.php": "186223a5bc53bfca5563c72d50c390ed6da7023e6acd1c5b68117566eb07b82c",
+      "team05/includes/csrf.php": "85efc63ad1a9a6e4e768957897621bf32dd2e1f68ceff512183434c3d88ab0d2",
+      "team05/includes/db.php": "ed589abd54b06bbac02e2f0cd95e230ed9043c0218ce3dc86502e71e150da302",
+      "team05/includes/filters.php": "f9099bf8d20c97e9ee45a1afce33370e617f7c034b79d22fee05b87ee610a8cd",
+      "team05/includes/footer.php": "0dfbdd8c6f227e5780cfdba769d12e296a0c2ee90ac0d082e22d975fbc7e2339",
+      "team05/includes/header.php": "f381e9b04f6753761d2b6e5afc873bd84608774039e9898d910b60aa2e9adb8e",
+      "team05/includes/plans.php": "7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67",
+      "team05/includes/queries.php": "1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be",
+      "team05/includes/session.php": "c0f24d21d89cb4727118c1068f0d6409f57be805b5220cee7f59b15e2628339a",
+      "team05/includes/view.php": "e708abea1f9acc5cd2de0d994680d2f8e0038290e93409a283acfc7b4ff889b7",
+      "team05/index.php": "d4ae77dc23d3deaf9072a905f8b8080f97e664da62719a04caf8e0772d8bbb13",
+      "team05/olap.php": "2e2fd10bd4821c718180d8b3c029a385383129d948910223ca79f5efa7be55d5",
+      "team05/plan_actions.php": "1b04203dcf31cdb5caff3001b4c0fb20429371b1baf7f2da64778e93735559f2",
+      "team05/plan_detail.php": "a4d172d88b75d30e4fea6cb50de9e4853242b13c56cbb191818885694bd31b62",
+      "team05/plan_form.php": "082e7dc9c5e52990a6e5b24ca9cb2ca64f6a4f1d8308b2e20a959175bb05a0b8",
+      "team05/plans.php": "4e45bdb2500d5f64d48a05c864199743f12ea5c9c464f6d8b43c01c25b04d854",
+      "team05/ranking.php": "3c54d3e64282c4a5cf5474e7e25457b81c6c1a5cbe0616de5da230617266c43b",
+      "team05/seasonal.php": "715d6fea069f199b3c1b040ed71ddd692709b5dfa70d093a79510738ace5292f",
+      "team05/window.php": "4845f909a5ce873f191a5304f0792a250f75a5678828292979750a8617d7db34",
+      "tests/chart.php": "9579b831fa9967e14f0e80b3081534304e6451347d9b7f7d655c80e962460c8c",
+      "tests/fingerprint.php": "018d64c10fd25c072022ab9bbb06a16136193f8be589887a99f4d01b06eb84eb",
+      "tests/offline_http.php": "f71d5a79f28d7727ebc5408e1ac9dd7ddcb2c2d067ff1c1fbde20793b1d23b0c",
+      "tests/revision_plans.php": "ddf6930a25b129708462b2ff9b65bf291ab1178bd12ee9dd59a2e1c24d21e839",
+      "tools/verify_install.py": "c0691e153c79532d48116f425b58853fb46705c82ecce46904dde62e1d801a78"
+    },
+    "identity_scope": "File hashes identify executed inputs, including uncommitted changes; this evidence does not hash itself."
+  }
+}

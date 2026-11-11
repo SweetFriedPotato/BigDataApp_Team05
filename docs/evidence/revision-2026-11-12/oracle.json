@@ -1,0 +1,552 @@
+{
+  "raw_sha256": {
+    "seoul": "18cdfb1db2c1a29a3662b39e572f5026fdd3d86a41000d38ebe058bd422a31db",
+    "busan": "7492c4b44e28ac6b97d95ab782e08dd0049a02eb328b63d11fa286dba136a27a",
+    "daegu": "51d46ad33c7f62c93e40a39ed2b7efcceb11b7f330ba62f5b3a648681b898475",
+    "gwangju": "639c95b786879ed4aa5c1daa97da0c8a659146dff46824b35a38abb05ada9ab5",
+    "jeju": "5c91f164a3bd044f00ac3667c983560148e0dcaa06a6964088f83fe278fa82e7"
+  },
+  "ranking_august_2024": [
+    {
+      "location_id": 2,
+      "valid_days": 31,
+      "matching_days": 2,
+      "matching_rate": "6.451612903225806451612903226",
+      "rank_no": 1
+    },
+    {
+      "location_id": 3,
+      "valid_days": 31,
+      "matching_days": 2,
+      "matching_rate": "6.451612903225806451612903226",
+      "rank_no": 1
+    },
+    {
+      "location_id": 5,
+      "valid_days": 31,
+      "matching_days": 1,
+      "matching_rate": "3.225806451612903225806451613",
+      "rank_no": 2
+    },
+    {
+      "location_id": 1,
+      "valid_days": 31,
+      "matching_days": 0,
+      "matching_rate": "0",
+      "rank_no": 3
+    },
+    {
+      "location_id": 4,
+      "valid_days": 31,
+      "matching_days": 0,
+      "matching_rate": "0",
+      "rank_no": 3
+    }
+  ],
+  "aggregate_jan_feb_2024": [
+    {
+      "location_id": 1,
+      "month_no": null,
+      "valid_days": 60,
+      "mean_temperature": "0.01866666666666666666666666667",
+      "mean_daily_max": "4.085666666666666666666666667",
+      "mean_daily_min": "-3.527833333333333333333333333",
+      "mean_daily_range": "7.6135",
+      "period_high": "13.86",
+      "period_low": "-14.48",
+      "matching_days": 52,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 1,
+      "month_no": 1,
+      "valid_days": 31,
+      "mean_temperature": "-1.781290322580645161290322581",
+      "mean_daily_max": "2.186774193548387096774193548",
+      "mean_daily_min": "-5.399677419354838709677419355",
+      "mean_daily_range": "7.586451612903225806451612903",
+      "period_high": "7.43",
+      "period_low": "-14.48",
+      "matching_days": 27,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 1,
+      "month_no": 2,
+      "valid_days": 29,
+      "mean_temperature": "1.942758620689655172413793103",
+      "mean_daily_max": "6.115517241379310344827586207",
+      "mean_daily_min": "-1.526896551724137931034482759",
+      "mean_daily_range": "7.642413793103448275862068966",
+      "period_high": "13.86",
+      "period_low": "-3.11",
+      "matching_days": 25,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 2,
+      "month_no": null,
+      "valid_days": 60,
+      "mean_temperature": "9.311833333333333333333333333",
+      "mean_daily_max": "10.81416666666666666666666667",
+      "mean_daily_min": "7.966666666666666666666666667",
+      "mean_daily_range": "2.8475",
+      "period_high": "16.44",
+      "period_low": "-2.05",
+      "matching_days": 60,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 2,
+      "month_no": 1,
+      "valid_days": 31,
+      "mean_temperature": "8.557741935483870967741935484",
+      "mean_daily_max": "10.45516129032258064516129032",
+      "mean_daily_min": "6.961290322580645161290322581",
+      "mean_daily_range": "3.493870967741935483870967742",
+      "period_high": "15.71",
+      "period_low": "-2.05",
+      "matching_days": 31,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 2,
+      "month_no": 2,
+      "valid_days": 29,
+      "mean_temperature": "10.11793103448275862068965517",
+      "mean_daily_max": "11.19793103448275862068965517",
+      "mean_daily_min": "9.041379310344827586206896552",
+      "mean_daily_range": "2.156551724137931034482758621",
+      "period_high": "16.44",
+      "period_low": "6.22",
+      "matching_days": 29,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 3,
+      "month_no": null,
+      "valid_days": 60,
+      "mean_temperature": "0.5158333333333333333333333333",
+      "mean_daily_max": "5.8585",
+      "mean_daily_min": "-3.5315",
+      "mean_daily_range": "9.39",
+      "period_high": "17.75",
+      "period_low": "-14.02",
+      "matching_days": 38,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 3,
+      "month_no": 1,
+      "valid_days": 31,
+      "mean_temperature": "-1.201290322580645161290322581",
+      "mean_daily_max": "4.188387096774193548387096774",
+      "mean_daily_min": "-5.216451612903225806451612903",
+      "mean_daily_range": "9.404838709677419354838709677",
+      "period_high": "10.02",
+      "period_low": "-14.02",
+      "matching_days": 20,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 3,
+      "month_no": 2,
+      "valid_days": 29,
+      "mean_temperature": "2.351379310344827586206896552",
+      "mean_daily_max": "7.643793103448275862068965517",
+      "mean_daily_min": "-1.730344827586206896551724138",
+      "mean_daily_range": "9.374137931034482758620689655",
+      "period_high": "17.75",
+      "period_low": "-4.33",
+      "matching_days": 18,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 4,
+      "month_no": null,
+      "valid_days": 60,
+      "mean_temperature": "2.530333333333333333333333333",
+      "mean_daily_max": "7.6505",
+      "mean_daily_min": "-1.557666666666666666666666667",
+      "mean_daily_range": "9.208166666666666666666666667",
+      "period_high": "17.43",
+      "period_low": "-6.62",
+      "matching_days": 37,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 4,
+      "month_no": 1,
+      "valid_days": 31,
+      "mean_temperature": "1.107096774193548387096774194",
+      "mean_daily_max": "6.014193548387096774193548387",
+      "mean_daily_min": "-2.677741935483870967741935484",
+      "mean_daily_range": "8.691935483870967741935483871",
+      "period_high": "12.98",
+      "period_low": "-6.62",
+      "matching_days": 20,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 4,
+      "month_no": 2,
+      "valid_days": 29,
+      "mean_temperature": "4.051724137931034482758620690",
+      "mean_daily_max": "9.399655172413793103448275862",
+      "mean_daily_min": "-0.3603448275862068965517241379",
+      "mean_daily_range": "9.76",
+      "period_high": "17.43",
+      "period_low": "-4.11",
+      "matching_days": 17,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 5,
+      "month_no": null,
+      "valid_days": 60,
+      "mean_temperature": "9.838333333333333333333333333",
+      "mean_daily_max": "11.20316666666666666666666667",
+      "mean_daily_min": "8.363833333333333333333333333",
+      "mean_daily_range": "2.839333333333333333333333333",
+      "period_high": "16.62",
+      "period_low": "2.61",
+      "matching_days": 60,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 5,
+      "month_no": 1,
+      "valid_days": 31,
+      "mean_temperature": "9.228387096774193548387096774",
+      "mean_daily_max": "10.56806451612903225806451613",
+      "mean_daily_min": "7.741935483870967741935483871",
+      "mean_daily_range": "2.826129032258064516129032258",
+      "period_high": "16.24",
+      "period_low": "2.61",
+      "matching_days": 31,
+      "exceedance_days": 0
+    },
+    {
+      "location_id": 5,
+      "month_no": 2,
+      "valid_days": 29,
+      "mean_temperature": "10.49034482758620689655172414",
+      "mean_daily_max": "11.88206896551724137931034483",
+      "mean_daily_min": "9.028620689655172413793103448",
+      "mean_daily_range": "2.853448275862068965517241379",
+      "period_high": "16.62",
+      "period_low": "5.58",
+      "matching_days": 29,
+      "exceedance_days": 0
+    }
+  ],
+  "windows": [
+    {
+      "location_id": 1,
+      "weather_date": "2024-01-01",
+      "metric": "mean",
+      "ma7": "1.141428571428571428571428571",
+      "ma30": "0.3013333333333333333333333333"
+    },
+    {
+      "location_id": 1,
+      "weather_date": "2024-01-01",
+      "metric": "max",
+      "ma7": "4.23",
+      "ma30": "3.868666666666666666666666667"
+    },
+    {
+      "location_id": 1,
+      "weather_date": "2024-01-01",
+      "metric": "min",
+      "ma7": "-1.35",
+      "ma30": "-2.817"
+    },
+    {
+      "location_id": 1,
+      "weather_date": "2024-01-01",
+      "metric": "range",
+      "ma7": "5.58",
+      "ma30": "6.685666666666666666666666667"
+    },
+    {
+      "location_id": 1,
+      "weather_date": "2024-03-01",
+      "metric": "mean",
+      "ma7": "0.9528571428571428571428571429",
+      "ma30": "1.732666666666666666666666667"
+    },
+    {
+      "location_id": 1,
+      "weather_date": "2024-03-01",
+      "metric": "max",
+      "ma7": "4.765714285714285714285714286",
+      "ma30": "5.85"
+    },
+    {
+      "location_id": 1,
+      "weather_date": "2024-03-01",
+      "metric": "min",
+      "ma7": "-2.535714285714285714285714286",
+      "ma30": "-1.676333333333333333333333333"
+    },
+    {
+      "location_id": 1,
+      "weather_date": "2024-03-01",
+      "metric": "range",
+      "ma7": "7.301428571428571428571428571",
+      "ma30": "7.526333333333333333333333333"
+    },
+    {
+      "location_id": 2,
+      "weather_date": "2024-01-01",
+      "metric": "mean",
+      "ma7": "10.36285714285714285714285714",
+      "ma30": "10.324"
+    },
+    {
+      "location_id": 2,
+      "weather_date": "2024-01-01",
+      "metric": "max",
+      "ma7": "11.78",
+      "ma30": "11.95733333333333333333333333"
+    },
+    {
+      "location_id": 2,
+      "weather_date": "2024-01-01",
+      "metric": "min",
+      "ma7": "9.205714285714285714285714286",
+      "ma30": "8.689333333333333333333333333"
+    },
+    {
+      "location_id": 2,
+      "weather_date": "2024-01-01",
+      "metric": "range",
+      "ma7": "2.574285714285714285714285714",
+      "ma30": "3.268"
+    },
+    {
+      "location_id": 2,
+      "weather_date": "2024-03-01",
+      "metric": "mean",
+      "ma7": "8.882857142857142857142857143",
+      "ma30": "9.965666666666666666666666667"
+    },
+    {
+      "location_id": 2,
+      "weather_date": "2024-03-01",
+      "metric": "max",
+      "ma7": "10.02428571428571428571428571",
+      "ma30": "11.13966666666666666666666667"
+    },
+    {
+      "location_id": 2,
+      "weather_date": "2024-03-01",
+      "metric": "min",
+      "ma7": "7.82",
+      "ma30": "8.825666666666666666666666667"
+    },
+    {
+      "location_id": 2,
+      "weather_date": "2024-03-01",
+      "metric": "range",
+      "ma7": "2.204285714285714285714285714",
+      "ma30": "2.314"
+    },
+    {
+      "location_id": 3,
+      "weather_date": "2024-01-01",
+      "metric": "mean",
+      "ma7": "0.7871428571428571428571428571",
+      "ma30": "0.7606666666666666666666666667"
+    },
+    {
+      "location_id": 3,
+      "weather_date": "2024-01-01",
+      "metric": "max",
+      "ma7": "6.09",
+      "ma30": "5.894333333333333333333333333"
+    },
+    {
+      "location_id": 3,
+      "weather_date": "2024-01-01",
+      "metric": "min",
+      "ma7": "-2.662857142857142857142857143",
+      "ma30": "-3.386666666666666666666666667"
+    },
+    {
+      "location_id": 3,
+      "weather_date": "2024-01-01",
+      "metric": "range",
+      "ma7": "8.752857142857142857142857143",
+      "ma30": "9.281"
+    },
+    {
+      "location_id": 3,
+      "weather_date": "2024-03-01",
+      "metric": "mean",
+      "ma7": "0.8342857142857142857142857143",
+      "ma30": "2.165666666666666666666666667"
+    },
+    {
+      "location_id": 3,
+      "weather_date": "2024-03-01",
+      "metric": "max",
+      "ma7": "5.402857142857142857142857143",
+      "ma30": "7.408333333333333333333333333"
+    },
+    {
+      "location_id": 3,
+      "weather_date": "2024-03-01",
+      "metric": "min",
+      "ma7": "-2.794285714285714285714285714",
+      "ma30": "-1.902"
+    },
+    {
+      "location_id": 3,
+      "weather_date": "2024-03-01",
+      "metric": "range",
+      "ma7": "8.197142857142857142857142857",
+      "ma30": "9.310333333333333333333333333"
+    },
+    {
+      "location_id": 4,
+      "weather_date": "2024-01-01",
+      "metric": "mean",
+      "ma7": "2.628571428571428571428571429",
+      "ma30": "3.579"
+    },
+    {
+      "location_id": 4,
+      "weather_date": "2024-01-01",
+      "metric": "max",
+      "ma7": "7.84",
+      "ma30": "8.059333333333333333333333333"
+    },
+    {
+      "location_id": 4,
+      "weather_date": "2024-01-01",
+      "metric": "min",
+      "ma7": "-1.414285714285714285714285714",
+      "ma30": "-0.3846666666666666666666666667"
+    },
+    {
+      "location_id": 4,
+      "weather_date": "2024-01-01",
+      "metric": "range",
+      "ma7": "9.254285714285714285714285714",
+      "ma30": "8.444"
+    },
+    {
+      "location_id": 4,
+      "weather_date": "2024-03-01",
+      "metric": "mean",
+      "ma7": "2.732857142857142857142857143",
+      "ma30": "3.857333333333333333333333333"
+    },
+    {
+      "location_id": 4,
+      "weather_date": "2024-03-01",
+      "metric": "max",
+      "ma7": "7.532857142857142857142857143",
+      "ma30": "9.120666666666666666666666667"
+    },
+    {
+      "location_id": 4,
+      "weather_date": "2024-03-01",
+      "metric": "min",
+      "ma7": "-0.9214285714285714285714285714",
+      "ma30": "-0.479"
+    },
+    {
+      "location_id": 4,
+      "weather_date": "2024-03-01",
+      "metric": "range",
+      "ma7": "8.454285714285714285714285714",
+      "ma30": "9.599666666666666666666666667"
+    },
+    {
+      "location_id": 5,
+      "weather_date": "2024-01-01",
+      "metric": "mean",
+      "ma7": "10.72285714285714285714285714",
+      "ma30": "11.06666666666666666666666667"
+    },
+    {
+      "location_id": 5,
+      "weather_date": "2024-01-01",
+      "metric": "max",
+      "ma7": "12.06142857142857142857142857",
+      "ma30": "12.443"
+    },
+    {
+      "location_id": 5,
+      "weather_date": "2024-01-01",
+      "metric": "min",
+      "ma7": "9.25",
+      "ma30": "9.662"
+    },
+    {
+      "location_id": 5,
+      "weather_date": "2024-01-01",
+      "metric": "range",
+      "ma7": "2.811428571428571428571428571",
+      "ma30": "2.781"
+    },
+    {
+      "location_id": 5,
+      "weather_date": "2024-03-01",
+      "metric": "mean",
+      "ma7": "9.13",
+      "ma30": "10.313"
+    },
+    {
+      "location_id": 5,
+      "weather_date": "2024-03-01",
+      "metric": "max",
+      "ma7": "10.49571428571428571428571429",
+      "ma30": "11.77066666666666666666666667"
+    },
+    {
+      "location_id": 5,
+      "weather_date": "2024-03-01",
+      "metric": "min",
+      "ma7": "8.167142857142857142857142857",
+      "ma30": "8.852666666666666666666666667"
+    },
+    {
+      "location_id": 5,
+      "weather_date": "2024-03-01",
+      "metric": "range",
+      "ma7": "2.328571428571428571428571429",
+      "ma30": "2.918"
+    }
+  ],
+  "_meta": {
+    "executed_at": "2026-11-12T01:11:59.621309+09:00",
+    "command": [
+      "python3",
+      "tests/oracle.py"
+    ],
+    "environment": {
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "python": "3.13.12"
+    },
+    "source_commit_base": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+    "source_files": {
+      "data/manifest.json": "c5cf91fbf2aa995ef0cc4a46fd94ddf621f9d99fb5c2cabd245dffc50e3b653c",
+      "data/processed/monthly_food_guides.csv": "b2772f55ceb6048710b9dc9e03f7c7c156dbe0e27f496fa6ed3f6344c9d70853",
+      "data/processed/solar_terms.csv": "9e4f5ae8aa36f6450c9ba406e26bceef36f5410306ebcbe1cec48d62eadac08b",
+      "data/processed/temperatures.csv": "241280815c5d1d9eefecab31cbd0dc3e2da1b02d079faa45d0f0d8b113a70433",
+      "data/raw/kasi_reference.csv": "9e4f5ae8aa36f6450c9ba406e26bceef36f5410306ebcbe1cec48d62eadac08b",
+      "data/raw/nasa_busan.csv": "7492c4b44e28ac6b97d95ab782e08dd0049a02eb328b63d11fa286dba136a27a",
+      "data/raw/nasa_daegu.csv": "51d46ad33c7f62c93e40a39ed2b7efcceb11b7f330ba62f5b3a648681b898475",
+      "data/raw/nasa_gwangju.csv": "639c95b786879ed4aa5c1daa97da0c8a659146dff46824b35a38abb05ada9ab5",
+      "data/raw/nasa_jeju.csv": "5c91f164a3bd044f00ac3667c983560148e0dcaa06a6964088f83fe278fa82e7",
+      "data/raw/nasa_seoul.csv": "18cdfb1db2c1a29a3662b39e572f5026fdd3d86a41000d38ebe058bd422a31db",
+      "data/raw/rda_curated.csv": "f1d0e14cf54e173145d68d20b460fef17d62deecbc1158f5f88bd8f7efb3c982",
+      "tests/oracle.py": "f2b26b5fd647ba50e649c51136382eb3d71eeb12949fd73829071a9f119c8fe6"
+    },
+    "identity_scope": "File hashes identify executed inputs, including uncommitted changes; this evidence does not hash itself."
+  }
+}

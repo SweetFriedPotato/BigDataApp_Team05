@@ -61,7 +61,7 @@
   ],
   "scope": "Path text I/O guarded to require explicit UTF-8; not a Windows/XAMPP runtime test",
   "_meta": {
-    "executed_at": "2026-11-12T01:00:22.781612+09:00",
+    "executed_at": "2026-11-12T01:12:01.547574+09:00",
     "command": [
       "python3",
       "tests/utf8_regression.py"
@@ -70,7 +70,7 @@
       "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
       "python": "3.13.12"
     },
-    "source_commit_base": "cc91e54daf350e6b7b24d92781642e22bb090bf7",
+    "source_commit_base": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
     "source_files": {
       "data/manifest.json": "c5cf91fbf2aa995ef0cc4a46fd94ddf621f9d99fb5c2cabd245dffc50e3b653c",
       "data/processed/monthly_food_guides.csv": "b2772f55ceb6048710b9dc9e03f7c7c156dbe0e27f496fa6ed3f6344c9d70853",

@@ -41,5 +41,7 @@ for i in raw:
             windows.append({'location_id':i,'weather_date':day.isoformat(),'metric':metric,
                 **{f'ma{n}':str(sum(fn(raw[i][day-timedelta(days=k)]) for k in range(n))/n) for n in (7,30)}})
 expected={'raw_sha256':hashes,'ranking_august_2024':aug,'aggregate_jan_feb_2024':groups,'windows':windows}
-(ROOT/'docs/evidence/oracle.json').write_text(json.dumps(expected,indent=2)+'\n', encoding='utf-8')
+__import__('sys').path.insert(0,str(ROOT/'tools'))
+from evidence_support import write_evidence
+write_evidence('oracle.json',expected,['python3','tests/oracle.py'],group='data',extra=['tests/oracle.py'])
 print(json.dumps({'ranking_august_2024':aug,'seoul_january_1':windows[0]},indent=2))

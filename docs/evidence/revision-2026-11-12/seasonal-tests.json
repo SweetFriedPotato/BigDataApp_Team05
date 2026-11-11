@@ -1,0 +1,113 @@
+{
+  "environment": {
+    "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+    "account": "team05@%",
+    "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+  },
+  "tests": [
+    {
+      "id": "T03",
+      "test": "KASI 24 dates/year and source-backed guide for every month",
+      "status": "PASS",
+      "actual": {
+        "year_counts": [
+          {
+            "year_no": 2023,
+            "n": 24
+          },
+          {
+            "year_no": 2024,
+            "n": 24
+          },
+          {
+            "year_no": 2025,
+            "n": 24
+          }
+        ],
+        "terms_across36_months": 72,
+        "monthly_items": 12,
+        "February_first_term_2024": {
+          "term_date": "2024-02-04",
+          "term_name": "입춘",
+          "source_url": "https://astro.kasi.re.kr/kor/life/post/calendarData?search_year=2024"
+        },
+        "February_first_term_2025": {
+          "term_date": "2025-02-03",
+          "term_name": "입춘",
+          "source_url": "https://astro.kasi.re.kr/kor/life/post/calendarData?search_year=2025"
+        }
+      }
+    },
+    {
+      "id": "T28",
+      "test": "Extra monthly food guides cannot multiply weather statistics",
+      "status": "PASS",
+      "actual": {
+        "food_guides_august_before": 1,
+        "during_test": 2,
+        "aggregate_ranking_window": "exactly unchanged"
+      }
+    }
+  ],
+  "result": "PASS",
+  "_meta": {
+    "executed_at": "2026-11-12T01:11:29.992743+09:00",
+    "command": [
+      "docker",
+      "exec",
+      "slg-review-482950a35-web",
+      "php",
+      "/workspace/tests/seasonal.php"
+    ],
+    "environment": {
+      "base_url": "http://127.0.0.1:8057/team05/",
+      "source_commit": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+      "app_sha256": "d47b9d5e12cc2858180e0d2937908453c683417a0613ce4c73b5578d3f86a525",
+      "container": "slg-review-482950a35-web",
+      "document_root": "/var/www/html/team05",
+      "php": "PHP 8.2.35 (cli) (built: Nov  5 2026 07:29:05) (NTS)"
+    },
+    "source_commit_base": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+    "source_files": {
+      "sql/dbcreate.sql": "1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1",
+      "sql/dbdrop.sql": "58cbb6cbc6042e95635ee5f37919ddf97f0e4c685ec87d4c8955c99164ea49a2",
+      "sql/dbdump.sql": "4d81a8c0f21b99513664d9ccc33187940c99966e941de6e6044b8bc609a39cb0",
+      "sql/dbinsert.sql": "6b090a2d2e31ea1ef2c3b01f598ef07f9f5479a3878b13dcb0120000771cb207",
+      "team05/.htaccess": "59caa281e2a0515a6c449999933e63a9822e356ff18a2618600203460b6ea9aa",
+      "team05/aggregate.php": "181ee070a3d54647ba8fd707376180d3bb9343d7d834d3fea41d288ffb68e5ed",
+      "team05/assets/css/app.css": "f0bc1539b0c062769272cf962d4c364d3cb3abc70003985c92c65feb4fa55a0e",
+      "team05/assets/fonts/NanumGothic-Regular.ttf": "76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31",
+      "team05/assets/fonts/OFL.txt": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "team05/assets/fonts/SOURCE.txt": "c5696c7bdbaed305f3f01cbc476bc8d9555f61ce057ac0e3568af8cdfc3a07e3",
+      "team05/assets/img/weather-mark.svg": "d763554fd7a45ed758e8969801b0de666ec7733fe5f128ad31bf8842b3663d19",
+      "team05/assets/js/app.js": "a66371925077990a277a1e2ab5cb0e2cacaca89c691ede61c5bae441f7c6a739",
+      "team05/config.local.example.php": "5e3d7d43e44fc53217b8673ccb4d61829ea077c4b7fe6818e0726398952deb15",
+      "team05/config.php": "700e3df2f7928451b708c090b7ee442055c072c26a1353843ff3f2d828cb7867",
+      "team05/includes/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+      "team05/includes/bootstrap.php": "95f10fbad84d072a75918a48b67cd5e7f2ce70a93e844eebdd61fc713cea67e6",
+      "team05/includes/chart.php": "186223a5bc53bfca5563c72d50c390ed6da7023e6acd1c5b68117566eb07b82c",
+      "team05/includes/csrf.php": "85efc63ad1a9a6e4e768957897621bf32dd2e1f68ceff512183434c3d88ab0d2",
+      "team05/includes/db.php": "ed589abd54b06bbac02e2f0cd95e230ed9043c0218ce3dc86502e71e150da302",
+      "team05/includes/filters.php": "f9099bf8d20c97e9ee45a1afce33370e617f7c034b79d22fee05b87ee610a8cd",
+      "team05/includes/footer.php": "0dfbdd8c6f227e5780cfdba769d12e296a0c2ee90ac0d082e22d975fbc7e2339",
+      "team05/includes/header.php": "f381e9b04f6753761d2b6e5afc873bd84608774039e9898d910b60aa2e9adb8e",
+      "team05/includes/plans.php": "7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67",
+      "team05/includes/queries.php": "1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be",
+      "team05/includes/session.php": "c0f24d21d89cb4727118c1068f0d6409f57be805b5220cee7f59b15e2628339a",
+      "team05/includes/view.php": "e708abea1f9acc5cd2de0d994680d2f8e0038290e93409a283acfc7b4ff889b7",
+      "team05/index.php": "d4ae77dc23d3deaf9072a905f8b8080f97e664da62719a04caf8e0772d8bbb13",
+      "team05/olap.php": "2e2fd10bd4821c718180d8b3c029a385383129d948910223ca79f5efa7be55d5",
+      "team05/plan_actions.php": "1b04203dcf31cdb5caff3001b4c0fb20429371b1baf7f2da64778e93735559f2",
+      "team05/plan_detail.php": "a4d172d88b75d30e4fea6cb50de9e4853242b13c56cbb191818885694bd31b62",
+      "team05/plan_form.php": "082e7dc9c5e52990a6e5b24ca9cb2ca64f6a4f1d8308b2e20a959175bb05a0b8",
+      "team05/plans.php": "4e45bdb2500d5f64d48a05c864199743f12ea5c9c464f6d8b43c01c25b04d854",
+      "team05/ranking.php": "3c54d3e64282c4a5cf5474e7e25457b81c6c1a5cbe0616de5da230617266c43b",
+      "team05/seasonal.php": "715d6fea069f199b3c1b040ed71ddd692709b5dfa70d093a79510738ace5292f",
+      "team05/window.php": "4845f909a5ce873f191a5304f0792a250f75a5678828292979750a8617d7db34",
+      "tests/seasonal.php": "ac08543c1e66a6c682e00a7ce02f6deed4825457121d4ef3fa073bd8de5b3093",
+      "tests/support.php": "0fab7bb77e17e328a84d0e58af529f3b3703ab3338b2862528e13b6c00cb3d85",
+      "tools/run_checks.py": "8f5da534a7320dbb3f249d61a0588fcb368e1d0d74e723c0939ea9ef033650e2"
+    },
+    "identity_scope": "File hashes identify executed inputs, including uncommitted changes; this evidence does not hash itself."
+  }
+}
