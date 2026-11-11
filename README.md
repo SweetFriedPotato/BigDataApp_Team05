@@ -43,7 +43,7 @@ Temperature records are historical gridded reanalysis rather than station observ
 
 Development: PHP 8.2.35 / Apache 2.4.69 / MariaDB 10.4.34. Separate official XAMPP Linux 8.2.12: PHP 8.2.12 / Apache 2.4.58 / MariaDB 10.4.32. CLI and Apache SAPI/extensions checked; SQL uses ONLY_FULL_GROUP_BY. Actual htdocs/team05 installation with unchanged defaults and no container network passed.
 
-Verified complex grouping against independent raw-CSV Decimal expectations; OLAP/rollup; dense ties and unrounded rates; cross-year/leap-month windows; web CRUD/Session; actual create/update FK-failure rollbacks; hostile HTTP inputs; fresh installation, drop/reinstall and **actual dump-only restoration with the bundled XAMPP client**. Chromium desktop/mobile flows passed with zero console errors.
+Verified complex grouping against independent raw-CSV Decimal expectations; OLAP/rollup; dense ties and unrounded rates; cross-year/leap-month windows; web CRUD/Session; actual create/update FK-failure rollbacks; hostile HTTP inputs; fresh installation, drop/reinstall and **actual dump-only restoration with the bundled XAMPP client**. Chromium checked all nine screens plus edit at four desktop/mobile sizes, keyboard and no-JavaScript flows with zero unexpected console errors. Existing T01–T34 and added T35–T44: **44 PASS**. Requirements: **27 PASS, 3 PARTIAL** for actual human review/presentation scope; those are not technical SQL failures. A ZIP-only extraction outside Git also passed fresh offline XAMPP reinstallation.
 
 ```bash
 python3 tools/verify_install.py

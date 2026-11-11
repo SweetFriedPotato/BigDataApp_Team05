@@ -26,7 +26,7 @@ Current judgments are derived from executed test evidence and complete requireme
 | R20 | team05 DB and non-root evaluation account | **PASS** | [team05/config.php](../team05/config.php) | T04, T33;  |
 | R21 | Actual htdocs/team05 installation | **PASS** | [tools/verify_xampp.py](../tools/verify_xampp.py) | T33; Actual tested OS only; professor physical host NOT_RUN |
 | R22 | Fresh offline installation from supplied PHP/SQL | **PASS** | [tools/verify_xampp.py](../tools/verify_xampp.py) | T29, T30, T31, T32; Actual tested OS only; professor physical host NOT_RUN |
-| R23 | Package, actual serving root and recorded app identity | **PARTIAL** | [tools/package_release.py](../tools/package_release.py) | T34, T42;  |
+| R23 | Package, actual serving root and recorded app identity | **PASS** | [tools/package_release.py](../tools/package_release.py) | T34, T42;  |
 | R24 | At least five base tables; actual six | **PASS** | [sql/dbcreate.sql](../sql/dbcreate.sql) | T04;  |
 | R25 | At least five user screens; actual nine | **PASS** | [team05/includes/header.php](../team05/includes/header.php) | T43;  |
 | R26 | Rendered report minimum 10 pages (review draft) | **PASS** | [docs/report.md](report.md) | T44;  |
@@ -35,6 +35,6 @@ Current judgments are derived from executed test evidence and complete requireme
 | R29 | English PPT, actual oral presentation and backup video | **PARTIAL** | [docs/demo-script.md](demo-script.md) | T42, T44; Assigned 20% responsibility is separate from actual human completion; oral_presentation=NOT_RUN |
 | R30 | Equal assigned responsibility, name comments and actual member review | **PARTIAL** | [docs/contributions.md](contributions.md) | T44; Assigned 20% responsibility is separate from actual human completion; member_reviews=NOT_RUN |
 
-Git synchronization: {"status": "SYNCHRONIZED", "checked_at": "2026-11-12T01:30:32.932480+09:00", "local_head": "cef8a87cef2018bb57a30bce8a8ec2e05780cb18", "remote_main": "cef8a87cef2018bb57a30bce8a8ec2e05780cb18", "existing_review_tag": "7c7c8509266f38d02f49965ee89f2bef0d53619a"}. Historical authentication failures are retained in progress.md; current status comes from this observed snapshot.
+Git synchronization: {"status": "SYNCHRONIZED", "checked_at": "2026-11-12T01:35:40.827361+09:00", "local_head": "c8c6cf43dd260c39cc4cf232a613bffc865393d9", "remote_main": "c8c6cf43dd260c39cc4cf232a613bffc865393d9", "existing_review_tag": "7c7c8509266f38d02f49965ee89f2bef0d53619a"}. Historical authentication failures are retained in progress.md; current status comes from this observed snapshot.
 
 KASI/RDA use the supplied reference snapshots; no new official-almanac cross-check is claimed. Windows/macOS, professor-host execution, real member sign-off, actual oral presentation and course upload are not inferred from Linux technical tests.
