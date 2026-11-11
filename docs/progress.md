@@ -77,3 +77,11 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - CLI T14–T18 PASS for 1..35 sequence, display invariance, all 40 raw-CSV cross-year/leap-month oracle cases, insufficient history, missing date and NULL day, location partitions and threshold invariance.
 - Actual Seoul 2024-01-01 means: 7-day 1.141429, 30-day 0.301333; Apache displays 1.14/0.30. All eight metric/focus combinations execute via HTTP.
 - Evidence: window-tests.json. Synthetic rows exist only inside rolled-back transactions. P5c push failed for missing credentials.
+
+## P6 — transactional saved plans
+
+- Implemented DB-backed plan list/detail/create/edit/delete, shared-space disclosure, Unicode character limits, common-condition persistence and validated apply-to-Session. All mutations use POST+CSRF and PRG; GET actions return 405.
+- CLI T21–T25 PASS: committed body/child writes, identical update, location replacement, cascading delete preserving another plan, successful parent INSERT followed by actual child FK failure and zero residues, update/delete-child/failed-insert rollback restoring an exact original snapshot.
+- Failure cases call the internal repository boundary only from CLI; no failure switches or test routes exist in the web application.
+- `python3 tests/plans_http.py`: actual HTTP CRUD and T26–T27 PASS, including Session reuse, escaped HTML, CSRF403, invalid target422, deleted detail404 and Unicode limits. All test plans cleaned up.
+- PHP syntax PASS. Evidence: plans-tests.json, plans-http.json, php-lint-p6.txt. P5d push failed for missing credentials.

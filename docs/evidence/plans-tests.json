@@ -1,0 +1,74 @@
+{
+    "environment": {
+        "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+        "account": "team05@%",
+        "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    },
+    "tests": [
+        {
+            "id": "T21",
+            "test": "Committed create\/read preserves all common fields and locations",
+            "status": "PASS",
+            "actual": {
+                "id": 1,
+                "locations": [
+                    1,
+                    2
+                ],
+                "database_commit": true
+            }
+        },
+        {
+            "id": "T22",
+            "test": "Update replaces body and locations; identical update is valid",
+            "status": "PASS",
+            "actual": {
+                "id": 2,
+                "replacement_locations": [
+                    3,
+                    5
+                ],
+                "unicode_title_chars": 100,
+                "unicode_memo_chars": 2000,
+                "identical_update": "accepted"
+            }
+        },
+        {
+            "id": "T23",
+            "test": "Delete cascades selected locations while preserving another plan",
+            "status": "PASS",
+            "actual": {
+                "deleted_parent": 3,
+                "remaining_links": 0,
+                "other_plan": 4
+            }
+        },
+        {
+            "id": "T24",
+            "test": "FK failure after successful parent INSERT leaves no parent or partial links",
+            "status": "PASS",
+            "actual": {
+                "failure": "SQLSTATE 23000 fk_plan_location",
+                "auto_increment_before": 5,
+                "auto_increment_after": 6,
+                "residual_parent": 0,
+                "residual_links": 0,
+                "failure_boundary": "normalized repository call in CLI; never exposed on web"
+            }
+        },
+        {
+            "id": "T25",
+            "test": "FK failure after UPDATE and child DELETE restores original body and locations",
+            "status": "PASS",
+            "actual": {
+                "plan_id": 6,
+                "restored_name": "original rollback body",
+                "restored_locations": [
+                    1,
+                    3
+                ],
+                "exact_snapshot_match": true
+            }
+        }
+    ]
+}
