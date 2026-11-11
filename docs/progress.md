@@ -113,3 +113,14 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - Evidence: xampp-install.json and xampp-installer-log.txt. `tools/verify_xampp.py` reproduces verification with an existing image; prepare_xampp.sh installs the official package in isolation. Windows/macOS/professor physical host remain NOT_RUN.
 - Adversarial real HTTP test PASS: SQL metacharacter title remains text, script memo escaped, duplicate IDs normalized, malformed action/id/array CSRF rejected; no table loss. Runtime PHP warning/fatal/parse/notice count is 0. Five NASA hashes exactly equal supplied references.
 - P8a push failed for missing credentials. P0–P8 runtime implementation/verification complete; T34 package identity will be checked after the P9 document freeze.
+
+## P9 — evidence-based documentation and demo drafts
+
+- Completed report.md (15 substantive chapters), paper.md (English academic draft), actual six-table ERD/PHP flow Mermaid sources and original SVGs, contributions.md with unconfirmed human activities explicitly pending.
+- Rendered report/paper with Chromium; actual counts are 18 and 7 pages. All figures loaded; PDF text extraction finds no blank pages. Representative actual PDF pages visually inspected. A text-formatting pass had split utf8mb4/team05 in the paper; corrected the identifiers, regenerated PDFs and checked their extracted text.
+- Captured two actual result-table figures for the paper (within the specified 1–4 figure range). Four full UI screenshots remain as browser evidence.
+- Created English demo-script.md, slides.md and a 12-slide PPTX draft. PPTX reopened successfully with python-pptx; actual PowerPoint render/rehearsal NOT_RUN. Recorded a real silent Chromium demo of analyses, OLAP, plan create/edit/apply/delete and seasonal information; all rehearsal test plans deleted. Silent preview is not a claimed final English oral/video submission.
+- Replaced README.md with an implementation/installation entry point after byte-checking the preserved original at .local/README.spec.md. Original remains ignored and is not part of Git/ZIP.
+- Added exact-commit review packaging tool and pinned optional developer document/browser dependencies. Runtime still needs only PHP/Apache/MariaDB and supplied SQL.
+- `record_results.py` and `record_requirements.py` link actual evidence. R26/R27 satisfy rendered draft minimums; final human review remains pending. R29 final presentation/video and R30 actual individual contributions are not fabricated as complete.
+- P8b push failed for missing HTTPS credentials. Local commits continue. Next: verify links and source cleanliness, commit documentation, run exact-commit package verification and freeze a review tag.

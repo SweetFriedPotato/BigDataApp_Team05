@@ -94,3 +94,22 @@ Read `environment.md`, `test-results.md` and `evidence/clean-install.json` for a
 `./tools/prepare_xampp.sh` downloads the pinned official Linux 8.2.12 installer and installs it only inside a new Docker container. No host package/configuration is modified. The vendor installer creates thousands of manual-page symbolic links and can take several minutes; do not mistake its silent period for an application test result.
 
 Then run `python3 tools/verify_xampp.py`. It copies only delivered PHP into the real `/opt/lampp/htdocs/team05` path, provisions a new disposable DB/account, uses unchanged evaluation config defaults, disables all container networking and verifies every analysis, HTTP CRUD, rollback, reset and dump-only restore. Actual observed result: PASS. The precise PHP/Apache/MariaDB versions and SAPI checks are retained in evidence/xampp-install.json.
+
+## Optional document/browser developer tools
+
+These are required only to regenerate PDFs, slides or recordings, never to run the installed PHP application:
+
+```bash
+mkdir -p .local/browser
+cp tools/qa-package.json .local/browser/package.json
+npm install --prefix .local/browser
+PLAYWRIGHT_BROWSERS_PATH="$PWD/.local/ms-playwright" .local/browser/node_modules/.bin/playwright install chromium
+python3 -m pip install --target .local/python -r tools/qa-requirements.txt
+python3 tools/draw_diagrams.py
+node tools/capture_figures.mjs
+node tools/render_documents.mjs
+python3 tools/make_slides.py
+node tools/record_demo.mjs
+```
+
+The browser/figure/video commands require the project Apache runtime to be serving. PDF generation checks actual rendered page counts and image loading. The PPTX was reopened and checked structurally; opening/rendering in the team's PowerPoint installation remains a human review step. The demo recording is silent rehearsal evidence and needs final presentation review/narration as appropriate.

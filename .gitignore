@@ -1,5 +1,4 @@
 /.local/
-/README.md
 /team05/config.local.php
 .env
 /dist/

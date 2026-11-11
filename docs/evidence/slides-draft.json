@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "file": "docs/rendered/slides-draft.pptx",
+  "slides": 12,
+  "validation": "PPTX reopened with python-pptx; text/package verified",
+  "powerpoint_application_render": "NOT_RUN",
+  "draft": true
+}

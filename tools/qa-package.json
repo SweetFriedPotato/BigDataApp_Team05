@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "description": "Optional developer-only browser and document tools",
+  "dependencies": {
+    "playwright": "1.56.1",
+    "marked": "18.2.0"
+  }
+}

@@ -1,0 +1,591 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><base href="../"><title>Seasonal Living Guide · report draft</title><style>@font-face{font-family:Korean;src:url('../team05/assets/fonts/NanumGothic-Regular.ttf')}@page{size:A4;margin:18mm 17mm 20mm}*{box-sizing:border-box}body{font:11pt/1.5 Georgia,'Times New Roman',Korean,serif;color:#243a35;margin:0}h1{font-size:24pt;line-height:1.2;color:#254f43;margin:0 0 20px}h2{font-size:17pt;line-height:1.2;margin:28px 0 14px;break-after:avoid}h3{font-size:12pt;break-after:avoid;margin:20px 0 8px}.report h2{break-before:page}.report h2:first-of-type{break-before:page}p{margin:10px 0;text-align:justify}a{color:#2c6155;text-decoration:none}table{border-collapse:collapse;width:100%;font:9pt/1.4 Arial,Korean,sans-serif;margin:16px 0}th,td{padding:7px;border:1px solid #cbd4c5;vertical-align:top;text-align:left}th{background:#edf1e8}tr{break-inside:avoid}thead{display:table-header-group}img{display:block;max-width:100%;max-height:105mm;margin:14px auto;object-fit:contain}.paper img{max-height:50mm}pre{font:8.5pt/1.4 'DejaVu Sans Mono',monospace;padding:13px;background:#f0f3ed;white-space:pre-wrap;overflow-wrap:anywhere;break-inside:avoid}code{font:9pt/1.4 'DejaVu Sans Mono',monospace;overflow-wrap:anywhere}pre code{font-size:8.5pt}li{margin:6px 0}blockquote{border-left:3px solid #b45b3b;padding-left:14px;color:#627063}.paper{font-size:11pt;line-height:1.5}.paper h2{font-size:15pt}.paper h3{font-size:12pt}.draft-note{font:9pt Arial,sans-serif;color:#7b674f;border-bottom:1px solid #d7dfd0;padding-bottom:8px;margin-bottom:20px}</style></head><body class="report"><p class="draft-note">TEAM 05 · EVIDENCE-BASED DRAFT · Human contribution and final submission review pending</p><h1>Seasonal Living Guide — Implementation Report</h1>
+<p><strong>Team 05 · Weather Data Analysis · Evidence-based draft · 2026-11-11, Asia/Seoul</strong></p>
+<p>This draft describes the implemented system and observed test results. It is ready for technical review, with individual human contribution statements and final course submission still pending. Page counts refer to rendered draft PDFs only. The local source specification is preserved separately and was not uploaded as the project README.</p>
+<h2>1. Purpose, users and completed scope</h2>
+<p>Seasonal Living Guide compares historical temperatures at five requested points in Korea: Seoul, Busan, Daegu, Gwangju and Jeju. A user chooses dates, locations, a maximum daily temperature and a maximum daily range. Four separate analysis menus answer different questions: grouped summaries compare periods, hierarchical exploration reveals daily details, dense ranking compares the proportion of qualifying days, and moving averages show continuous temperature patterns.</p>
+<p>The application is an actual Apache/PHP/MariaDB system. Data is loaded from supplied SQL before browsing; no API or CDN is required at runtime. Permanent comparison plans are stored in MariaDB. Current comparison conditions are kept in a PHP session and can be applied across analysis pages. Calendar dates and monthly ingredients form a separate reference feature.</p>
+<table>
+<thead>
+<tr>
+<th>Member ID</th>
+<th>Member supplied in the specification</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2371001</td>
+<td>Nunnalin Heimvichit</td>
+</tr>
+<tr>
+<td>2376329</td>
+<td>Jieun Hwang / 황지은</td>
+</tr>
+<tr>
+<td>2376274</td>
+<td>Sumin Cho / 조수민</td>
+</tr>
+<tr>
+<td>2476009</td>
+<td>Koo Daon / 구다온</td>
+</tr>
+<tr>
+<td>2276337</td>
+<td>Jihee Choi / 최지희</td>
+</tr>
+</tbody></table>
+<p>No individual development roles are assigned by this report. Implementation was performed by one Codex session; the team&#39;s actual human work must be recorded separately in <a href="contributions.md">contributions.md</a>.</p>
+<p>The comparison is deliberately bounded. NASA values are historical gridded reanalysis, rather than urban station observations or forecasts. A high matching rate means a larger share of historical valid days met the chosen limits. It does not establish safety, health benefit, or overall comfort. Ingredient entries are historical monthly editorial selections, independent of weather and location-specific harvest timing. There is no login, map, real-time forecast, nutrition database or AI recommendation subsystem.</p>
+<p>A representative workflow is to compare August 2024 across all five locations, inspect the tied ranking, open a particular month in the explorer, save the comparison conditions, update the selected locations and apply that plan to another analysis. The implementation and tests cover this complete workflow.</p>
+<h2>2. Actual development sequence and traceability</h2>
+<p>The work began with README.md as the only project file and no Git repository. All 1,157 specification lines were read. No applicable AGENTS.md existed in the project or ancestor directories. The specified remote returned no references, so no remote commits were overwritten. The existing configured Git identity was retained. Initial shell sandbox startup failed before executing commands; approved project command execution was used afterward.</p>
+<p>Host PHP, Apache and MariaDB executables were not found in PATH or the checked common XAMPP locations. Docker 29.6.2 was available. Dedicated project containers were therefore created without altering host packages, existing containers, databases or server-wide SQL settings.</p>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Actual implementation and evidence</th>
+<th>Recorded commit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>P0</td>
+<td>Inspect files, remote and environment</td>
+<td>bfec3f7</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>Schema and strict input contracts; local runtime</td>
+<td>e660795</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>Download and validate real NASA data; deterministic seed</td>
+<td>c9ff724</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>Actual schema creation and constraint probes</td>
+<td>376d5a8</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>Nine Apache routes, common views and Session</td>
+<td>4198842</td>
+</tr>
+<tr>
+<td>P5a</td>
+<td>Complex grouping versus independent raw oracle</td>
+<td>d7b7b15</td>
+</tr>
+<tr>
+<td>P5b</td>
+<td>Hierarchy queries and WITH ROLLUP</td>
+<td>932d1d0</td>
+</tr>
+<tr>
+<td>P5c</td>
+<td>Dense ranks, ties and denominator tests</td>
+<td>71340b0</td>
+</tr>
+<tr>
+<td>P5d</td>
+<td>Continuous 7/30-day frames and boundaries</td>
+<td>0e7e894</td>
+</tr>
+<tr>
+<td>P6</td>
+<td>Web CRUD and two real FK-failure rollbacks</td>
+<td>fba9c9f</td>
+</tr>
+<tr>
+<td>P7</td>
+<td>Calendar and monthly food queries</td>
+<td>3dcb986</td>
+</tr>
+<tr>
+<td>P8</td>
+<td>Browser, clean install, dump and offline execution</td>
+<td>cb2ce62; subsequent compatibility evidence in history</td>
+</tr>
+</tbody></table>
+<p>Each milestone was checked before its commit. Push was attempted after every milestone and failed because GitHub HTTPS credentials were unavailable. Local commits remain intact. No force push, reset-hard, fabricated authors or parallel development branches were used. <a href="progress.md">progress.md</a> records commands, changes, observed failures and corrections. <a href="requirements.md">requirements.md</a> maps all 30 requirements to implementation paths and evidence; <a href="test-results.md">test-results.md</a> distinguishes PASS from NOT_RUN.</p>
+<h2>3. Sources, coordinates and data preparation</h2>
+<p>Each temperature row represents one requested location on one NASA Local Solar Time (LST) date. The period is 2023-01-01 through 2025-12-31 inclusive: 365 + 366 + 365 = 1,096 days per location and 5,480 location-day rows. Requested coordinates are preserved as such; they are not labeled as the provider&#39;s grid-center coordinates.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Location</th>
+<th align="right">Requested latitude</th>
+<th align="right">Requested longitude</th>
+<th align="right">Daily rows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Seoul</td>
+<td align="right">37.5665</td>
+<td align="right">126.9780</td>
+<td align="right">1096</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Busan</td>
+<td align="right">35.1796</td>
+<td align="right">129.0756</td>
+<td align="right">1096</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Daegu</td>
+<td align="right">35.8714</td>
+<td align="right">128.6014</td>
+<td align="right">1096</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Gwangju</td>
+<td align="right">35.1595</td>
+<td align="right">126.8526</td>
+<td align="right">1096</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Jeju</td>
+<td align="right">33.4996</td>
+<td align="right">126.5312</td>
+<td align="right">1096</td>
+</tr>
+</tbody></table>
+<p><code>tools/fetch_data.py</code> downloaded the five exact NASA requests sequentially, preserving response bytes, URL, collection timestamp and SHA-256. <code>tools/validate_data.py</code> locates the <code>-END HEADER-</code> marker and parses named CSV columns rather than deleting a fixed number of header lines. It checks date sets, duplicate keys, real dates, numeric values, missing sentinels and the three pairwise temperature-order comparisons. Every location includes 2024-02-29; all duplicate, missing, out-of-range, missing-temperature and order-error counts are zero.</p>
+<p>The newly acquired bytes match all five supplied reference hashes exactly. <code>T2M</code>, <code>T2M_MAX</code> and <code>T2M_MIN</code> become <code>tmean</code>, <code>tmax</code> and <code>tmin</code>. No interpolation, invented measurements or synthetic weather rows are used in the delivered seed. Full source metadata and checks are in <a href="../data/manifest.json">manifest.json</a> and <a href="data-validation.md">data-validation.md</a>.</p>
+<p>KASI&#39;s 72 date/name occurrences and RDA&#39;s 12 month/ingredient items were transcribed from the user-supplied reference appendices. This session did not newly download or independently reverify those pages. RDA publication dates and original source URLs are retained in the curated snapshot. KASI is labeled calendar reference material; comparison with the final official almanac remains unperformed.</p>
+<p>Only validated inputs produce <code>dbinsert.sql</code>. Repeated generation yielded the same hash. The seed contains 5 locations + 5,480 temperatures + 72 terms + 12 food guides = 5,569 rows, with empty saved-plan tables. Python is a development-only preparation and independent-oracle tool; the installed PHP application does not invoke it.</p>
+<h2>4. Six-table schema, constraints and normalization</h2>
+<p><img src="diagrams/erd.svg" alt="Actual six-table ERD"></p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Grain and primary key</th>
+<th>Important constraints / indexes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>locations</td>
+<td>One requested point; location_id</td>
+<td>Unique code; requested decimal coordinates</td>
+</tr>
+<tr>
+<td>daily_temperatures</td>
+<td>One location and LST date; composite PK</td>
+<td>Location FK, date/location index, nullable DECIMAL temperatures and pairwise ordering CHECK</td>
+</tr>
+<tr>
+<td>solar_terms</td>
+<td>One actual occurrence date; term_date</td>
+<td>Repeated names across years are permitted; source URL required</td>
+</tr>
+<tr>
+<td>monthly_food_guides</td>
+<td>One monthly editorial item; guide_id</td>
+<td>Unique month/name; month 1–12 CHECK</td>
+</tr>
+<tr>
+<td>saved_plans</td>
+<td>One saved comparison; plan_id</td>
+<td>Ordered dates CHECK, nonnegative range CHECK, updated/id index</td>
+</tr>
+<tr>
+<td>plan_locations</td>
+<td>One selected region in a plan; composite PK</td>
+<td>Plan FK with cascading delete, location FK, location index</td>
+</tr>
+</tbody></table>
+<p>All six physical tables use InnoDB, utf8mb4 and utf8mb4_unicode_ci. Weather units are degrees Celsius, stored as DECIMAL rather than binary floating point. Year, month, daily range, averages and ranks are derived in SQL and are not redundantly stored. The association table represents the many-to-many relationship between plans and locations without comma-separated ID fields.</p>
+<p>Physical foreign keys exist only where shown by connecting lines. Solar terms and food guides are independent date/month references. They are not artificial parents of daily weather. At least one selected location per plan is an application and transaction invariant; a foreign key alone cannot enforce that minimum cardinality.</p>
+<p>Schema verification executed actual duplicate-key, invalid-location, invalid-month, reversed-plan-date and inverted-temperature probes. The temperature test also used a NULL mean with reversed minimum/maximum to ensure that the third pairwise CHECK is effective. All probes failed as intended and were rolled back. Metadata and exact row counts are preserved in <a href="evidence/schema.json">schema.json</a>.</p>
+<h2>5. PHP structure, common filters and Session</h2>
+<p><img src="diagrams/php-structure.svg" alt="Actual PHP request flow"></p>
+<p>The bootstrap loads central configuration, starts a strict PHP session before output, connects through PDO and sets the database session&#39;s SQL mode to include ONLY_FULL_GROUP_BY. PDO uses exceptions, associative results and native prepared statements (<code>ATTR_EMULATE_PREPARES=false</code>). The connection charset is utf8mb4. The database connection time zone is explicitly +09:00 to match displayed plan timestamps; weather date semantics remain NASA LST.</p>
+<table>
+<thead>
+<tr>
+<th>Common input</th>
+<th>Validation</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>location_ids</td>
+<td>Array of strict IDs 1–5; deduplicated/sorted; at least one</td>
+<td>All five</td>
+</tr>
+<tr>
+<td>start_date / end_date</td>
+<td>Real YYYY-MM-DD, within data period, ordered</td>
+<td>2025-01-01 / 2025-12-31</td>
+</tr>
+<tr>
+<td>max_temp_threshold</td>
+<td>Finite decimal, −50 to 60, ≤2 decimals</td>
+<td>28.00</td>
+</tr>
+<tr>
+<td>max_temp_range</td>
+<td>Finite decimal, 0 to 60, ≤2 decimals</td>
+<td>10.00</td>
+</tr>
+</tbody></table>
+<p>The filter form includes an explicit submission marker. Empty location selection is an error, not a request to silently restore previous locations. A new valid request has priority over stored Session conditions; otherwise Session values apply, with defaults only when neither exists. Common and page-specific options must both validate before Session changes. Tests confirm an invalid request preserves the previous Session and returns HTTP422 without running an analysis.</p>
+<p>Separate option whitelists control grouping, hierarchy level, year/month, minimum valid days, Top N rank, metric and window focus. Value placeholders never stand in for identifiers or SQL expressions. The number of region placeholders equals the number of selected IDs. The code uses positional placeholders consistently and binds integer options as PDO::PARAM_INT.</p>
+<p>Analysis reset is a CSRF-protected POST that resets only analysis conditions/options, preserving the CSRF token. Plan application first reads database conditions and location IDs, validates them through the same common parser, then writes Session conditions. Page-specific presentation settings remain outside the saved-plan contract.</p>
+<h2>6. Complex grouping: Temperature Comparison</h2>
+<p><code>aggregate.php</code> groups by location × year × month, or by location × year. The base CTE classifies every candidate daily row using three flags. A valid day has all three temperature values. A matching day is valid and satisfies both inclusive limits. An exceedance day is valid and its maximum exceeds the selected maximum limit.</p>
+<pre><code class="language-sql">SUM(valid_flag) AS valid_days,
+AVG(CASE WHEN valid_flag=1 THEN tmean END) AS mean_temperature,
+AVG(CASE WHEN valid_flag=1 THEN tmax-tmin END) AS mean_daily_range,
+SUM(exceedance_flag) AS exceedance_days,
+SUM(matching_flag) AS matching_days,
+100.0*SUM(matching_flag)/NULLIF(SUM(valid_flag),0) AS matching_rate
+</code></pre>
+<p>The actual query also returns mean daily maxima/minima and period extreme high/low. The threshold is used for classification, never to remove candidate weather rows before aggregation. Consequently changing a limit changes matching/exceedance counts while preserving the valid-day denominator. A year row covering selected months is labeled as a partial-period summary.</p>
+<p>Independent expected results come from <code>tests/oracle.py</code>, which parses original CSV bytes separately and computes Decimal statistics without importing the application&#39;s query builder or data parser. Ten January/February 2024 groups and five combined partial-year groups were compared with the database. Every returned statistic agreed within 0.00001°C/count tolerance; counts were checked exactly where relevant.</p>
+<table>
+<thead>
+<tr>
+<th>Seoul period / fixture</th>
+<th>Observed result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>January 2024</td>
+<td>31 valid days; mean −1.781290°C; average daily range 7.586452°C</td>
+</tr>
+<tr>
+<td>Jan–Feb 2024</td>
+<td>60 valid days; weighted daily mean 0.018667°C</td>
+</tr>
+<tr>
+<td>Boundary: maximum=28, range=10</td>
+<td>Matching day</td>
+</tr>
+<tr>
+<td>Maximum=28.01 or range=10.01</td>
+<td>Nonmatching day</td>
+</tr>
+<tr>
+<td>Four-row boundary/NULL fixture</td>
+<td>4 candidates; 3 valid; 1 match; 1 exceedance</td>
+</tr>
+</tbody></table>
+<p>Averages use the same valid-day set. The mean daily range is the average of daily differences, not the monthly maximum minus monthly minimum. The Jan–Feb result derives from 60 daily observations rather than averaging two monthly means with equal weights.</p>
+<h2>7. OLAP: Temperature Explorer</h2>
+<p><code>olap.php</code> changes the actual SQL grouping dimensions for year, month and day views. Distinct drill links lead from a year to that year&#39;s months, then to a month&#39;s daily records. Breadcrumb links return to month or year views. Drill bounds intersect the common comparison period; the system never broadens dates to accommodate a drill. An empty intersection is explicitly explained.</p>
+<p>The roll-up panel uses MariaDB&#39;s physical <code>WITH ROLLUP</code> syntax. It computes monthly groups, annual subtotals, location subtotals and a grand total from raw daily records. Grouping occurs inside a CTE and ordering outside it, avoiding the MariaDB restriction on combining WITH ROLLUP and ORDER BY in the same SELECT.</p>
+<pre><code class="language-sql">SELECT location_id, year_no, month_no,
+       SUM(valid_flag) valid_days,
+       AVG(CASE WHEN valid_flag=1 THEN tmean END) mean_temperature
+FROM base
+GROUP BY location_id, year_no, month_no WITH ROLLUP
+</code></pre>
+<p>The application distinguishes subtotal NULL dimensions from missing weather values. It displays “Annual subtotal,” “Location subtotal” and “All selected locations.” Totals across multiple locations count location-days, not distinct calendar days. Two locations on the same date contribute two daily records.</p>
+<table>
+<thead>
+<tr>
+<th>Actual January–February 2024 drill check</th>
+<th align="right">Observed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Location × year groups</td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td>Location × month groups</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td>January daily location-day records</td>
+<td align="right">155</td>
+</tr>
+<tr>
+<td>Jan15–Jan31 intersection for Seoul</td>
+<td align="right">17</td>
+</tr>
+<tr>
+<td>Grand total across five locations and two months</td>
+<td align="right">300 location-days</td>
+</tr>
+</tbody></table>
+<p>Upward return recomputed the same results as the original year query. Annual/location means matched independent raw-day values. An out-of-period drill returned no rows. HTTP and Chromium tests followed year→month→day→month→year, confirming actual links and executable page behavior rather than only direct SQL calls.</p>
+<h2>8. Ranking: Find My Season</h2>
+<p><code>ranking.php</code> first counts valid and matching days per selected region. It excludes zero-valid and insufficient-valid-day regions, computes a high-precision DECIMAL rate, and then assigns <code>DENSE_RANK()</code> ordered only by the unrounded rate. A final outer predicate selects ranks ≤ Top N. Location ID is used only for deterministic presentation, not to break window-function ties.</p>
+<pre><code class="language-sql">SELECT r.*,
+       DENSE_RANK() OVER (ORDER BY matching_rate DESC) AS rank_no
+FROM rates r
+</code></pre>
+<p>Top N therefore means N ranks including every tie. It does not mean LIMIT N rows. A fixture where one region had 2 matches out of 4 valid days and another 3 out of 6 returned the same rank. A separate fixture with 1/1095 versus 1/1096 produced different ranks although both displayed percentages rounded to the same two decimal places. These tests verify the division and ordering logic independently of a convenient example.</p>
+<p>For 2024-08-01 through 2024-08-31, maximum ≤28°C and daily range ≤10°C, all five locations, minimum valid days 1:</p>
+<table>
+<thead>
+<tr>
+<th align="right">Rank</th>
+<th>Location</th>
+<th align="right">Matching / valid</th>
+<th align="right">Displayed rate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1</td>
+<td>Busan</td>
+<td align="right">2 / 31</td>
+<td align="right">6.45%</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td>Daegu</td>
+<td align="right">2 / 31</td>
+<td align="right">6.45%</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td>Jeju</td>
+<td align="right">1 / 31</td>
+<td align="right">3.23%</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>Seoul</td>
+<td align="right">0 / 31</td>
+<td align="right">0.00%</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>Gwangju</td>
+<td align="right">0 / 31</td>
+<td align="right">0.00%</td>
+</tr>
+</tbody></table>
+<p>The result agrees with the independent Decimal oracle and the supplied same-hash source version. Selecting Top1 in both HTTP and Chromium returned Busan and Daegu together. The page exposes matching days and valid days so that users can judge the denominator, including cases with limited coverage. The values are computed by MariaDB, not emitted from the report&#39;s table as constants.</p>
+<h2>9. Windowing: Temperature Trends</h2>
+<p><code>window.php</code> supports mean, maximum, minimum and daily-range metrics. Both 7-day and 30-day averages are calculated in MariaDB; the selected option controls which output column is emphasized. Each window includes the current date and the preceding 6 or 29 daily records, partitioned only by location. Year and month are not partition keys.</p>
+<pre><code class="language-sql">AVG(metric_value) OVER (
+  PARTITION BY location_id ORDER BY weather_date
+  ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+)
+</code></pre>
+<p>The internal scan starts up to 29 days before the displayed start date. SQL calculates the averages over this continuous history; only the outer SELECT filters the displayed dates. Matching thresholds do not filter the internal series. The metric value is NULL for an invalid day; the same frame counts valid metric values. A displayed moving average requires count 7 or 30 and the expected date span, so a gap cannot masquerade as a calendar-day window.</p>
+<table>
+<thead>
+<tr>
+<th>Input / independent expectation</th>
+<th>Actual MariaDB output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Synthetic sequence 1..35, day7</td>
+<td>7-day mean 4.000000</td>
+</tr>
+<tr>
+<td>Same sequence, day30</td>
+<td>30-day mean 15.500000</td>
+</tr>
+<tr>
+<td>Display only from day31</td>
+<td>7-day 28.000000; 30-day 16.500000</td>
+</tr>
+<tr>
+<td>Seoul 2024-01-01</td>
+<td>7-day 1.141429; 30-day 0.301333</td>
+</tr>
+<tr>
+<td>First 6 / first 29 source days</td>
+<td>Corresponding average NULL</td>
+</tr>
+<tr>
+<td>A missing date or NULL-value day in frame</td>
+<td>Incomplete average remains NULL</td>
+</tr>
+<tr>
+<td>Same series with a second location +100</td>
+<td>Separate location averages differ by exactly 100</td>
+</tr>
+</tbody></table>
+<p>Forty independent raw-CSV expectations cover five locations, two dates, four metrics and both frames. The dates include the year boundary and 2024-03-01 after leap February. A display-start change preserves the same date&#39;s average. SQL-derived valid display-day counts are shown with each location, and the result table identifies both frame counts. The interface distinguishes “Insufficient history” from a valid numeric zero.</p>
+<p>The dataset is small enough to display all selected daily rows in a scrollable table. No client-side aggregation or fabricated smooth curve replaces the database result. The boundary checks are retained in <a href="evidence/window-tests.json">window-tests.json</a>.</p>
+<h2>10. Persistent plans, transactions and real rollback evidence</h2>
+<p>A plan saves its title, dates, two temperature limits, memo and selected locations. It does not promise to save grouping, Top N display or window focus. <code>plans.php</code> and <code>plan_detail.php</code> read persistent data from MariaDB. The form supports Unicode titles of 1–100 characters and memos of up to 2,000 characters; lengths are character counts rather than byte counts.</p>
+<p><code>plan_actions.php</code> accepts only POST, validates a Session-bound CSRF token, normalizes input and invokes the repository transaction. Successful writes redirect with HTTP303, implementing Post/Redirect/Get. The detail view can apply the stored common filters to a selected, whitelisted analysis page. This action revalidates values read from the database before changing Session state.</p>
+<pre><code class="language-text">CREATE: begin → insert parent → lastInsertId → insert each region → commit
+UPDATE: begin → lock/check parent → update body → delete old links
+        → insert replacement links → commit
+ANY FAILURE: if transaction active → rollback → propagate failure
+DELETE: begin → lock/check parent → delete parent → FK cascade → commit
+</code></pre>
+<p>The update path checks existence separately and accepts a same-value update even when the affected-row count is zero. Parent and link changes are never committed in separate stages. Deletion requires POST/CSRF, cascades links and preserves unrelated plans.</p>
+<p>The rollback tests deliberately bypass only the web validation layer at the internal repository boundary. A CLI fixture supplies valid parent fields and child IDs <code>[1,99]</code> or <code>[2,99]</code>, so an actual FK failure occurs after earlier SQL statements succeed. There is no failure-injection query parameter, admin menu or test route in the delivered web code.</p>
+<table>
+<thead>
+<tr>
+<th>Real database test</th>
+<th>Observed evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Create commit then read</td>
+<td>Exact body and selected regions persisted</td>
+</tr>
+<tr>
+<td>Update and identical update</td>
+<td>Body/regions replaced; same-value save accepted</td>
+</tr>
+<tr>
+<td>Delete one of two plans</td>
+<td>Target parent/links removed; other parent preserved</td>
+</tr>
+<tr>
+<td>Parent INSERT, first child, failing child</td>
+<td>SQLSTATE23000 on fk_plan_location; auto-increment advanced; residual parent=0, links=0</td>
+</tr>
+<tr>
+<td>Body UPDATE, old-child DELETE, failing new child</td>
+<td>Exact original parent and location snapshot restored</td>
+</tr>
+</tbody></table>
+<p>The FK exceptions, counts and before/after snapshots are in <a href="evidence/plans-tests.json">plans-tests.json</a>. Web CRUD, applying a plan, validation errors and deletion were also executed through real HTTP and Chromium. All temporary plans were removed. Auto-increment gaps created by rollback are normal database behavior and do not imply surviving partial plans.</p>
+<h2>11. Interface, controls and request protection</h2>
+<p>Nine user-facing screens exist: Home; Temperature Comparison; Temperature Explorer; Find My Season; Temperature Trends; Seasonal Information; Saved Plans; Create/Edit Plan; Plan Details. The POST handler is not counted as a user page. Every page uses the same navigation with four distinct analysis entries.</p>
+<p>The original interface uses cream, green and terracotta colors, readable system typography and a bundled Korean font under the SIL Open Font License. It uses only local CSS, JavaScript and fonts. Analysis output is a table with clear units, dates, limits and valid counts. Wide result tables scroll within their containers. Buttons and labels are keyboard accessible; the document includes a skip link and visible focus states. Core forms work without JavaScript; JavaScript adds deletion confirmation only.</p>
+<table>
+<thead>
+<tr>
+<th>Control / behavior</th>
+<th>Actual verification</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Date, numeric, checkbox, select and buttons</td>
+<td>Dynamic forms exercised in Chromium and HTTP</td>
+</tr>
+<tr>
+<td>Session persistence</td>
+<td>Aggregate filter reused on ranking; plan applied on window then ranking</td>
+</tr>
+<tr>
+<td>Invalid inputs</td>
+<td>Empty regions, unknown IDs, reversed/fake dates, NaN/INF, decimal precision and unknown options rejected</td>
+</tr>
+<tr>
+<td>HTML output</td>
+<td>Script/name/memo escaped with ENT_QUOTES and UTF-8 substitution</td>
+</tr>
+<tr>
+<td>SQL input</td>
+<td>SQL metacharacter title stored literally; five location rows and 5,480 weather rows preserved</td>
+</tr>
+<tr>
+<td>Change protection</td>
+<td>GET handler405; invalid CSRF403; invalid shapes422</td>
+</tr>
+<tr>
+<td>Direct PHP helper/config requests</td>
+<td>Apache403 under the tested development runtime</td>
+</tr>
+<tr>
+<td>Mobile layout</td>
+<td>390×844; eight routes; no document overflow</td>
+</tr>
+</tbody></table>
+<p>The Session cookie is HttpOnly with SameSite=Lax and strict mode. Responses use a self-origin Content Security Policy and nosniff. Redirect targets are fixed analysis names, preventing arbitrary redirect URLs. Browser-visible error pages do not expose passwords, complete DSNs or raw SQL exception details. Detailed server exceptions go to the project server log, whose examined PHP warning/fatal/parse/notice count was zero after functional tests.</p>
+<p>Saved Plans is explicitly a shared demonstration space. This version has no authentication or per-person ownership isolation and does not describe those records as private. These bounded protections were tested; they are not presented as a comprehensive security certification or a production hosting design.</p>
+<h2>12. Seasonal reference feature and independence of analyses</h2>
+<p><code>seasonal.php</code> validates a selected year in 2023–2025 and a month in 1–12. Solar terms are queried between the first date of that month and the first date of the next month. Food guides use a separate <code>WHERE month_no=?</code> query. Every displayed item includes an original source link.</p>
+<pre><code class="language-sql">SELECT term_date,term_name,source_url
+FROM solar_terms WHERE term_date&gt;=? AND term_date&lt;? ORDER BY term_date;
+SELECT month_no,food_name,source_url
+FROM monthly_food_guides WHERE month_no=? ORDER BY guide_id;
+</code></pre>
+<p>The distinction is intentional. Joining several food items to each daily temperature and then aggregating could multiply location-day records. This implementation never performs that join. T28 inserts an extra August guide item inside a transaction and compares aggregate, ranking and window results before and after. All weather outputs remain exactly identical while the monthly guide query correctly returns two items. The fixture is rolled back afterward.</p>
+<p>All 36 year-month selections were exercised via Apache HTTP, each returning term and food references. CLI checks confirm 24 solar terms per year, 72 occurrences overall and at least one guide for every month. The year-specific dates are retained: the first February term is 2024-02-04 in 2024 and 2025-02-03 in 2025. Dates are not copied as fixed annual month/day values.</p>
+<p>The source limitation is visible in the product and report. KASI entries are calendar references, not a claimed final-almanac cross-check. Exact solar transition times are outside the feature. NASA LST daily values are not equated to a KST transition instant. RDA items come from historical “ingredient of the month” editorial features; they do not measure food availability in a selected 2023–2025 month or establish local harvest timing.</p>
+<p>No health claims, recipes, prices, nutrition details or copied food images are included. No live source availability is necessary for browsing the guide. The source links are for optional human consultation; reference rows are already installed through SQL. This preserves the requested seasonal context without changing the meaning or denominator of the temperature analyses.</p>
+<h2>13. Installation, four SQL files and executed verification</h2>
+<table>
+<thead>
+<tr>
+<th>Required SQL</th>
+<th>Actual role and verification</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dbcreate.sql</td>
+<td>Creates exact six tables with PK/FK/UNIQUE/CHECK/indexes as team05</td>
+</tr>
+<tr>
+<td>dbinsert.sql</td>
+<td>Plain deterministic INSERTs for 5,569 reference/data rows</td>
+</tr>
+<tr>
+<td>dbdrop.sql</td>
+<td>Child-first deletion of project tables only; warns that plans are erased</td>
+</tr>
+<tr>
+<td>dbdump.sql</td>
+<td>Actual mysqldump output from MariaDB 10.4.34; restored into zero tables</td>
+</tr>
+</tbody></table>
+<p>The normal installation copies <code>team05/</code> into <code>htdocs/team05/</code>. SQL, original data and developer tests remain outside the public document root. Central defaults are host 127.0.0.1, port 3306, database/user/password team05, charset utf8mb4. The optional checked <code>config.local.php</code> override is ignored by Git and excluded from the delivery archive. Administrative provisioning is separate from the required SQL; application code never connects as root.</p>
+<p>Two independent environment families were exercised. Development containers used PHP 8.2.35, Apache 2.4.69 and MariaDB 10.4.34. A separately installed official XAMPP Linux 8.2.12 environment used PHP 8.2.12, Apache 2.4.58 and MariaDB 10.4.32. CLI and Apache PHP were both explicitly probed for versions, SAPI/configuration and pdo_mysql. The temporary probes were removed.</p>
+<p>The actual XAMPP check used <code>/opt/lampp/htdocs/team05</code>, unchanged evaluation configuration and team05@localhost. Its container had network mode <code>none</code>. The fresh DB successfully executed create→insert, all nine screens and HTTP CRUD/Session, all six analysis/transaction test suites, drop→create→insert, and dump-only restoration using the bundled XAMPP mysql client. A local override using localhost also passed. Thus an actual XAMPP run, rather than only a PHP development server, supports the installation claim. Windows/macOS and the professor&#39;s physical server remain untested.</p>
+<p>Semantic fingerprints compare every ordered table row hash, column/type metadata, constraints and indexes. After reset and restoration these fingerprints matched the seeded database exactly. Temporary plans and synthetic weather/food fixtures were absent after the suites. Volatile auto-increment counters were intentionally excluded from equivalence because rollback can consume IDs without retaining records.</p>
+<p>The T01–T33 calculation/data/runtime checks passed. T34 is evaluated when the review package is generated from a fixed Git commit. The <a href="test-results.md">test matrix</a> is generated from retained JSON evidence, with command, input, expectation, actual result and status. It does not mark unexecuted work as passed. Browser checks add real desktop/mobile flows and four screenshot captures. This evaluation is a correctness and reproducibility check, not a load benchmark, usability study or distributed big-data performance experiment.</p>
+<h2>14. Review, delivery identity and remaining human work</h2>
+<p>The P9 deliverables are review drafts: this implementation report, an English paper, a demo script and supporting artifacts. Their descriptions use actual data and executed results. Rendered draft page counts are recorded separately in <code>evidence/document-render.json</code>; Markdown line counts are not treated as page counts. A package tool records the source commit and hashes every delivered member to verify that demo code and packaged code agree.</p>
+<p>GitHub pushes remain blocked by missing HTTPS credentials. The repository has meaningful local commits and preserves the original specification locally at <code>.local/README.spec.md</code>. The replacement README describes the implemented system. No final course-submission tag, course upload or completed human presentation is implied by a review package. A later code change requires rebuilding the package and identifying a new demo version.</p>
+<table>
+<thead>
+<tr>
+<th>Remaining review / action</th>
+<th>Honest current status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Personal roles, effort and actual human work</td>
+<td>Not supplied; BLOCKED pending member confirmation</td>
+</tr>
+<tr>
+<td>Draft report and paper technical review</td>
+<td>Ready for team review; not a signed final submission</td>
+</tr>
+<tr>
+<td>Professor&#39;s physical evaluation host</td>
+<td>NOT_RUN; Linux official XAMPP compatibility passed</td>
+</tr>
+<tr>
+<td>English oral presentation</td>
+<td>Script prepared; actual delivery NOT_RUN</td>
+</tr>
+<tr>
+<td>Final PPT/video and course upload</td>
+<td>Draft artifacts may assist; actual submission NOT_RUN</td>
+</tr>
+<tr>
+<td>KASI final official almanac cross-check</td>
+<td>NOT_RUN; public calendar reference used</td>
+</tr>
+</tbody></table>
+<p>The source specification lists the initial code/report/paper deadline as 2026-11-30, English slides/video as 2026-12-01, presentations on an assigned 2026-12-03 or 2026-12-07 class date, and revised paper acceptance through 2026-12-10. These dates are user-supplied requirements; this session did not independently access the course announcement. No exact deadline time is invented. The initial English paper must still accompany the November 30 submission according to that specification.</p>
+<p>The contribution record names all five members without inventing development assignments. It distinguishes existing Git identity from manual authorship and records Codex implementation explicitly. Final personal contribution statements require concrete work, dates and review evidence from the people concerned.</p>
+<h2>15. References and reproducibility artifacts</h2>
+<ol>
+<li>NASA POWER, <a href="https://power.larc.nasa.gov/docs/services/api/temporal/daily/">Daily API</a>: daily CSV requests and LST definition.</li>
+<li>NASA POWER, <a href="https://power.larc.nasa.gov/docs/methodology/data/sources_meteorology/">Meteorology sources</a>: provider background for gridded weather interpretation.</li>
+<li>KASI, <a href="https://astro.kasi.re.kr/kor/life/post/calendarData?search_year=2023">2023 calendar reference</a>, <a href="https://astro.kasi.re.kr/kor/life/post/calendarData?search_year=2024">2024</a>, <a href="https://astro.kasi.re.kr/kor/life/post/calendarData?search_year=2025">2025</a>: upstream URLs retained in supplied date snapshot.</li>
+<li>RDA, <a href="https://www.nongsaro.go.kr/portal/ps/psr/psrb/monthFdLst.ps">Monthly food information</a>: source family; exact historical feature URLs/publication dates are in <code>data/raw/rda_curated.csv</code>.</li>
+<li>PHP, <a href="https://www.php.net/manual/en/pdo.prepare.php">PDO::prepare</a>, <a href="https://www.php.net/manual/en/pdo.transactions.php">transactions</a>, <a href="https://www.php.net/manual/en/function.session-start.php">Session start</a>.</li>
+<li>MariaDB, <a href="https://mariadb.com/docs/server/reference/sql-functions/special-functions/window-functions/window-functions-overview">Window functions</a>, <a href="https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/select-with-rollup">SELECT WITH ROLLUP</a>, <a href="https://mariadb.com/docs/server/clients-and-utilities/backup-restore-and-import-clients/mariadb-dump">dump</a>.</li>
+<li>Apache Friends, <a href="https://www.apachefriends.org/download.html">XAMPP downloads</a>; official archived Linux 8.2.12 installer URL and acquired hash are in XAMPP evidence.</li>
+<li>Project artifacts: <code>data/manifest.json</code>; <code>docs/evidence/oracle.json</code>; <code>prepared-queries.json</code>; <code>schema.json</code>; <code>aggregate-tests.json</code>; <code>olap-tests.json</code>; <code>ranking-tests.json</code>; <code>window-tests.json</code>; <code>plans-tests.json</code>; <code>plans-http.json</code>; <code>seasonal-tests.json</code>; <code>browser-tests.json</code>; <code>clean-install.json</code>; <code>xampp-install.json</code>.</li>
+</ol>
+<p>The included ERD and request-flow diagrams are original descriptions of the actual implementation. The Korean typeface is Nanum Gothic under OFL, with its license and source bundled. Runtime screenshots are actual Chromium captures, not mockups. The report and paper make no unmeasured performance, user-study or recommendation-accuracy claims.</p>
+</body></html>

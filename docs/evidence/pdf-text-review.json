@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "review": {
+    "report": {
+      "pages": 18,
+      "blank_pages": 0,
+      "extracted_text_characters": 33816
+    },
+    "paper": {
+      "pages": 7,
+      "blank_pages": 0,
+      "extracted_text_characters": 19508
+    }
+  },
+  "visual_review": "Rendered report schema page and paper first/experiment pages inspected; technical identifiers corrected and PDFs regenerated"
+}

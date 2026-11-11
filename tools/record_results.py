@@ -39,7 +39,7 @@ for id,search in [('T29','T29 '),('T30','T30 '),('T31','T31 '),('T32','T32 '),('
     step=next(x for x in install['steps'] if x['step'].startswith(search))
     add(id,step['step'],'Fresh isolated environment; complete expected state',step['actual'],'clean-install.json','python3 tools/verify_install.py',step['status'])
 if (E/'release-verification.json').exists():
-    r=evidence('release-verification.json');add('T34','Demo/package code identity','Archive files match the recorded commit',r,'release-verification.json','python3 tools/package_release.py --verify',r['result'])
+    r=evidence('release-verification.json');add('T34','Demo/package code identity','Archive files match the recorded commit',r,'release-verification.json','python3 tools/package_release.py',r['result'])
 else:add('T34','Demo/package code identity','Archive files match recorded release commit','Packaging pending P9 evidence freeze','progress.md','Not executed','NOT_RUN')
 md=f'# Actual test results\n\nGenerated {now} from retained result files. PASS means an executed check. Synthetic fixtures are rolled back or cleaned up; no fixture is part of seed/dump. SQL assertions use native PDO with ONLY_FULL_GROUP_BY.\n\n'
 md+='| ID | Test / input | Expected | Actual | Result | Evidence | Command / environment |\n|---|---|---|---|---|---|---|\n'

@@ -1,0 +1,19 @@
+flowchart TD
+    B[Browser: validated GET or POST forms] --> BO[includes/bootstrap.php]
+    BO --> CF[config.php + optional config.local.php]
+    BO --> SE[Session + CSRF + escaping]
+    BO --> DB[db.php: native PDO, strict session SQL mode]
+    SE --> FI[filters.php: dates, IDs, decimals, option whitelists]
+    FI --> AN[aggregate.php / olap.php / ranking.php / window.php]
+    AN --> QU[queries.php: DB grouping, rollup, rank, windows]
+    QU --> DB
+    BO --> ST[seasonal.php: separate term and food SELECTs]
+    ST --> QU
+    BO --> PL[plans.php / plan_form.php / plan_detail.php]
+    PL --> PA[plan_actions.php: POST + CSRF + PRG]
+    PA --> PS[plans.php repository: atomic parent and child writes]
+    PS --> DB
+    DB --> MA[(MariaDB: exactly six InnoDB tables)]
+    AN --> VI[header + view + footer: escaped HTML tables]
+    PL --> VI
+    ST --> VI

@@ -1,0 +1,4 @@
+# Optional developer document rendering only; never a web runtime dependency.
+pypdf==7.0.1
+python-pptx==1.0.2
+pymupdf==2.1

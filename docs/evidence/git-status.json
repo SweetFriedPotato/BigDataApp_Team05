@@ -1,0 +1,11 @@
+{
+  "status": "BLOCKED_PUSH",
+  "captured_at": "2026-11-11T23:20:58.740700+09:00",
+  "remote": "https://github.com/SweetFriedPotato/BigDataApp_Team05.git",
+  "remote_initial_state": "git ls-remote exit0 and no refs; no remote commits overwritten",
+  "configured_identity": "SweetFriedPotato <jiheechoi0102@ewha.ac.kr>",
+  "actual_last_push_error": "fatal: could not read Username for 'https://github.com': terminal prompts disabled",
+  "local_commits": "All milestones retained locally; current SHA/count are available from git log and review ZIP metadata",
+  "next_authenticated_action": "git push -u origin main; push the review tag if desired; never force",
+  "credentials": "No token was requested, stored, printed or added to the remote URL"
+}

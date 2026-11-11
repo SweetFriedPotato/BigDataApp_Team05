@@ -1,0 +1,18 @@
+{
+  "draft": true,
+  "renderer": "Chromium 141.0.7390.37",
+  "files": {
+    "report": "report-draft.pdf",
+    "paper": "paper-draft.pdf"
+  },
+  "checks": "All local images loaded; no external asset dependencies; actual pypdf counts",
+  "report": {
+    "pages": 18,
+    "file": "docs/rendered/report-draft.pdf"
+  },
+  "paper": {
+    "pages": 7,
+    "file": "docs/rendered/paper-draft.pdf"
+  },
+  "result": "PASS"
+}

@@ -1,0 +1,45 @@
+erDiagram
+    locations ||--o{ daily_temperatures : location_id
+    locations ||--o{ plan_locations : location_id
+    saved_plans ||--|{ plan_locations : "plan_id; application ensures >=1"
+    locations {
+        TINYINT location_id PK
+        VARCHAR location_code UK
+        VARCHAR name_en
+        VARCHAR name_ko
+        DECIMAL requested_latitude
+        DECIMAL requested_longitude
+    }
+    daily_temperatures {
+        TINYINT location_id PK,FK
+        DATE weather_date PK
+        DECIMAL tmean
+        DECIMAL tmax
+        DECIMAL tmin
+    }
+    saved_plans {
+        BIGINT plan_id PK
+        VARCHAR plan_name
+        DATE start_date
+        DATE end_date
+        DECIMAL max_temp_threshold
+        DECIMAL max_temp_range
+        TEXT memo
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    plan_locations {
+        BIGINT plan_id PK,FK
+        TINYINT location_id PK,FK
+    }
+    solar_terms {
+        DATE term_date PK
+        VARCHAR term_name
+        VARCHAR source_url
+    }
+    monthly_food_guides {
+        INT guide_id PK
+        TINYINT month_no UK
+        VARCHAR food_name UK
+        VARCHAR source_url
+    }

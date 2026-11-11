@@ -1,6 +1,6 @@
 # Actual test results
 
-Generated 2026-11-11 23:05 KST from retained result files. PASS means an executed check. Synthetic fixtures are rolled back or cleaned up; no fixture is part of seed/dump. SQL assertions use native PDO with ONLY_FULL_GROUP_BY.
+Generated 2026-11-11 23:20 KST from retained result files. PASS means an executed check. Synthetic fixtures are rolled back or cleaned up; no fixture is part of seed/dump. SQL assertions use native PDO with ONLY_FULL_GROUP_BY.
 
 | ID | Test / input | Expected | Actual | Result | Evidence | Command / environment |
 |---|---|---|---|---|---|---|

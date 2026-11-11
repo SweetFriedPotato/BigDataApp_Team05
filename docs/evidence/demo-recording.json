@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "file": "docs/rendered/demo-preview.webm",
+  "bytes": 1818124,
+  "recording": "Actual Chromium interactions with Apache/PHP/MariaDB",
+  "audio": "none; silent rehearsal preview",
+  "final_course_video": "NOT_SUBMITTED",
+  "test_plan": "deleted"
+}

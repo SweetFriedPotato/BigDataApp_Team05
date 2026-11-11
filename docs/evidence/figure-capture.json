@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "source": "Actual Apache/PHP result tables",
+  "browser": "141.0.7390.37",
+  "figures": [
+    "ranking-results.png",
+    "window-results.png"
+  ],
+  "credentials_in_capture": false
+}
