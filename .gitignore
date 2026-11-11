@@ -1,0 +1,9 @@
+/.local/
+/README.md
+/team05/config.local.php
+.env
+/dist/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
