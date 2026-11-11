@@ -1,0 +1,65 @@
+{
+    "environment": {
+        "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+        "account": "team05@%",
+        "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    },
+    "tests": [
+        {
+            "id": "T14",
+            "test": "Known sequence 1..35 has day7 mean4 and day30 mean15.5",
+            "status": "PASS",
+            "actual": {
+                "day7_ma7": "4.000000",
+                "day30_ma30": "15.500000"
+            }
+        },
+        {
+            "id": "T15",
+            "test": "Changing display start preserves the same-day historical window",
+            "status": "PASS",
+            "actual": {
+                "day31_ma7": "28.000000",
+                "day31_ma30": "16.500000"
+            }
+        },
+        {
+            "id": "T16",
+            "test": "All four metrics across year\/month boundaries versus raw Decimal oracle",
+            "status": "PASS",
+            "actual": {
+                "cases": 40,
+                "seoul_2024_01_01": {
+                    "location_id": 1,
+                    "weather_date": "2024-01-01",
+                    "metric": "mean",
+                    "ma7": "1.141428571428571428571428571",
+                    "ma30": "0.3013333333333333333333333333"
+                },
+                "all_metrics": "mean\/max\/min\/range",
+                "month_boundary": "2024-03-01 includes leap February"
+            }
+        },
+        {
+            "id": "T17",
+            "test": "First 6\/29 rows lack full windows; missing date\/invalid day do not masquerade as complete history",
+            "status": "PASS",
+            "actual": {
+                "first6and29": "NULL",
+                "date_gap": "NULL",
+                "invalid_metric_count": 6
+            }
+        },
+        {
+            "id": "T18",
+            "test": "Location partitions do not mix; thresholds do not filter windows",
+            "status": "PASS",
+            "actual": {
+                "location1_ma7": "28.000000",
+                "location2_ma7": "128.000000",
+                "location2_ma30": "116.500000",
+                "zero_matches": "both averages still computed"
+            }
+        }
+    ]
+}

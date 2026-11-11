@@ -70,3 +70,10 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - CLI T11–T13 PASS: 2/4 and 3/6 share rank 1; zero-valid excluded; equal display percentages with different full rates retain different ranks; Top1 includes ties; minimum-valid-days applied before ranking.
 - Actual NASA August 2024 matches the independent oracle: Busan/Daegu 2/31 rank1, Jeju 1/31 rank2, Seoul/Gwangju 0/31 rank3.
 - Apache Top1 HTTP returns both Busan and Daegu, 6.45% each. Evidence: ranking-tests.json. P5b push failed for missing credentials.
+
+## P5d — continuous windows
+
+- Added DB 7/30-day windows partitioned by location, 29-day lookback before display filtering, complete-valid-day counts, date-span checks and all four metric whitelists. Both frame results are shown; the selected frame is emphasized.
+- CLI T14–T18 PASS for 1..35 sequence, display invariance, all 40 raw-CSV cross-year/leap-month oracle cases, insufficient history, missing date and NULL day, location partitions and threshold invariance.
+- Actual Seoul 2024-01-01 means: 7-day 1.141429, 30-day 0.301333; Apache displays 1.14/0.30. All eight metric/focus combinations execute via HTTP.
+- Evidence: window-tests.json. Synthetic rows exist only inside rolled-back transactions. P5c push failed for missing credentials.

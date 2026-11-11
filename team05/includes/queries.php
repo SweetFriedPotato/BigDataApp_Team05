@@ -90,3 +90,28 @@ function ranking_query(array $f, array $o): array {
       WHERE r.rank_no<=? ORDER BY r.rank_no,r.location_id';
     return [$sql,[...$params,$minDays,$topRank]];
 }
+function window_query(array $f, array $o): array {
+    $metric = match ($o['metric']) {
+        'mean' => 'tmean', 'max' => 'tmax', 'min' => 'tmin', 'range' => 'dtr',
+        default => throw new InvalidArgumentException('Unknown temperature metric.'),
+    };
+    if (!in_array($o['window_days'],[7,30],true)) throw new InvalidArgumentException('Unknown window.');
+    $scan = max(DATA_START, (new DateTimeImmutable($f['start_date']))->modify('-29 days')->format('Y-m-d'));
+    [$sql,$params] = base_cte($f,$scan,$f['end_date']);
+    $sql .= ', metrics AS (SELECT b.*,CASE WHEN valid_flag=1 THEN ' . $metric . ' END metric_value FROM base b),
+    framed AS (
+        SELECT m.*,AVG(metric_value) OVER w7 mean7,COUNT(metric_value) OVER w7 n7,
+        AVG(metric_value) OVER w30 mean30,COUNT(metric_value) OVER w30 n30,
+        MIN(weather_date) OVER w7 first7,MIN(weather_date) OVER w30 first30
+        FROM metrics m WINDOW
+        w7 AS (PARTITION BY location_id ORDER BY weather_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW),
+        w30 AS (PARTITION BY location_id ORDER BY weather_date ROWS BETWEEN 29 PRECEDING AND CURRENT ROW)
+    )
+    SELECT w.*,l.name_en,
+        CASE WHEN n7=7 AND DATEDIFF(weather_date,first7)=6 THEN mean7 END ma7,
+        CASE WHEN n30=30 AND DATEDIFF(weather_date,first30)=29 THEN mean30 END ma30,
+        SUM(valid_flag) OVER (PARTITION BY w.location_id) display_valid_days
+    FROM framed w JOIN locations l ON l.location_id=w.location_id
+    WHERE weather_date BETWEEN ? AND ? ORDER BY w.location_id,weather_date';
+    return [$sql,[...$params,$f['start_date'],$f['end_date']]];
+}
