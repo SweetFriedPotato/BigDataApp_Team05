@@ -1,0 +1,78 @@
+{
+  "result": "PASS",
+  "fixture_classes": [
+    "normal",
+    "failing",
+    "missing"
+  ],
+  "strict_exit_verified": true,
+  "checks": [
+    "normal complete evidence produces PASS",
+    "audit counterexamples produce FAIL, including declared FAIL schema",
+    "actual missing-row count is read from JSON",
+    "failed data/schema propagate to mapped requirements",
+    "missing evidence is NOT_RUN",
+    "row count alone does not prove valid date sets",
+    "missing execution provenance is not PASS",
+    "report/diagram presence alone cannot satisfy R28",
+    "strict mode rejects failing",
+    "no all-PASS summary for failing",
+    "strict mode rejects missing",
+    "no all-PASS summary for missing",
+    "historical false-PASS behavior reproduced only in fixture"
+  ],
+  "historical_bug_reproduced": true,
+  "_meta": {
+    "executed_at": "2026-11-12T00:19:03.493117+09:00",
+    "command": [
+      "python3",
+      "tests/evidence_regression.py"
+    ],
+    "environment": {
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "python": "3.13.12"
+    },
+    "source_commit_base": "de223eb9c91a27d23a64ab4a34ddd4b6df5224b9",
+    "source_files": {
+      "sql/dbcreate.sql": "d3692c5c5b4bdf2415a71371bac6a20249a3aeb4bf67bf1f231833a7c7fe70cc",
+      "sql/dbdrop.sql": "abc6f9f8ef7508936e6cac8584a6a923b4c2b7eb3fade4414047cf4d5574638b",
+      "sql/dbdump.sql": "6b4cdf05b94469864bdc2839f14b38ace4ee13c0c39fc398719e7ebf55baa8b7",
+      "sql/dbinsert.sql": "5113725dffc2c9de6f9f95f8edb25bde398a4a3a3b99b0e0437d2728e5975513",
+      "team05/.htaccess": "59caa281e2a0515a6c449999933e63a9822e356ff18a2618600203460b6ea9aa",
+      "team05/aggregate.php": "5924eee402b54fb8e57fa7ac0b487c7aabdf9208c2351f9c2bcdfbfb316875a1",
+      "team05/assets/css/app.css": "10e93a2aef72d18aef6d844aa027a673c738a733b66b9a83b7255efee3432aff",
+      "team05/assets/fonts/NanumGothic-Regular.ttf": "76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31",
+      "team05/assets/fonts/OFL.txt": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "team05/assets/fonts/SOURCE.txt": "c5696c7bdbaed305f3f01cbc476bc8d9555f61ce057ac0e3568af8cdfc3a07e3",
+      "team05/assets/js/app.js": "6ced870e65705a164b9a9aefa0e634b1323df2952bbd78413498cd469cc76a32",
+      "team05/config.local.example.php": "9cd01995ca7c0bc799a1c0fe6ecaec79430a9fe70661913cc44b064a0dc895da",
+      "team05/config.php": "cf8f6c4d8ae154f0c9a60678b23fa296a45ec0c8b22565a77345ccbdb32c442e",
+      "team05/includes/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+      "team05/includes/bootstrap.php": "3367defd7ad76cdf0944dea8f02eb79e374c8f90506e5a218bc9d30f4d79902d",
+      "team05/includes/csrf.php": "39d8471f5f078874ac3ae65af2ca8e88a09c1d1d97992bcdff20003ff328585e",
+      "team05/includes/db.php": "d3b3293577209708a2fcf6e9dab94ace8783a49e96ea821762ab5b8bd10d1477",
+      "team05/includes/filters.php": "5a9d47f2ba21527bacef98ff9dbe9dd6d30117e8235eabaf78ba1c32269c98b4",
+      "team05/includes/footer.php": "281a79fe622c51368b652dfe26748c27de49f26703898f3f1d1b8ded509e0796",
+      "team05/includes/header.php": "4da3860943447197597fca27b1758afd0312ed0f97eab466062532817b31062b",
+      "team05/includes/plans.php": "2a4a9e164b5a8bfd978a880e2cdee66c271f489be6ecb989b4d2e69bc652f39f",
+      "team05/includes/queries.php": "2c6e4ea1ec4d2c79a7c5f216c1de54f2d9108f05016e13e954959d64813fc430",
+      "team05/includes/session.php": "abc0964f4067c184646f625ddf255eea2071957c6cdae0d5668244970c914cf8",
+      "team05/includes/view.php": "b70d21f4949f1ea1f471a16538a1ec4b7627801b5b7bf5fbd5343ae8c72f5b11",
+      "team05/index.php": "5fb8b4fd91f655caec1be4b452d5943daa23dbfd0ad191fdb6c033f1759bafd8",
+      "team05/olap.php": "48c08896cd8668c7561f80e3575fb022a92dca4509026e39ec0030f4a9841b4b",
+      "team05/plan_actions.php": "4cccbdc9ce8bd2e700c9ca2593b54a7332539f7acf2fc73c3f3071ce248ad268",
+      "team05/plan_detail.php": "33ef8daf3008002ea3c72fa4b960f43dbf11571bb2c47c4d332c02332499b8cf",
+      "team05/plan_form.php": "43da1ab1197c322ecc252634b2c3eb6a74727a95bef9425f0870640adc4d0c4a",
+      "team05/plans.php": "dd950ea14165c31835d10f7e6d3de06de2f7ad4dd24456336951c623d999d3b4",
+      "team05/ranking.php": "6199d749d638bae99f484b8785affa54abe6828461ccf9a290ed5a10c9d9365c",
+      "team05/seasonal.php": "7140e497da0f3e11fff66fef99cd76a58e312d2ad95f116c7534f51ce322e36f",
+      "team05/window.php": "8f04c069f983f59f6af4b8a89eb86d8af12293a58518381e46e42c8c7f4e8aa4",
+      "tests/evidence_regression.py": "e4eb00d3a880f2c6803f84d924d4ba04f91837631569dc6a03f8da05446ec934",
+      "tools/evidence_status.py": "0f9fd9086c115a5c096085045b26fd9da4c810996ae8f370781c43a3c37c1bd3",
+      "tools/evidence_support.py": "3009cfb2a061524a3a9ca318f453a9643d4b70bf112410e2bb9f4c7bba321dee",
+      "tools/record_requirements.py": "935a7af1ad5f48dd265aeb72796bc7c19fb1c42887a7b812434aedab591bc4d0",
+      "tools/record_results.py": "5cc7abc27f86e49068800c796d3266741fe8d387a20236855eb8c52e5996e937"
+    },
+    "identity_scope": "File hashes identify executed inputs, including uncommitted changes; this evidence does not hash itself."
+  }
+}
