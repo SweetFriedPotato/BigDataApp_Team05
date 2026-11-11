@@ -13,3 +13,11 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - Next: project-owned Docker containers for Apache/PHP and MariaDB, without changing host packages or existing containers/databases.
 - Verification: read-only environment commands, Docker version, Git remote refs. P0 inspection PASS; runtime not yet installed.
 - Validated commit: this initial commit (see `git log -- docs/progress.md`). Push result recorded in evidence and next entry.
+
+## P1 — schema and input contracts
+
+- Added the six exact schema tables, keys, CHECKs and date index; administrator operations are excluded from required SQL.
+- Added central evaluation defaults and validated local override, strict common filters and per-page option whitelists.
+- Added isolated Docker runtime definition with an internal network and a localhost-only web port. Existing host services are untouched.
+- P0 push failed: `could not read Username ... terminal prompts disabled`. Local commit bfec3f7 exists; authentication remains unavailable.
+- Verification before this commit: `docker compose config --quiet`, `git diff --check`; PHP runtime and schema execution pending P3/P4. The commit is a contract/setup milestone, not a claim of runtime PASS.

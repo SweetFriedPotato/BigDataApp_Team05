@@ -1,0 +1,36 @@
+name: seasonal-team05
+services:
+  db:
+    image: mariadb:10.4
+    environment:
+      MARIADB_ROOT_PASSWORD: local-development-only
+      MYSQL_ROOT_PASSWORD: local-development-only
+      MYSQL_DATABASE: team05
+      MYSQL_USER: team05
+      MYSQL_PASSWORD: team05
+    volumes:
+      - seasonal_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+    networks: [runtime]
+  web:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile
+    environment:
+      SLG_DB_HOST: db
+    ports: ["127.0.0.1:8055:80"]
+    volumes:
+      - ./team05:/var/www/html/team05:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [runtime]
+volumes:
+  seasonal_db:
+networks:
+  runtime:
+    internal: true
