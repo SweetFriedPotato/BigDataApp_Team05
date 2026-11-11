@@ -115,3 +115,12 @@ function window_query(array $f, array $o): array {
     WHERE weather_date BETWEEN ? AND ? ORDER BY w.location_id,weather_date';
     return [$sql,[...$params,$f['start_date'],$f['end_date']]];
 }
+function seasonal_data(PDO $p,array $o): array {
+    $year = integer_input($o,'year',2023,2025);
+    $month = integer_input($o,'month',1,12);
+    $first = new DateTimeImmutable(sprintf('%04d-%02d-01',$year,$month));
+    $terms = run_query($p,'SELECT term_date,term_name,source_url FROM solar_terms WHERE term_date>=? AND term_date<? ORDER BY term_date',
+        [$first->format('Y-m-d'),$first->modify('+1 month')->format('Y-m-d')]);
+    $foods = run_query($p,'SELECT month_no,food_name,source_url FROM monthly_food_guides WHERE month_no=? ORDER BY guide_id',[$month]);
+    return ['terms'=>$terms,'foods'=>$foods];
+}

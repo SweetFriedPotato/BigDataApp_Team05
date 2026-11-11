@@ -85,3 +85,10 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - Failure cases call the internal repository boundary only from CLI; no failure switches or test routes exist in the web application.
 - `python3 tests/plans_http.py`: actual HTTP CRUD and T26–T27 PASS, including Session reuse, escaped HTML, CSRF403, invalid target422, deleted detail404 and Unicode limits. All test plans cleaned up.
 - PHP syntax PASS. Evidence: plans-tests.json, plans-http.json, php-lint-p6.txt. P5d push failed for missing credentials.
+
+## P7 — seasonal references
+
+- Completed year/month selection, independently prepared date-range KASI SELECT and month-bound RDA SELECT, Korean names, direct source links and accurate reference/editorial provenance.
+- T03/T28 CLI PASS: 24 terms each year, every month has an item, year-varying February dates, and added food items leave aggregate/ranking/window results exactly unchanged.
+- Actual Apache: all 36 year-month selections HTTP200 with source links; four invalid option cases HTTP422. Evidence: seasonal-tests.json.
+- P6 push failed for missing credentials. All nine required user screens now have completed behavior; plan_actions is an additional POST handler.

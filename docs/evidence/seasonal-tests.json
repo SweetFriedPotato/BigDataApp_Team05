@@ -1,0 +1,52 @@
+{
+    "environment": {
+        "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+        "account": "team05@%",
+        "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    },
+    "tests": [
+        {
+            "id": "T03",
+            "test": "KASI 24 dates\/year and source-backed guide for every month",
+            "status": "PASS",
+            "actual": {
+                "year_counts": [
+                    {
+                        "year_no": 2023,
+                        "n": 24
+                    },
+                    {
+                        "year_no": 2024,
+                        "n": 24
+                    },
+                    {
+                        "year_no": 2025,
+                        "n": 24
+                    }
+                ],
+                "terms_across36_months": 72,
+                "monthly_items": 12,
+                "February_first_term_2024": {
+                    "term_date": "2024-02-04",
+                    "term_name": "입춘",
+                    "source_url": "https:\/\/astro.kasi.re.kr\/kor\/life\/post\/calendarData?search_year=2024"
+                },
+                "February_first_term_2025": {
+                    "term_date": "2025-02-03",
+                    "term_name": "입춘",
+                    "source_url": "https:\/\/astro.kasi.re.kr\/kor\/life\/post\/calendarData?search_year=2025"
+                }
+            }
+        },
+        {
+            "id": "T28",
+            "test": "Extra monthly food guides cannot multiply weather statistics",
+            "status": "PASS",
+            "actual": {
+                "food_guides_august_before": 1,
+                "during_test": 2,
+                "aggregate_ranking_window": "exactly unchanged"
+            }
+        }
+    ]
+}
