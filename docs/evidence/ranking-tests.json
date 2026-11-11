@@ -1,0 +1,108 @@
+{
+    "environment": {
+        "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+        "account": "team05@%",
+        "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    },
+    "tests": [
+        {
+            "id": "T11",
+            "test": "Equal ratios 2\/4 and 3\/6 tie; zero-valid region excluded; unrounded rates distinguish close values",
+            "status": "PASS",
+            "actual": {
+                "ties": [
+                    {
+                        "location_id": 1,
+                        "valid_days": "4",
+                        "matching_days": "2",
+                        "matching_rate": "50.00000000000000000000",
+                        "rank_no": 1,
+                        "name_en": "Seoul"
+                    },
+                    {
+                        "location_id": 2,
+                        "valid_days": "6",
+                        "matching_days": "3",
+                        "matching_rate": "50.00000000000000000000",
+                        "rank_no": 1,
+                        "name_en": "Busan"
+                    }
+                ],
+                "same_display_distinct_ranks": [
+                    {
+                        "location_id": 4,
+                        "valid_days": "1095",
+                        "matching_days": "1",
+                        "matching_rate": "0.09132420000000000000",
+                        "rank_no": 1,
+                        "name_en": "Gwangju"
+                    },
+                    {
+                        "location_id": 5,
+                        "valid_days": "1096",
+                        "matching_days": "1",
+                        "matching_rate": "0.09124087500000000000",
+                        "rank_no": 2,
+                        "name_en": "Jeju"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "T12",
+            "test": "Top 1 returns every tied first-place location; minimum days applied",
+            "status": "PASS",
+            "actual": {
+                "top1_rows": 2,
+                "min5_rows": 1
+            }
+        },
+        {
+            "id": "T13",
+            "test": "Actual August 2024 ranks versus independent raw Decimal oracle",
+            "status": "PASS",
+            "actual": [
+                {
+                    "location_id": 2,
+                    "valid_days": "31",
+                    "matching_days": "2",
+                    "matching_rate": "6.45161290300000000000",
+                    "rank_no": 1,
+                    "name_en": "Busan"
+                },
+                {
+                    "location_id": 3,
+                    "valid_days": "31",
+                    "matching_days": "2",
+                    "matching_rate": "6.45161290300000000000",
+                    "rank_no": 1,
+                    "name_en": "Daegu"
+                },
+                {
+                    "location_id": 5,
+                    "valid_days": "31",
+                    "matching_days": "1",
+                    "matching_rate": "3.22580645100000000000",
+                    "rank_no": 2,
+                    "name_en": "Jeju"
+                },
+                {
+                    "location_id": 1,
+                    "valid_days": "31",
+                    "matching_days": "0",
+                    "matching_rate": "0.00000000000000000000",
+                    "rank_no": 3,
+                    "name_en": "Seoul"
+                },
+                {
+                    "location_id": 4,
+                    "valid_days": "31",
+                    "matching_days": "0",
+                    "matching_rate": "0.00000000000000000000",
+                    "rank_no": 3,
+                    "name_en": "Gwangju"
+                }
+            ]
+        }
+    ]
+}

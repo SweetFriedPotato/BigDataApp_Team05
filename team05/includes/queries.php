@@ -74,3 +74,19 @@ function rollup_query(array $f, array $o): array {
         ORDER BY (t.location_id IS NULL),t.location_id,(t.year_no IS NULL),t.year_no,(t.month_no IS NULL),t.month_no';
     return [$sql,$params];
 }
+function ranking_query(array $f, array $o): array {
+    $minDays = integer_input($o,'min_valid_days',1,1096);
+    $topRank = integer_input($o,'top_rank',1,5);
+    [$sql,$params] = base_cte($f);
+    $sql .= ', counts AS (
+        SELECT location_id,SUM(valid_flag) valid_days,SUM(matching_flag) matching_days
+        FROM base GROUP BY location_id
+    ), rates AS (
+        SELECT c.*,100*CAST(matching_days AS DECIMAL(30,16))/valid_days matching_rate
+        FROM counts c WHERE valid_days>=? AND valid_days>0
+    ), ranked AS (
+        SELECT r.*,DENSE_RANK() OVER (ORDER BY matching_rate DESC) rank_no FROM rates r
+    ) SELECT r.*,l.name_en FROM ranked r JOIN locations l ON l.location_id=r.location_id
+      WHERE r.rank_no<=? ORDER BY r.rank_no,r.location_id';
+    return [$sql,[...$params,$minDays,$topRank]];
+}

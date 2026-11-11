@@ -63,3 +63,10 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - Added real MariaDB `WITH ROLLUP`, outer ordering, annual/location/grand labels and location-day units. All means derive from raw daily records.
 - CLI T09–T10 PASS under ONLY_FULL_GROUP_BY. Five years groups / ten month groups / 155 January location-days; partial January has 17 days; grand subtotal is 300 location-days for Jan–Feb 2024.
 - Actual Apache HTTP year→month→day→month→year: PASS. Evidence: olap-tests.json. P5a push failed for missing credentials.
+
+## P5c — dense ranking
+
+- Added DB counts→high-precision rates→DENSE_RANK→outer Top N ranks, with integer binding and no tie breaker in the window ordering.
+- CLI T11–T13 PASS: 2/4 and 3/6 share rank 1; zero-valid excluded; equal display percentages with different full rates retain different ranks; Top1 includes ties; minimum-valid-days applied before ranking.
+- Actual NASA August 2024 matches the independent oracle: Busan/Daegu 2/31 rank1, Jeju 1/31 rank2, Seoul/Gwangju 0/31 rank3.
+- Apache Top1 HTTP returns both Busan and Daegu, 6.45% each. Evidence: ranking-tests.json. P5b push failed for missing credentials.
