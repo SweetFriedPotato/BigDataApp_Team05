@@ -5,7 +5,7 @@ require __DIR__ . '/includes/queries.php';
 [$f,$o,$error] = analysis_context('olap');
 $rows = $error ? [] : run_query(db(),...olap_query($f,$o));
 $totals = $error ? [] : run_query(db(),...rollup_query($f,$o));
-page_header('Temperature Explorer','olap','Follow the data from a year to a month to a day. Move back up to see how each detail fits into the selected period.');
+page_header('Temperature Explorer','olap','Explore years, months and days, then return to the totals.');
 alert_error($error); filters_form('olap',$f,$o); scope_note($f);
 if (!$error):
 [$scanStart,$scanEnd] = olap_bounds($f,$o); ?>
@@ -22,7 +22,7 @@ elseif ($o['level']==='day' && $rows): ?>
 <div class="table-wrap"><table><caption class="sr-only">Daily records for the selected month</caption><thead><tr><th>Location</th><th>Date · LST</th><th>Mean °C</th><th>Maximum °C</th><th>Minimum °C</th><th>Daily range °C</th><th>Valid</th><th>Matches limits</th></tr></thead><tbody>
 <?php foreach($rows as $r): ?><tr><th scope="row"><?=e($r['name_en'])?></th><td><?=e($r['weather_date'])?></td><td><?=num($r['tmean'])?></td><td><?=num($r['tmax'])?></td><td><?=num($r['tmin'])?></td><td><?=num($r['dtr'])?></td><td><?= $r['valid_flag'] ? 'Yes' : 'No' ?></td><td><?= $r['valid_flag'] ? ($r['matching_flag'] ? 'Yes':'No') : '—' ?></td></tr><?php endforeach; ?></tbody></table></div>
 <?php else: empty_state('This drill selection does not overlap the selected data. Use the exploration path to return to a wider level.'); endif; ?>
-<div class="section-heading"><h2>The bigger picture</h2><span>SQL WITH ROLLUP</span></div>
-<p class="caption">Annual and location subtotals are recomputed from daily records. All selected locations totals count location-days; one date in five locations contributes five records. NULL dimensions identify subtotals.</p>
-<details open><summary>Monthly groups, annual subtotals, location subtotals &amp; all selected locations</summary><?php stats_table($totals,true,true); ?></details>
+<div class="section-heading"><h2>Roll-up totals</h2><span>SQL WITH ROLLUP</span></div>
+<p class="caption">Totals use daily records. Combined locations count location-days, with separate annual and location subtotals.</p>
+<details class="method-note"><summary>Monthly groups, annual subtotals, location subtotals &amp; all selected locations</summary><?php stats_table($totals,true,true); ?></details>
 <?php endif; page_footer(); ?>

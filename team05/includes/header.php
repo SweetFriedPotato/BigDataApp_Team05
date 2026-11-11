@@ -9,5 +9,5 @@ $menus = ['index'=>['Home','index.php'],'aggregate'=>['Temperature Comparison','
 <body><a class="skip" href="#main">Skip to content</a>
 <header class="masthead"><a class="brand" href="index.php" aria-label="Seasonal Living Guide"><img src="assets/img/weather-mark.svg" width="40" height="40" alt="" aria-hidden="true"><span>Seasonal Living Guide</span></a><span class="edition">5 locations · 2023–2025 <span class="lst-label">LST</span></span></header>
 <nav class="navigation" aria-label="Main navigation"><?php foreach ($menus as $key=>[$label,$href]): ?><a href="<?=e($href)?>"<?=$key===$page ? ' aria-current="page"' : ''?>><?=e($label)?></a><?php endforeach; ?></nav>
-<main id="main" class="workspace"><div class="page-heading"><h1><?=e($title)?></h1><?php if ($intro): ?><p class="intro"><?=e($intro)?></p><?php endif; ?></div>
+<main id="main" tabindex="-1" class="workspace"><div class="page-heading"><h1><?=e($title)?></h1><?php if ($intro): ?><p class="intro"><?=e($intro)?></p><?php endif; ?></div>
 <?php if ($message = take_flash()): ?><div class="notice" role="status"><?=e($message)?></div><?php endif; ?>

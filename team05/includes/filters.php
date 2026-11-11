@@ -65,7 +65,7 @@ function default_options(string $page): array {
         'aggregate' => ['group_mode' => 'location_year_month'],
         'olap' => ['level' => 'year', 'drill_year' => 2025, 'drill_month' => 1],
         'ranking' => ['top_rank' => 5, 'min_valid_days' => 1],
-        'window' => ['metric' => 'mean', 'window_days' => 7],
+        'window' => ['metric' => 'mean', 'window_days' => 7, 'chart_location' => 1],
         'seasonal' => ['year' => 2025, 'month' => 1],
         default => [],
     };
@@ -75,7 +75,7 @@ function validate_options(string $page, array $input, array $previous): array {
     $enums = ['group_mode' => ['location_year', 'location_year_month'],
         'level' => ['year','month','day'], 'metric' => ['mean','max','min','range']];
     $ranges = ['drill_year' => [2023,2025], 'drill_month' => [1,12], 'top_rank' => [1,5],
-        'min_valid_days' => [1,1096], 'window_days' => [7,30], 'year' => [2023,2025], 'month' => [1,12]];
+        'min_valid_days' => [1,1096], 'chart_location' => [1,5], 'window_days' => [7,30], 'year' => [2023,2025], 'month' => [1,12]];
     foreach ($o as $key => $value) {
         if (!array_key_exists($key, $input)) continue;
         if (isset($enums[$key])) {

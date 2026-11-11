@@ -36,7 +36,7 @@ class Store:
         actual=doc;declared=doc.get('result')
         if test_id:
             matches=[r for r in doc.get('tests',[]) if r.get('id')==test_id]
-            if len(matches)!=1:return {'status':'NOT_RUN' if not matches else 'FAIL','actual':'Test row missing or duplicated','evidence':name,'execution':doc.get('_meta')}
+            if len(matches)!=1:return {'status':(doc.get('result') if doc.get('result') in ('FAIL','BLOCKED') else 'NOT_RUN') if not matches else 'FAIL','actual':doc.get('error','Test row missing or duplicated'),'evidence':name,'execution':doc.get('_meta')}
             actual=matches[0];declared=actual.get('status')
         if step:
             matches=[r for r in doc.get('steps',[]) if r.get('step','').startswith(step)]

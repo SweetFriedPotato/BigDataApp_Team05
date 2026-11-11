@@ -18,7 +18,7 @@ function analysis_definitions(): void { ?>
 
 function field_error(string $name): ?string { return $GLOBALS['validation_errors'][$name] ?? null; }
 function field_attrs(string $name): string {
-    $attrs=' id="f-'.e($name).'"';
+    $attrs=' id="f-'.e($name).'"'.($name==='location_ids' ? ' tabindex="-1"':'');
     if (field_error($name)!==null) $attrs.=' aria-invalid="true" aria-describedby="f-'.e($name).'-error"';
     return $attrs;
 }
@@ -102,14 +102,14 @@ function stats_table(array $rows,bool $show_month = true,bool $rollup = false): 
         if ($r['year_no']===null) return 'All years';
         return isset($r['month_no']) ? sprintf('%04d-%02d',$r['year_no'],$r['month_no']) : (string)$r['year_no'];
     };
-    echo '<div class="table-wrap primary-statistics"><table><caption class="sr-only">Temperature statistics computed by MariaDB</caption><thead><tr><th>Location</th><th>Period</th><th>Valid days</th><th>Mean °C</th><th>Mean range °C</th><th>Exceedance days</th><th>Match rate</th></tr></thead><tbody>';
+    echo '<div class="table-wrap primary-statistics"><table><caption class="sr-only">Temperature statistics computed by MariaDB</caption><thead><tr><th scope="col">Location</th><th scope="col">Period</th><th scope="col">Valid days</th><th scope="col">Mean °C</th><th scope="col">Mean range °C</th><th scope="col">Exceedance days</th><th scope="col">Match rate</th></tr></thead><tbody>';
     foreach($rows as $r){
         $subtotal=$rollup && ($r['location_id']===null || $r['year_no']===null || $r['month_no']===null);
         echo '<tr'.($subtotal ? ' class="subtotal"':'').'><th scope="row">'.e($label($r)).'</th><td>'.e($period($r)).'</td>';
         foreach(['valid_days','mean_temperature','mean_daily_range','exceedance_days','matching_rate'] as $key) echo '<td>'.num($r[$key],in_array($key,['valid_days','exceedance_days']) ? 0:2).($key==='matching_rate' && $r[$key]!==null ? '%':'').'</td>';
         echo '</tr>';
     }
-    echo '</tbody></table></div><details class="method-note more-statistics"><summary>More statistics</summary><div class="table-wrap"><table><caption class="sr-only">Additional temperature statistics</caption><thead><tr><th>Location</th><th>Period</th><th>Mean max °C</th><th>Mean min °C</th><th>Period high °C</th><th>Period low °C</th><th>Matching days</th></tr></thead><tbody>';
+    echo '</tbody></table></div><details class="method-note more-statistics"><summary>More statistics</summary><div class="table-wrap"><table><caption class="sr-only">Additional temperature statistics</caption><thead><tr><th scope="col">Location</th><th scope="col">Period</th><th scope="col">Mean max °C</th><th scope="col">Mean min °C</th><th scope="col">Period high °C</th><th scope="col">Period low °C</th><th scope="col">Matching days</th></tr></thead><tbody>';
     foreach($rows as $r){
         echo '<tr><th scope="row">'.e($label($r)).'</th><td>'.e($period($r)).'</td>';
         foreach(['mean_daily_max','mean_daily_min','period_high','period_low','matching_days'] as $key)echo '<td>'.num($r[$key],$key==='matching_days' ? 0:2).'</td>';

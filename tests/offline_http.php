@@ -2,6 +2,8 @@
 // HTTP workflow helper. Network isolation is inspected by the outer verifier.
 declare(strict_types=1);
 function demand(bool $condition,string $message): void {if(!$condition)throw new RuntimeException($message);}
+require_once dirname(__DIR__).'/team05/includes/db.php';
+$runtime_database=run_query(db(),'SELECT VERSION() version,CURRENT_USER() account')[0];
 $cookie=tempnam(sys_get_temp_dir(),'slg_cookie_');
 $base=getenv('SLG_TEST_URL') ?: 'http://127.0.0.1/team05/';
 function request_page(string $page,array $params=[],bool $post=false): array {
@@ -32,7 +34,7 @@ try {
     [$status,$body]=request_page('aggregate.php');demand($status===200 && str_contains($body,'value="2" checked') && !str_contains($body,'value="1" checked'),'Cross-page session');
     [$status,$body]=request_page('plan_actions.php',['action'=>'delete','plan_id'=>$id,'csrf_token'=>$token],true);demand($status===200,'Delete');
     [$status,$body]=request_page('plan_detail.php',['id'=>$id]);demand($status===404,'Deleted detail');$id=null;
-    echo json_encode(['result'=>'PASS','pages'=>9,'analyses'=>'four independent dynamic DB menus','olap'=>'year/month/day/up','ranking'=>'two first-place ties','seasonal'=>'October 2024 sources and ingredient','crud'=>'HTTP create/read/list/edit/update/apply/delete','session'=>'saved common filters reused on another analysis','client_php'=>PHP_VERSION,'network_isolation'=>'not inspected by this HTTP helper','base_url'=>$base],JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE),"\n";
+    echo json_encode(['result'=>'PASS','pages'=>9,'analyses'=>'four independent dynamic DB menus','olap'=>'year/month/day/up','ranking'=>'two first-place ties','seasonal'=>'October 2024 sources and ingredient','crud'=>'HTTP create/read/list/edit/update/apply/delete','session'=>'saved common filters reused on another analysis','database'=>$runtime_database,'client_php'=>PHP_VERSION,'network_isolation'=>'not inspected by this HTTP helper','base_url'=>$base],JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE),"\n";
 } finally {
     if($id!==null)request_page('plan_actions.php',['action'=>'delete','plan_id'=>$id,'csrf_token'=>$token],true);
     unlink($cookie);

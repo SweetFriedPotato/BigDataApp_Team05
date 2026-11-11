@@ -20,6 +20,10 @@ function analysis_context(string $page): array {
                 $candidate = validate_filters($_GET);
             }
             $options = validate_options($page, $_GET, $o);
+            if ($page === 'window' && !in_array($options['chart_location'],$candidate['location_ids'],true)) {
+                if (array_key_exists('chart_location',$_GET)) throw new InputValidationException('chart_location','Choose a graph location from the selected comparison locations.');
+                $options['chart_location']=$candidate['location_ids'][0];
+            }
             // Nothing is written to the session until both common and page options validate.
             $_SESSION['analysis_filters'] = $candidate;
             $_SESSION['analysis_options'][$page] = $options;
