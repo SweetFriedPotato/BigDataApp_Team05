@@ -1,0 +1,1 @@
+</main><footer class="footer"><a href="index.php">Seasonal Living Guide <span aria-hidden="true">✳</span></a><p>NASA POWER · Historical gridded reanalysis · LST dates<br>Calendar references: KASI · Monthly editorial food guides: RDA</p><span>TEAM 05<br>WEATHER DATA ANALYSIS</span></footer></body></html>

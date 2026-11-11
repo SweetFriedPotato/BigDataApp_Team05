@@ -1,0 +1,1 @@
+{"sapi":"apache2handler","version":"8.2.35","pdo_mysql":true,"session":true,"ini_files":"\/usr\/local\/etc\/php\/conf.d\/docker-php-ext-opcache.ini,\n\/usr\/local\/etc\/php\/conf.d\/docker-php-ext-pdo_mysql.ini,\n\/usr\/local\/etc\/php\/conf.d\/docker-php-ext-sodium.ini,\n\/usr\/local\/etc\/php\/conf.d\/seasonal.ini\n"}

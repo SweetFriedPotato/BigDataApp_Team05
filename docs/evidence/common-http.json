@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "session": "A aggregate filters reused by B ranking; invalid common/option submissions preserve prior state; reset preserves CSRF",
+  "invalid_cases": 13,
+  "protected_files": "config and includes return HTTP 403",
+  "cookies": "HttpOnly, SameSite=Lax",
+  "environment": "Apache HTTP at localhost:8055"
+}

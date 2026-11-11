@@ -39,3 +39,12 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - Evidence: docs/evidence/schema.json, php-cli.txt, apache.txt, php-lint-p3.txt.
 - Initial HTTP connection failed because Docker's internal-only network suppressed the host mapping. A separate localhost access bridge is being added; HTTP is not marked PASS at this point.
 - P2 push failed for missing HTTPS credentials; c9ff724 remains local. P3 validated commit is the commit adding schema evidence; see history.
+
+## P4 — common PHP and nine page routes
+
+- Implemented bootstrap, native PDO, Session, strict filter/option validation, CSRF, escaped view helpers and shared navigation for the four distinct analysis menus.
+- Added original responsive English UI using local CSS/JS; Home counts come from MariaDB. Nine routes execute under Apache. Feature skeletons are explicitly marked pending and will be replaced in P5–P7.
+- HTTP host mapping now works at http://127.0.0.1:8055/team05/. CLI and Apache both run PHP 8.2.35 with pdo_mysql. Temporary SAPI probe was removed immediately after collection.
+- `php -l` all PHP: PASS. Nine routes HTTP 200; `python3 tests/common_http.py`: PASS for cross-page Session, 13 invalid input cases, unchanged Session on invalid submission, CSRF reset protection, HttpOnly/SameSite and denied direct config/includes access.
+- Initial HTTP harness encoded its array-date case as a scalar; the assertion correctly failed. Fixed the request key to `start_date[]` and reran the entire check.
+- Evidence: php-lint-p4.txt, php-apache.json, common-http.json. P3 push failed for the same credentials issue. Validated P4 commit is the commit adding these files.
