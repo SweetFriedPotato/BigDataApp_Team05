@@ -1,5 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><base href="../"><title>Seasonal Living Guide · report draft</title><style>@font-face{font-family:Korean;src:url('../team05/assets/fonts/NanumGothic-Regular.ttf')}@page{size:A4;margin:18mm 17mm 20mm}*{box-sizing:border-box}body{font:11pt/1.5 Georgia,'Times New Roman',Korean,serif;color:#243a35;margin:0}h1{font-size:24pt;line-height:1.2;color:#254f43;margin:0 0 20px}h2{font-size:17pt;line-height:1.2;margin:28px 0 14px;break-after:avoid}h3{font-size:12pt;break-after:avoid;margin:20px 0 8px}.report h2{break-before:page}.report h2:first-of-type{break-before:page}p{margin:10px 0;text-align:justify}a{color:#2c6155;text-decoration:none}table{border-collapse:collapse;width:100%;font:9pt/1.4 Arial,Korean,sans-serif;margin:16px 0}th,td{padding:7px;border:1px solid #cbd4c5;vertical-align:top;text-align:left}th{background:#edf1e8}tr{break-inside:avoid}thead{display:table-header-group}img{display:block;max-width:100%;max-height:105mm;margin:14px auto;object-fit:contain}.paper img{max-height:50mm}pre{font:8.5pt/1.4 'DejaVu Sans Mono',monospace;padding:13px;background:#f0f3ed;white-space:pre-wrap;overflow-wrap:anywhere;break-inside:avoid}code{font:9pt/1.4 'DejaVu Sans Mono',monospace;overflow-wrap:anywhere}pre code{font-size:8.5pt}li{margin:6px 0}blockquote{border-left:3px solid #b45b3b;padding-left:14px;color:#627063}.paper{font-size:11pt;line-height:1.5}.paper h2{font-size:15pt}.paper h3{font-size:12pt}.draft-note{font:9pt Arial,sans-serif;color:#7b674f;border-bottom:1px solid #d7dfd0;padding-bottom:8px;margin-bottom:20px}</style></head><body class="report"><p class="draft-note">TEAM 05 · EVIDENCE-BASED DRAFT · Human contribution and final submission review pending</p><h1>Seasonal Living Guide — Implementation Report</h1>
-<p><strong>Team 05 · Weather Data Analysis · Evidence-based draft · 2026-11-11, Asia/Seoul</strong></p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><base href="../"><title>Seasonal Living Guide · report draft</title><style>@font-face{font-family:Korean;src:url('../team05/assets/fonts/NanumGothic-Regular.ttf')}@page{size:A4;margin:18mm 17mm 20mm}*{box-sizing:border-box}body{font:11pt/1.5 Georgia,'Times New Roman',Korean,serif;color:#172033;margin:0}h1{font-size:24pt;line-height:1.2;color:#2563EB;margin:0 0 20px}h2{font-size:17pt;line-height:1.2;margin:28px 0 14px;break-after:avoid}h3{font-size:12pt;break-after:avoid;margin:20px 0 8px}p{margin:10px 0;text-align:justify}a{color:#2563EB;text-decoration:none}table{border-collapse:collapse;width:100%;font:9pt/1.4 Arial,Korean,sans-serif;margin:16px 0}th,td{padding:7px;border:1px solid #E2E8F0;vertical-align:top;text-align:left}th{background:#EAF3FF}tr{break-inside:avoid}thead{display:table-header-group}img{display:block;max-width:100%;max-height:105mm;margin:14px auto;object-fit:contain}.paper img{max-height:60mm}figure{margin:18px 0;break-inside:avoid}figcaption{font:9pt/1.4 Arial,Korean,sans-serif;color:#475569;text-align:center}pre{font:8.5pt/1.4 'DejaVu Sans Mono',monospace;padding:13px;background:#F6F8FB;white-space:pre-wrap;overflow-wrap:anywhere;break-inside:avoid}code{font:9pt/1.4 'DejaVu Sans Mono',monospace;overflow-wrap:anywhere}pre code{font-size:8.5pt}li{margin:6px 0}blockquote{border-left:3px solid #2563EB;padding-left:14px;color:#475569}.paper{font-size:11pt;line-height:1.5}.paper h2{font-size:15pt}.paper h3{font-size:12pt}.draft-note{font:9pt Arial,sans-serif;color:#7b674f;border-bottom:1px solid #d7dfd0;padding-bottom:8px;margin-bottom:20px}</style></head><body class="report"><p class="draft-note">TEAM 05 · EVIDENCE-BASED DRAFT · Human contribution and final submission review pending</p><h1>Seasonal Living Guide — Implementation Report</h1>
+<p><strong>Team 05 · Weather Data Analysis · Evidence-based draft · 2026-11-12, Asia/Seoul</strong></p>
 <p>This draft describes the implemented system and observed test results. It is ready for technical review, with individual human contribution statements and final course submission still pending. Page counts refer to rendered draft PDFs only. The local source specification is preserved separately and was not uploaded as the project README.</p>
 <h2>1. Purpose, users and completed scope</h2>
 <p>Seasonal Living Guide compares historical temperatures at five requested points in Korea: Seoul, Busan, Daegu, Gwangju and Jeju. A user chooses dates, locations, a maximum daily temperature and a maximum daily range. Four separate analysis menus answer different questions: grouped summaries compare periods, hierarchical exploration reveals daily details, dense ranking compares the proportion of qualifying days, and moving averages show continuous temperature patterns.</p>
@@ -32,7 +32,7 @@
 <td>Jihee Choi / 최지희</td>
 </tr>
 </tbody></table>
-<p>No individual development roles are assigned by this report. Implementation was performed by one Codex session; the team&#39;s actual human work must be recorded separately in <a href="contributions.md">contributions.md</a>.</p>
+<p>The confirmed assignment gives each member 20% responsibility for technical work, the report, the English paper and presentation. Nunnalin owns data/schema/four SQL files (slides 2–3); Jieun owns common PHP/PDO/Session/UI and seasonal references (4–5); Sumin owns plans/transactions (6–7); Koo Daon owns grouping/OLAP (8–9); Jihee owns ranking/windows/charts (10–11). Slides 1 and 12 are shared. Integration, English editing, PPT/video and final checks are shared equally. Actual human review remains NOT_RUN for each person. One sequential Codex session implemented these revisions; assignment does not rewrite Git authorship. <a href="team-responsibilities.md">team-responsibilities.md</a> is the detailed responsibility record.</p>
 <p>The comparison is deliberately bounded. NASA values are historical gridded reanalysis, rather than urban station observations or forecasts. A high matching rate means a larger share of historical valid days met the chosen limits. It does not establish safety, health benefit, or overall comfort. Ingredient entries are historical monthly editorial selections, independent of weather and location-specific harvest timing. There is no login, map, real-time forecast, nutrition database or AI recommendation subsystem.</p>
 <p>A representative workflow is to compare August 2024 across all five locations, inspect the tied ranking, open a particular month in the explorer, save the comparison conditions, update the selected locations and apply that plan to another analysis. The implementation and tests cover this complete workflow.</p>
 <h2>2. Actual development sequence and traceability</h2>
@@ -107,7 +107,71 @@
 <td>cb2ce62; subsequent compatibility evidence in history</td>
 </tr>
 </tbody></table>
-<p>Each milestone was checked before its commit. Push was attempted after every milestone and failed because GitHub HTTPS credentials were unavailable. Local commits remain intact. No force push, reset-hard, fabricated authors or parallel development branches were used. <a href="progress.md">progress.md</a> records commands, changes, observed failures and corrections. <a href="requirements.md">requirements.md</a> maps all 30 requirements to implementation paths and evidence; <a href="test-results.md">test-results.md</a> distinguishes PASS from NOT_RUN.</p>
+<p>Each milestone was checked before its commit. The original milestones initially encountered missing HTTPS credentials. The user subsequently authenticated and pushed all original commits and the existing review tag. Revision commits have been pushed successfully; observed local/remote SHAs are retained in revision evidence. The original failure remains a historical event. No force push, reset-hard, fabricated authors or parallel development branches were used. <a href="progress.md">progress.md</a> records commands, changes, observed failures and corrections. <a href="requirements.md">requirements.md</a> maps all 30 requirements to implementation paths and evidence; <a href="test-results.md">test-results.md</a> distinguishes PASS from NOT_RUN.</p>
+<h3>Revision execution and verified responsibility results</h3>
+<table>
+<thead>
+<tr>
+<th>Revision stage</th>
+<th>Concrete result and evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A–B</td>
+<td>Preserved pre-revision DB, commits and review tag; fixed evidence interpretation with normal/failure/missing fixtures</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Timestamp/rollback, memo zero, current-input saving and UTF-8 fixes verified through SQL and HTTP</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Original blue/white UI and SQL-value chart; all nine screens and edit verified at four viewport sizes</td>
+</tr>
+<tr>
+<td>E–F</td>
+<td>Equal 20% responsibility matrix, honest human status and reproducible current-source listings</td>
+</tr>
+<tr>
+<td>G–I</td>
+<td>Full runtime/fresh-install checks, committed-source media and rendered drafts; concrete package verification retained separately</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Assigned responsible member</th>
+<th>Actual automated implementation result</th>
+<th>Actual personal confirmation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nunnalin Heimvichit (2371001)</td>
+<td>Data validation, schema probes, deterministic UTF-8 seed and fresh SQL restoration passed</td>
+<td>NOT_RUN</td>
+</tr>
+<tr>
+<td>Jieun Hwang (2376329)</td>
+<td>Common filter/Session, current-input save, nine-screen UI and seasonal tests passed</td>
+<td>NOT_RUN</td>
+</tr>
+<tr>
+<td>Sumin Cho (2376274)</td>
+<td>Real web CRUD, timestamp ordering, memo zero and FK rollback tests passed</td>
+<td>NOT_RUN</td>
+</tr>
+<tr>
+<td>Koo Daon (2476009)</td>
+<td>Independent weighted grouping and hierarchical/ROLLUP SQL checks passed</td>
+<td>NOT_RUN</td>
+</tr>
+<tr>
+<td>Jihee Choi (2276337)</td>
+<td>Unrounded tied ranks, continuous window and direct-SQL chart checks passed</td>
+<td>NOT_RUN</td>
+</tr>
+</tbody></table>
+<p>Assignment is responsibility, not a claim that a student personally ran the automated checks. The agreed total oral time is unspecified; when T is agreed each receives about T/5. No official duration is invented.</p>
 <h2>3. Sources, coordinates and data preparation</h2>
 <p>Each temperature row represents one requested location on one NASA Local Solar Time (LST) date. The period is 2023-01-01 through 2025-12-31 inclusive: 365 + 366 + 365 = 1,096 days per location and 5,480 location-day rows. Requested coordinates are preserved as such; they are not labeled as the provider&#39;s grid-center coordinates.</p>
 <table>
@@ -161,7 +225,7 @@
 <p>KASI&#39;s 72 date/name occurrences and RDA&#39;s 12 month/ingredient items were transcribed from the user-supplied reference appendices. This session did not newly download or independently reverify those pages. RDA publication dates and original source URLs are retained in the curated snapshot. KASI is labeled calendar reference material; comparison with the final official almanac remains unperformed.</p>
 <p>Only validated inputs produce <code>dbinsert.sql</code>. Repeated generation yielded the same hash. The seed contains 5 locations + 5,480 temperatures + 72 terms + 12 food guides = 5,569 rows, with empty saved-plan tables. Python is a development-only preparation and independent-oracle tool; the installed PHP application does not invoke it.</p>
 <h2>4. Six-table schema, constraints and normalization</h2>
-<p><img src="diagrams/erd.svg" alt="Actual six-table ERD"></p>
+<figure><img src="diagrams/erd.svg" alt="Actual six-table ERD"><figcaption>Actual six-table ERD</figcaption></figure>
 <table>
 <thead>
 <tr>
@@ -203,9 +267,9 @@
 </tbody></table>
 <p>All six physical tables use InnoDB, utf8mb4 and utf8mb4_unicode_ci. Weather units are degrees Celsius, stored as DECIMAL rather than binary floating point. Year, month, daily range, averages and ranks are derived in SQL and are not redundantly stored. The association table represents the many-to-many relationship between plans and locations without comma-separated ID fields.</p>
 <p>Physical foreign keys exist only where shown by connecting lines. Solar terms and food guides are independent date/month references. They are not artificial parents of daily weather. At least one selected location per plan is an application and transaction invariant; a foreign key alone cannot enforce that minimum cardinality.</p>
-<p>Schema verification executed actual duplicate-key, invalid-location, invalid-month, reversed-plan-date and inverted-temperature probes. The temperature test also used a NULL mean with reversed minimum/maximum to ensure that the third pairwise CHECK is effective. All probes failed as intended and were rolled back. Metadata and exact row counts are preserved in <a href="evidence/schema.json">schema.json</a>.</p>
+<p>Schema verification executed actual duplicate-key, invalid-location, invalid-month, reversed-plan-date and inverted-temperature probes. The temperature test also used a NULL mean with reversed minimum/maximum to ensure that the third pairwise CHECK is effective. All probes failed as intended and were rolled back. Metadata and exact row counts are preserved in <a href="evidence/revision-2026-11-12/schema.json">schema.json</a>.</p>
 <h2>5. PHP structure, common filters and Session</h2>
-<p><img src="diagrams/php-structure.svg" alt="Actual PHP request flow"></p>
+<figure><img src="diagrams/php-structure.svg" alt="Actual PHP request flow"><figcaption>Actual PHP request flow</figcaption></figure>
 <p>The bootstrap loads central configuration, starts a strict PHP session before output, connects through PDO and sets the database session&#39;s SQL mode to include ONLY_FULL_GROUP_BY. PDO uses exceptions, associative results and native prepared statements (<code>ATTR_EMULATE_PREPARES=false</code>). The connection charset is utf8mb4. The database connection time zone is explicitly +09:00 to match displayed plan timestamps; weather date semantics remain NASA LST.</p>
 <table>
 <thead>
@@ -412,7 +476,7 @@ FROM rates r
 </tr>
 </tbody></table>
 <p>Forty independent raw-CSV expectations cover five locations, two dates, four metrics and both frames. The dates include the year boundary and 2024-03-01 after leap February. A display-start change preserves the same date&#39;s average. SQL-derived valid display-day counts are shown with each location, and the result table identifies both frame counts. The interface distinguishes “Insufficient history” from a valid numeric zero.</p>
-<p>The dataset is small enough to display all selected daily rows in a scrollable table. No client-side aggregation or fabricated smooth curve replaces the database result. The boundary checks are retained in <a href="evidence/window-tests.json">window-tests.json</a>.</p>
+<p>The original SVG chart plots the returned SQL daily/7-day/30-day values directly. A graph-only selector chooses one location from the global comparison without changing that global set. Date coordinates use elapsed calendar days; absent dates and NULL values break lines. One-day results use finite points. Both focus options emphasize the same SQL series in graph and table. The table remains available without JavaScript. All 5,480 daily rows can be displayed in a scrollable table; PHP performs no new moving-average calculation. The boundary checks are retained in <a href="evidence/revision-2026-11-12/window-tests.json">window-tests.json</a>.</p>
 <h2>10. Persistent plans, transactions and real rollback evidence</h2>
 <p>A plan saves its title, dates, two temperature limits, memo and selected locations. It does not promise to save grouping, Top N display or window focus. <code>plans.php</code> and <code>plan_detail.php</code> read persistent data from MariaDB. The form supports Unicode titles of 1–100 characters and memos of up to 2,000 characters; lengths are character counts rather than byte counts.</p>
 <p><code>plan_actions.php</code> accepts only POST, validates a Session-bound CSRF token, normalizes input and invokes the repository transaction. Successful writes redirect with HTTP303, implementing Post/Redirect/Get. The detail view can apply the stored common filters to a selected, whitelisted analysis page. This action revalidates values read from the database before changing Session state.</p>
@@ -422,7 +486,7 @@ UPDATE: begin → lock/check parent → update body → delete old links
 ANY FAILURE: if transaction active → rollback → propagate failure
 DELETE: begin → lock/check parent → delete parent → FK cascade → commit
 </code></pre>
-<p>The update path checks existence separately and accepts a same-value update even when the affected-row count is zero. Parent and link changes are never committed in separate stages. Deletion requires POST/CSRF, cascades links and preserves unrelated plans.</p>
+<p>The update path checks existence separately and accepts a same-value update even when the affected-row count is zero. Every accepted update explicitly sets updated_at=CURRENT_TIMESTAMP, including location-only changes. A real FK failure restores the exact timestamp as well as body and children. Memo fallback tests distinguish the literal string &quot;0&quot; from an empty memo. Parent and link changes are never committed in separate stages. Deletion requires POST/CSRF, cascades links and preserves unrelated plans.</p>
 <p>The rollback tests deliberately bypass only the web validation layer at the internal repository boundary. A CLI fixture supplies valid parent fields and child IDs <code>[1,99]</code> or <code>[2,99]</code>, so an actual FK failure occurs after earlier SQL statements succeed. There is no failure-injection query parameter, admin menu or test route in the delivered web code.</p>
 <table>
 <thead>
@@ -452,10 +516,10 @@ DELETE: begin → lock/check parent → delete parent → FK cascade → commit
 <td>Exact original parent and location snapshot restored</td>
 </tr>
 </tbody></table>
-<p>The FK exceptions, counts and before/after snapshots are in <a href="evidence/plans-tests.json">plans-tests.json</a>. Web CRUD, applying a plan, validation errors and deletion were also executed through real HTTP and Chromium. All temporary plans were removed. Auto-increment gaps created by rollback are normal database behavior and do not imply surviving partial plans.</p>
+<p>The FK exceptions, counts and before/after snapshots are in <a href="evidence/revision-2026-11-12/plans-tests.json">plans-tests.json</a>. Web CRUD, applying a plan, validation errors and deletion were also executed through real HTTP and Chromium. All temporary plans were removed. Auto-increment gaps created by rollback are normal database behavior and do not imply surviving partial plans.</p>
 <h2>11. Interface, controls and request protection</h2>
 <p>Nine user-facing screens exist: Home; Temperature Comparison; Temperature Explorer; Find My Season; Temperature Trends; Seasonal Information; Saved Plans; Create/Edit Plan; Plan Details. The POST handler is not counted as a user page. Every page uses the same navigation with four distinct analysis entries.</p>
-<p>The original interface uses cream, green and terracotta colors, readable system typography and a bundled Korean font under the SIL Open Font License. It uses only local CSS, JavaScript and fonts. Analysis output is a table with clear units, dates, limits and valid counts. Wide result tables scroll within their containers. Buttons and labels are keyboard accessible; the document includes a skip link and visible focus states. Core forms work without JavaScript; JavaScript adds deletion confirmation only.</p>
+<p>The revised original interface uses #F6F8FB page backgrounds, white cards, #172033 text, #475569 secondary text, #2563EB controls and a bundled Korean font under the SIL Open Font License. The sun/cloud SVG is shared by header, footer and favicon. Controls are at least 44px high; standard labels are at least 13px. Compact filter panels place the first comparison result row inside both tested desktop heights. The default comparison has seven columns; all remaining SQL metrics are available in More statistics. It uses only local CSS, JavaScript and fonts. Analysis output is a table with clear units, dates, limits and valid counts. Wide result tables scroll within their containers. Buttons and labels are keyboard accessible; the document includes a skip link and visible focus states. Core forms work without JavaScript; JavaScript adds deletion confirmation only.</p>
 <table>
 <thead>
 <tr>
@@ -492,8 +556,8 @@ DELETE: begin → lock/check parent → delete parent → FK cascade → commit
 <td>Apache403 under the tested development runtime</td>
 </tr>
 <tr>
-<td>Mobile layout</td>
-<td>390×844; eight routes; no document overflow</td>
+<td>Responsive layout</td>
+<td>All nine screens plus valid edit at 1440×900, 1366×768, 390×844 and 360×844; no document overflow</td>
 </tr>
 </tbody></table>
 <p>The Session cookie is HttpOnly with SameSite=Lax and strict mode. Responses use a self-origin Content Security Policy and nosniff. Redirect targets are fixed analysis names, preventing arbitrary redirect URLs. Browser-visible error pages do not expose passwords, complete DSNs or raw SQL exception details. Detailed server exceptions go to the project server log, whose examined PHP warning/fatal/parse/notice count was zero after functional tests.</p>
@@ -538,10 +602,10 @@ FROM monthly_food_guides WHERE month_no=? ORDER BY guide_id;
 <p>Two independent environment families were exercised. Development containers used PHP 8.2.35, Apache 2.4.69 and MariaDB 10.4.34. A separately installed official XAMPP Linux 8.2.12 environment used PHP 8.2.12, Apache 2.4.58 and MariaDB 10.4.32. CLI and Apache PHP were both explicitly probed for versions, SAPI/configuration and pdo_mysql. The temporary probes were removed.</p>
 <p>The actual XAMPP check used <code>/opt/lampp/htdocs/team05</code>, unchanged evaluation configuration and team05@localhost. Its container had network mode <code>none</code>. The fresh DB successfully executed create→insert, all nine screens and HTTP CRUD/Session, all six analysis/transaction test suites, drop→create→insert, and dump-only restoration using the bundled XAMPP mysql client. A local override using localhost also passed. Thus an actual XAMPP run, rather than only a PHP development server, supports the installation claim. Windows/macOS and the professor&#39;s physical server remain untested.</p>
 <p>Semantic fingerprints compare every ordered table row hash, column/type metadata, constraints and indexes. After reset and restoration these fingerprints matched the seeded database exactly. Temporary plans and synthetic weather/food fixtures were absent after the suites. Volatile auto-increment counters were intentionally excluded from equivalence because rollback can consume IDs without retaining records.</p>
-<p>The T01–T33 calculation/data/runtime checks passed. T34 is evaluated when the review package is generated from a fixed Git commit. The <a href="test-results.md">test matrix</a> is generated from retained JSON evidence, with command, input, expectation, actual result and status. It does not mark unexecuted work as passed. Browser checks add real desktop/mobile flows and four screenshot captures. This evaluation is a correctness and reproducibility check, not a load benchmark, usability study or distributed big-data performance experiment.</p>
+<p>The existing data/calculation/runtime checks were rerun against the revision. Additional T35–T44 cover timestamp/order/rollback, memo zero, current-input saving, invalid-save preservation, false-PASS fixtures, UTF-8 reproducibility, chart geometry, deployed/media identity, nine-screen UI and rendered submission documents. Exact current statuses are generated in the test matrix after execution; absent or stale evidence cannot become PASS. The <a href="test-results.md">test matrix</a> is generated from retained JSON evidence, with command, input, expectation, actual result and status. It does not mark unexecuted work as passed. Browser checks exercise all nine screens and a valid edit at four viewports, keyboard navigation, no-JavaScript Save conditions, long Korean strings, empty results and 5,480-row display. This evaluation is a correctness and reproducibility check, not a load benchmark, usability study or distributed big-data performance experiment.</p>
 <h2>14. Review, delivery identity and remaining human work</h2>
-<p>The P9 deliverables are review drafts: this implementation report, an English paper, a demo script and supporting artifacts. Their descriptions use actual data and executed results. Rendered draft page counts are recorded separately in <code>evidence/document-render.json</code>; Markdown line counts are not treated as page counts. A package tool records the source commit and hashes every delivered member to verify that demo code and packaged code agree.</p>
-<p>GitHub pushes remain blocked by missing HTTPS credentials. The repository has meaningful local commits and preserves the original specification locally at <code>.local/README.spec.md</code>. The replacement README describes the implemented system. No final course-submission tag, course upload or completed human presentation is implied by a review package. A later code change requires rebuilding the package and identifying a new demo version.</p>
+<p>The P9 deliverables are review drafts: this implementation report, an English paper, a demo script and supporting artifacts. Their descriptions use actual data and executed results. Rendered draft page counts are recorded separately in <code>evidence/revision-2026-11-12/document-render.json</code>; Markdown line counts are not treated as page counts. A package tool records the source commit and hashes every delivered member to verify that demo code and packaged code agree.</p>
+<p>GitHub synchronization was restored by the user, and validated revision commits have been pushed. The repository preserves meaningful original and revision commits and preserves the original specification locally at <code>.local/README.spec.md</code>. The replacement README describes the implemented system. No final course-submission tag, course upload or completed human presentation is implied by a review package. A later code change requires rebuilding the package and identifying a new demo version.</p>
 <table>
 <thead>
 <tr>
@@ -550,8 +614,8 @@ FROM monthly_food_guides WHERE month_no=? ORDER BY guide_id;
 </tr>
 </thead>
 <tbody><tr>
-<td>Personal roles, effort and actual human work</td>
-<td>Not supplied; BLOCKED pending member confirmation</td>
+<td>Confirmed responsibility / actual human review</td>
+<td>20% each in all four dimensions / each actual member review NOT_RUN</td>
 </tr>
 <tr>
 <td>Draft report and paper technical review</td>
@@ -575,8 +639,317 @@ FROM monthly_food_guides WHERE month_no=? ORDER BY guide_id;
 </tr>
 </tbody></table>
 <p>The source specification lists the initial code/report/paper deadline as 2026-11-30, English slides/video as 2026-12-01, presentations on an assigned 2026-12-03 or 2026-12-07 class date, and revised paper acceptance through 2026-12-10. These dates are user-supplied requirements; this session did not independently access the course announcement. No exact deadline time is invented. The initial English paper must still accompany the November 30 submission according to that specification.</p>
-<p>The contribution record names all five members without inventing development assignments. It distinguishes existing Git identity from manual authorship and records Codex implementation explicitly. Final personal contribution statements require concrete work, dates and review evidence from the people concerned.</p>
-<h2>15. References and reproducibility artifacts</h2>
+<p>The contribution record names all five confirmed responsibility assignments while keeping actual human completion separate. It distinguishes existing Git identity from manual authorship and records Codex implementation explicitly. Final personal contribution statements require concrete work, dates and review evidence from the people concerned.</p>
+<h3>Revision provenance and delivered application identity</h3>
+<p>Application source commit: <code>e12ee89cd59964d2e58e601a7acfcd537dcecce8</code>. Application manifest SHA-256: <code>d47b9d5e12cc2858180e0d2937908453c683417a0613ce4c73b5578d3f86a525</code>. <code>tools/review_server.py</code> deploys a committed ZIP into an isolated Apache document root; it hashes actual serving files inside the container and compares HTTP-served CSS/JS/SVG/font bytes. Screenshots and video identify that deployment, URL, environment and execution time. Later documentation/package commits may advance without changing this application manifest. The final ZIP records its own package commit separately. Its whole-file SHA-256 lives in an external sidecar to avoid self-reference.</p>
+<p>The original prepared DB is backed up locally and never used for mutation fixtures. Separate test databases are destroyed after checks. The verification generators retain historical evidence, require execution metadata and actual expected fields, and return nonzero in strict mode when any selected check is not PASS. File existence alone cannot complete personal-review or presentation requirements.</p>
+<!-- SOURCE_EXCERPTS_START --><h2>15. Reproducible current implementation excerpts</h2>
+<p>Generated by <code>python3 tools/update_report.py</code>. Each listing is an exact current source slice; file SHA-256 and one-based inclusive line numbers permit reproduction. Omitted source is outside each stated range. SQL analysis builders return prepared SQL and separate parameters. The application identity is fixed independently of later documentation commits.</p>
+<h3>DDL: weather PK, date index, FK and pairwise CHECK</h3>
+<p><code>sql/dbcreate.sql</code> · lines 12–22 · SHA-256 <code>1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1</code></p>
+<pre><code class="language-sql">CREATE TABLE daily_temperatures (
+ location_id TINYINT UNSIGNED NOT NULL,
+ weather_date DATE NOT NULL,
+ tmean DECIMAL(6,2) NULL, tmax DECIMAL(6,2) NULL, tmin DECIMAL(6,2) NULL,
+ PRIMARY KEY (location_id, weather_date),
+ KEY idx_weather_date_location (weather_date, location_id),
+ CONSTRAINT fk_weather_location FOREIGN KEY (location_id) REFERENCES locations(location_id),
+ CONSTRAINT chk_temperature_order CHECK (
+  (tmin IS NULL OR tmean IS NULL OR tmin &lt;= tmean) AND
+  (tmean IS NULL OR tmax IS NULL OR tmean &lt;= tmax) AND
+  (tmin IS NULL OR tmax IS NULL OR tmin &lt;= tmax))
+</code></pre>
+<h3>DDL: plans, association keys and cascade</h3>
+<p><code>sql/dbcreate.sql</code> · lines 35–50 · SHA-256 <code>1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1</code></p>
+<pre><code class="language-sql">CREATE TABLE saved_plans (
+ plan_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ plan_name VARCHAR(100) NOT NULL, start_date DATE NOT NULL, end_date DATE NOT NULL,
+ max_temp_threshold DECIMAL(6,2) NOT NULL, max_temp_range DECIMAL(6,2) NOT NULL,
+ memo TEXT NULL, created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ KEY idx_plan_updated (updated_at, plan_id),
+ CONSTRAINT chk_plan_dates CHECK (start_date &lt;= end_date),
+ CONSTRAINT chk_plan_range CHECK (max_temp_range &gt;= 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE plan_locations (
+ plan_id BIGINT UNSIGNED NOT NULL, location_id TINYINT UNSIGNED NOT NULL,
+ PRIMARY KEY (plan_id, location_id), KEY idx_plan_location (location_id),
+ CONSTRAINT fk_plan_parent FOREIGN KEY (plan_id) REFERENCES saved_plans(plan_id) ON DELETE CASCADE,
+ CONSTRAINT fk_plan_location FOREIGN KEY (location_id) REFERENCES locations(location_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+</code></pre>
+<h3>Seed: explicit encoding, transaction and plain INSERT</h3>
+<p><code>sql/dbinsert.sql</code> · lines 3–10 · SHA-256 <code>6b090a2d2e31ea1ef2c3b01f598ef07f9f5479a3878b13dcb0120000771cb207</code></p>
+<pre><code class="language-sql">USE team05;
+SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
+START TRANSACTION;
+INSERT INTO locations (location_id,location_code,name_en,name_ko,requested_latitude,requested_longitude) VALUES
+(&#39;1&#39;,&#39;seoul&#39;,&#39;Seoul&#39;,&#39;서울&#39;,&#39;37.5665&#39;,&#39;126.9780&#39;),
+(&#39;2&#39;,&#39;busan&#39;,&#39;Busan&#39;,&#39;부산&#39;,&#39;35.1796&#39;,&#39;129.0756&#39;),
+(&#39;3&#39;,&#39;daegu&#39;,&#39;Daegu&#39;,&#39;대구&#39;,&#39;35.8714&#39;,&#39;128.6014&#39;),
+(&#39;4&#39;,&#39;gwangju&#39;,&#39;Gwangju&#39;,&#39;광주&#39;,&#39;35.1595&#39;,&#39;126.8526&#39;),
+</code></pre>
+<h3>Project-only child-first DROP</h3>
+<p><code>sql/dbdrop.sql</code> · lines 3–9 · SHA-256 <code>58cbb6cbc6042e95635ee5f37919ddf97f0e4c685ec87d4c8955c99164ea49a2</code></p>
+<pre><code class="language-sql">USE team05;
+DROP TABLE IF EXISTS plan_locations;
+DROP TABLE IF EXISTS saved_plans;
+DROP TABLE IF EXISTS daily_temperatures;
+DROP TABLE IF EXISTS monthly_food_guides;
+DROP TABLE IF EXISTS solar_terms;
+DROP TABLE IF EXISTS locations;
+</code></pre>
+<h3>PDO connection and native prepare configuration</h3>
+<p><code>team05/includes/db.php</code> · lines 5–12 · SHA-256 <code>ed589abd54b06bbac02e2f0cd95e230ed9043c0218ce3dc86502e71e150da302</code></p>
+<pre><code class="language-php">function connect_db(?array $config = null): PDO {
+    $c = $config ?? require dirname(__DIR__) . &#39;/config.php&#39;;
+    $pdo = new PDO(&#39;mysql:host=&#39; . $c[&#39;host&#39;] . &#39;;port=&#39; . $c[&#39;port&#39;] . &#39;;dbname=&#39; . $c[&#39;database&#39;] . &#39;;charset=utf8mb4&#39;,
+        $c[&#39;username&#39;], $c[&#39;password&#39;], [PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE =&gt; PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES =&gt; false]);
+    $pdo-&gt;exec(&quot;SET SESSION sql_mode=&#39;STRICT_TRANS_TABLES,ONLY_FULL_GROUP_BY,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&#39;&quot;);
+    $pdo-&gt;exec(&quot;SET SESSION time_zone=&#39;+09:00&#39;&quot;);
+    return $pdo;
+</code></pre>
+<h3>Actual prepare, typed bindValue and execute</h3>
+<p><code>team05/includes/db.php</code> · lines 18–25 · SHA-256 <code>ed589abd54b06bbac02e2f0cd95e230ed9043c0218ce3dc86502e71e150da302</code></p>
+<pre><code class="language-php">function run_query(PDO $pdo, string $sql, array $params = []): array {
+    $statement = $pdo-&gt;prepare($sql);
+    foreach (array_values($params) as $i =&gt; $value) {
+        $statement-&gt;bindValue($i + 1, $value, is_int($value) ? PDO::PARAM_INT : ($value === null ? PDO::PARAM_NULL : PDO::PARAM_STR));
+    }
+    $statement-&gt;execute();
+    return $statement-&gt;columnCount() ? $statement-&gt;fetchAll() : [];
+}
+</code></pre>
+<h3>Session start before output</h3>
+<p><code>team05/includes/bootstrap.php</code> · lines 5–18 · SHA-256 <code>95f10fbad84d072a75918a48b67cd5e7f2ce70a93e844eebdd61fc713cea67e6</code></p>
+<pre><code class="language-php">ini_set(&#39;display_errors&#39;, &#39;0&#39;);
+error_reporting(E_ALL);
+date_default_timezone_set(&#39;Asia/Seoul&#39;);
+set_exception_handler(function(Throwable $e): void {
+    error_log(get_class($e) . &#39;: &#39; . $e-&gt;getMessage());
+    http_response_code(503);
+    echo &#39;&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;title&gt;Service unavailable&lt;/title&gt;&lt;h1&gt;Service unavailable&lt;/h1&gt;&lt;p&gt;The request could not be completed. Please check the database connection or try again.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;index.php&quot;&gt;Return home&lt;/a&gt;&lt;/p&gt;&lt;/html&gt;&#39;;
+});
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start([&#39;use_strict_mode&#39; =&gt; true, &#39;cookie_httponly&#39; =&gt; true, &#39;cookie_samesite&#39; =&gt; &#39;Lax&#39;,
+        &#39;cookie_secure&#39; =&gt; !empty($_SERVER[&#39;HTTPS&#39;]) &amp;&amp; $_SERVER[&#39;HTTPS&#39;] !== &#39;off&#39;]);
+}
+header(&quot;Content-Security-Policy: default-src &#39;self&#39;; style-src &#39;self&#39;; script-src &#39;self&#39;; img-src &#39;self&#39; data:; base-uri &#39;self&#39;; form-action &#39;self&#39;; frame-ancestors &#39;none&#39;&quot;);
+header(&#39;X-Content-Type-Options: nosniff&#39;);
+</code></pre>
+<h3>Validate current Save conditions before Session/redirect</h3>
+<p><code>team05/includes/session.php</code> · lines 15–34 · SHA-256 <code>c0f24d21d89cb4727118c1068f0d6409f57be805b5220cee7f59b15e2628339a</code></p>
+<pre><code class="language-php">            $candidate = $f;
+            $intent = array_key_exists(&#39;intent&#39;,$_GET) ? scalar_input($_GET,&#39;intent&#39;) : &#39;apply&#39;;
+            if (!in_array($intent,[&#39;apply&#39;,&#39;save&#39;],true)) throw new InvalidArgumentException(&#39;Unknown filter action.&#39;);
+            if ($intent === &#39;save&#39; &amp;&amp; !array_key_exists(&#39;apply_filters&#39;,$_GET)) throw new InvalidArgumentException(&#39;Submit the current comparison conditions first.&#39;);
+            if (array_key_exists(&#39;apply_filters&#39;, $_GET)) {
+                if (scalar_input($_GET,&#39;apply_filters&#39;) !== &#39;1&#39;) throw new InvalidArgumentException(&#39;Invalid filter submission.&#39;);
+                $candidate = validate_filters($_GET);
+            }
+            $options = validate_options($page, $_GET, $o);
+            if ($page === &#39;window&#39; &amp;&amp; !in_array($options[&#39;chart_location&#39;],$candidate[&#39;location_ids&#39;],true)) {
+                if (array_key_exists(&#39;chart_location&#39;,$_GET)) throw new InputValidationException(&#39;chart_location&#39;,&#39;Choose a graph location from the selected comparison locations.&#39;);
+                $options[&#39;chart_location&#39;]=$candidate[&#39;location_ids&#39;][0];
+            }
+            // Nothing is written to the session until both common and page options validate.
+            $_SESSION[&#39;analysis_filters&#39;] = $candidate;
+            $_SESSION[&#39;analysis_options&#39;][$page] = $options;
+            $f = $candidate; $o = $options;
+            if ($intent === &#39;save&#39;) {
+                header(&#39;Location: plan_form.php&#39;,true,303);
+                exit;
+</code></pre>
+<h3>Persistent plan SELECT/list</h3>
+<p><code>team05/includes/plans.php</code> · lines 21–34 · SHA-256 <code>7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67</code></p>
+<pre><code class="language-php">function get_plan(PDO $p,int $id): ?array {
+    $rows=run_query($p,&#39;SELECT * FROM saved_plans WHERE plan_id=?&#39;,[$id]);
+    if (!$rows) return null;
+    $plan=$rows[0];
+    $plan[&#39;locations&#39;]=run_query($p,&#39;SELECT l.* FROM plan_locations pl JOIN locations l ON l.location_id=pl.location_id WHERE pl.plan_id=? ORDER BY pl.location_id&#39;,[$id]);
+    $plan[&#39;location_ids&#39;]=array_map(&#39;intval&#39;,array_column($plan[&#39;locations&#39;],&#39;location_id&#39;));
+    return $plan;
+}
+function list_plans(PDO $p): array {
+    return run_query($p,&quot;SELECT s.*,COALESCE(p.location_count,0) location_count,p.location_names
+        FROM saved_plans s LEFT JOIN (
+            SELECT pl.plan_id,COUNT(*) location_count,GROUP_CONCAT(l.name_en ORDER BY l.location_id SEPARATOR &#39;, &#39;) location_names
+            FROM plan_locations pl JOIN locations l ON l.location_id=pl.location_id GROUP BY pl.plan_id
+        ) p ON p.plan_id=s.plan_id ORDER BY s.updated_at DESC,s.plan_id DESC&quot;);
+</code></pre>
+<h3>Atomic INSERT/UPDATE/children and actual rollback</h3>
+<p><code>team05/includes/plans.php</code> · lines 36–55 · SHA-256 <code>7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67</code></p>
+<pre><code class="language-php">function save_plan(PDO $p,array $plan,?int $id = null): int {
+    // Internal repository boundary accepts normalized data. Database FK/CHECK failures propagate after rollback.
+    $p-&gt;beginTransaction();
+    try {
+        $values=[$plan[&#39;plan_name&#39;],$plan[&#39;start_date&#39;],$plan[&#39;end_date&#39;],$plan[&#39;max_temp_threshold&#39;],$plan[&#39;max_temp_range&#39;],$plan[&#39;memo&#39;]];
+        if ($id === null) {
+            run_query($p,&#39;INSERT INTO saved_plans (plan_name,start_date,end_date,max_temp_threshold,max_temp_range,memo) VALUES (?,?,?,?,?,?)&#39;,$values);
+            $id=(int)$p-&gt;lastInsertId();
+        } else {
+            if (!run_query($p,&#39;SELECT plan_id FROM saved_plans WHERE plan_id=? FOR UPDATE&#39;,[$id])) throw new OutOfBoundsException(&#39;Plan no longer exists.&#39;);
+            run_query($p,&#39;UPDATE saved_plans SET plan_name=?,start_date=?,end_date=?,max_temp_threshold=?,max_temp_range=?,memo=?,updated_at=CURRENT_TIMESTAMP WHERE plan_id=?&#39;,[...$values,$id]);
+            run_query($p,&#39;DELETE FROM plan_locations WHERE plan_id=?&#39;,[$id]);
+        }
+        foreach($plan[&#39;location_ids&#39;] as $location) run_query($p,&#39;INSERT INTO plan_locations (plan_id,location_id) VALUES (?,?)&#39;,[$id,$location]);
+        $p-&gt;commit();
+        return $id;
+    } catch (Throwable $e) {
+        if ($p-&gt;inTransaction()) $p-&gt;rollBack();
+        throw $e;
+    }
+</code></pre>
+<h3>Transactional DELETE</h3>
+<p><code>team05/includes/plans.php</code> · lines 57–63 · SHA-256 <code>7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67</code></p>
+<pre><code class="language-php">function delete_plan(PDO $p,int $id): void {
+    $p-&gt;beginTransaction();
+    try {
+        if (!run_query($p,&#39;SELECT plan_id FROM saved_plans WHERE plan_id=? FOR UPDATE&#39;,[$id])) throw new OutOfBoundsException(&#39;Plan no longer exists.&#39;);
+        run_query($p,&#39;DELETE FROM saved_plans WHERE plan_id=?&#39;,[$id]);
+        $p-&gt;commit();
+    } catch (Throwable $e) { if ($p-&gt;inTransaction()) $p-&gt;rollBack(); throw $e; }
+</code></pre>
+<h3>Date, number and checkbox inputs</h3>
+<p><code>team05/includes/view.php</code> · lines 46–60 · SHA-256 <code>e708abea1f9acc5cd2de0d994680d2f8e0038290e93409a283acfc7b4ff889b7</code></p>
+<pre><code class="language-php">function filter_fields(array $f): void { ?&gt;
+    &lt;div class=&quot;field-row&quot;&gt;
+        &lt;label class=&quot;field&quot;&gt;&lt;span&gt;From · LST&lt;/span&gt;&lt;input type=&quot;date&quot; name=&quot;start_date&quot;&lt;?=field_attrs(&#39;start_date&#39;)?&gt; min=&quot;2023-01-01&quot; max=&quot;2025-12-31&quot; value=&quot;&lt;?=e(form_value(&#39;start_date&#39;,$f[&#39;start_date&#39;]))?&gt;&quot; required&gt;&lt;?php field_error_view(&#39;start_date&#39;); ?&gt;&lt;/label&gt;
+        &lt;label class=&quot;field&quot;&gt;&lt;span&gt;To · LST&lt;/span&gt;&lt;input type=&quot;date&quot; name=&quot;end_date&quot;&lt;?=field_attrs(&#39;end_date&#39;)?&gt; min=&quot;2023-01-01&quot; max=&quot;2025-12-31&quot; value=&quot;&lt;?=e(form_value(&#39;end_date&#39;,$f[&#39;end_date&#39;]))?&gt;&quot; required&gt;&lt;?php field_error_view(&#39;end_date&#39;); ?&gt;&lt;/label&gt;
+        &lt;label class=&quot;field&quot;&gt;&lt;span&gt;Daily maximum ≤ °C&lt;/span&gt;&lt;input type=&quot;number&quot; name=&quot;max_temp_threshold&quot;&lt;?=field_attrs(&#39;max_temp_threshold&#39;)?&gt; min=&quot;-50&quot; max=&quot;60&quot; step=&quot;0.01&quot; value=&quot;&lt;?=e(form_value(&#39;max_temp_threshold&#39;,$f[&#39;max_temp_threshold&#39;]))?&gt;&quot; required&gt;&lt;?php field_error_view(&#39;max_temp_threshold&#39;); ?&gt;&lt;/label&gt;
+        &lt;label class=&quot;field&quot;&gt;&lt;span&gt;Daily range ≤ °C&lt;/span&gt;&lt;input type=&quot;number&quot; name=&quot;max_temp_range&quot;&lt;?=field_attrs(&#39;max_temp_range&#39;)?&gt; min=&quot;0&quot; max=&quot;60&quot; step=&quot;0.01&quot; value=&quot;&lt;?=e(form_value(&#39;max_temp_range&#39;,$f[&#39;max_temp_range&#39;]))?&gt;&quot; required&gt;&lt;?php field_error_view(&#39;max_temp_range&#39;); ?&gt;&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;?php $draft=$GLOBALS[&#39;filter_draft&#39;] ?? []; $selected=$f[&#39;location_ids&#39;];
+    if (array_key_exists(&#39;apply_filters&#39;,$draft)) {
+        $selected=[];foreach(is_array($draft[&#39;location_ids&#39;] ?? null) ? $draft[&#39;location_ids&#39;] : [] as $id) if(is_scalar($id) &amp;&amp; preg_match(&#39;/^[1-5]$/D&#39;,(string)$id))$selected[]=(int)$id;
+    } ?&gt;
+    &lt;fieldset class=&quot;regions&quot;&lt;?=field_attrs(&#39;location_ids&#39;)?&gt;&gt;&lt;legend&gt;Compare locations &lt;span&gt;Select one or more requested points&lt;/span&gt;&lt;/legend&gt;
+    &lt;?php foreach (locations() as $l): ?&gt;&lt;label class=&quot;region&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;location_ids[]&quot; value=&quot;&lt;?=e($l[&#39;location_id&#39;])?&gt;&quot;&lt;?=in_array((int)$l[&#39;location_id&#39;], $selected, true) ? &#39; checked&#39; : &#39;&#39;?&gt;&gt;&lt;span&gt;&lt;?=e($l[&#39;name_en&#39;])?&gt; &lt;small lang=&quot;ko&quot;&gt;&lt;?=e($l[&#39;name_ko&#39;])?&gt;&lt;/small&gt;&lt;/span&gt;&lt;/label&gt;&lt;?php endforeach; ?&gt;
+    &lt;?php field_error_view(&#39;location_ids&#39;); ?&gt;&lt;/fieldset&gt;
+&lt;?php }
+</code></pre>
+<h3>Select controls and current-input Save submit</h3>
+<p><code>team05/includes/view.php</code> · lines 61–84 · SHA-256 <code>e708abea1f9acc5cd2de0d994680d2f8e0038290e93409a283acfc7b4ff889b7</code></p>
+<pre><code class="language-php">function filters_form(string $page, array $f, array $o): void { ?&gt;
+&lt;section class=&quot;panel filters&quot; aria-label=&quot;Analysis filters&quot;&gt;&lt;form method=&quot;get&quot;&gt;
+&lt;input type=&quot;hidden&quot; name=&quot;apply_filters&quot; value=&quot;1&quot;&gt;
+&lt;?php filter_fields($f); ?&gt;
+&lt;div class=&quot;options-row&quot;&gt;
+&lt;?php
+switch ($page) {
+    case &#39;aggregate&#39;: select_control(&#39;group_mode&#39;,&#39;Group records by&#39;,[&#39;location_year_month&#39;=&gt;&#39;Location · year · month&#39;,&#39;location_year&#39;=&gt;&#39;Location · year&#39;],$o[&#39;group_mode&#39;]); break;
+    case &#39;olap&#39;:
+        select_control(&#39;level&#39;,&#39;Explore level&#39;,[&#39;year&#39;=&gt;&#39;Year&#39;,&#39;month&#39;=&gt;&#39;Month&#39;,&#39;day&#39;=&gt;&#39;Day&#39;],$o[&#39;level&#39;]);
+        select_control(&#39;drill_year&#39;,&#39;Drill year&#39;,[2023=&gt;2023,2024=&gt;2024,2025=&gt;2025],$o[&#39;drill_year&#39;]);
+        select_control(&#39;drill_month&#39;,&#39;Drill month&#39;,array_combine(range(1,12),range(1,12)),$o[&#39;drill_month&#39;]); break;
+    case &#39;ranking&#39;:
+        select_control(&#39;top_rank&#39;,&#39;Show ranks&#39;,[1=&gt;&#39;Top 1 · includes ties&#39;,2=&gt;&#39;Top 2 · includes ties&#39;,3=&gt;&#39;Top 3 · includes ties&#39;,4=&gt;&#39;Top 4 · includes ties&#39;,5=&gt;&#39;All 5 ranks&#39;],$o[&#39;top_rank&#39;]);
+        echo &#39;&lt;label class=&quot;field&quot;&gt;&lt;span&gt;Minimum valid days&lt;/span&gt;&lt;input type=&quot;number&quot; name=&quot;min_valid_days&quot; min=&quot;1&quot; max=&quot;1096&quot; value=&quot;&#39;.e($o[&#39;min_valid_days&#39;]).&#39;&quot; required&gt;&lt;/label&gt;&#39;; break;
+    case &#39;window&#39;:
+        select_control(&#39;metric&#39;,&#39;Temperature metric&#39;,[&#39;mean&#39;=&gt;&#39;Daily mean&#39;,&#39;max&#39;=&gt;&#39;Daily maximum&#39;,&#39;min&#39;=&gt;&#39;Daily minimum&#39;,&#39;range&#39;=&gt;&#39;Daily range&#39;],$o[&#39;metric&#39;]);
+        select_control(&#39;window_days&#39;,&#39;Highlight moving average&#39;,[7=&gt;&#39;7 days&#39;,30=&gt;&#39;30 days&#39;],$o[&#39;window_days&#39;]); break;
+}
+?&gt;
+&lt;button class=&quot;button&quot; type=&quot;submit&quot;&gt;Apply filters &lt;span aria-hidden=&quot;true&quot;&gt;↗&lt;/span&gt;&lt;/button&gt;
+&lt;button class=&quot;button secondary&quot; type=&quot;submit&quot; name=&quot;intent&quot; id=&quot;f-intent&quot; value=&quot;save&quot;&gt;Save conditions&lt;/button&gt;
+&lt;/div&gt;&lt;/form&gt;
+&lt;form class=&quot;reset-form&quot; method=&quot;post&quot;&gt;&lt;input type=&quot;hidden&quot; name=&quot;csrf_token&quot; value=&quot;&lt;?=e(csrf_token())?&gt;&quot;&gt;&lt;button class=&quot;text-button&quot; name=&quot;reset_filters&quot; value=&quot;1&quot;&gt;Reset filters&lt;/button&gt;&lt;/form&gt;
+</code></pre>
+<h3>Complex grouping and full valid-day statistics</h3>
+<p><code>team05/includes/queries.php</code> · lines 22–44 · SHA-256 <code>1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be</code></p>
+<pre><code class="language-php">function statistics_sql(): string {
+    return &#39;COUNT(*) candidate_days, SUM(valid_flag) valid_days,
+        AVG(CASE WHEN valid_flag=1 THEN tmean END) mean_temperature,
+        AVG(CASE WHEN valid_flag=1 THEN tmax END) mean_daily_max,
+        AVG(CASE WHEN valid_flag=1 THEN tmin END) mean_daily_min,
+        AVG(CASE WHEN valid_flag=1 THEN dtr END) mean_daily_range,
+        MAX(CASE WHEN valid_flag=1 THEN tmax END) period_high,
+        MIN(CASE WHEN valid_flag=1 THEN tmin END) period_low,
+        SUM(exceedance_flag) exceedance_days, SUM(matching_flag) matching_days,
+        100.0*SUM(matching_flag)/NULLIF(SUM(valid_flag),0) matching_rate&#39;;
+}
+// Team responsibility: Koo Daon (2476009) — Assigned module responsibility; implementation history remains unchanged.
+function aggregate_query(array $f, array $o): array {
+    [$sql,$params] = base_cte($f);
+    $month = match ($o[&#39;group_mode&#39;]) {
+        &#39;location_year_month&#39; =&gt; true, &#39;location_year&#39; =&gt; false,
+        default =&gt; throw new InvalidArgumentException(&#39;Unknown grouping.&#39;),
+    };
+    $dimensions = &#39;location_id, year_no&#39; . ($month ? &#39;, month_no&#39; : &#39;&#39;);
+    $sql .= &#39;, grouped AS (SELECT &#39; . $dimensions . &#39;, &#39; . statistics_sql() . &#39; FROM base GROUP BY &#39; . $dimensions . &#39;)
+        SELECT g.*, l.name_en FROM grouped g JOIN locations l ON l.location_id=g.location_id
+        ORDER BY g.location_id, g.year_no&#39; . ($month ? &#39;, g.month_no&#39; : &#39;&#39;);
+    return [$sql,$params];
+</code></pre>
+<h3>OLAP level query and physical WITH ROLLUP</h3>
+<p><code>team05/includes/queries.php</code> · lines 64–81 · SHA-256 <code>1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be</code></p>
+<pre><code class="language-php">function olap_query(array $f, array $o): array {
+    [$start,$end] = olap_bounds($f,$o);
+    if ($o[&#39;level&#39;] !== &#39;day&#39;) {
+        return aggregate_query(array_replace($f,[&#39;start_date&#39;=&gt;$start,&#39;end_date&#39;=&gt;$end]),
+            [&#39;group_mode&#39;=&gt;$o[&#39;level&#39;]===&#39;year&#39; ? &#39;location_year&#39; : &#39;location_year_month&#39;]);
+    }
+    [$sql,$params] = base_cte($f,$start,$end);
+    return [$sql.&#39; SELECT b.*,l.name_en FROM base b JOIN locations l ON l.location_id=b.location_id ORDER BY b.location_id,b.weather_date&#39;,$params];
+}
+// Team responsibility: Koo Daon (2476009) — Assigned module responsibility; implementation history remains unchanged.
+function rollup_query(array $f, array $o): array {
+    [$start,$end] = olap_bounds($f,$o);
+    [$sql,$params] = base_cte($f,$start,$end);
+    $sql .= &#39;, totals AS (SELECT location_id,year_no,month_no,&#39; . statistics_sql() . &#39;
+        FROM base GROUP BY location_id,year_no,month_no WITH ROLLUP)
+        SELECT t.*,l.name_en FROM totals t LEFT JOIN locations l ON l.location_id=t.location_id
+        ORDER BY (t.location_id IS NULL),t.location_id,(t.year_no IS NULL),t.year_no,(t.month_no IS NULL),t.month_no&#39;;
+    return [$sql,$params];
+</code></pre>
+<h3>Precision, qualification and tied DENSE_RANK</h3>
+<p><code>team05/includes/queries.php</code> · lines 84–99 · SHA-256 <code>1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be</code></p>
+<pre><code class="language-php">function ranking_query(array $f, array $o): array {
+    $minDays = integer_input($o,&#39;min_valid_days&#39;,1,1096);
+    $topRank = integer_input($o,&#39;top_rank&#39;,1,5);
+    [$sql,$params] = base_cte($f);
+    $sql .= &#39;, counts AS (
+        SELECT location_id,SUM(valid_flag) valid_days,SUM(matching_flag) matching_days
+        FROM base GROUP BY location_id
+    ), rates AS (
+        SELECT c.*,100*CAST(matching_days AS DECIMAL(30,16))/valid_days matching_rate
+        FROM counts c WHERE valid_days&gt;=? AND valid_days&gt;0
+    ), ranked AS (
+        SELECT r.*,DENSE_RANK() OVER (ORDER BY matching_rate DESC) rank_no FROM rates r
+    ) SELECT r.*,l.name_en FROM ranked r JOIN locations l ON l.location_id=r.location_id
+      WHERE r.rank_no&lt;=? ORDER BY r.rank_no,r.location_id&#39;;
+    return [$sql,[...$params,$minDays,$topRank]];
+}
+</code></pre>
+<h3>Continuous SQL windows, counts and outer display bounds</h3>
+<p><code>team05/includes/queries.php</code> · lines 101–124 · SHA-256 <code>1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be</code></p>
+<pre><code class="language-php">function window_query(array $f, array $o): array {
+    $metric = match ($o[&#39;metric&#39;]) {
+        &#39;mean&#39; =&gt; &#39;tmean&#39;, &#39;max&#39; =&gt; &#39;tmax&#39;, &#39;min&#39; =&gt; &#39;tmin&#39;, &#39;range&#39; =&gt; &#39;dtr&#39;,
+        default =&gt; throw new InvalidArgumentException(&#39;Unknown temperature metric.&#39;),
+    };
+    if (!in_array($o[&#39;window_days&#39;],[7,30],true)) throw new InvalidArgumentException(&#39;Unknown window.&#39;);
+    $scan = max(DATA_START, (new DateTimeImmutable($f[&#39;start_date&#39;]))-&gt;modify(&#39;-29 days&#39;)-&gt;format(&#39;Y-m-d&#39;));
+    [$sql,$params] = base_cte($f,$scan,$f[&#39;end_date&#39;]);
+    $sql .= &#39;, metrics AS (SELECT b.*,CASE WHEN valid_flag=1 THEN &#39; . $metric . &#39; END metric_value FROM base b),
+    framed AS (
+        SELECT m.*,AVG(metric_value) OVER w7 mean7,COUNT(metric_value) OVER w7 n7,
+        AVG(metric_value) OVER w30 mean30,COUNT(metric_value) OVER w30 n30,
+        MIN(weather_date) OVER w7 first7,MIN(weather_date) OVER w30 first30
+        FROM metrics m WINDOW
+        w7 AS (PARTITION BY location_id ORDER BY weather_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW),
+        w30 AS (PARTITION BY location_id ORDER BY weather_date ROWS BETWEEN 29 PRECEDING AND CURRENT ROW)
+    )
+    SELECT w.*,l.name_en,
+        CASE WHEN n7=7 AND DATEDIFF(weather_date,first7)=6 THEN mean7 END ma7,
+        CASE WHEN n30=30 AND DATEDIFF(weather_date,first30)=29 THEN mean30 END ma30,
+        SUM(valid_flag) OVER (PARTITION BY w.location_id) display_valid_days
+    FROM framed w JOIN locations l ON l.location_id=w.location_id
+    WHERE weather_date BETWEEN ? AND ? ORDER BY w.location_id,weather_date&#39;;
+    return [$sql,[...$params,$f[&#39;start_date&#39;],$f[&#39;end_date&#39;]]];
+</code></pre>
+<!-- SOURCE_EXCERPTS_END --><h2>16. References and reproducibility artifacts</h2>
 <ol>
 <li>NASA POWER, <a href="https://power.larc.nasa.gov/docs/services/api/temporal/daily/">Daily API</a>: daily CSV requests and LST definition.</li>
 <li>NASA POWER, <a href="https://power.larc.nasa.gov/docs/methodology/data/sources_meteorology/">Meteorology sources</a>: provider background for gridded weather interpretation.</li>

@@ -113,3 +113,21 @@ node tools/record_demo.mjs
 ```
 
 The browser/figure/video commands require the project Apache runtime to be serving. PDF generation checks actual rendered page counts and image loading. The PPTX was reopened and checked structurally; opening/rendering in the team's PowerPoint installation remains a human review step. The demo recording is silent rehearsal evidence and needs final presentation review/narration as appropriate.
+
+## Revision evidence and optional document tools
+
+The revision's complete current matrix is generated from `docs/evidence/revision-2026-11-12/`, preserving the original evidence as historical records. For selected checks, `python3 tools/record_results.py --fail-on-error --ids T01 T02 T04` returns nonzero if evidence is absent, failed, incomplete or stale. Running the matrix generator does not execute the tests. Each JSON retains actual execution time, command, environment and tested input hashes.
+
+The application used for final captures is source commit e12ee89cd59964d2e58e601a7acfcd537dcecce8, deployed from a committed ZIP to a separate Apache document root. Later package/document commits preserve the same application manifest. Actual serving-container hashes and HTTP asset checks are separate from working-tree/package checks. See deployment-media.json and the final ZIP's COMMIT_SHA.txt, RELEASE_MANIFEST.json and VERIFICATION.json. Whole-ZIP SHA-256 sidecars stay outside the archive.
+
+Optional developer document dependencies are listed in tools/qa-package.json and tools/qa-requirements.txt. `tools/render_documents.mjs` renders PDFs with real page counts. `tools/update_report.py` extracts exact current code with source/line/hash references. To prepare the optional presentation renderer when internet is available:
+
+```bash
+docker build -f tools/document-render.Dockerfile -t seasonal-team05-document-render:2026-11-12 .
+python3 tools/make_slides.py
+python3 tools/render_slides.py
+```
+
+The actual renderer used LibreOffice7.3.7.2 and ran with network=none. All twelve slide PNGs were inspected by Codex; this is separate from student sign-off. Document tools are not web runtime dependencies. PHP8.0 syntax compatibility is a target only: actual PHP8.0 execution and Windows/macOS/professor-host installation remain NOT_RUN.
+
+`python3 tools/package_release.py` needs a reviewed clean Git tree and the isolated evaluation server state; it checks every payload byte plus actual served/captured app identity. `--record-evidence` records one concrete package snapshot for the matrix, after which that evidence can be committed. Final repackaging without the flag writes only dist files, avoiding a self-referential commit loop. The final package's own manifest and external verification identify the authoritative delivered payload commit; matrix T34 retains its actual earlier package snapshot. No final course upload is performed by these commands.

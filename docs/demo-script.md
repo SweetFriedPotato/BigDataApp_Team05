@@ -1,88 +1,87 @@
-# English demonstration draft
+# English demonstration and presentation draft
 
-**Team 05 · Based on executed results · 2026-11-11 (Asia/Seoul)**
+Team 05 · Revision 2026-11-12 (Asia/Seoul). The application is commit `e12ee89cd59964d2e58e601a7acfcd537dcecce8`; use the final ZIP manifest for the separately identified document/package commit. All demonstration captures come from the committed-source server, not an arbitrary working directory.
 
-This is a rehearsal script, not a claim that the final English presentation or course video has been delivered. Use the review package's COMMIT_SHA.txt to identify the exact code. Keep the same package and source version for the demonstration. Personal speaking parts are not assigned; the team must decide who actually presents and record that contribution.
+Each person has 20% technical, report, English paper and presentation responsibility. Slides 1 and 12 are shared; slides 2–3 belong to Nunnalin, 4–5 to Jieun, 6–7 to Sumin, 8–9 to Koo Daon and 10–11 to Jihee. Integration, English editing, PPT/video and final checks are shared equally. When total duration T is agreed, allow approximately T/5 per person. No official total duration is inferred. The captioned recording is a real browser demonstration, without human speech; actual member review, oral delivery and course upload remain NOT_RUN.
 
-## Opening
+## Shared opening — slide 1
 
-“Seasonal Living Guide compares historical temperature records for five requested locations in Korea. Our period is January 2023 through December 2025. We use NASA POWER gridded reanalysis and Local Solar Time dates. These values describe the past. They are not forecasts or station observations.”
+“Seasonal Living Guide compares historical temperature records for five requested points in Korea. Four separate SQL analyses answer different questions. Users can save comparison conditions and apply them across pages. Calendar dates and monthly ingredients are independent reference information.”
 
-Open Home and point to 5,480 daily records and the four separate analysis menus. Explain that calendar dates and monthly ingredient guidance are separate references. No API or CDN is needed after installation.
+Open Home. Show the four analysis menus and 5,480-row total. The local sun/cloud icon and blue/white compact layout are original project assets. No external API, CDN, Node or Python is needed after installing PHP/MariaDB and importing SQL.
 
-## 1. Complex grouping — Temperature Comparison
+## Nunnalin Heimvichit (2371001) — slides 2 and 3 — 20%
 
-Open Temperature Comparison. Select all five locations, dates 2024-08-01 to 2024-08-31, daily maximum 28 and daily range 10. Choose location/year/month and Apply filters.
+“Our period is January 2023 through December 2025, with 1,096 daily records for each of Seoul, Busan, Daegu, Gwangju and Jeju. NASA POWER supplies gridded reanalysis on Local Solar Time dates. These are historical values, not forecasts or urban station measurements. The preserved raw hashes match, and the date checks include leap day.”
 
-“We count all valid days in the selected dates. A valid day contains mean, maximum and minimum temperature. Both limits must hold for a matching day. These thresholds classify days; they do not remove the nonmatching days before calculating a rate.”
+Show the actual six-table ERD. Point to the weather composite primary key, date/location index, location foreign key and pairwise temperature CHECK. Point to saved_plans/plan_locations and cascading deletion. Solar terms and monthly food guides have independent date/month lookups and no artificial weather foreign keys.
 
-Show the means, period extremes,31 valid days, matching counts and exceedance counts. Change a threshold and show that valid-day counts remain 31 while matches change. Restore 28/10. Change the grouping option to location/year and point out that an annual row represents only the selected dates.
+“Four SQL files support reinstallation: dbcreate defines six tables; dbinsert contains deterministic plain INSERT statements; dbdrop removes only project tables; dbdump is actual MariaDB dump output. In fresh isolated databases we verified initialization, DROP/recreate and dump-only restoration. The actual Linux XAMPP test used htdocs/team05, the team05 account and network mode none.”
 
-## 2. OLAP — Temperature Explorer
+Show revision `data-validation.json`, `schema.json`, `clean-install.json` and `xampp-install.json`. Do not run destructive SQL against the existing prepared database. The administrator account is used only to provision a fresh test database; application queries use team05.
 
-Follow the Explorer navigation link; the common period persists through PHP Session. Choose year view, open 2024, then open month 8. Point to the daily records. Use the exploration path to return to month and year.
+## Jieun Hwang / 황지은 (2376329) — slides 4 and 5 — 20%
 
-“The queries change from year groups to month groups to daily records. Drill choices intersect the comparison dates. The roll-up table computes monthly, annual, location and all-location totals from daily data. Across five locations, a date contributes five location-days.”
+“Common dates, region checkboxes and decimal limits are validated before Session changes. Unknown options, empty locations and invalid dates return an error while keeping the previous conditions. PDO uses native prepared statements with typed bound parameters. Core forms work without JavaScript.”
 
-Show Annual subtotal, Location subtotal and All selected locations. For a separate correctness example, January–February 2024 has 60 days per location and 300 location-days overall. The mean is daily weighted, not an unweighted average of monthly averages.
+On Temperature Comparison, change a date and click **Save conditions before Apply**. The current form reaches Create a Plan; no permanent INSERT happens until Save plan. Return to comparison and demonstrate a field-associated validation message. The compact primary table has seven columns, and More statistics retains every other metric.
 
-## 3. Dense ranking — Find My Season
+“Seasonal Information uses actual year/month dates for terms and month numbers for ingredients. February's first reference is 2024-02-04 in 2024 and 2025-02-03 in 2025. KASI/RDA snapshots were supplied reference material; final official-almanac cross-check was not performed. An extra food item cannot multiply temperature records because the lookups are separate.”
 
-Restore August 2024, all five locations,28/10, minimum valid days 1. Choose Top 5 then Top 1.
+Show February 2025 and the source links. State that monthly editorial ingredients do not prove harvest timing for a selected location/year. The app makes no nutrition, health or safety claim.
 
-“Our matching rate is matching days divided by valid days. Busan and Daegu both have 2 out of 31, so they share rank 1 at 6.45 percent. Jeju has 1 out of 31 and rank 2. Seoul and Gwangju share rank 3 at zero. Top 1 includes both first-place ties.”
+## Sumin Cho / 조수민 (2376274) — slides 6 and 7 — 20%
 
-Explain that DENSE_RANK orders full-precision rates and that location ID only makes final display order stable. Show the denominators and minimum-valid-days control. A display-rounding fixture 1/1095 versus 1/1096 is documented in ranking-tests.json; do not replace live results with constants.
+“Plans persist a title, common dates/limits, memo and selected regions. POST and a Session-bound CSRF token protect writes. Names and memos are bound as values and escaped when displayed. Success uses a 303 redirect.”
 
-## 4. Continuous windows — Temperature Trends
+Create a clearly named temporary plan with memo `0`; show that zero is rendered literally. Edit only region selection and save. Explain that explicit updated_at=CURRENT_TIMESTAMP updates the parent and newest-first list order, including location-only and same-value saves. Apply the plan to Ranking; show that common filters persist to another analysis. Delete the temporary plan and verify its detail is gone. Other records remain intact.
 
-Select Seoul only and display 2024-01-01 through 2024-01-03, metric mean. Apply and switch the focus from 7 to 30 days.
+“Each parent and its selected-location links commit together. Our real CLI create test inserts a parent and first child before another child violates an FK. Rollback leaves no partial parent or links. The update failure restores body, selected regions and timestamp exactly. A validation rejection is not our rollback evidence.”
 
-“For January 1, the 7-day average is 1.14 degrees and the 30-day average is 0.30 degrees. These require December 2023 history. The internal query scans 29 days earlier before trimming the display. Windows partition by location and continue across months and years.”
-
-Show the valid frame counts. Then display 2023-01-01 to 2023-01-07 to explain Insufficient history for early frames. Mention that temperature limits never remove days from the window. Restore a useful comparison period before saving a plan.
-
-## 5. Web CRUD and applying a plan
-
-Choose Save these conditions. Enter a clear demonstration title and memo; select two regions and save. Open the persisted details and edit the title, limits or locations. Save unchanged once if useful, demonstrating that a same-value update is accepted.
-
-“Plan creation and modification commit the parent and all selected location links together. The saved plan contains common dates, regions and limits. It does not claim to save grouping or moving-average focus.”
-
-Apply the plan to Ranking, then follow Temperature Comparison and show the same common inputs. Return to Saved Plans, open the plan and delete it. Show that the parent/detail is gone. State that this is a shared demonstration area with no per-person private ownership.
-
-## 6. Actual transaction failure evidence
-
-Open docs/evidence/plans-tests.json or the corresponding report section. Show T 24 and T 25.
-
-“In the create test, the parent insert and first child insert succeed before another child violates the location foreign key. Rollback leaves zero parent and child rows. In the update test, body changes and deletion of old links occur before the failing new child. The original body and region set are exactly restored.”
-
-These are real DB failures tested from CLI, not form rejection presented as rollback. No failure-injection switch exists on the web. If a live rerun is appropriate, use the disposable installation command rather than resetting a real shared database:
+Show T24/T25 in `docs/evidence/revision-2026-11-12/plans-tests.json` and T35 in `revision-functional.json`. There is no public web failure switch. To rerun in a disposable database only:
 
 ```bash
 python3 tools/verify_install.py
 ```
 
-## 7. Seasonal Information
+The captioned video explicitly labels these JSON results as recorded real CLI evidence, rather than pretending to trigger a failure from a web form.
 
-Select 2024/October and show 한로, 상강 and 새송이버섯 with source links. Compare February 2024 and 2025 to show year-dependent solar-term dates:2024-02-04 versus 2025-02-03 for the first February occurrence.
+## Koo Daon / 구다온 (2476009) — slides 8 and 9 — 20%
 
-“Solar terms are KASI calendar reference dates. Food entries are historical RDA monthly editorial selections. They are independent of the location temperatures. Adding a monthly item does not multiply weather counts, because the application uses separate SELECT statements.”
+“Thresholds classify every valid candidate day. They do not remove nonmatching records before calculating denominators. Grouping by location/year/month or location/year changes actual SQL dimensions. Means are weighted by valid daily rows.”
 
-Do not call the calendar snapshot a final-almanac cross-check or imply that a monthly editorial feature proves a harvest date for a selected location/year.
+Compare 2024-01-01 through 2024-02-29 for all five points. Each location has 60 valid days. Seoul's partial-year daily mean is 0.018667°C. Show More statistics, including mean maximum/minimum, extreme high/low and matching counts. These are retained original SQL results, not replacement client calculations.
 
-## 8. Installation, offline behavior and version
+For August 2024, follow Explorer year → 2024 → month 8 → daily records, then the breadcrumb path upward. There are 155 location-day records across five points and 31 dates. Drill intervals intersect the common dates instead of broadening them.
 
-Show the four SQL files and docs/install.md. Point to xampp-install.json: PHP 8.2.12, Apache 2.4.58 and MariaDB 10.4.32, actual htdocs/team05, team05 account and network mode none. Show create/insert, reset and dump-only restoration PASS with equal data/key fingerprints.
+“WITH ROLLUP calculates monthly rows, annual subtotals, location subtotals and a grand total from the original daily observations. Five points over January–February contribute 300 location-days. This is not 300 distinct dates, and the subtotal mean is not an unweighted average of monthly means.”
 
-“The required runtime is PHP, Apache and MariaDB. We install the provided SQL before browsing. The actual XAMPP test used no network. Python and Node are developer tools only. The review package identifies its source commit, so the demonstrated code can be matched to the delivered files.”
+Open the separate roll-up panel and point to its explicit subtotal labels. A Seoul January 15–31 intersection returns 17 rows.
 
-Close by stating the verification limits: no performance or user study, untested professor physical host, and pending actual human contribution statements. Do not claim the final course upload or live presentation has already occurred.
+## Jihee Choi / 최지희 (2276337) — slides 10 and 11 — 20%
 
-## Evidence and recovery checklist
+Select August 2024, all five locations, maximum 28°C, range 10°C, minimum valid days 1. Show Top 5 and Top 1.
 
-- Start the prepared local environment with `./tools/dev.sh up`. Run init only on a new empty project database. The existing prepared database is already initialized.
-- Local development URL: `http://127.0.0.1:8055/team05/`. XAMPP default URL: `http://localhost/team05/`.
-- Keep `docs/rendered/slides-draft.pptx`, report/paper PDFs, actual result captures and the silent demo preview available as draft aids.
-- The silent preview is an actual browser recording without spoken English narration; it is not the final submitted backup video.
-- Use retained JSON/screenshots when a live host fails. Describe them as recorded evidence, not a newly executed test.
-- Before final submission, have humans confirm personal contributions, review the draft language, rehearse English, check the assigned presentation date and verify the real course upload status.
+“Busan and Daegu each have 2 matching days out of 31, so both share rank 1 at 6.45%. Jeju has 1/31 and rank 2. Seoul and Gwangju share rank 3 at zero. DENSE_RANK uses full-precision DECIMAL rates, then the display rounds. Top 1 includes both first-place ties.”
+
+Set minimum valid days to 32 to show an explained empty result. The precision fixture 1/1095 versus 1/1096 retains distinct ranks despite equal two-decimal displays. Return to valid conditions.
+
+“Temperature Trends calculates both 7- and 30-day averages in MariaDB. It scans up to 29 days before the display start and partitions only by location. On Seoul January 1, 2024, the results are 1.141429°C and 0.301333°C, displayed as 1.14 and 0.30. December history remains available across the year boundary.”
+
+Show a January graph with Seoul and Busan selected. Change only Graph location to Busan; confirm both remain in the common comparison. Switch 7/30 focus and show the same selected series emphasized in table and graph. Display one day for a finite point, then the beginning of 2023 for Insufficient history. NULL values and missing dates break lines; PHP does not recompute averages. The complete table remains available without JavaScript.
+
+## Shared closing — slide 12
+
+“The original SQL/data/schema remain unchanged apart from responsibility comments. Existing and additional regressions use real raw-data expectations, SQL boundaries, HTTP and all nine responsive screens. Evidence generation rejects missing, failing, incomplete and stale inputs, and strict mode exits nonzero.”
+
+Show `docs/test-results.md` for the actual final test counts, not an outdated copied number. Report/paper page counts come from generated PDFs, and all 12 slides were actually rendered to PDF/PNG and inspected. Images fit both height and width without text overlap.
+
+“The committed-source ZIP, actual Apache document-root hashes, HTTP assets, screenshots and English-captioned video identify one application manifest. The later final package commit is separate and recorded in COMMIT_SHA.txt. The whole ZIP checksum is outside the ZIP. Actual member sign-off, oral presentation, professor-host execution and course upload remain unperformed.”
+
+## Evidence, replay and recovery
+
+- Use `./tools/dev.sh up` to restart the preserved prepared DB at `http://127.0.0.1:8055/team05/`. Do not run init/reset on it.
+- Use the packaged `docs/install.md` instructions for a genuinely new XAMPP database. Runtime defaults are database/user/password team05; local configuration can override host/port.
+- Keep report/paper PDFs, slides-draft.pptx, its actually rendered PDF and twelve PNGs, result figures and demo-preview.webm together with the package manifest.
+- If a live host fails, describe retained evidence as a recording from its stated execution time. Do not call it a newly executed check.
+- For a final human submission: each member reviews the assigned module and English content, records actual review notes, rehearses approximately T/5, confirms the course presentation date and performs the real course upload.

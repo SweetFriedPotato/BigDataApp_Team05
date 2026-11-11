@@ -23,7 +23,7 @@
   ],
   "historical_bug_reproduced": true,
   "_meta": {
-    "executed_at": "2026-11-12T01:12:01.348404+09:00",
+    "executed_at": "2026-11-12T01:31:15.514224+09:00",
     "command": [
       "python3",
       "tests/evidence_regression.py"
@@ -32,7 +32,7 @@
       "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
       "python": "3.13.12"
     },
-    "source_commit_base": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+    "source_commit_base": "cef8a87cef2018bb57a30bce8a8ec2e05780cb18",
     "source_files": {
       "sql/dbcreate.sql": "1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1",
       "sql/dbdrop.sql": "58cbb6cbc6042e95635ee5f37919ddf97f0e4c685ec87d4c8955c99164ea49a2",

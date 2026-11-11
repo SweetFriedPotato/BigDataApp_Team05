@@ -1,16 +1,15 @@
-# English presentation draft — 12 slides
+# English slide outline
 
-1. Seasonal Living Guide — historical regional temperatures and seasonal references; Team05; draft and contribution review status.
-2. Question and scope — compare the same historical period; five requested points; limits express preferences.
-3. Data — NASA5480 rows, KASI72 dates, RDA12 monthly items; LST; source hashes and separate reference provenance.
-4. Relational design — six InnoDB tables; composite weather key; plan association FKs; reference tables have no weather FK.
-5. Complex grouping — location/year/month, common valid-day denominator, raw-day means and threshold flags.
-6. OLAP — year→month→day→up; intersected dates; WITH ROLLUP and location-day subtotals.
-7. Dense ranking — August2024 actual table, both tied first-place locations returned by Top1.
-8. Windowing — lookback before display; Seoul January1,2024 values1.14/0.30; incomplete frames and location partitions.
-9. Plans and Session — actual create/read/update/delete; atomic parent/links; saved common filters applied across pages.
-10. Failure and input evidence — real create/update FK rollbacks; literal SQL text, escaped script, CSRF and malformed controls.
-11. Reproducible installation — SQL4, fresh official XAMPP, team05 defaults, no network, dump-only restoration/fingerprints.
-12. Demo and limits — same-commit review package; no unmeasured performance claim; actual human contributions, final presentation and course upload pending.
+Twelve actually rendered review slides. Detailed English wording is in demo-script.md. Each person has 20% technical/report/paper/presentation responsibility. Actual oral delivery remains NOT_RUN; for agreed total T, approximately T/5 each. Slides1/12 and integration/editing/PPT/video/final checks are shared equally.
 
-Speaker narrative and exact interaction steps are in demo-script.md. No speaking role is assigned automatically. The generated PPTX is a review draft; a human should open and rehearse it in the intended presentation software.
+| Slides | Assigned member | Content |
+|---|---|---|
+| 1 | Shared | Title, scope and application version |
+| 2, 3 | 2371001 Nunnalin Heimvichit | Topic, data, ERD and SQL initialization |
+| 4, 5 | 2376329 Jieun Hwang | Page structure, filters, Session and seasonal information |
+| 6, 7 | 2376274 Sumin Cho | Plan create/read/update/delete and rollback |
+| 8, 9 | 2476009 Koo Daon | Location/period summaries, year-month-day and subtotals |
+| 10, 11 | 2276337 Jihee Choi | Tied ranks, 7/30-day windows and year boundaries |
+| 12 | Shared | Verified installation, evidence, version identity and pending human work |
+
+PPTX: docs/rendered/slides-draft.pptx. Actual LibreOffice PDF: docs/rendered/slides-draft.pdf; inspected PNGs: docs/rendered/slides/01.png–12.png. Both width and height bound every aspect-fit image. Source/geometry/rendered-text/visual checks are retained in revision evidence.

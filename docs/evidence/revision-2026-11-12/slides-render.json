@@ -24,7 +24,7 @@
   "visual_review": "Pending explicit visual review of all 12 PNG pages; this automated result does not claim it",
   "source_commit": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
   "_meta": {
-    "executed_at": "2026-11-12T01:19:21.044410+09:00",
+    "executed_at": "2026-11-12T01:28:38.089062+09:00",
     "command": [
       "python3",
       "tools/render_slides.py"
@@ -34,22 +34,22 @@
       "network": "none",
       "image": "seasonal-team05-document-render:2026-11-12"
     },
-    "source_commit_base": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+    "source_commit_base": "cef8a87cef2018bb57a30bce8a8ec2e05780cb18",
     "source_files": {
       "docs/rendered/slides/01.png": "692c7ca4a315dab5a29dca776088f21e6dad59133de255e02b8039c49a3c59ca",
       "docs/rendered/slides/02.png": "bd5e3ac76a2e65f2f17b79abe4e484a206ff45d4c774fb6f815344335a51e838",
-      "docs/rendered/slides/03.png": "467718e854fe2f47d90c5542818c03da11b556907395d1edb8b6d2ebf332bba9",
+      "docs/rendered/slides/03.png": "17b59eacb61c522087fe4afea0895f17e60df05d5b543e335cd3bccb6a52c13e",
       "docs/rendered/slides/04.png": "5d27c2947d752faf449d27ca8ef345b3b852f7c23ff046e320cb81759fe32732",
       "docs/rendered/slides/05.png": "3ba52f20455cdde56bd7b54f849c7c2cd3a0fbb8e88a417cb518981b1a1f02b4",
       "docs/rendered/slides/06.png": "930792bcbf43527f7b71313aba64bfa16e9cb1532279e92fe9b95cfa32292f2f",
       "docs/rendered/slides/07.png": "420f9b65d300e89a7afb2bde7b1afc4493c93bca4fc2c9cfa4337b3bc0dd3df5",
-      "docs/rendered/slides/08.png": "09386e949c66db03c897aff34d94a66f7513696917714e6a34ab22492141a9ff",
+      "docs/rendered/slides/08.png": "6c476b5de82637621194a3b9af71d40473b3a4593111dbc00fa6d704ba39593e",
       "docs/rendered/slides/09.png": "24f241ee9cc9527ec21510aa23b25a04d411f5e867a305cd28c7cc7bc2323179",
-      "docs/rendered/slides/10.png": "c48c1294bc15785f035f88d1a3a2a0bb4c40488a884867390e94aed3bfea825b",
-      "docs/rendered/slides/11.png": "f5b8b67ec40d1d770693f18eca4bf21ead2da94e7d0633077787e0578ee824c0",
+      "docs/rendered/slides/10.png": "7378d3a105e075ff2524465f219d553bc45c007a77d1f6fd2367d7b131d4ecbb",
+      "docs/rendered/slides/11.png": "e940116febf23841177921bb6f1ff5d0e2716ddf20331a496a8cf867be86cde0",
       "docs/rendered/slides/12.png": "48c0b9a830ad91d87935964d1d2be6eb38b3f47dc057a46ff57ae43538d9528f",
-      "docs/rendered/slides-draft.pdf": "0fc9e4bb4838c710d36fe4f08400008332e434ddc9a23c9da454d08330473d2d",
-      "docs/rendered/slides-draft.pptx": "5b3567bd5237e74b24b0ef7caf553fc91b7f5c1380cc7f5885a01f88a7682d92",
+      "docs/rendered/slides-draft.pdf": "b9513ddae9f603f79f12bce0f4b1a3a39523b5d77decc8b98d5cd1f391766bd5",
+      "docs/rendered/slides-draft.pptx": "a50cb8cf2d9ce2fc0a1c8b90413b0db8266ad9f3b4bd0ca2dbce3b120380ce6b",
       "sql/dbcreate.sql": "1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1",
       "sql/dbdrop.sql": "58cbb6cbc6042e95635ee5f37919ddf97f0e4c685ec87d4c8955c99164ea49a2",
       "sql/dbdump.sql": "4d81a8c0f21b99513664d9ccc33187940c99966e941de6e6044b8bc609a39cb0",
@@ -85,8 +85,8 @@
       "team05/ranking.php": "3c54d3e64282c4a5cf5474e7e25457b81c6c1a5cbe0616de5da230617266c43b",
       "team05/seasonal.php": "715d6fea069f199b3c1b040ed71ddd692709b5dfa70d093a79510738ace5292f",
       "team05/window.php": "4845f909a5ce873f191a5304f0792a250f75a5678828292979750a8617d7db34",
-      "tools/make_slides.py": "ee0c5719b7a1f422cfc0e9e2fe3fa5cb257f428732c1449a9999fc45195a49eb",
-      "tools/render_slides.py": "2d17ea226bd98813dc1ec8769b670bc45a1c788a06a5bcf3cce8c263317c9400"
+      "tools/make_slides.py": "43a784abcfd6431cfe15eec32069fd2a84a0719e1de0919d0c8718e1da91a27f",
+      "tools/render_slides.py": "ac56fe369e64361e5118f18f1a530b27e0dbac33d5543b56abaa556a0dbd683e"
     },
     "identity_scope": "File hashes identify executed inputs, including uncommitted changes; this evidence does not hash itself."
   }

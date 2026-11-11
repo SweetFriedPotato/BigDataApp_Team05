@@ -38,10 +38,10 @@
   "document_root": "/var/www/html/team05",
   "url": "http://127.0.0.1:8057/team05/",
   "container": "slg-review-482950a35-web",
-  "server_config": "VirtualHost configuration:\n*:80                   localhost (/etc/apache2/sites-enabled/000-default.conf:1)\nServerRoot: \"/etc/apache2\"\nMain DocumentRoot: \"/var/www/html\"\nMain ErrorLog: \"/var/log/apache2/error.log\"\nMutex default: dir=\"/var/run/apache2/\" mechanism=default \nMutex mpm-accept: using_defaults\nMutex watchdog-callback: using_defaults\nPidFile: \"/var/run/apache2/apache2.pid\"\nDefine: DUMP_VHOSTS\nDefine: DUMP_RUN_CFG\nUser: name=\"www-data\" id=33\nGroup: name=\"www-data\" id=33",
+  "server_config": "VirtualHost configuration:\n*:80                   localhost (/etc/apache2/sites-enabled/000-default.conf:1)\nServerRoot: \"/etc/apache2\"\nMain DocumentRoot: \"/var/www/html\"\nMain ErrorLog: \"/var/log/apache2/error.log\"\nMutex watchdog-callback: using_defaults\nMutex default: dir=\"/var/run/apache2/\" mechanism=default \nMutex mpm-accept: using_defaults\nPidFile: \"/var/run/apache2/apache2.pid\"\nDefine: DUMP_VHOSTS\nDefine: DUMP_RUN_CFG\nUser: name=\"www-data\" id=33\nGroup: name=\"www-data\" id=33",
   "scope": "Actual container PHP/CSS/JS/SVG/font/other bytes and HTTP-served static assets checked",
   "_meta": {
-    "executed_at": "2026-11-12T01:17:55.777154+09:00",
+    "executed_at": "2026-11-12T01:24:18.487805+09:00",
     "command": [
       "python3",
       "tools/review_server.py",
@@ -51,7 +51,7 @@
       "url": "http://127.0.0.1:8057/team05/",
       "document_root": "/var/www/html/team05"
     },
-    "source_commit_base": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+    "source_commit_base": "cef8a87cef2018bb57a30bce8a8ec2e05780cb18",
     "source_files": {
       "sql/dbcreate.sql": "1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1",
       "sql/dbdrop.sql": "58cbb6cbc6042e95635ee5f37919ddf97f0e4c685ec87d4c8955c99164ea49a2",

@@ -1,0 +1,206 @@
+{
+  "result": "PASS",
+  "file": "docs/rendered/demo-preview.webm",
+  "bytes": 21431692,
+  "sha256": "42be20b6d5cc2822d22327fd230ec9679e3968957e407e817e1f06f0bd021a4e",
+  "recorded_at": "2026-11-11T16:24:21.299Z",
+  "completed_at": "2026-11-11T16:28:32.465Z",
+  "duration_seconds": 248.44,
+  "resolution": "1440x900",
+  "recording": "Actual Chromium actions on committed-source Apache/PHP/MariaDB; recording-only English caption overlays",
+  "audio": "none; English captions; actual human oral presentation NOT_RUN",
+  "deployment_identity": {
+    "source_commit": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+    "app_sha256": "d47b9d5e12cc2858180e0d2937908453c683417a0613ce4c73b5578d3f86a525",
+    "url": "http://127.0.0.1:8057/team05/",
+    "container": "slg-review-482950a35-web",
+    "document_root": "/var/www/html/team05"
+  },
+  "scene_count": 20,
+  "scenes": [
+    {
+      "title": "1 / Data and scope · Nunnalin Heimvichit (assigned 20%)",
+      "caption": "5,480 historical NASA records; five requested points; 2023–2025 LST dates. No forecast or comfort/safety claim.",
+      "url": "http://127.0.0.1:8057/team05/",
+      "shown_at": "2026-11-11T16:24:21.435Z"
+    },
+    {
+      "title": "2 / Six tables and four SQL files · Nunnalin Heimvichit",
+      "caption": "Actual schema: weather/location and plan/link foreign keys. Calendar and monthly ingredients remain separate lookups.",
+      "url": "file:///home/jiheechoi0102/BigData/.local/revision/diagram-video.html",
+      "shown_at": "2026-11-11T16:24:33.529Z"
+    },
+    {
+      "title": "3 / Common filters and Session · Jieun Hwang (assigned 20%)",
+      "caption": "Real dates, locations and decimal limits are validated together. The current form can be saved before Apply.",
+      "url": "http://127.0.0.1:8057/team05/aggregate.php",
+      "shown_at": "2026-11-11T16:24:46.002Z"
+    },
+    {
+      "title": "4 / Complex grouping · Koo Daon (assigned 20%)",
+      "caption": "Every point has 31 valid August days. Thresholds classify days; they do not filter the denominator. Seven primary columns stay readable.",
+      "url": "http://127.0.0.1:8057/team05/aggregate.php?apply_filters=1&start_date=2024-08-01&end_date=2024-08-31&max_temp_threshold=28.00&max_temp_range=10.00&location_ids%5B%5D=1&location_ids%5B%5D=2&location_ids%5B%5D=3&location_ids%5B%5D=4&location_ids%5B%5D=5&group_mode=location_year_month",
+      "shown_at": "2026-11-11T16:24:58.787Z"
+    },
+    {
+      "title": "5 / Every SQL statistic remains available · Koo Daon",
+      "caption": "More statistics retains maxima/minima, period extremes and matching counts. Values are the original validated SQL results.",
+      "url": "http://127.0.0.1:8057/team05/aggregate.php?apply_filters=1&start_date=2024-08-01&end_date=2024-08-31&max_temp_threshold=28.00&max_temp_range=10.00&location_ids%5B%5D=1&location_ids%5B%5D=2&location_ids%5B%5D=3&location_ids%5B%5D=4&location_ids%5B%5D=5&group_mode=location_year_month",
+      "shown_at": "2026-11-11T16:25:10.932Z"
+    },
+    {
+      "title": "6 / OLAP year to month · Koo Daon",
+      "caption": "Drill changes the actual grouping query and intersects the selected comparison dates.",
+      "url": "http://127.0.0.1:8057/team05/olap.php?level=month&drill_year=2024",
+      "shown_at": "2026-11-11T16:25:23.221Z"
+    },
+    {
+      "title": "7 / OLAP day details · Koo Daon",
+      "caption": "Five locations × 31 August dates = 155 location-day records. Breadcrumbs return to month and year.",
+      "url": "http://127.0.0.1:8057/team05/olap.php?level=day&drill_year=2024&drill_month=8",
+      "shown_at": "2026-11-11T16:25:35.551Z"
+    },
+    {
+      "title": "8 / Dense ranks preserve ties · Jihee Choi (assigned 20%)",
+      "caption": "Busan and Daegu both have 2/31 matching days = 6.45%. Top 1 includes both tied rank-1 locations.",
+      "url": "http://127.0.0.1:8057/team05/ranking.php?apply_filters=1&start_date=2024-08-01&end_date=2024-08-31&max_temp_threshold=28.00&max_temp_range=10.00&location_ids%5B%5D=1&location_ids%5B%5D=2&location_ids%5B%5D=3&location_ids%5B%5D=4&location_ids%5B%5D=5&top_rank=1&min_valid_days=1",
+      "shown_at": "2026-11-11T16:25:48.394Z"
+    },
+    {
+      "title": "9 / Explain an empty result · Jihee Choi",
+      "caption": "A minimum of 32 valid days cannot be met inside a 31-day month. No result is fabricated.",
+      "url": "http://127.0.0.1:8057/team05/ranking.php?apply_filters=1&start_date=2024-08-01&end_date=2024-08-31&max_temp_threshold=28.00&max_temp_range=10.00&location_ids%5B%5D=1&location_ids%5B%5D=2&location_ids%5B%5D=3&location_ids%5B%5D=4&location_ids%5B%5D=5&top_rank=1&min_valid_days=32",
+      "shown_at": "2026-11-11T16:26:01.216Z"
+    },
+    {
+      "title": "10 / Direct SQL-value chart · Jihee Choi",
+      "caption": "Daily, 7-day and 30-day values come from MariaDB. Focus changes emphasis; PHP does not recalculate averages.",
+      "url": "http://127.0.0.1:8057/team05/window.php?apply_filters=1&start_date=2024-01-01&end_date=2024-01-31&max_temp_threshold=28.00&max_temp_range=10.00&location_ids%5B%5D=1&location_ids%5B%5D=2&metric=mean&window_days=30",
+      "shown_at": "2026-11-11T16:26:14.493Z"
+    },
+    {
+      "title": "11 / Graph-only location selection · Jihee Choi",
+      "caption": "The graph shows Busan while both Seoul and Busan remain selected in the comparison. Calendar spacing, NULL gaps and finite single-day points are tested.",
+      "url": "http://127.0.0.1:8057/team05/window.php?chart_location=2",
+      "shown_at": "2026-11-11T16:26:26.795Z"
+    },
+    {
+      "title": "12 / Continuous December history · Jihee Choi",
+      "caption": "Seoul January 1: 7-day average 1.14°C, 30-day 0.30°C. The internal query includes December 2023 before trimming display dates.",
+      "url": "http://127.0.0.1:8057/team05/window.php?apply_filters=1&start_date=2024-01-01&end_date=2024-01-01&max_temp_threshold=28.00&max_temp_range=10.00&location_ids%5B%5D=1&metric=mean&window_days=30",
+      "shown_at": "2026-11-11T16:26:39.748Z"
+    },
+    {
+      "title": "13 / Save the unapplied current form · Jieun Hwang / Sumin Cho",
+      "caption": "The changed end date January 3 is forwarded to Create a Plan before a permanent INSERT. Validation precedes Session changes.",
+      "url": "http://127.0.0.1:8057/team05/plan_form.php",
+      "shown_at": "2026-11-11T16:26:51.904Z"
+    },
+    {
+      "title": "14 / Real create and read · Sumin Cho (assigned 20%)",
+      "caption": "This plan is persisted in the disposable MariaDB database. The literal memo \"0\" is visible. Parent and selected locations committed together.",
+      "url": "http://127.0.0.1:8057/team05/plan_detail.php?id=16",
+      "shown_at": "2026-11-11T16:27:04.140Z"
+    },
+    {
+      "title": "15 / Region-only update · Sumin Cho",
+      "caption": "Only the region selection changed. The parent updated_at explicitly advances; failed replacements restore body, links and timestamp atomically.",
+      "url": "http://127.0.0.1:8057/team05/plan_detail.php?id=16",
+      "shown_at": "2026-11-11T16:27:16.498Z"
+    },
+    {
+      "title": "16 / Apply persistent conditions to Session · Sumin Cho / Jieun Hwang",
+      "caption": "The saved January 1–3 period and selected locations reappear in Ranking. Page-specific presentation options remain separate.",
+      "url": "http://127.0.0.1:8057/team05/ranking.php",
+      "shown_at": "2026-11-11T16:27:28.806Z"
+    },
+    {
+      "title": "17 / Real delete and cascading links · Sumin Cho",
+      "caption": "The demonstration plan is deleted. Unrelated plans and all reference/weather records are preserved.",
+      "url": "http://127.0.0.1:8057/team05/plans.php",
+      "shown_at": "2026-11-11T16:27:41.048Z"
+    },
+    {
+      "title": "18 / Independent seasonal references · Jieun Hwang",
+      "caption": "February 2025 starts with the February 3 calendar reference. Ingredients use a separate month query and do not multiply weather rows.",
+      "url": "http://127.0.0.1:8057/team05/seasonal.php?year=2025&month=2",
+      "shown_at": "2026-11-11T16:27:53.245Z"
+    },
+    {
+      "title": "19 / Actual middle-step FK failures · Sumin Cho",
+      "caption": "Recorded CLI results: parent/first child succeed, later FK fails, rollback leaves no residues; failing update restores the original snapshot.",
+      "url": "file:///home/jiheechoi0102/BigData/.local/revision/rollback-video.html",
+      "shown_at": "2026-11-11T16:28:05.300Z"
+    },
+    {
+      "title": "20 / Reproduce this application version · Shared closing",
+      "caption": "Fresh offline Apache/MariaDB and official XAMPP passed. App e12ee89cd599. Each member has 20% responsibility; actual oral delivery and course upload remain NOT_RUN.",
+      "url": "http://127.0.0.1:8057/team05/",
+      "shown_at": "2026-11-11T16:28:17.362Z"
+    }
+  ],
+  "console_errors": [],
+  "test_plan": "deleted",
+  "final_course_video": "NOT_SUBMITTED",
+  "application_files_edited_for_recording": false,
+  "_meta": {
+    "executed_at": "2026-11-12T01:28:32.523710+09:00",
+    "command": [
+      "node",
+      "tools/record_demo.mjs"
+    ],
+    "environment": {
+      "source_commit": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+      "app_sha256": "d47b9d5e12cc2858180e0d2937908453c683417a0613ce4c73b5578d3f86a525",
+      "url": "http://127.0.0.1:8057/team05/",
+      "container": "slg-review-482950a35-web",
+      "document_root": "/var/www/html/team05",
+      "browser": "Chromium",
+      "video": "1440x900"
+    },
+    "source_commit_base": "cef8a87cef2018bb57a30bce8a8ec2e05780cb18",
+    "source_files": {
+      "docs/diagrams/erd-slide.svg": "fd4201b4856a9432bb811f3b812fb82a846ea1df9135327eb2f5b64f7a802304",
+      "docs/evidence/revision-2026-11-12/plans-tests.json": "fc638fab7227bdceb0919321180fae2fb3a7b0c90e57b5a61618707e14cb262f",
+      "docs/rendered/demo-preview.webm": "42be20b6d5cc2822d22327fd230ec9679e3968957e407e817e1f06f0bd021a4e",
+      "sql/dbcreate.sql": "1281919c15c03112ac2c87bb57ced17d1eada61a8429a9cbef3bb0633df14ee1",
+      "sql/dbdrop.sql": "58cbb6cbc6042e95635ee5f37919ddf97f0e4c685ec87d4c8955c99164ea49a2",
+      "sql/dbdump.sql": "4d81a8c0f21b99513664d9ccc33187940c99966e941de6e6044b8bc609a39cb0",
+      "sql/dbinsert.sql": "6b090a2d2e31ea1ef2c3b01f598ef07f9f5479a3878b13dcb0120000771cb207",
+      "team05/.htaccess": "59caa281e2a0515a6c449999933e63a9822e356ff18a2618600203460b6ea9aa",
+      "team05/aggregate.php": "181ee070a3d54647ba8fd707376180d3bb9343d7d834d3fea41d288ffb68e5ed",
+      "team05/assets/css/app.css": "f0bc1539b0c062769272cf962d4c364d3cb3abc70003985c92c65feb4fa55a0e",
+      "team05/assets/fonts/NanumGothic-Regular.ttf": "76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31",
+      "team05/assets/fonts/OFL.txt": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "team05/assets/fonts/SOURCE.txt": "c5696c7bdbaed305f3f01cbc476bc8d9555f61ce057ac0e3568af8cdfc3a07e3",
+      "team05/assets/img/weather-mark.svg": "d763554fd7a45ed758e8969801b0de666ec7733fe5f128ad31bf8842b3663d19",
+      "team05/assets/js/app.js": "a66371925077990a277a1e2ab5cb0e2cacaca89c691ede61c5bae441f7c6a739",
+      "team05/config.local.example.php": "5e3d7d43e44fc53217b8673ccb4d61829ea077c4b7fe6818e0726398952deb15",
+      "team05/config.php": "700e3df2f7928451b708c090b7ee442055c072c26a1353843ff3f2d828cb7867",
+      "team05/includes/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+      "team05/includes/bootstrap.php": "95f10fbad84d072a75918a48b67cd5e7f2ce70a93e844eebdd61fc713cea67e6",
+      "team05/includes/chart.php": "186223a5bc53bfca5563c72d50c390ed6da7023e6acd1c5b68117566eb07b82c",
+      "team05/includes/csrf.php": "85efc63ad1a9a6e4e768957897621bf32dd2e1f68ceff512183434c3d88ab0d2",
+      "team05/includes/db.php": "ed589abd54b06bbac02e2f0cd95e230ed9043c0218ce3dc86502e71e150da302",
+      "team05/includes/filters.php": "f9099bf8d20c97e9ee45a1afce33370e617f7c034b79d22fee05b87ee610a8cd",
+      "team05/includes/footer.php": "0dfbdd8c6f227e5780cfdba769d12e296a0c2ee90ac0d082e22d975fbc7e2339",
+      "team05/includes/header.php": "f381e9b04f6753761d2b6e5afc873bd84608774039e9898d910b60aa2e9adb8e",
+      "team05/includes/plans.php": "7d6a8b138fa31deceda4af97074079415c1cc07bed4fcffb4bec8218a3a71a67",
+      "team05/includes/queries.php": "1edc41ae9e56d503ca04b03d4d96c94b81d3ca95ae192d45ee016a9bf568f5be",
+      "team05/includes/session.php": "c0f24d21d89cb4727118c1068f0d6409f57be805b5220cee7f59b15e2628339a",
+      "team05/includes/view.php": "e708abea1f9acc5cd2de0d994680d2f8e0038290e93409a283acfc7b4ff889b7",
+      "team05/index.php": "d4ae77dc23d3deaf9072a905f8b8080f97e664da62719a04caf8e0772d8bbb13",
+      "team05/olap.php": "2e2fd10bd4821c718180d8b3c029a385383129d948910223ca79f5efa7be55d5",
+      "team05/plan_actions.php": "1b04203dcf31cdb5caff3001b4c0fb20429371b1baf7f2da64778e93735559f2",
+      "team05/plan_detail.php": "a4d172d88b75d30e4fea6cb50de9e4853242b13c56cbb191818885694bd31b62",
+      "team05/plan_form.php": "082e7dc9c5e52990a6e5b24ca9cb2ca64f6a4f1d8308b2e20a959175bb05a0b8",
+      "team05/plans.php": "4e45bdb2500d5f64d48a05c864199743f12ea5c9c464f6d8b43c01c25b04d854",
+      "team05/ranking.php": "3c54d3e64282c4a5cf5474e7e25457b81c6c1a5cbe0616de5da230617266c43b",
+      "team05/seasonal.php": "715d6fea069f199b3c1b040ed71ddd692709b5dfa70d093a79510738ace5292f",
+      "team05/window.php": "4845f909a5ce873f191a5304f0792a250f75a5678828292979750a8617d7db34",
+      "tools/media_metadata.mjs": "771b6007873225e8a7d0485f011ce44f79542953c0bcbca0a4e10d36a6691ceb",
+      "tools/record_demo.mjs": "832d2499594da62ad97b1285d2354dff59e34ddc660616bef53ef409754e8a8a"
+    },
+    "identity_scope": "File hashes identify executed inputs, including uncommitted changes; this evidence does not hash itself."
+  }
+}

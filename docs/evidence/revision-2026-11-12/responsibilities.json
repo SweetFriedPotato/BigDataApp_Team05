@@ -150,7 +150,7 @@
   "actual_member_review_status": "NOT_RUN",
   "actual_oral_status": "NOT_RUN",
   "_meta": {
-    "executed_at": "2026-11-12T01:18:27.911107+09:00",
+    "executed_at": "2026-11-12T01:31:15.595859+09:00",
     "command": [
       "python3",
       "tools/check_responsibilities.py"
@@ -159,7 +159,7 @@
       "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
       "python": "3.13.12"
     },
-    "source_commit_base": "e12ee89cd59964d2e58e601a7acfcd537dcecce8",
+    "source_commit_base": "cef8a87cef2018bb57a30bce8a8ec2e05780cb18",
     "source_files": {
       "docs/contributions.md": "a34b489c78a69d1d253f531d91ac9cb4bf7d975e5389dd0c4ba328ee0af1dd10",
       "docs/human-review.json": "e9ff64d69eb9729374fcf06505833168dcb5c27db8c93dff2a879acbf10e87b5",

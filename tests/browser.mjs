@@ -1,3 +1,4 @@
+import {verifyDeployment,writeEvidence,sha} from '../tools/media_metadata.mjs';
 // Real Chromium regression, including all nine user screens. Run against a disposable DB.
 import {createRequire} from 'node:module';import {fileURLToPath} from 'node:url';import path from 'node:path';import fs from 'node:fs';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');process.env.PLAYWRIGHT_BROWSERS_PATH??=path.join(root,'.local/ms-playwright');
@@ -32,7 +33,7 @@ try{
  const routes=['index.php','aggregate.php','olap.php?level=year','ranking.php','window.php','seasonal.php','plans.php','plan_form.php','plan_detail.php?id='+id];
  for(const [w,h] of [[1440,900],[1366,768],[390,844],[360,844]]){
   await page.setViewportSize({width:w,height:h});
-  for(const route of routes){const r=await go(route);assert.equal(r.status(),200);await noOverflow(w+' '+route);}
+  for(const [index,route] of routes.entries()){const r=await go(route);assert.equal(r.status(),200);await noOverflow(w+' '+route);if(w===390){const name='mobile-'+String(index+1).padStart(2,'0')+'.png';await page.screenshot({path:path.join(capture,name),fullPage:false});shots.push(name);}}
   await go('plan_form.php?id='+id);await noOverflow(w+' edit');
  }
  await page.setViewportSize({width:1440,height:900});await go('plans.php');await shot('07-plans');
@@ -42,7 +43,7 @@ try{
  const noJS=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const np=await noJS.newPage();await np.goto(base+'aggregate.php');await np.locator('[name=start_date]').fill('2024-01-01');await np.locator('[name=end_date]').fill('2024-01-03');await np.getByRole('button',{name:'Save conditions',exact:true}).click();assert.match(np.url(),/plan_form.php/);assert.equal(await np.locator('[name=start_date]').inputValue(),'2024-01-01');await noJS.close();
  assert.deepEqual(errors,[]);assert.deepEqual(external,[]);assert.deepEqual(overflow,[]);
  const result={result:'PASS',browser:browser.version(),base_url:base,user_screen_count:9,viewports:['1440x900','1366x768','390x844','360x844'],console_errors:errors,external_runtime_requests:external,document_overflow:overflow,keyboard_and_no_js:true,checks:['SQL aggregate metrics and details','Top1 ties and no results','OLAP drill and roll-up navigation','SQL graph values, one day, NULL averages, region selection, both focus options','all 5480 rows','memo0 and Unicode title/memo','plan create/read/edit/apply/delete','validation associations','valid plan detail and edit at all four widths','no-JS current-input save'],screenshots:shots};
- const identity=process.env.SLG_APP_IDENTITY?JSON.parse(fs.readFileSync(process.env.SLG_APP_IDENTITY,'utf8')):null;if(identity)result.deployment_identity=identity;
+ const identity=verifyDeployment();assert.equal(new URL(base).href,new URL(identity.url).href);result.deployment_identity=identity;result.captured_at=new Date().toISOString();result.capture_directory=path.relative(root,capture);result.screenshot_sha256=Object.fromEntries(shots.map(name=>[path.relative(root,path.join(capture,name)),sha(path.join(capture,name))]));writeEvidence('browser-tests.json',result,['tests/browser.mjs','tools/media_metadata.mjs',...Object.keys(result.screenshot_sha256)],{...identity,browser:browser.version()});
  fs.writeFileSync(path.join(root,'.local/revision/browser-result.json'),JSON.stringify(result,null,2)+'\n');
  console.log(JSON.stringify(result,null,2));
 }finally{

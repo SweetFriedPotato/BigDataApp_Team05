@@ -24,7 +24,7 @@ The runtime requires Apache, PHP 8.x with pdo_mysql and MariaDB 10.4+ (window fu
 | Temperature Comparison | aggregate.php | Location/year/month or location/year grouping, means, extremes, matching/exceedance counts |
 | Temperature Explorer | olap.php | Year→month→day and upward links; real WITH ROLLUP subtotals |
 | Find My Season | ranking.php | Full-precision DENSE_RANK, minimum valid days, Top N ranks including ties |
-| Temperature Trends | window.php | Continuous 7/30-day windows with lookback, four metrics, complete-history checks |
+| Temperature Trends | window.php | Continuous SQL 7/30-day windows, four metrics, NULL/gap-aware SVG graph |
 | Seasonal Information | seasonal.php | Independent dated calendar and monthly ingredient SELECTs with source links |
 | Saved Plans | plans.php | Web create/read/update/delete, atomic parent/locations, validated apply-to-Session |
 
@@ -54,11 +54,14 @@ The first command uses existing project runtime images and creates disposable in
 
 ## Review drafts and delivery identity
 
-- [Implementation report](docs/report.md) · [PDF](docs/rendered/report-draft.pdf): **18 rendered draft pages**.
-- [English paper](docs/paper.md) · [PDF](docs/rendered/paper-draft.pdf): **7 rendered draft pages**, two actual result-table figures.
-- [English demo script](docs/demo-script.md), [slide outline](docs/slides.md), [12-slide PPTX draft](docs/rendered/slides-draft.pptx) and [silent actual-browser preview](docs/rendered/demo-preview.webm).
-- [Actual contributions / pending human review](docs/contributions.md).
+- [Implementation report](docs/report.md) · [PDF](docs/rendered/report-draft.pdf): **24 rendered draft pages**.
+- [English paper](docs/paper.md) · [PDF](docs/rendered/paper-draft.pdf): **8 rendered draft pages**, two actual result-table figures.
+- [English demo script](docs/demo-script.md), [slide outline](docs/slides.md), [12-slide PPTX draft](docs/rendered/slides-draft.pptx) and [English-captioned actual-browser demonstration](docs/rendered/demo-preview.webm) (4 min 8.44 sec, 1440×900; no human narration).
+- [Equal 20% responsibility assignments](docs/team-responsibilities.md) · [actual contributions / pending human review](docs/contributions.md).
+- [Actually rendered 12-slide PDF](docs/rendered/slides-draft.pdf) · [all 12 inspected slide PNGs](docs/rendered/slides/) · [before/after screenshots](docs/evidence/revision-2026-11-12/screenshots/).
 
-`tools/package_release.py` builds a review ZIP from a clean Git commit, writes COMMIT_SHA.txt and a SHA-256 file manifest, verifies every payload member against Git, and verifies the live demo PHP/SQL bytes against the same commit. It excludes untracked secrets, local configuration, the original local specification and .git. The original supplied README is preserved only at `.local/README.spec.md`; this replacement README describes actual implementation.
+Application source is `e12ee89cd59964d2e58e601a7acfcd537dcecce8`, manifest SHA-256 `d47b9d5e12cc2858180e0d2937908453c683417a0613ce4c73b5578d3f86a525`. A committed ZIP was deployed to a separate Apache document root. Actual container PHP/CSS/JS/SVG/font bytes, HTTP assets, screenshots and video match this application. Later document/package commits are separate; COMMIT_SHA.txt and RELEASE_MANIFEST.json in the final ZIP identify its payload commit. `tools/package_release.py` verifies all payload members, working-tree bytes and actual serving/captured app independently. The full ZIP checksum is external in `dist/team05-review-2026-11-12.zip.sha256`; generated metadata never hashes itself. Old review evidence and review-2026-11-11 are preserved. Local ZIP alias: `dist/team05-review-2026-11-12.zip` (dist is intentionally untracked). No GitHub Release/course upload is implied.
+
+The 2026-11-12 revision fixes region-only timestamp updates, memo `0`, current-input Save conditions, false-PASS evidence generation, explicit UTF-8 preparation and actual offline checks. Original calculations/data/schema are preserved; responsibility comments are the only SQL changes. T01–T44 statuses and their actual execution provenance are in [test-results.md](docs/test-results.md); missing/stale evidence cannot pass, and `--fail-on-error` exits nonzero. Each of the five people has 20% technical/report/paper/presentation responsibility; actual personal review remains separate.
 
 The PDFs and slides are drafts. Actual personal contribution statements, English oral presentation, final video/submission review, professor-host verification and course upload remain human work. Windows/macOS were not tested. The original 15 commits and review-2026-11-11 tag have been pushed and verified against GitHub. Current revision synchronization is recorded with observed SHAs in docs/evidence/revision-2026-11-12/git-status.json. No final course-submission tag is implied by a review tag.
