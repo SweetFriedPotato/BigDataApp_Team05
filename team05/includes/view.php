@@ -8,25 +8,54 @@ function url(string $file, array $args = []): string { return $file . ($args ? '
 function page_header(string $title, string $page, string $intro = ''): void {
     require __DIR__ . '/header.php';
 }
-function page_footer(): void { require __DIR__ . '/footer.php'; }
-function alert_error(?string $error): void {
-    if ($error !== null) echo '<div class="notice error" role="alert">' . e($error) . ' No analysis was run. Your saved session filters were kept.</div>';
+function page_footer(): void {
+    if (in_array($GLOBALS['analysis_page'] ?? '',['aggregate','olap','ranking','window'],true)) analysis_definitions();
+    require __DIR__ . '/footer.php';
 }
-function select_control(string $name, string $label, array $choices, mixed $value): void {
-    echo '<label class="field"><span>' . e($label) . '</span><select name="' . e($name) . '">';
-    foreach ($choices as $key => $text) echo '<option value="' . e($key) . '"' . ((string)$key === (string)$value ? ' selected' : '') . '>' . e($text) . '</option>';
-    echo '</select></label>';
+function analysis_definitions(): void { ?>
+<details class="method-note"><summary>Definitions &amp; data sources</summary><p>Valid day: all three temperatures are present. A match meets both limits. Means include every valid day. Daily range is maximum minus minimum; exceedance means maximum above your limit. Historical NASA POWER grid values use Local Solar Time (LST). These conditions do not measure safety or health.</p></details>
+<?php }
+
+function field_error(string $name): ?string { return $GLOBALS['validation_errors'][$name] ?? null; }
+function field_attrs(string $name): string {
+    $attrs=' id="f-'.e($name).'"';
+    if (field_error($name)!==null) $attrs.=' aria-invalid="true" aria-describedby="f-'.e($name).'-error"';
+    return $attrs;
+}
+function field_error_view(string $name): void {
+    if ($message=field_error($name)) echo '<span class="field-error" id="f-'.e($name).'-error">'.e($message).'</span>';
+}
+function form_value(string $name,mixed $fallback): mixed {
+    $draft=$GLOBALS['filter_draft'] ?? [];
+    return isset($draft[$name]) && is_scalar($draft[$name]) && !is_bool($draft[$name]) ? (string)$draft[$name] : $fallback;
+}
+function alert_error(?string $error): void {
+    if ($error===null) return;
+    echo '<div class="notice error" role="alert" id="form-errors">'.e($error).' No analysis was run. Your saved session filters were kept.';
+    foreach($GLOBALS['validation_errors'] ?? [] as $name=>$message) echo ' <a href="#f-'.e($name).'">Check this field</a>';
+    echo '</div>';
+}
+function select_control(string $name,string $label,array $choices,mixed $value): void {
+    $value=form_value($name,$value);
+    echo '<label class="field"><span>'.e($label).'</span><select name="'.e($name).'"'.field_attrs($name).'>';
+    if (!in_array((string)$value,array_map('strval',array_keys($choices)),true)) echo '<option value="" selected disabled>Choose a valid option</option>';
+    foreach($choices as $key=>$text) echo '<option value="'.e($key).'"'.((string)$key===(string)$value ? ' selected':'').'>'.e($text).'</option>';
+    echo '</select>';field_error_view($name);echo '</label>';
 }
 function filter_fields(array $f): void { ?>
     <div class="field-row">
-        <label class="field"><span>From · LST</span><input type="date" name="start_date" min="2023-01-01" max="2025-12-31" value="<?=e($f['start_date'])?>" required></label>
-        <label class="field"><span>To · LST</span><input type="date" name="end_date" min="2023-01-01" max="2025-12-31" value="<?=e($f['end_date'])?>" required></label>
-        <label class="field"><span>Daily maximum ≤ °C</span><input type="number" name="max_temp_threshold" min="-50" max="60" step="0.01" value="<?=e($f['max_temp_threshold'])?>" required></label>
-        <label class="field"><span>Daily range ≤ °C</span><input type="number" name="max_temp_range" min="0" max="60" step="0.01" value="<?=e($f['max_temp_range'])?>" required></label>
+        <label class="field"><span>From · LST</span><input type="date" name="start_date"<?=field_attrs('start_date')?> min="2023-01-01" max="2025-12-31" value="<?=e(form_value('start_date',$f['start_date']))?>" required><?php field_error_view('start_date'); ?></label>
+        <label class="field"><span>To · LST</span><input type="date" name="end_date"<?=field_attrs('end_date')?> min="2023-01-01" max="2025-12-31" value="<?=e(form_value('end_date',$f['end_date']))?>" required><?php field_error_view('end_date'); ?></label>
+        <label class="field"><span>Daily maximum ≤ °C</span><input type="number" name="max_temp_threshold"<?=field_attrs('max_temp_threshold')?> min="-50" max="60" step="0.01" value="<?=e(form_value('max_temp_threshold',$f['max_temp_threshold']))?>" required><?php field_error_view('max_temp_threshold'); ?></label>
+        <label class="field"><span>Daily range ≤ °C</span><input type="number" name="max_temp_range"<?=field_attrs('max_temp_range')?> min="0" max="60" step="0.01" value="<?=e(form_value('max_temp_range',$f['max_temp_range']))?>" required><?php field_error_view('max_temp_range'); ?></label>
     </div>
-    <fieldset class="regions"><legend>Compare locations <span>Select one or more requested points</span></legend>
-    <?php foreach (locations() as $l): ?><label class="region"><input type="checkbox" name="location_ids[]" value="<?=e($l['location_id'])?>"<?=in_array((int)$l['location_id'], $f['location_ids'], true) ? ' checked' : ''?>><span><?=e($l['name_en'])?> <small lang="ko"><?=e($l['name_ko'])?></small></span></label><?php endforeach; ?>
-    </fieldset>
+    <?php $draft=$GLOBALS['filter_draft'] ?? []; $selected=$f['location_ids'];
+    if (array_key_exists('apply_filters',$draft)) {
+        $selected=[];foreach(is_array($draft['location_ids'] ?? null) ? $draft['location_ids'] : [] as $id) if(is_scalar($id) && preg_match('/^[1-5]$/D',(string)$id))$selected[]=(int)$id;
+    } ?>
+    <fieldset class="regions"<?=field_attrs('location_ids')?>><legend>Compare locations <span>Select one or more requested points</span></legend>
+    <?php foreach (locations() as $l): ?><label class="region"><input type="checkbox" name="location_ids[]" value="<?=e($l['location_id'])?>"<?=in_array((int)$l['location_id'], $selected, true) ? ' checked' : ''?>><span><?=e($l['name_en'])?> <small lang="ko"><?=e($l['name_ko'])?></small></span></label><?php endforeach; ?>
+    <?php field_error_view('location_ids'); ?></fieldset>
 <?php }
 function filters_form(string $page, array $f, array $o): void { ?>
 <section class="panel filters" aria-label="Analysis filters"><form method="get">
@@ -49,33 +78,42 @@ switch ($page) {
 }
 ?>
 <button class="button" type="submit">Apply filters <span aria-hidden="true">↗</span></button>
-<button class="button secondary" type="submit" name="intent" value="save">Save conditions</button>
+<button class="button secondary" type="submit" name="intent" id="f-intent" value="save">Save conditions</button>
 </div></form>
-<form class="reset-form" method="post"><input type="hidden" name="csrf_token" value="<?=e(csrf_token())?>"><button class="text-button" name="reset_filters" value="1">Reset analysis filters</button></form>
+<form class="reset-form" method="post"><input type="hidden" name="csrf_token" value="<?=e(csrf_token())?>"><button class="text-button" name="reset_filters" value="1">Reset filters</button></form>
 </section>
 <?php }
 function scope_note(array $f, array $o = []): void {
     $names = array_column(array_filter(locations(), fn($l) => in_array((int)$l['location_id'], $f['location_ids'], true)), 'name_en'); ?>
 <div class="scope"><span class="dot"></span><strong><?=e($f['start_date'])?> → <?=e($f['end_date'])?></strong><span><?=e(implode(' · ', $names))?></span><span>Maximum ≤ <?=e($f['max_temp_threshold'])?>°C · range ≤ <?=e($f['max_temp_range'])?>°C</span></div>
-<p class="caption">Valid day = all three temperatures present. Match = both limits satisfied. Means use all valid days, including days that do not match. Dates use Local Solar Time (LST).</p>
+
 <?php }
 function empty_state(string $message = 'No records match this selection. Try another period or a lower minimum day count.'): void {
     echo '<div class="empty"><span aria-hidden="true">○</span><h2>No results for these conditions</h2><p>'.e($message).'</p></div>';
 }
-function stats_table(array $rows, bool $show_month = true, bool $rollup = false): void {
+function stats_table(array $rows,bool $show_month = true,bool $rollup = false): void {
     if (!$rows) { empty_state(); return; }
-    echo '<div class="table-wrap"><table><caption class="sr-only">Temperature statistics computed by MariaDB</caption><thead><tr><th scope="col">Location</th><th scope="col">Year</th>';
-    if ($show_month) echo '<th scope="col">Month</th>';
-    foreach (['Valid days','Mean °C','Mean max °C','Mean min °C','Mean range °C','Period high °C','Period low °C','Exceedance days','Matching days','Match %'] as $label) echo '<th scope="col">'.e($label).'</th>';
-    echo '</tr></thead><tbody>';
-    foreach ($rows as $r) {
-        $subtotal = $rollup && ($r['location_id'] === null || $r['year_no'] === null || $r['month_no'] === null);
-        $label = $r['name_en'] ?? 'All selected locations';
-        if ($subtotal && $r['location_id'] !== null) $label .= $r['year_no'] === null ? ' · Location subtotal' : ' · Annual subtotal';
-        echo '<tr'.($subtotal ? ' class="subtotal"' : '').'><th scope="row">'.e($label).'</th><td>'.e($r['year_no'] ?? 'All years').'</td>';
-        if ($show_month) echo '<td>'.e($r['month_no'] ?? 'All months').'</td>';
-        foreach (['valid_days','mean_temperature','mean_daily_max','mean_daily_min','mean_daily_range','period_high','period_low','exceedance_days','matching_days','matching_rate'] as $key) echo '<td>'.num($r[$key],in_array($key,['valid_days','exceedance_days','matching_days']) ? 0 : 2).'</td>';
+    $label=function(array $r) use($rollup): string {
+        $name=$r['name_en'] ?? 'All selected locations';
+        if ($rollup && $r['location_id']!==null && ($r['year_no']===null || $r['month_no']===null)) $name.=$r['year_no']===null ? ' · Location subtotal':' · Annual subtotal';
+        return $name;
+    };
+    $period=function(array $r) use($show_month): string {
+        if ($r['year_no']===null) return 'All years';
+        return isset($r['month_no']) ? sprintf('%04d-%02d',$r['year_no'],$r['month_no']) : (string)$r['year_no'];
+    };
+    echo '<div class="table-wrap primary-statistics"><table><caption class="sr-only">Temperature statistics computed by MariaDB</caption><thead><tr><th>Location</th><th>Period</th><th>Valid days</th><th>Mean °C</th><th>Mean range °C</th><th>Exceedance days</th><th>Match rate</th></tr></thead><tbody>';
+    foreach($rows as $r){
+        $subtotal=$rollup && ($r['location_id']===null || $r['year_no']===null || $r['month_no']===null);
+        echo '<tr'.($subtotal ? ' class="subtotal"':'').'><th scope="row">'.e($label($r)).'</th><td>'.e($period($r)).'</td>';
+        foreach(['valid_days','mean_temperature','mean_daily_range','exceedance_days','matching_rate'] as $key) echo '<td>'.num($r[$key],in_array($key,['valid_days','exceedance_days']) ? 0:2).($key==='matching_rate' && $r[$key]!==null ? '%':'').'</td>';
         echo '</tr>';
     }
-    echo '</tbody></table></div>';
+    echo '</tbody></table></div><details class="method-note more-statistics"><summary>More statistics</summary><div class="table-wrap"><table><caption class="sr-only">Additional temperature statistics</caption><thead><tr><th>Location</th><th>Period</th><th>Mean max °C</th><th>Mean min °C</th><th>Period high °C</th><th>Period low °C</th><th>Matching days</th></tr></thead><tbody>';
+    foreach($rows as $r){
+        echo '<tr><th scope="row">'.e($label($r)).'</th><td>'.e($period($r)).'</td>';
+        foreach(['mean_daily_max','mean_daily_min','period_high','period_low','matching_days'] as $key)echo '<td>'.num($r[$key],$key==='matching_days' ? 0:2).'</td>';
+        echo '</tr>';
+    }
+    echo '</tbody></table></div></details>';
 }

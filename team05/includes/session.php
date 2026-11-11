@@ -2,6 +2,7 @@
 // Implementation: Codex. Filters persist across pages; permanent plans live in MariaDB.
 declare(strict_types=1);
 function analysis_context(string $page): array {
+    $GLOBALS['analysis_page'] = $page;
     $f = $_SESSION['analysis_filters'] ?? default_filters();
     $o = $_SESSION['analysis_options'][$page] ?? default_options($page);
     try {
@@ -31,6 +32,8 @@ function analysis_context(string $page): array {
         return [$f, $o, null];
     } catch (InvalidArgumentException $e) {
         http_response_code(422);
+        $GLOBALS['validation_errors'] = $e instanceof InputValidationException ? [$e->field => $e->getMessage()] : [];
+        $GLOBALS['filter_draft'] = $_GET;
         return [$f, $o, $e->getMessage()];
     }
 }

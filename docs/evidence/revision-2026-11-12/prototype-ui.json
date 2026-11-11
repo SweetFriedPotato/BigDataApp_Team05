@@ -1,0 +1,153 @@
+{
+  "result": "PASS",
+  "layout": [
+    {
+      "route": "index",
+      "w": 1440,
+      "h": 900,
+      "width": 1440,
+      "viewport": 1440
+    },
+    {
+      "route": "aggregate",
+      "w": 1440,
+      "h": 900,
+      "width": 1440,
+      "viewport": 1440,
+      "firstRow": 691.140625
+    },
+    {
+      "route": "index",
+      "w": 1366,
+      "h": 768,
+      "width": 1366,
+      "viewport": 1366
+    },
+    {
+      "route": "aggregate",
+      "w": 1366,
+      "h": 768,
+      "width": 1366,
+      "viewport": 1366,
+      "firstRow": 691.140625
+    },
+    {
+      "route": "index",
+      "w": 390,
+      "h": 844,
+      "width": 390,
+      "viewport": 390
+    },
+    {
+      "route": "aggregate",
+      "w": 390,
+      "h": 844,
+      "width": 390,
+      "viewport": 390,
+      "firstRow": 1200.78125
+    },
+    {
+      "route": "index",
+      "w": 360,
+      "h": 844,
+      "width": 360,
+      "viewport": 360
+    },
+    {
+      "route": "aggregate",
+      "w": 360,
+      "h": 844,
+      "width": 360,
+      "viewport": 360,
+      "firstRow": 1241.28125
+    }
+  ],
+  "contrast_pairs": [
+    {
+      "foreground": "#172033",
+      "background": "#FFFFFF",
+      "ratio": 16.268480224545662
+    },
+    {
+      "foreground": "#475569",
+      "background": "#F6F8FB",
+      "ratio": 7.122474998615123
+    },
+    {
+      "foreground": "#475569",
+      "background": "#F1F5F9",
+      "ratio": 6.916973995632248
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#2563EB",
+      "ratio": 5.16855556002256
+    },
+    {
+      "foreground": "#1D4ED8",
+      "background": "#EAF3FF",
+      "ratio": 5.987647717442998
+    },
+    {
+      "foreground": "#B42318",
+      "background": "#FFFFFF",
+      "ratio": 6.57428861557707
+    }
+  ],
+  "visual_review": "Home and comparison screenshots inspected; first result row visible on both desktop sizes; all four widths have no page overflow",
+  "_meta": {
+    "executed_at": "2026-11-12T00:34:51.453863+09:00",
+    "command": [
+      "Chromium prototype capture",
+      "SQL aggregate regression",
+      "contrast calculation"
+    ],
+    "environment": {
+      "url": "http://127.0.0.1:8056/team05/",
+      "viewports": [
+        "1440x900",
+        "1366x768",
+        "390x844",
+        "360x844"
+      ]
+    },
+    "source_commit_base": "4e18484cc14c15468e0aada999c0ee0a32025cbf",
+    "source_files": {
+      "sql/dbcreate.sql": "d3692c5c5b4bdf2415a71371bac6a20249a3aeb4bf67bf1f231833a7c7fe70cc",
+      "sql/dbdrop.sql": "abc6f9f8ef7508936e6cac8584a6a923b4c2b7eb3fade4414047cf4d5574638b",
+      "sql/dbdump.sql": "6b4cdf05b94469864bdc2839f14b38ace4ee13c0c39fc398719e7ebf55baa8b7",
+      "sql/dbinsert.sql": "5113725dffc2c9de6f9f95f8edb25bde398a4a3a3b99b0e0437d2728e5975513",
+      "team05/.htaccess": "59caa281e2a0515a6c449999933e63a9822e356ff18a2618600203460b6ea9aa",
+      "team05/aggregate.php": "763ad7e6ef17c0911f278e9f04fe4e2dce9a35916c600130addf9a7b6f5d85e1",
+      "team05/assets/css/app.css": "7693ba50351091c728ab2769d40c0f5034a18ac414b46bb817c44a13c186665a",
+      "team05/assets/fonts/NanumGothic-Regular.ttf": "76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31",
+      "team05/assets/fonts/OFL.txt": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "team05/assets/fonts/SOURCE.txt": "c5696c7bdbaed305f3f01cbc476bc8d9555f61ce057ac0e3568af8cdfc3a07e3",
+      "team05/assets/img/weather-mark.svg": "d763554fd7a45ed758e8969801b0de666ec7733fe5f128ad31bf8842b3663d19",
+      "team05/assets/js/app.js": "a66371925077990a277a1e2ab5cb0e2cacaca89c691ede61c5bae441f7c6a739",
+      "team05/config.local.example.php": "9cd01995ca7c0bc799a1c0fe6ecaec79430a9fe70661913cc44b064a0dc895da",
+      "team05/config.php": "cf8f6c4d8ae154f0c9a60678b23fa296a45ec0c8b22565a77345ccbdb32c442e",
+      "team05/includes/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+      "team05/includes/bootstrap.php": "3367defd7ad76cdf0944dea8f02eb79e374c8f90506e5a218bc9d30f4d79902d",
+      "team05/includes/csrf.php": "39d8471f5f078874ac3ae65af2ca8e88a09c1d1d97992bcdff20003ff328585e",
+      "team05/includes/db.php": "d3b3293577209708a2fcf6e9dab94ace8783a49e96ea821762ab5b8bd10d1477",
+      "team05/includes/filters.php": "8b32d359a77a675fa52c8893949022b4f755a582466ed0e785c44336bfc67568",
+      "team05/includes/footer.php": "f5f65af89b08b5848da6d8c47d894979011dd1279cc3690a5cc4a25927026b0a",
+      "team05/includes/header.php": "7cd04442d7998799f6a3310a5de5e2af77704ad5310ea7d738fdb7302bd9034f",
+      "team05/includes/plans.php": "cf9bb949569d5d9cc4d37d7dbd1e5c763c598290a11fa86f5493c0541fd8dd04",
+      "team05/includes/queries.php": "2c6e4ea1ec4d2c79a7c5f216c1de54f2d9108f05016e13e954959d64813fc430",
+      "team05/includes/session.php": "67646aaf9b81d30818f9b3fe72d91a358b8b3d9f4f2645780e4e63466475cc9e",
+      "team05/includes/view.php": "3203e82df03f5eef4bb83ecd75311cde0e95c5e54f164385c3be119c60a7f872",
+      "team05/index.php": "5d57c52a0713e88bc5ffb3b8172a973217bcf642868c483a0d0359d5d181a125",
+      "team05/olap.php": "48c08896cd8668c7561f80e3575fb022a92dca4509026e39ec0030f4a9841b4b",
+      "team05/plan_actions.php": "3cbfaa68e96a964571e6c3846887c7ce9107d1b8692a7483429aa88ed44609a1",
+      "team05/plan_detail.php": "aca05f7713beaedba7d7334b12d6146d69f931df008c4787afc56189a433ec64",
+      "team05/plan_form.php": "43da1ab1197c322ecc252634b2c3eb6a74727a95bef9425f0870640adc4d0c4a",
+      "team05/plans.php": "dd950ea14165c31835d10f7e6d3de06de2f7ad4dd24456336951c623d999d3b4",
+      "team05/ranking.php": "6199d749d638bae99f484b8785affa54abe6828461ccf9a290ed5a10c9d9365c",
+      "team05/seasonal.php": "7140e497da0f3e11fff66fef99cd76a58e312d2ad95f116c7534f51ce322e36f",
+      "team05/window.php": "8f04c069f983f59f6af4b8a89eb86d8af12293a58518381e46e42c8c7f4e8aa4"
+    },
+    "identity_scope": "File hashes identify executed inputs, including uncommitted changes; this evidence does not hash itself."
+  }
+}

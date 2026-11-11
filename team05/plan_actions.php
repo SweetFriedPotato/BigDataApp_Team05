@@ -29,7 +29,7 @@ try {
     flash('Saved comparison conditions applied.');header('Location: '.$target.'.php',true,303);exit;
 } catch (InvalidArgumentException $e) {
     if(isset($action) && in_array($action,['create','update'],true)) {
-        http_response_code(422);$form_input=$_POST;$form_error=$e->getMessage();$form_id=$id ?? null;
+        http_response_code(422);$GLOBALS['validation_errors']=$e instanceof InputValidationException ? [$e->field=>$e->getMessage()] : []; $form_input=$_POST;$form_error=$e->getMessage();$form_id=$id ?? null;
         require __DIR__ . '/plan_form.php';exit;
     }
     action_error(422,$e->getMessage());

@@ -10,8 +10,8 @@ function validate_plan(array $input): array {
     $f = validate_filters($input);
     $name = scalar_input($input,'plan_name');
     $memo = isset($input['memo']) ? scalar_input($input,'memo') : '';
-    if (text_length($name)<1 || text_length($name)>100) throw new InvalidArgumentException('Plan name must contain 1–100 characters.');
-    if (text_length($memo)>2000) throw new InvalidArgumentException('Memo must contain at most 2,000 characters.');
+    if (text_length($name)<1 || text_length($name)>100) throw new InputValidationException('plan_name','Plan name must contain 1–100 characters.');
+    if (text_length($memo)>2000) throw new InputValidationException('memo','Memo must contain at most 2,000 characters.');
     return array_merge($f,['plan_name'=>$name,'memo'=>$memo]);
 }
 function plan_id(array $input, string $key = 'plan_id'): int {
