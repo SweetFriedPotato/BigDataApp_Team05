@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "browser": "141.0.7390.37",
+  "desktop": "1440×1050",
+  "mobile": "390×844, eight routes, no document overflow",
+  "flows": [
+    "dynamic aggregate",
+    "cross-page Session",
+    "Top1 ties",
+    "OLAP year→month→day→month→year",
+    "both moving-average focus options",
+    "year-specific seasonal date",
+    "plan create/read/edit/apply/delete",
+    "escaped HTML memo"
+  ],
+  "console_errors": [],
+  "screenshots": [
+    "01-home.png",
+    "02-comparison.png",
+    "03-ranking.png",
+    "04-trends.png"
+  ]
+}

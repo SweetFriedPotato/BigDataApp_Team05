@@ -1,0 +1,130 @@
+{
+  "environment": "fresh MariaDB10.4 + PHP8.2/Apache containers; internal-only network",
+  "resource_prefix": "slg-clean-b98b65d4e3",
+  "steps": [
+    {
+      "step": "T29 clean create→insert→all9screens",
+      "status": "PASS",
+      "actual": {
+        "schema": {
+          "daily_temperatures": 5480,
+          "locations": 5,
+          "monthly_food_guides": 12,
+          "plan_locations": 0,
+          "saved_plans": 0,
+          "solar_terms": 72
+        },
+        "identity": {
+          "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+          "db": "team05",
+          "account": "team05@%",
+          "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+        },
+        "http": {
+          "result": "PASS",
+          "pages": 9,
+          "analyses": "four independent dynamic DB menus",
+          "olap": "year/month/day/up",
+          "ranking": "two first-place ties",
+          "seasonal": "October 2024 sources and ingredient",
+          "crud": "HTTP create/read/list/edit/update/apply/delete",
+          "session": "saved common filters reused on another analysis",
+          "network": "container attached only to an internal Docker network",
+          "base_url": "http://127.0.0.1/team05/"
+        }
+      }
+    },
+    {
+      "step": "fresh full calculation and transaction suite",
+      "status": "PASS",
+      "actual": {
+        "aggregate": [
+          "T05",
+          "T06",
+          "T07",
+          "T08"
+        ],
+        "olap": [
+          "T09",
+          "T10"
+        ],
+        "ranking": [
+          "T11",
+          "T12",
+          "T13"
+        ],
+        "window": [
+          "T14",
+          "T15",
+          "T16",
+          "T17",
+          "T18"
+        ],
+        "plans": [
+          "T21",
+          "T22",
+          "T23",
+          "T24",
+          "T25"
+        ],
+        "seasonal": [
+          "T03",
+          "T28"
+        ]
+      }
+    },
+    {
+      "step": "T30 drop→create→insert",
+      "status": "PASS",
+      "actual": {
+        "fingerprint": "identical rows, data hashes, columns, constraints and indexes"
+      }
+    },
+    {
+      "step": "T31 dump-only restore into zero tables",
+      "status": "PASS",
+      "actual": {
+        "fingerprint": "identical to seeded baseline",
+        "http": {
+          "result": "PASS",
+          "pages": 9,
+          "analyses": "four independent dynamic DB menus",
+          "olap": "year/month/day/up",
+          "ranking": "two first-place ties",
+          "seasonal": "October 2024 sources and ingredient",
+          "crud": "HTTP create/read/list/edit/update/apply/delete",
+          "session": "saved common filters reused on another analysis",
+          "network": "container attached only to an internal Docker network",
+          "base_url": "http://127.0.0.1/team05/"
+        },
+        "client": "mysql bundled with MariaDB10.4.34"
+      }
+    },
+    {
+      "step": "T32 offline runtime",
+      "status": "PASS",
+      "actual": {
+        "internal_network": true,
+        "attached_networks": [
+          "slg-clean-b98b65d4e3-net"
+        ],
+        "public_request_exit": 6,
+        "all9screens_and_crud": "passed before and after dump restore"
+      }
+    },
+    {
+      "step": "T33 changed copied path and local config override",
+      "status": "PASS",
+      "actual": {
+        "copied_path": "/tmp/slg-clean-b98b65d4e3-38kvlgkz/team05",
+        "web_path": "/var/www/html/team05",
+        "url": "http://127.0.0.1/team05/",
+        "override_host": "database.local",
+        "account": "team05@%",
+        "default_user_database_password": "team05; root not used by application"
+      }
+    }
+  ],
+  "result": "PASS",
+  "cleanup": "only this run’s unique resources removed; primary runtime preserved"
+}

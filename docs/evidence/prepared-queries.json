@@ -1,0 +1,76 @@
+{
+    "aggregate": {
+        "sql": "WITH params AS (SELECT CAST(? AS DECIMAL(6,2)) max_limit, CAST(? AS DECIMAL(6,2)) range_limit),\n    source AS (\n        SELECT d.*, tmax-tmin AS dtr,\n        CASE WHEN tmean IS NOT NULL AND tmax IS NOT NULL AND tmin IS NOT NULL THEN 1 ELSE 0 END AS valid_flag\n        FROM daily_temperatures d\n        WHERE weather_date BETWEEN ? AND ? AND location_id IN (?,?,?,?,?)\n    ), base AS (\n        SELECT s.*, YEAR(weather_date) year_no, MONTH(weather_date) month_no,\n        CASE WHEN valid_flag=1 AND tmax<=p.max_limit AND dtr<=p.range_limit THEN 1 ELSE 0 END matching_flag,\n        CASE WHEN valid_flag=1 AND tmax>p.max_limit THEN 1 ELSE 0 END exceedance_flag\n        FROM source s CROSS JOIN params p\n    ), grouped AS (SELECT location_id, year_no, month_no, COUNT(*) candidate_days, SUM(valid_flag) valid_days,\n        AVG(CASE WHEN valid_flag=1 THEN tmean END) mean_temperature,\n        AVG(CASE WHEN valid_flag=1 THEN tmax END) mean_daily_max,\n        AVG(CASE WHEN valid_flag=1 THEN tmin END) mean_daily_min,\n        AVG(CASE WHEN valid_flag=1 THEN dtr END) mean_daily_range,\n        MAX(CASE WHEN valid_flag=1 THEN tmax END) period_high,\n        MIN(CASE WHEN valid_flag=1 THEN tmin END) period_low,\n        SUM(exceedance_flag) exceedance_days, SUM(matching_flag) matching_days,\n        100.0*SUM(matching_flag)\/NULLIF(SUM(valid_flag),0) matching_rate FROM base GROUP BY location_id, year_no, month_no)\n        SELECT g.*, l.name_en FROM grouped g JOIN locations l ON l.location_id=g.location_id\n        ORDER BY g.location_id, g.year_no, g.month_no",
+        "bound_values": [
+            "28.00",
+            "10.00",
+            "2024-08-01",
+            "2024-08-31",
+            1,
+            2,
+            3,
+            4,
+            5
+        ]
+    },
+    "olap": {
+        "sql": "WITH params AS (SELECT CAST(? AS DECIMAL(6,2)) max_limit, CAST(? AS DECIMAL(6,2)) range_limit),\n    source AS (\n        SELECT d.*, tmax-tmin AS dtr,\n        CASE WHEN tmean IS NOT NULL AND tmax IS NOT NULL AND tmin IS NOT NULL THEN 1 ELSE 0 END AS valid_flag\n        FROM daily_temperatures d\n        WHERE weather_date BETWEEN ? AND ? AND location_id IN (?,?,?,?,?)\n    ), base AS (\n        SELECT s.*, YEAR(weather_date) year_no, MONTH(weather_date) month_no,\n        CASE WHEN valid_flag=1 AND tmax<=p.max_limit AND dtr<=p.range_limit THEN 1 ELSE 0 END matching_flag,\n        CASE WHEN valid_flag=1 AND tmax>p.max_limit THEN 1 ELSE 0 END exceedance_flag\n        FROM source s CROSS JOIN params p\n    ), grouped AS (SELECT location_id, year_no, COUNT(*) candidate_days, SUM(valid_flag) valid_days,\n        AVG(CASE WHEN valid_flag=1 THEN tmean END) mean_temperature,\n        AVG(CASE WHEN valid_flag=1 THEN tmax END) mean_daily_max,\n        AVG(CASE WHEN valid_flag=1 THEN tmin END) mean_daily_min,\n        AVG(CASE WHEN valid_flag=1 THEN dtr END) mean_daily_range,\n        MAX(CASE WHEN valid_flag=1 THEN tmax END) period_high,\n        MIN(CASE WHEN valid_flag=1 THEN tmin END) period_low,\n        SUM(exceedance_flag) exceedance_days, SUM(matching_flag) matching_days,\n        100.0*SUM(matching_flag)\/NULLIF(SUM(valid_flag),0) matching_rate FROM base GROUP BY location_id, year_no)\n        SELECT g.*, l.name_en FROM grouped g JOIN locations l ON l.location_id=g.location_id\n        ORDER BY g.location_id, g.year_no",
+        "bound_values": [
+            "28.00",
+            "10.00",
+            "2024-08-01",
+            "2024-08-31",
+            1,
+            2,
+            3,
+            4,
+            5
+        ]
+    },
+    "ranking": {
+        "sql": "WITH params AS (SELECT CAST(? AS DECIMAL(6,2)) max_limit, CAST(? AS DECIMAL(6,2)) range_limit),\n    source AS (\n        SELECT d.*, tmax-tmin AS dtr,\n        CASE WHEN tmean IS NOT NULL AND tmax IS NOT NULL AND tmin IS NOT NULL THEN 1 ELSE 0 END AS valid_flag\n        FROM daily_temperatures d\n        WHERE weather_date BETWEEN ? AND ? AND location_id IN (?,?,?,?,?)\n    ), base AS (\n        SELECT s.*, YEAR(weather_date) year_no, MONTH(weather_date) month_no,\n        CASE WHEN valid_flag=1 AND tmax<=p.max_limit AND dtr<=p.range_limit THEN 1 ELSE 0 END matching_flag,\n        CASE WHEN valid_flag=1 AND tmax>p.max_limit THEN 1 ELSE 0 END exceedance_flag\n        FROM source s CROSS JOIN params p\n    ), counts AS (\n        SELECT location_id,SUM(valid_flag) valid_days,SUM(matching_flag) matching_days\n        FROM base GROUP BY location_id\n    ), rates AS (\n        SELECT c.*,100*CAST(matching_days AS DECIMAL(30,16))\/valid_days matching_rate\n        FROM counts c WHERE valid_days>=? AND valid_days>0\n    ), ranked AS (\n        SELECT r.*,DENSE_RANK() OVER (ORDER BY matching_rate DESC) rank_no FROM rates r\n    ) SELECT r.*,l.name_en FROM ranked r JOIN locations l ON l.location_id=r.location_id\n      WHERE r.rank_no<=? ORDER BY r.rank_no,r.location_id",
+        "bound_values": [
+            "28.00",
+            "10.00",
+            "2024-08-01",
+            "2024-08-31",
+            1,
+            2,
+            3,
+            4,
+            5,
+            1,
+            5
+        ]
+    },
+    "window": {
+        "sql": "WITH params AS (SELECT CAST(? AS DECIMAL(6,2)) max_limit, CAST(? AS DECIMAL(6,2)) range_limit),\n    source AS (\n        SELECT d.*, tmax-tmin AS dtr,\n        CASE WHEN tmean IS NOT NULL AND tmax IS NOT NULL AND tmin IS NOT NULL THEN 1 ELSE 0 END AS valid_flag\n        FROM daily_temperatures d\n        WHERE weather_date BETWEEN ? AND ? AND location_id IN (?,?,?,?,?)\n    ), base AS (\n        SELECT s.*, YEAR(weather_date) year_no, MONTH(weather_date) month_no,\n        CASE WHEN valid_flag=1 AND tmax<=p.max_limit AND dtr<=p.range_limit THEN 1 ELSE 0 END matching_flag,\n        CASE WHEN valid_flag=1 AND tmax>p.max_limit THEN 1 ELSE 0 END exceedance_flag\n        FROM source s CROSS JOIN params p\n    ), metrics AS (SELECT b.*,CASE WHEN valid_flag=1 THEN tmean END metric_value FROM base b),\n    framed AS (\n        SELECT m.*,AVG(metric_value) OVER w7 mean7,COUNT(metric_value) OVER w7 n7,\n        AVG(metric_value) OVER w30 mean30,COUNT(metric_value) OVER w30 n30,\n        MIN(weather_date) OVER w7 first7,MIN(weather_date) OVER w30 first30\n        FROM metrics m WINDOW\n        w7 AS (PARTITION BY location_id ORDER BY weather_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW),\n        w30 AS (PARTITION BY location_id ORDER BY weather_date ROWS BETWEEN 29 PRECEDING AND CURRENT ROW)\n    )\n    SELECT w.*,l.name_en,\n        CASE WHEN n7=7 AND DATEDIFF(weather_date,first7)=6 THEN mean7 END ma7,\n        CASE WHEN n30=30 AND DATEDIFF(weather_date,first30)=29 THEN mean30 END ma30,\n        SUM(valid_flag) OVER (PARTITION BY w.location_id) display_valid_days\n    FROM framed w JOIN locations l ON l.location_id=w.location_id\n    WHERE weather_date BETWEEN ? AND ? ORDER BY w.location_id,weather_date",
+        "bound_values": [
+            "28.00",
+            "10.00",
+            "2024-07-03",
+            "2024-08-31",
+            1,
+            2,
+            3,
+            4,
+            5,
+            "2024-08-01",
+            "2024-08-31"
+        ]
+    },
+    "rollup": {
+        "sql": "WITH params AS (SELECT CAST(? AS DECIMAL(6,2)) max_limit, CAST(? AS DECIMAL(6,2)) range_limit),\n    source AS (\n        SELECT d.*, tmax-tmin AS dtr,\n        CASE WHEN tmean IS NOT NULL AND tmax IS NOT NULL AND tmin IS NOT NULL THEN 1 ELSE 0 END AS valid_flag\n        FROM daily_temperatures d\n        WHERE weather_date BETWEEN ? AND ? AND location_id IN (?,?,?,?,?)\n    ), base AS (\n        SELECT s.*, YEAR(weather_date) year_no, MONTH(weather_date) month_no,\n        CASE WHEN valid_flag=1 AND tmax<=p.max_limit AND dtr<=p.range_limit THEN 1 ELSE 0 END matching_flag,\n        CASE WHEN valid_flag=1 AND tmax>p.max_limit THEN 1 ELSE 0 END exceedance_flag\n        FROM source s CROSS JOIN params p\n    ), totals AS (SELECT location_id,year_no,month_no,COUNT(*) candidate_days, SUM(valid_flag) valid_days,\n        AVG(CASE WHEN valid_flag=1 THEN tmean END) mean_temperature,\n        AVG(CASE WHEN valid_flag=1 THEN tmax END) mean_daily_max,\n        AVG(CASE WHEN valid_flag=1 THEN tmin END) mean_daily_min,\n        AVG(CASE WHEN valid_flag=1 THEN dtr END) mean_daily_range,\n        MAX(CASE WHEN valid_flag=1 THEN tmax END) period_high,\n        MIN(CASE WHEN valid_flag=1 THEN tmin END) period_low,\n        SUM(exceedance_flag) exceedance_days, SUM(matching_flag) matching_days,\n        100.0*SUM(matching_flag)\/NULLIF(SUM(valid_flag),0) matching_rate\n        FROM base GROUP BY location_id,year_no,month_no WITH ROLLUP)\n        SELECT t.*,l.name_en FROM totals t LEFT JOIN locations l ON l.location_id=t.location_id\n        ORDER BY (t.location_id IS NULL),t.location_id,(t.year_no IS NULL),t.year_no,(t.month_no IS NULL),t.month_no",
+        "bound_values": [
+            "28.00",
+            "10.00",
+            "2024-08-01",
+            "2024-08-31",
+            1,
+            2,
+            3,
+            4,
+            5
+        ]
+    }
+}

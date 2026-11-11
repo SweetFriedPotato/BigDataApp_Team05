@@ -1,0 +1,422 @@
+{
+    "daily_temperatures": {
+        "rows": 5480,
+        "sha256": "26144cf9e01edcf9e43b9b66e7b7e2ebe648c619887338ceb5cbbe8315e0d5ab"
+    },
+    "locations": {
+        "rows": 5,
+        "sha256": "1542318cedfb2d33f060823a3bd4e90166556255cff34c5dff6747cc095e7d5f"
+    },
+    "monthly_food_guides": {
+        "rows": 12,
+        "sha256": "c4bb71567de694ffe51478b4c7abddffc1f51eefd8d40efe108c405ff1aadcb9"
+    },
+    "plan_locations": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "saved_plans": {
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "solar_terms": {
+        "rows": 72,
+        "sha256": "b5db4e7bb36faf89ada8015496bc3826e3acdad6fbf6309b1c18d1f28d34a7a9"
+    },
+    "constraints": [
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "CONSTRAINT_NAME": "chk_temperature_order",
+            "CONSTRAINT_TYPE": "CHECK"
+        },
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "CONSTRAINT_NAME": "fk_weather_location",
+            "CONSTRAINT_TYPE": "FOREIGN KEY"
+        },
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "CONSTRAINT_NAME": "PRIMARY",
+            "CONSTRAINT_TYPE": "PRIMARY KEY"
+        },
+        {
+            "TABLE_NAME": "locations",
+            "CONSTRAINT_NAME": "location_code",
+            "CONSTRAINT_TYPE": "UNIQUE"
+        },
+        {
+            "TABLE_NAME": "locations",
+            "CONSTRAINT_NAME": "PRIMARY",
+            "CONSTRAINT_TYPE": "PRIMARY KEY"
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "CONSTRAINT_NAME": "chk_food_month",
+            "CONSTRAINT_TYPE": "CHECK"
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "CONSTRAINT_NAME": "PRIMARY",
+            "CONSTRAINT_TYPE": "PRIMARY KEY"
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "CONSTRAINT_NAME": "uq_month_food",
+            "CONSTRAINT_TYPE": "UNIQUE"
+        },
+        {
+            "TABLE_NAME": "plan_locations",
+            "CONSTRAINT_NAME": "fk_plan_location",
+            "CONSTRAINT_TYPE": "FOREIGN KEY"
+        },
+        {
+            "TABLE_NAME": "plan_locations",
+            "CONSTRAINT_NAME": "fk_plan_parent",
+            "CONSTRAINT_TYPE": "FOREIGN KEY"
+        },
+        {
+            "TABLE_NAME": "plan_locations",
+            "CONSTRAINT_NAME": "PRIMARY",
+            "CONSTRAINT_TYPE": "PRIMARY KEY"
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "CONSTRAINT_NAME": "chk_plan_dates",
+            "CONSTRAINT_TYPE": "CHECK"
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "CONSTRAINT_NAME": "chk_plan_range",
+            "CONSTRAINT_TYPE": "CHECK"
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "CONSTRAINT_NAME": "PRIMARY",
+            "CONSTRAINT_TYPE": "PRIMARY KEY"
+        },
+        {
+            "TABLE_NAME": "solar_terms",
+            "CONSTRAINT_NAME": "PRIMARY",
+            "CONSTRAINT_TYPE": "PRIMARY KEY"
+        }
+    ],
+    "indexes": [
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "INDEX_NAME": "idx_weather_date_location",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "weather_date"
+        },
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "INDEX_NAME": "idx_weather_date_location",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "location_id"
+        },
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "location_id"
+        },
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "weather_date"
+        },
+        {
+            "TABLE_NAME": "locations",
+            "INDEX_NAME": "location_code",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "location_code"
+        },
+        {
+            "TABLE_NAME": "locations",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "location_id"
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "guide_id"
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "INDEX_NAME": "uq_month_food",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "month_no"
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "INDEX_NAME": "uq_month_food",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "food_name"
+        },
+        {
+            "TABLE_NAME": "plan_locations",
+            "INDEX_NAME": "idx_plan_location",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "location_id"
+        },
+        {
+            "TABLE_NAME": "plan_locations",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "plan_id"
+        },
+        {
+            "TABLE_NAME": "plan_locations",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "location_id"
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "INDEX_NAME": "idx_plan_updated",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "updated_at"
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "INDEX_NAME": "idx_plan_updated",
+            "NON_UNIQUE": 1,
+            "SEQ_IN_INDEX": 2,
+            "COLUMN_NAME": "plan_id"
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "plan_id"
+        },
+        {
+            "TABLE_NAME": "solar_terms",
+            "INDEX_NAME": "PRIMARY",
+            "NON_UNIQUE": 0,
+            "SEQ_IN_INDEX": 1,
+            "COLUMN_NAME": "term_date"
+        }
+    ],
+    "columns": [
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "COLUMN_NAME": "location_id",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "COLUMN_NAME": "weather_date",
+            "COLUMN_TYPE": "date",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "COLUMN_NAME": "tmean",
+            "COLUMN_TYPE": "decimal(6,2)",
+            "IS_NULLABLE": "YES",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "COLUMN_NAME": "tmax",
+            "COLUMN_TYPE": "decimal(6,2)",
+            "IS_NULLABLE": "YES",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "daily_temperatures",
+            "COLUMN_NAME": "tmin",
+            "COLUMN_TYPE": "decimal(6,2)",
+            "IS_NULLABLE": "YES",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "locations",
+            "COLUMN_NAME": "location_id",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "locations",
+            "COLUMN_NAME": "location_code",
+            "COLUMN_TYPE": "varchar(20)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "locations",
+            "COLUMN_NAME": "name_en",
+            "COLUMN_TYPE": "varchar(40)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "locations",
+            "COLUMN_NAME": "name_ko",
+            "COLUMN_TYPE": "varchar(40)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "locations",
+            "COLUMN_NAME": "requested_latitude",
+            "COLUMN_TYPE": "decimal(9,6)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "locations",
+            "COLUMN_NAME": "requested_longitude",
+            "COLUMN_TYPE": "decimal(10,6)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "COLUMN_NAME": "guide_id",
+            "COLUMN_TYPE": "int(10) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "COLUMN_NAME": "month_no",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "COLUMN_NAME": "food_name",
+            "COLUMN_TYPE": "varchar(80)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "monthly_food_guides",
+            "COLUMN_NAME": "source_url",
+            "COLUMN_TYPE": "varchar(1024)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "plan_locations",
+            "COLUMN_NAME": "plan_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "plan_locations",
+            "COLUMN_NAME": "location_id",
+            "COLUMN_TYPE": "tinyint(3) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "COLUMN_NAME": "plan_id",
+            "COLUMN_TYPE": "bigint(20) unsigned",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "COLUMN_NAME": "plan_name",
+            "COLUMN_TYPE": "varchar(100)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "COLUMN_NAME": "start_date",
+            "COLUMN_TYPE": "date",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "COLUMN_NAME": "end_date",
+            "COLUMN_TYPE": "date",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "COLUMN_NAME": "max_temp_threshold",
+            "COLUMN_TYPE": "decimal(6,2)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "COLUMN_NAME": "max_temp_range",
+            "COLUMN_TYPE": "decimal(6,2)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "COLUMN_NAME": "memo",
+            "COLUMN_TYPE": "text",
+            "IS_NULLABLE": "YES",
+            "COLLATION_NAME": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "COLUMN_NAME": "created_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "saved_plans",
+            "COLUMN_NAME": "updated_at",
+            "COLUMN_TYPE": "datetime",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "solar_terms",
+            "COLUMN_NAME": "term_date",
+            "COLUMN_TYPE": "date",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": null
+        },
+        {
+            "TABLE_NAME": "solar_terms",
+            "COLUMN_NAME": "term_name",
+            "COLUMN_TYPE": "varchar(20)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": "utf8mb4_unicode_ci"
+        },
+        {
+            "TABLE_NAME": "solar_terms",
+            "COLUMN_NAME": "source_url",
+            "COLUMN_TYPE": "varchar(1024)",
+            "IS_NULLABLE": "NO",
+            "COLLATION_NAME": "utf8mb4_unicode_ci"
+        }
+    ]
+}

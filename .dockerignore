@@ -1,0 +1,8 @@
+.git
+.local
+dist
+docs
+data
+sql
+tests
+README.md

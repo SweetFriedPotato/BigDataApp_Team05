@@ -1,0 +1,3 @@
+Nanum Gothic Regular, distributed by Google Fonts, SIL Open Font License 1.1.
+https://github.com/google/fonts/tree/main/ofl/nanumgothic
+Bundled for offline Korean labels. See OFL.txt.

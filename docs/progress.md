@@ -92,3 +92,14 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - T03/T28 CLI PASS: 24 terms each year, every month has an item, year-varying February dates, and added food items leave aggregate/ranking/window results exactly unchanged.
 - Actual Apache: all 36 year-month selections HTTP200 with source links; four invalid option cases HTTP422. Evidence: seasonal-tests.json.
 - P6 push failed for missing credentials. All nine required user screens now have completed behavior; plan_actions is an additional POST handler.
+
+## P8 — integration evidence (ongoing actual XAMPP check)
+
+- Generated sql/dbdump.sql with actual MariaDB 10.4.34 mysqldump; saved plans are empty. Captured row hashes, columns, constraints and indexes plus representative bound analysis SQL.
+- Fresh uniquely named MariaDB/PHP Apache environment PASS: create→insert→all9screens, full calculation/transaction suite, drop→create→insert, zero-table dump-only restoration, exact semantic fingerprint, internal-network-only execution, blocked public request and changed copied path/local config host. Primary runtime was preserved.
+- Actual Chromium 141 PASS: desktop 1440×1050, mobile 390×844 across eight routes, dynamic filters, tied ranks, drilldown/up, 7/30 focus, seasonal date, plan CRUD/apply and escaped memo. Zero console errors. Four screenshots are genuine browser captures.
+- Visual inspection found missing Korean glyphs on the Linux browser; bundled Nanum Gothic under OFL and reran browser checks/captures successfully. No CDN/font download is needed at runtime.
+- Fixed an integration inconsistency: created/updated timestamps were labeled KST while MariaDB used its default time zone. PDO now sets the connection time zone to +09:00; no global server setting changed.
+- Final PHP syntax check PASS; T01–T33 currently PASS. T34 packaging NOT_RUN. `tools/record_results.py` generated the matrix from actual evidence only.
+- Official XAMPP Linux 8.2.12 installer downloaded from the project's SourceForge mirror, hash recorded; installation inside a new Ubuntu container is still running. XAMPP-specific requirements remain TODO until actual execution finishes.
+- P7 push failed for missing HTTPS credentials. Remaining work: finish the XAMPP check, commit integration evidence, then P9 documents and a concrete demo package.
