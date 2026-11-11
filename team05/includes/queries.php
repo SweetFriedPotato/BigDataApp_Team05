@@ -40,3 +40,37 @@ function aggregate_query(array $f, array $o): array {
         ORDER BY g.location_id, g.year_no' . ($month ? ', g.month_no' : '');
     return [$sql,$params];
 }
+function olap_bounds(array $f, array $o): array {
+    $start = $f['start_date']; $end = $f['end_date'];
+    if ($o['level'] !== 'year') {
+        $year = integer_input($o,'drill_year',2023,2025);
+        if ($o['level'] === 'month') {
+            $start = max($start, sprintf('%04d-01-01',$year));
+            $end = min($end, sprintf('%04d-12-31',$year));
+        } elseif ($o['level'] === 'day') {
+            $month = integer_input($o,'drill_month',1,12);
+            $first = new DateTimeImmutable(sprintf('%04d-%02d-01',$year,$month));
+            $start = max($start,$first->format('Y-m-d'));
+            $end = min($end,$first->modify('last day of this month')->format('Y-m-d'));
+        } else throw new InvalidArgumentException('Unknown OLAP level.');
+    }
+    return [$start,$end];
+}
+function olap_query(array $f, array $o): array {
+    [$start,$end] = olap_bounds($f,$o);
+    if ($o['level'] !== 'day') {
+        return aggregate_query(array_replace($f,['start_date'=>$start,'end_date'=>$end]),
+            ['group_mode'=>$o['level']==='year' ? 'location_year' : 'location_year_month']);
+    }
+    [$sql,$params] = base_cte($f,$start,$end);
+    return [$sql.' SELECT b.*,l.name_en FROM base b JOIN locations l ON l.location_id=b.location_id ORDER BY b.location_id,b.weather_date',$params];
+}
+function rollup_query(array $f, array $o): array {
+    [$start,$end] = olap_bounds($f,$o);
+    [$sql,$params] = base_cte($f,$start,$end);
+    $sql .= ', totals AS (SELECT location_id,year_no,month_no,' . statistics_sql() . '
+        FROM base GROUP BY location_id,year_no,month_no WITH ROLLUP)
+        SELECT t.*,l.name_en FROM totals t LEFT JOIN locations l ON l.location_id=t.location_id
+        ORDER BY (t.location_id IS NULL),t.location_id,(t.year_no IS NULL),t.year_no,(t.month_no IS NULL),t.month_no';
+    return [$sql,$params];
+}

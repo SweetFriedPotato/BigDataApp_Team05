@@ -1,0 +1,47 @@
+{
+    "environment": {
+        "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+        "account": "team05@%",
+        "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    },
+    "tests": [
+        {
+            "id": "T09",
+            "test": "Year\/month\/day drills and upward return; common period intersection",
+            "status": "PASS",
+            "actual": {
+                "year_groups": 5,
+                "month_groups": 10,
+                "january_location_days": 155,
+                "partial_january_days": 17,
+                "disjoint": "empty"
+            }
+        },
+        {
+            "id": "T10",
+            "test": "WITH ROLLUP subtotals use daily weights and location-days",
+            "status": "PASS",
+            "actual": {
+                "rollup_rows": 21,
+                "grand_total": {
+                    "location_id": null,
+                    "year_no": null,
+                    "month_no": null,
+                    "candidate_days": 300,
+                    "valid_days": "300",
+                    "mean_temperature": "4.443000",
+                    "mean_daily_max": "7.922400",
+                    "mean_daily_min": "1.542700",
+                    "mean_daily_range": "6.379700",
+                    "period_high": "17.75",
+                    "period_low": "-14.48",
+                    "exceedance_days": "0",
+                    "matching_days": "247",
+                    "matching_rate": "82.33333",
+                    "name_en": null
+                },
+                "unit": "location-days for combined locations"
+            }
+        }
+    ]
+}

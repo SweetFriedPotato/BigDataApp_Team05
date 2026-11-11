@@ -56,3 +56,10 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - `docker compose exec -T web php /workspace/tests/aggregate.php`: T05–T08 PASS against independent raw-CSV Decimal expectations and transactional boundary/null fixtures.
 - `python3 tests/common_http.py`: still PASS; real aggregate page HTTP 200. Evidence: aggregate-tests.json.
 - P4 push failed for missing credentials. P5a validated commit: commit adding aggregate-tests.json.
+
+## P5b — OLAP and roll-up
+
+- Replaced OLAP skeleton with SQL year/month/day queries, visible drill links and upward navigation. Drill bounds intersect common filters, including an explicit empty intersection state.
+- Added real MariaDB `WITH ROLLUP`, outer ordering, annual/location/grand labels and location-day units. All means derive from raw daily records.
+- CLI T09–T10 PASS under ONLY_FULL_GROUP_BY. Five years groups / ten month groups / 155 January location-days; partial January has 17 days; grand subtotal is 300 location-days for Jan–Feb 2024.
+- Actual Apache HTTP year→month→day→month→year: PASS. Evidence: olap-tests.json. P5a push failed for missing credentials.
