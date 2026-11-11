@@ -48,3 +48,11 @@ All timestamps use Asia/Seoul. One Codex session; no parallel developers. Source
 - `php -l` all PHP: PASS. Nine routes HTTP 200; `python3 tests/common_http.py`: PASS for cross-page Session, 13 invalid input cases, unchanged Session on invalid submission, CSRF reset protection, HttpOnly/SameSite and denied direct config/includes access.
 - Initial HTTP harness encoded its array-date case as a scalar; the assertion correctly failed. Fixed the request key to `start_date[]` and reran the entire check.
 - Evidence: php-lint-p4.txt, php-apache.json, common-http.json. P3 push failed for the same credentials issue. Validated P4 commit is the commit adding these files.
+
+## P5a — complex grouping
+
+- Added shared valid/matching/exceedance flags CTE and native prepared complex grouping by location×year×month or location×year.
+- Includes all required means, daily-range average, period extremes, exceedance/matching counts and denominator-safe rates. Thresholds never prefilter candidate weather rows.
+- `docker compose exec -T web php /workspace/tests/aggregate.php`: T05–T08 PASS against independent raw-CSV Decimal expectations and transactional boundary/null fixtures.
+- `python3 tests/common_http.py`: still PASS; real aggregate page HTTP 200. Evidence: aggregate-tests.json.
+- P4 push failed for missing credentials. P5a validated commit: commit adding aggregate-tests.json.

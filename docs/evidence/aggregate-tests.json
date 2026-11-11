@@ -1,0 +1,72 @@
+{
+    "environment": {
+        "version": "10.4.34-MariaDB-1:10.4.34+maria~ubu2004",
+        "account": "team05@%",
+        "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    },
+    "tests": [
+        {
+            "id": "T05",
+            "test": "Complex grouped statistics versus independent raw Decimal oracle",
+            "status": "PASS",
+            "actual": {
+                "groups": 10,
+                "all_statistic_fields": "equal to oracle within 0.00001",
+                "first_group": {
+                    "location_id": 1,
+                    "year_no": 2024,
+                    "month_no": 1,
+                    "candidate_days": 31,
+                    "valid_days": "31",
+                    "mean_temperature": "-1.781290",
+                    "mean_daily_max": "2.186774",
+                    "mean_daily_min": "-5.399677",
+                    "mean_daily_range": "7.586452",
+                    "period_high": "7.43",
+                    "period_low": "-14.48",
+                    "exceedance_days": "0",
+                    "matching_days": "27",
+                    "matching_rate": "87.09677",
+                    "name_en": "Seoul"
+                }
+            }
+        },
+        {
+            "id": "T06",
+            "test": "Annual partial-period mean is weighted by daily rows",
+            "status": "PASS",
+            "actual": {
+                "valid_days_each": 60,
+                "first_location_mean": "0.018667",
+                "source": "raw daily values, not unweighted monthly means"
+            }
+        },
+        {
+            "id": "T07",
+            "test": "Inclusive maximum\/range limits and invalid-day exclusion",
+            "status": "PASS",
+            "actual": {
+                "location_id": 1,
+                "year_no": 2023,
+                "candidate_days": 4,
+                "valid_days": "3",
+                "mean_temperature": "20.000000",
+                "mean_daily_max": "28.003333",
+                "mean_daily_min": "18.000000",
+                "mean_daily_range": "10.003333",
+                "period_high": "28.01",
+                "period_low": "17.99",
+                "exceedance_days": "1",
+                "matching_days": "1",
+                "matching_rate": "33.33333",
+                "name_en": "Seoul"
+            }
+        },
+        {
+            "id": "T08",
+            "test": "Thresholds classify records without changing the valid-day denominator",
+            "status": "PASS",
+            "actual": "Each location remains 31 valid days; matches change from 0 to 31"
+        }
+    ]
+}
